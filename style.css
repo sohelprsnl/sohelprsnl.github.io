@@ -152,3 +152,12 @@ footer .bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 22px; 
   .company-card .visit { margin-top: 0; margin-left: auto; }
   .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,.07); }
 }
+/* ---------- CV request form ---------- */
+.cv-form { display: flex; gap: 12px; flex-wrap: wrap; max-width: 560px; }
+.cv-form input[type="email"] { flex: 1 1 300px; padding: 13px 18px; border: 1.5px solid var(--line); border-radius: 8px; font-size: .95rem; font-family: inherit; background: #fff; color: var(--ink); }
+.cv-form input[type="email"]:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,162,39,.18); }
+.cv-status { margin-top: 14px; font-size: .92rem; font-weight: 600; }
+.cv-status.ok { color: #1d7a2e; }
+.cv-status.err { color: #b3261e; }
+.contact-list li { display: flex; align-items: center; gap: 12px; }
+.contact-list svg { width: 22px; height: 22px; flex: 0 0 auto; }
