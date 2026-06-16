@@ -51,9 +51,17 @@
 
 <section>
   <div class="container">
-    <p class="eyebrow reveal">All 25 issues</p>
+    <p class="eyebrow reveal">All 26 issues</p>
     <h2 class="title reveal">Newsletter archive</h2>
-    <p class="lede reveal">Every issue from edition 1 to 25. Click any title to read on LinkedIn. New issues every week.</p>
+    <p class="lede reveal">Every issue from edition 1 to 26. Click any title to read on LinkedIn. New issues every week.</p>
+
+    <!-- EDITION 26 -->
+    <div class="article-card reveal" style="margin-bottom:18px">
+      <span class="tag">Traceability &amp; Compliance</span>
+      <h3><a href="https://www.linkedin.com/pulse/passport-every-garment-soon-need-md-sohel-rana-msr--pxodc" target="_blank" rel="noopener">The Passport Every Garment Will Soon Need</a></h3>
+      <p>How growing traceability expectations are reshaping apparel sourcing and forcing manufacturers to rethink supply chain visibility.</p>
+      <div class="meta">June 2026 &middot; RMG Xpress Insights by Sohel</div>
+    </div>
 
     <!-- EDITION 25 -->
     <div class="article-card reveal" style="margin-bottom:18px">
@@ -313,4 +321,8 @@
 
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
-const io = new Interse
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

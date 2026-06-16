@@ -173,4 +173,16 @@
       </div>
     </div>
     <div class="bottom">
-      <div>&copy; <span id="yr">2026</span> Md.
+      <div>&copy; <span id="yr">2026</span> Md. Sohel Rana &middot; sohelprsnl.com</div>
+      <div>Bangladesh RMG, from the inside.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
