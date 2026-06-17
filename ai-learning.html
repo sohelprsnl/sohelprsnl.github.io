@@ -165,4 +165,45 @@
 <section class="cta-band">
   <div class="container">
     <h2 class="reveal">Following the same path?</h2>
-    <p class="reve
+    <p class="reveal">I write about AI in apparel in the newsletter, practical, floor-tested, no hype.</p>
+    <div class="reveal"><a class="btn btn-gold" href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7404103356878589952" target="_blank" rel="noopener">Subscribe on LinkedIn</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="cols">
+      <div>
+        <div class="brandline">Md. Sohel Rana</div>
+        <p>Merchandising Team Leader at LPP S.A. Bangladesh. Writing weekly on RMG, sourcing, compliance, and AI. Dhaka, Bangladesh.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="about.html">About</a>
+        <a href="journey.html">Career Journey</a>
+        <a href="articles.html">Articles</a>
+        <a href="ai-learning.html">AI Learning</a>
+        <a href="resources.html">Resources</a>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <a href="mailto:sohel.prsnl@gmail.com">sohel.prsnl@gmail.com</a>
+        <a href="https://www.linkedin.com/in/sohelprsnl/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7404103356878589952" target="_blank" rel="noopener">Newsletter</a>
+        <a href="contact.html#cv">Request my CV</a>
+      </div>
+    </div>
+    <div class="bottom">
+      <div>&copy; <span id="yr">2026</span> Md. Sohel Rana &middot; sohelprsnl.com</div>
+      <div>Bangladesh RMG, from the inside.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
