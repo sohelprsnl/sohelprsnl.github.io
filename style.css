@@ -161,3 +161,12 @@ footer .bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 22px; 
 .cv-status.err { color: #b3261e; }
 .contact-list li { display: flex; align-items: center; gap: 12px; }
 .contact-list svg { width: 22px; height: 22px; flex: 0 0 auto; }
+
+
+/* Inline logo cards on list pages (Resources, AI Learning) */
+.res .company-stack{position:static;width:auto;display:flex;flex-direction:row;flex-wrap:wrap;gap:12px;margin-top:14px;}
+.res .company-card{position:static;width:auto;display:inline-flex;flex-direction:row;align-items:center;gap:12px;padding:10px 16px;margin-top:14px;text-align:left;}
+.res .company-stack .company-card{margin-top:0;}
+.res .company-card img{width:auto;height:36px;max-width:150px;object-fit:contain;margin-bottom:0;padding:0;border:none;border-radius:6px;background:transparent;}
+.res .company-card .cname{font-size:.85rem;}
+.res .company-card .visit{margin-top:0;margin-left:14px;white-space:nowrap;}
