@@ -7,7 +7,7 @@
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { font-family: "Inter","Segoe UI",-apple-system,sans-serif; color: var(--ink); background: var(--paper); line-height: 1.7; font-size: 16.5px; -webkit-font-smoothing: antialiased; }
+body { font-family: "Inter","Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif,"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji"; color: var(--ink); background: var(--paper); line-height: 1.7; font-size: 16.5px; -webkit-font-smoothing: antialiased; }
 .container { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
 h1, h2, h3, .display { font-family: "Fraunces",Georgia,serif; }
 img { max-width: 100%; }
