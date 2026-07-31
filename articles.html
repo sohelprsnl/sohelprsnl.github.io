@@ -5,14 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Newsletter, RMG Xpress Insights by Sohel</title>
 <meta name="description" content="RMG Xpress Insights by Sohel, a weekly newsletter on Bangladesh RMG: costing, sourcing, CSDDD/EUDR compliance, sustainability, and AI in apparel.">
+<meta name="author" content="Md. Sohel Rana">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0e1b2e">
+<link rel="canonical" href="https://sohelprsnl.com/articles.html">
+<link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Md. Sohel Rana">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://sohelprsnl.com/articles.html">
+<meta property="og:title" content="RMG Xpress Insights by Sohel, the full newsletter archive">
+<meta property="og:description" content="All 30 issues on Bangladesh RMG: costing, sourcing, EUDR and CSDDD compliance, sustainability, and AI in apparel. One issue a week.">
+<meta property="og:image" content="https://sohelprsnl.com/assets/newsletter-logo.png">
+<meta property="og:image:alt" content="RMG Xpress Insights by Sohel newsletter logo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="RMG Xpress Insights by Sohel, the full newsletter archive">
+<meta name="twitter:description" content="All 30 issues on Bangladesh RMG: costing, sourcing, compliance, sustainability, and AI in apparel.">
+<meta name="twitter:image" content="https://sohelprsnl.com/assets/newsletter-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<noscript><style>.reveal,.stagger>*{opacity:1!important;transform:none!important}.scroll-progress{display:none}</style></noscript>
 
 
 </head>
 <body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="scroll-progress" aria-hidden="true"></div>
 
 <div class="topbar">
   <div class="container">
@@ -23,8 +44,8 @@
 
 <nav class="main">
   <div class="container">
-    <a class="brand" href="index.html">Md. Sohel Rana</a>
-    <button class="menu-btn" onclick="document.querySelector('nav .links').classList.toggle('open')">&#9776;</button>
+    <a class="brand" href="index.html">Md. Sohel Rana <span class="brand-mark">(MSR)</span></a>
+    <button class="menu-btn" type="button" aria-label="Toggle navigation menu" aria-expanded="false" onclick="var l=document.querySelector('nav .links');l.classList.toggle('open');this.setAttribute('aria-expanded', l.classList.contains('open'));">&#9776;</button>
     <div class="links">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
@@ -38,7 +59,7 @@
   </div>
 </nav>
 
-<header class="hero">
+<header class="hero" id="main">
   <div class="container" style="padding-top:56px;padding-bottom:60px">
     <div style="text-align: center; margin-bottom: 24px;"><img src="assets/newsletter-logo.png" alt="RMG Xpress Insights Logo" style="height: 60px; width: auto;"></div>
     <div class="hero-text">
@@ -53,9 +74,17 @@
 
 <section>
   <div class="container">
-    <p class="eyebrow reveal">All 29 issues</p>
+    <p class="eyebrow reveal">All 30 issues</p>
     <h2 class="title reveal">Newsletter archive</h2>
-    <p class="lede reveal">Every issue from edition 1 to 29. Click any title to read on LinkedIn. New issues every week.</p>
+    <p class="lede reveal">Every issue from edition 1 to 30. Click any title to read on LinkedIn. New issues every week.</p>
+
+    <!-- EDITION 30 -->
+    <div class="article-card reveal" style="margin-bottom:18px">
+      <span class="tag">Sourcing & Materials</span>
+      <h3><a href="https://www.linkedin.com/pulse/why-bangladeshs-costing-sheets-still-begin-cotton-md-sohel-rana-msr--0f7ic" target="_blank" rel="noopener">Why Bangladesh's Costing Sheets Still Begin With Cotton</a></h3>
+      <p>Why Bangladesh's transition to man-made fibres requires coordinated buyer commitments, supplier investment, and policy support to build a globally competitive synthetic apparel value chain.</p>
+      <div class="meta">July 2026 &middot; RMG Xpress Insights by Sohel</div>
+    </div>
 
     <!-- EDITION 29 -->
     <div class="article-card reveal" style="margin-bottom:18px">
@@ -337,6 +366,7 @@
         <a href="mailto:sohel.prsnl@gmail.com">sohel.prsnl@gmail.com</a>
         <a href="https://www.linkedin.com/in/sohelprsnl/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7404103356878589952" target="_blank" rel="noopener">Newsletter</a>
+        <a href="https://github.com/sohelprsnl" target="_blank" rel="noopener me">GitHub</a>
         <a href="contact.html#cv">Request my CV</a>
       </div>
     </div>
@@ -347,10 +377,6 @@
   </div>
 </footer>
 
-<script>
-document.getElementById('yr').textContent = new Date().getFullYear();
-const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-</script>
+<script src="motion.js" defer></script>
 </body>
 </html>
