@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0e1b2e"/>
+      <stop offset="0.75" stop-color="#1f3864"/>
+      <stop offset="1" stop-color="#2c4a7c"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.85" cy="0" r="0.7">
+      <stop offset="0" stop-color="#c9a227" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#c9a227" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- gold rule -->
+  <rect x="90" y="118" width="72" height="4" rx="2" fill="#c9a227"/>
+
+  <text x="90" y="102" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="21"
+        font-weight="700" fill="#e8d9a0" letter-spacing="4">BANGLADESH RMG, FROM THE INSIDE</text>
+
+  <text x="90" y="212" font-family="Georgia, 'Times New Roman', serif" font-size="66"
+        font-weight="700" fill="#ffffff">Md. Sohel Rana</text>
+
+  <text x="90" y="272" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="29"
+        fill="#cdd8ec">Merchandising Team Leader, LPP S.A. Bangladesh</text>
+
+  <text x="90" y="330" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="25"
+        fill="#93a5c4">I help European fashion brands get their products made right</text>
+  <text x="90" y="366" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="25"
+        fill="#93a5c4">in Bangladesh, on cost, on time, and on compliance.</text>
+
+  <!-- stat band -->
+  <rect x="90" y="428" width="1020" height="1" fill="#ffffff" opacity="0.16"/>
+
+  <text x="90"  y="500" font-family="Georgia, serif" font-size="50" font-weight="700" fill="#c9a227">14+</text>
+  <text x="90"  y="534" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="19" fill="#93a5c4">Years in RMG</text>
+
+  <text x="345" y="500" font-family="Georgia, serif" font-size="50" font-weight="700" fill="#c9a227">3M</text>
+  <text x="345" y="534" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="19" fill="#93a5c4">Pieces per year</text>
+
+  <text x="600" y="500" font-family="Georgia, serif" font-size="50" font-weight="700" fill="#c9a227">35</text>
+  <text x="600" y="534" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="19" fill="#93a5c4">Active vendors</text>
+
+  <text x="855" y="500" font-family="Georgia, serif" font-size="50" font-weight="700" fill="#c9a227">97%</text>
+  <text x="855" y="534" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="19" fill="#93a5c4">On-time delivery</text>
+
+  <text x="90" y="596" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="19"
+        fill="#e8d9a0" letter-spacing="2">sohelprsnl.com</text>
+</svg>
