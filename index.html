@@ -2,14 +2,31 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>
+/* Theme boot. Inline and synchronous on purpose: it must set the attribute
+   before first paint, otherwise a dark-mode visitor sees a white flash. */
+(function(){try{
+  var s=localStorage.getItem("theme");
+  var d=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.setAttribute("data-theme", s || (d?"dark":"light"));
+}catch(e){}})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Md. Sohel Rana, Apparel Professional · AI Learner · Bangladesh RMG</title>
 <meta name="description" content="Md. Sohel Rana, Personal branding website & knowledge hub designed and built hands-on with AI tools. Merchandising Team Leader at LPP S.A., writer of RMG Xpress Insights by Sohel. 14+ years in Bangladesh RMG, AI learner, future-ready manufacturing advocate.">
 <meta name="author" content="Md. Sohel Rana">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#0e1b2e">
+<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d141f" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://sohelprsnl.com/">
 <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="apple-mobile-web-app-title" content="Sohel Rana">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
 <!-- Social sharing. 1200x630 card: assets/og-cover-v1.png. Rebuild it with portfolio-card-studio.html and bump the filename, never overwrite, because LinkedIn caches by URL. -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Md. Sohel Rana">
@@ -115,6 +132,10 @@
       <a href="resources.html">Resources</a>
       <a href="contact.html">Contact</a>
     </div>
+    <button class="theme-toggle" type="button" id="themeToggle" aria-label="Switch between light and dark theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
   </div>
 </nav>
 
@@ -131,7 +152,10 @@
         <a class="btn btn-ghost" href="about.html">My story</a>
       </div>
     </div>
-    <div class="hero-photo"><img src="assets/sohel.jpg" alt="Md. Sohel Rana, Merchandising Team Leader at LPP S.A. Bangladesh" width="230" height="266" fetchpriority="high" decoding="async"></div>
+    <div class="hero-photo"><picture>
+      <source srcset="assets/sohel-460.webp" type="image/webp">
+      <img src="assets/sohel-460.jpg" alt="Md. Sohel Rana, Merchandising Team Leader at LPP S.A. Bangladesh" width="230" height="266" fetchpriority="high" decoding="async">
+    </picture></div>
   </div>
 </header>
 
@@ -169,7 +193,7 @@
         <div class="meta">July 2026 · RMG Xpress Insights by Sohel</div>
       </div>
     </div>
-    <div style="margin-top:34px" class="reveal"><a class="btn btn-line" href="articles.html">All newsletter issues (30) &rarr;</a> <a class="btn btn-line" href="publications.html">Article publications (5) &rarr;</a></div>
+    <div style="margin-top:18px" class="reveal"><a class="btn btn-line" href="articles.html">All newsletter issues (30) &rarr;</a> <a class="btn btn-line" href="publications.html">Article publications (5) &rarr;</a></div>
   </div>
 </section>
 
@@ -177,21 +201,21 @@
   <div class="container">
     <p class="eyebrow reveal">What I bring</p>
     <h2 class="title reveal">Operator. Strategist. Lifelong learner.</h2>
-    <div class="grid cols-3" style="margin-top:34px">
-      <div class="card reveal">
-        <span class="icon">&#9878;&#65039;</span>
+    <div class="grid cols-3" style="margin-top:18px">
+      <div class="card a-ops reveal">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.4v17.2"/><path d="M6.6 20.6h10.8"/><path d="M4.6 7.2h14.8"/><path d="m4.6 7.2-3 6.2a3.6 3.6 0 0 0 6 0z"/><path d="m19.4 7.2-3 6.2a3.6 3.6 0 0 0 6 0z"/><circle cx="12" cy="4.6" r="1.4"/></svg></span>
         <h3>Costing &amp; Negotiation</h3>
         <p>FOB pricing built from yarn math up. Six buying seasons a year since 2011, every negotiation backed by raw-material data, not guesswork.</p>
         <a class="more" href="journey.html">See the track record &rarr;</a>
       </div>
-      <div class="card reveal">
-        <span class="icon">&#127758;</span>
+      <div class="card a-ops reveal">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/><path d="M3.4 12h17.2"/><path d="M12 3.4c2.3 2.4 3.5 5.4 3.5 8.6S14.3 18.2 12 20.6c-2.3-2.4-3.5-5.4-3.5-8.6S9.7 5.8 12 3.4z"/></svg></span>
         <h3>Sourcing &amp; Vendor Strategy</h3>
         <p>35 active vendors, 8 onboarded in 2025&ndash;26, vendor-sharing strategies across five European brands. Capacity is a plan, not a hope.</p>
         <a class="more" href="journey.html">How I run it &rarr;</a>
       </div>
-      <div class="card reveal">
-        <span class="icon">&#129302;</span>
+      <div class="card a-ai reveal">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8.2" width="16" height="12" rx="3.2"/><path d="M12 4.4v3.8"/><circle cx="12" cy="3" r="1.5"/><path d="M9.2 13.2v1.8M14.8 13.2v1.8"/><path d="M1.9 12.6v3.4M22.1 12.6v3.4"/></svg></span>
         <h3>AI &amp; The Future of RMG</h3>
         <p>Studying and applying AI in real merchandising work, reporting, analysis, communication, and writing about what actually helps.</p>
         <a class="more" href="ai-learning.html">My learning journey &rarr;</a>
@@ -213,23 +237,35 @@
     <p class="eyebrow reveal">Recent milestones</p>
     <h2 class="title reveal">Latest achievements</h2>
     <div style="margin-top:14px">
-      <div class="achieve reveal">
-        <div class="when">2026</div>
-        <div class="what"><h3>97% on-time delivery at LPP</h3><p>Latest season, across 35 vendors and ~3 million pieces a year, while growing Dhaka office order volume 10% against target.</p></div>
+      <div class="achieve a-ai reveal">
+        <div class="when">Aug 2026</div>
+        <div class="what"><h3>Started AiAP &mdash; AI Agents for Professional Excellence</h3><p>3-month no-code AI agent certification with myAi, cohort started 3 August 2026, toward the myAi Certified AI Automation Strategist credential. <a href="ai-learning.html">See the AI learning journey &rarr;</a></p></div>
       </div>
-      <div class="achieve reveal">
-        <div class="when">2025&ndash;26</div>
-        <div class="what"><h3>8 new vendors onboarded</h3><p>Sourced, evaluated, and onboarded to diversify LPP&rsquo;s Bangladesh supply base across denim, woven bottoms, and accessories.</p></div>
+      <div class="achieve a-ai reveal">
+        <div class="when">Jul 2026</div>
+        <div class="what"><h3>Completed AiPS &mdash; AI for Professional Success</h3><p>Finished the 2-month myAi program on 17 July 2026: prompt engineering, productivity, career acceleration, AI fundamentals, leadership, and business application. <a href="ai-learning.html">See the coursework &rarr;</a></p></div>
       </div>
-      <div class="achieve reveal">
+      <div class="achieve a-build reveal">
         <div class="when">Jul 2026</div>
         <div class="what"><h3>Built and published the PGD-GB Batch 11 Programme Archive</h3><p>The complete public record of my IBA-SICIP batch: 46 lecturers, 108 dated classes, 3 modules, 30 credits, 40 industry module topics. <a href="https://sohelprsnl.com/pgd-gb-archive/" target="_blank" rel="noopener">Visit the archive &rarr;</a></p></div>
       </div>
-      <div class="achieve reveal">
-        <div class="when">2025&ndash;</div>
-        <div class="what"><h3>PGD in Garment Business, IBA, University of Dhaka</h3><p>Formalizing fourteen years of operating experience with the country&rsquo;s top business school. AI for Professional Success (AiPS) coursework running alongside since May 2026.</p></div>
+      <div class="achieve a-build reveal">
+        <div class="when">Jun 2026</div>
+        <div class="what"><h3>Built and launched sohelprsnl.com</h3><p>This site, planned, written, and built hands-on with AI tools. No agency, no framework.</p></div>
       </div>
-      <div class="achieve reveal">
+      <div class="achieve a-ops reveal">
+        <div class="when">Season 2026</div>
+        <div class="what"><h3>97% on-time delivery at LPP</h3><p>Latest season, across 35 vendors and ~3 million pieces a year, while growing Dhaka office order volume 10% against target.</p></div>
+      </div>
+      <div class="achieve a-ops reveal">
+        <div class="when">2025&ndash;26</div>
+        <div class="what"><h3>8 new vendors onboarded</h3><p>Sourced, evaluated, and onboarded to diversify LPP&rsquo;s Bangladesh supply base across denim, woven bottoms, and accessories.</p></div>
+      </div>
+      <div class="achieve a-edu reveal">
+        <div class="when">2025&ndash;</div>
+        <div class="what"><h3>PGD in Garment Business, IBA, University of Dhaka</h3><p>Formalizing fourteen years of operating experience with the country&rsquo;s top business school. Now in the final module, completing the industry internship. <a href="resources.html">See the full programme &rarr;</a></p></div>
+      </div>
+      <div class="achieve a-write reveal">
         <div class="when">Ongoing</div>
         <div class="what"><h3>RMG Xpress Insights by Sohel, every week</h3><p>A growing readership of merchandisers, sourcing managers, and brand-side buyers, plus daily LinkedIn posts.</p></div>
       </div>

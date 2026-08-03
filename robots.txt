@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /_tools-card-studio.html
 
 Sitemap: https://sohelprsnl.com/sitemap.xml

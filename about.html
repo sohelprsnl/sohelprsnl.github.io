@@ -2,14 +2,31 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>
+/* Theme boot. Inline and synchronous on purpose: it must set the attribute
+   before first paint, otherwise a dark-mode visitor sees a white flash. */
+(function(){try{
+  var s=localStorage.getItem("theme");
+  var d=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.setAttribute("data-theme", s || (d?"dark":"light"));
+}catch(e){}})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About, Md. Sohel Rana</title>
 <meta name="description" content="The story and mission behind sohelprsnl.com, fourteen years in Bangladesh RMG, from factory floor to leading merchandising for European brands.">
 <meta name="author" content="Md. Sohel Rana">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#0e1b2e">
+<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d141f" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://sohelprsnl.com/about.html">
 <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="apple-mobile-web-app-title" content="Sohel Rana">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="Md. Sohel Rana">
 <meta property="og:locale" content="en_US">
@@ -57,11 +74,15 @@
       <a href="resources.html">Resources</a>
       <a href="contact.html">Contact</a>
     </div>
+    <button class="theme-toggle" type="button" id="themeToggle" aria-label="Switch between light and dark theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
   </div>
 </nav>
 
 <header class="hero" id="main">
-  <div class="container" style="padding-top:56px;padding-bottom:60px">
+  <div class="container" style="padding-top:42px;padding-bottom:46px">
     <div class="hero-text">
       <p class="kicker">About me</p>
       <h1>Fourteen years, every link of the chain.</h1>
@@ -76,11 +97,9 @@
     <p class="eyebrow reveal">My mission</p>
     <h2 class="title reveal">Help garment manufacturing get smarter, without losing what makes it work.</h2>
     <div class="pull reveal">&ldquo;The next decade of RMG belongs to people who pair floor experience with technology. I intend to be one of them, and to bring others along.&rdquo;</div>
-    <p class="reveal">I started as an assistant merchandiser at Crystal Martin Apparel in 2011, chasing lab dips, preparing costings, learning what a critical path means when the production floor is right downstairs. That grounding shaped everything since: I have never quoted a price I could not trace back to yarn, or promised a delivery date without knowing what the factory can actually run.</p>
-    <p class="reveal">At New Wave Group, I was one of two merchandisers who started the group&rsquo;s trading business through its intercompany, Multi Sourcing Asia Ltd. We built it from a standing start to USD 35 million in annual order value, opening 15 buyer accounts, Bj&ouml;rn Borg, SEBAGO, Volvo AB, and Aditya Birla Fashion &amp; Retail among them.</p>
-    <p class="reveal">Five years at Celio followed: I independently ran the tee, polo, sweatshirt, nightwear, pyjama, and accessory accounts, 1.5 million pieces a year, 70+ styles a season across 14 factories, 94% on-time delivery, and helped push 30% of the collection into sustainable production.</p>
-    <p class="reveal">Today I lead a four-person merchandising team at LPP S.A.&rsquo;s Bangladesh liaison office: about 3 million pieces a year across 35 vendors, denim for Cropp, House, and Mohito, accessories for all five LPP brands, Sinsay, Reserved, Cropp, House, and Mohito. Last season we hit 97% on-time delivery and grew Dhaka office order volume 10% against target.</p>
-    <p class="reveal">Alongside the day job, I study and I write. A Post Graduate Diploma in Garment Business at IBA (University of Dhaka), the AI for Professional Success (AiPS) capacity-building program, a weekly newsletter, daily posts. The industry is changing faster than most sourcing playbooks, I would rather write the new one than be surprised by it.</p>
+    <p class="reveal">I started as an assistant merchandiser at Crystal Martin Apparel in 2011, chasing lab dips and preparing costings with the production floor right downstairs. That grounding set the rule I still work by: never quote a price I cannot trace back to yarn, and never promise a delivery date without knowing what the factory can actually run.</p>
+    <p class="reveal">Everything since has been the same job at a larger scale. Today I lead a four-person merchandising team at LPP S.A.&rsquo;s Bangladesh liaison office, covering denim for Cropp, House, and Mohito and accessories for all five LPP brands. Before that came Celio and New Wave Group.</p>
+    <p class="reveal">Alongside the day job, I study and I write. The industry is changing faster than most sourcing playbooks. I would rather write the new one than be surprised by it.</p>
   </div>
 </section>
 
@@ -88,19 +107,19 @@
   <div class="container">
     <p class="eyebrow reveal">Three things at once</p>
     <h2 class="title reveal">Why this combination matters</h2>
-    <div class="grid cols-3" style="margin-top:30px">
-      <div class="card reveal">
-        <span class="icon">&#127981;</span>
+    <div class="grid cols-3" style="margin-top:22px">
+      <div class="card a-ops reveal">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M4 21V10l5 3.2V10l5 3.2V10l5 3.2V21"/><path d="M6.4 10 7 3.4h2.6L10 10"/><path d="M8 17.4h1.6M13 17.4h1.6M18 17.4h1.6"/></svg></span>
         <h3>The Operator</h3>
         <p>Costing, negotiation, vendor allocation, and critical-path execution at scale, for LPP, Celio, and New Wave Group. The numbers on the Career Journey page are the proof.</p>
       </div>
-      <div class="card reveal">
-        <span class="icon">&#127758;</span>
+      <div class="card a-ops reveal">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/><path d="M3.4 12h17.2"/><path d="M12 3.4c2.3 2.4 3.5 5.4 3.5 8.6S14.3 18.2 12 20.6c-2.3-2.4-3.5-5.4-3.5-8.6S9.7 5.8 12 3.4z"/></svg></span>
         <h3>Globally Ready</h3>
         <p>Daily work with a European head office, in English, across time zones. International and remote roles are an extension of my current job, not a leap.</p>
       </div>
-      <div class="card reveal">
-        <span class="icon">&#9997;&#65039;</span>
+      <div class="card a-write reveal">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15.3 4.6l4.1 4.1"/><path d="M17 2.9a2.4 2.4 0 0 1 3.4 3.4L8.2 18.5l-4.6 1.3 1.3-4.6z"/><path d="M4 21.6h16"/></svg></span>
         <h3>The Writer &amp; Learner</h3>
         <p>A weekly newsletter, daily posts, and continuous coursework make my thinking public. Read three months of my work and you know how I think before we ever talk.</p>
       </div>
@@ -110,33 +129,27 @@
 
 <section>
   <div class="container">
-    <p class="eyebrow reveal">Education</p>
-    <h2 class="title reveal">Formal grounding</h2>
-    <div style="margin-top:20px">
-      <div class="res reveal">
-        <h3>Post Graduate Diploma in Garment Business (PGD-GB) <span class="status progress">In progress</span></h3>
-        <p>Institute of Business Administration (IBA), University of Dhaka &middot; started 11 July 2025 &ndash; ongoing</p>
-        <p>I built the public <a href="https://sohelprsnl.com/pgd-gb-archive/" target="_blank" rel="noopener">PGD-GB Batch 11 Programme Archive &rarr;</a>, the complete record of the batch: 46 lecturers, 108 classes, 3 modules, 40 industry module topics.</p>
+    <p class="eyebrow reveal">Where to next</p>
+    <h2 class="title reveal">The evidence, in three places.</h2>
+    <p class="lede reveal">I keep each kind of proof on one page, so nothing is repeated and nothing is buried.</p>
+    <div class="grid cols-3">
+      <div class="card a-ops reveal">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3.4 17.2 9.6 11l3.6 3.6 7.4-7.6"/><path d="M15.4 6.9h5.2v5.2"/></svg></span>
+        <h3>The career record</h3>
+        <p>Four chapters from the factory floor to leading a team, with the volumes, the buyer accounts, and the delivery numbers attached to each.</p>
+        <a class="more" href="journey.html">See the career journey &rarr;</a>
       </div>
-      <div class="res reveal">
-        <h3>Internship, PGD-GB Program <span class="status progress">In progress</span></h3>
-        <p>Internship Report Topic: <em>&ldquo;Sustainable and Ethical Sourcing Practices and Their Challenges in the Bangladeshi RMG Industry: A Buying House Perspective&rdquo;</em> at LPP S.A. Bangladesh Liaison Office, supervised by Mohammad Saif Noman Khan, Associate Professor, IBA.</p>
+      <div class="card a-edu reveal">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.3 22 8.4l-10 5.1L2 8.4z"/><path d="M6 10.6v5.1c0 1.7 2.7 3.1 6 3.1s6-1.4 6-3.1v-5.1"/><path d="M22 8.4v5.6"/></svg></span>
+        <h3>Credentials and education</h3>
+        <p>Degrees, the PGD-GB at IBA, professional training, case studies from the floor, the tools I work with, and the CV.</p>
+        <a class="more" href="resources.html">Open the resources hub &rarr;</a>
       </div>
-      <div class="res reveal">
-        <h3>AI for Professional Success (AiPS) <span class="status live">Completed</span></h3>
-        <p>2-month AI Capacity Building Program &middot; myAi &middot; 19 May 2026 to 17 July 2026. <a href="ai-learning.html">Follow the AI learning journey &rarr;</a></p>
-      </div>
-      <div class="res reveal">
-        <h3>B.Sc. in Textile Engineering <span class="status live">Completed</span></h3>
-        <p>Wet Processing Technology (Dyeing) &middot; City University, Bangladesh &middot; 2011</p>
-      </div>
-      <div class="res reveal">
-        <h3>Higher Secondary Certificate (HSC), Science <span class="status live">Completed</span></h3>
-        <p>Dr. Abul Hossain Degree College &middot; 2005 &middot; GPA 4.10 out of 5.00</p>
-      </div>
-      <div class="res reveal">
-        <h3>Secondary School Certificate (SSC), Science <span class="status live">Completed</span></h3>
-        <p>Shailkupa Pilot High School &middot; 2003 &middot; GPA 4.19 out of 5.00</p>
+      <div class="card a-ai reveal">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8.2" width="16" height="12" rx="3.2"/><path d="M12 4.4v3.8"/><circle cx="12" cy="3" r="1.5"/><path d="M9.2 13.2v1.8M14.8 13.2v1.8"/><path d="M1.9 12.6v3.4M22.1 12.6v3.4"/></svg></span>
+        <h3>The AI work</h3>
+        <p>Coursework, the tools I use in live merchandising, the sites I have built, and a dated log of what holds up.</p>
+        <a class="more" href="ai-learning.html">Follow the AI learning journey &rarr;</a>
       </div>
     </div>
   </div>
@@ -147,7 +160,7 @@
     <p class="eyebrow reveal">Beyond the desk</p>
     <h2 class="title reveal">A sports mindset</h2>
     <p class="lede reveal">Competition, teamwork, and performing under pressure aren&rsquo;t just merchandising skills, they&rsquo;re cricket skills. I bring the same mindset to both.</p>
-    <div class="res reveal">
+    <div class="res a-ops reveal">
       <h3>IBOCT 2022&ndash;2023, Inter Buying Office Cricket Tournament <span class="status live">Man of the Match</span></h3>
       <p>Played for the Celio Sourcing office team and took home a Man of the Match trophy. The buying-office community competes hard on the pitch, and the same instincts win negotiations.</p>
     </div>

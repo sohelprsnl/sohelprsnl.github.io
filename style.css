@@ -1,9 +1,57 @@
-/* sohelprsnl.com - design system v2 "Knowledge Hub" */
+/* sohelprsnl.com - design system v3 "Knowledge Hub"
+   Two themes, one token layer.
+
+   BRAND tokens (--ink, --navy, --gold ...) never change. They paint the
+   permanently dark chrome: hero, stat band, CTA band, footer, topbar. Those
+   surfaces look identical in light and dark mode, which is what keeps the
+   site recognisably the same site in both.
+
+   SEMANTIC tokens (--bg, --surface, --text ...) flip with the theme. Every
+   rule below uses these, never a raw hex, so a theme is a token swap and
+   nothing else. */
 :root {
+  color-scheme: light;
+
+  /* ---- Brand constants. Identical in both themes. ---- */
   --ink: #0e1b2e; --navy: #1f3864; --navy-soft: #2c4a7c;
-  --gold: #c9a227; --gold-soft: #e8d9a0; --paper: #faf9f6; --white: #ffffff;
-  --grey: #5b6473; --line: #e6e2d8; --maxw: 1080px; --radius: 14px;
-  --shadow: 0 10px 40px rgba(14,27,46,.08); --shadow-lg: 0 24px 60px rgba(14,27,46,.18);
+  --gold: #c9a227; --gold-soft: #e8d9a0;
+  --paper: #faf9f6; --white: #ffffff;
+
+  /* ---- Semantic surfaces ---- */
+  --bg: #faf9f6;
+  --bg-tint: #f1eee6;
+  --surface: #ffffff;
+  --surface-2: #ffffff;
+  --nav-bg: rgba(250,249,246,.92);
+  --border: #e6e2d8;
+  --border-soft: #eeebe3;
+
+  /* ---- Semantic text. Every value below clears WCAG AA on its surface. ---- */
+  --text: #0e1b2e;
+  --text-soft: #333a46;
+  --text-muted: #5b6473;
+  --text-strong: #1f3864;
+  --gold-text: #806400;
+
+  /* ---- Category accents. One hue per kind of content, never more. ---- */
+  --a-ops:   #17557d;
+  --a-ai:    #0f6d64;
+  --a-edu:   #6a3d94;
+  --a-write: #97570a;
+  --a-build: #1d6b3a;
+
+  /* ---- Depth ---- */
+  --shadow: 0 10px 40px rgba(14,27,46,.08);
+  --shadow-lg: 0 24px 60px rgba(14,27,46,.18);
+  --shadow-accent: 0 18px 46px rgba(14,27,46,.16);
+
+  /* Status chips and tags, tokenised so they invert cleanly. */
+  --chip-bg: #f0e9d4;
+  --st-live-bg: #e3f2e6; --st-live-fg: #1a6e29;
+  --st-prog-bg: #fdf3d7; --st-prog-fg: #8a6500;
+  --st-plan-bg: #e8edf5; --st-plan-fg: #1f3864;
+
+  --maxw: 1080px; --radius: 14px;
 
   /* Type system. One family does all the text work. Weight, size and
      tracking carry the hierarchy instead of a second typeface.
@@ -16,10 +64,62 @@
   --ease-soft: cubic-bezier(.33,1,.68,1);
   --dur: 360ms;
 }
+
+/* ---- Dark theme. Same structure, flipped surfaces. ----
+   Backgrounds are desaturated navy rather than pure black, so the permanently
+   dark chrome still reads as a deliberate darker band against the page. */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0d141f;
+  --bg-tint: #131c29;
+  --surface: #18222f;
+  --surface-2: #1e2937;
+  --nav-bg: rgba(13,20,31,.92);
+  --border: #2b3849;
+  --border-soft: #232f3e;
+
+  --text: #e7edf6;
+  --text-soft: #c6d2e2;
+  --text-muted: #a3b3c9;
+  --text-strong: #9dc0f5;
+  --gold-text: #e6c65c;
+
+  --a-ops:   #7cb8e8;
+  --a-ai:    #52c4b4;
+  --a-edu:   #c19cf0;
+  --a-write: #e5b168;
+  --a-build: #6fce93;
+
+  --shadow: 0 10px 40px rgba(0,0,0,.34);
+  --shadow-lg: 0 24px 60px rgba(0,0,0,.52);
+  --shadow-accent: 0 18px 46px rgba(0,0,0,.46);
+
+  --chip-bg: #3a3117;
+  --st-live-bg: #143324; --st-live-fg: #74d99a;
+  --st-prog-bg: #3a2f10; --st-prog-fg: #f0cd6a;
+  --st-plan-bg: #1c2b40; --st-plan-fg: #9dc0f5;
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { font-family: var(--font-sans); color: var(--ink); background: var(--paper); line-height: 1.7; font-size: 16.5px; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
-.container { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+html {
+  scroll-behavior: smooth;
+  /* iOS Safari inflates text in landscape without this. */
+  -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
+  /* Nothing should ever scroll sideways on a phone. */
+  overflow-x: hidden;
+}
+/* The grey flash Android and iOS paint over a tapped link is replaced by the
+   element's own :active state, which is already designed. */
+* { -webkit-tap-highlight-color: transparent; }
+body { font-family: var(--font-sans); color: var(--text); background: var(--bg); line-height: 1.7; font-size: 16.5px; overflow-x: hidden; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+.container {
+  max-width: var(--maxw); margin: 0 auto;
+  /* env() keeps content clear of the notch, Dynamic Island and the rounded
+     corners when an iPhone is held in landscape. Falls back to 28px. */
+  padding-left: max(28px, env(safe-area-inset-left));
+  padding-right: max(28px, env(safe-area-inset-right));
+}
 
 /* Single-family hierarchy. The bigger the type, the heavier the weight and
    the tighter the tracking. That contrast is what replaces the serif. */
@@ -47,25 +147,27 @@ img { max-width: 100%; }
 .topbar .container { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .topbar a { color: var(--gold-soft); text-decoration: none; }
 .topbar a:hover { color: #fff; }
-nav.main { position: sticky; top: 0; z-index: 200; background: rgba(250,249,246,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
-nav.main .container { display: flex; align-items: center; justify-content: space-between; height: 66px; }
-nav.main .brand { font-family: var(--font-sans); font-weight: 700; font-size: 1.1rem; letter-spacing: -.035em; color: var(--ink); text-decoration: none; }
-nav.main .brand span { color: var(--gold); }
-nav.main .brand .brand-mark { font-family: var(--font-mono); font-size: .74rem; font-weight: 600; letter-spacing: .02em; color: var(--gold); vertical-align: 2px; margin-left: 3px; }
-nav.main .links { display: flex; align-items: center; }
-nav.main .links a { color: var(--grey); text-decoration: none; margin-left: 24px; font-size: .875rem; font-weight: 600; letter-spacing: -.01em; padding-bottom: 4px; border-bottom: 2px solid transparent; transition: color .2s var(--ease-out), border-color .2s var(--ease-out); }
-nav.main .links a:hover { color: var(--ink); }
-nav.main .links a.active { color: var(--ink); border-bottom-color: var(--gold); }
-nav.main .menu-btn { display: none; background: none; border: none; font-size: 1.7rem; color: var(--ink); cursor: pointer; }
+nav.main { position: sticky; top: 0; z-index: 200; background: var(--nav-bg); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+nav.main .container { display: flex; align-items: center; justify-content: flex-start; height: 66px; }
+nav.main .brand { font-family: var(--font-sans); font-weight: 700; font-size: 1.1rem; letter-spacing: -.035em; color: var(--text); text-decoration: none; }
+nav.main .brand span { color: var(--gold-text); }
+nav.main .brand .brand-mark { font-family: var(--font-mono); font-size: .74rem; font-weight: 600; letter-spacing: .02em; color: var(--gold-text); vertical-align: 2px; margin-left: 3px; }
+nav.main .links { display: flex; align-items: center; margin-left: auto; }
+nav.main .links a { color: var(--text-muted); text-decoration: none; margin-left: 24px; font-size: .875rem; font-weight: 600; letter-spacing: -.01em; padding-bottom: 4px; border-bottom: 2px solid transparent; transition: color .2s var(--ease-out), border-color .2s var(--ease-out); }
+nav.main .links a:hover { color: var(--text); }
+nav.main .links a.active { color: var(--text); border-bottom-color: var(--gold); }
+nav.main .menu-btn { display: none; background: none; border: none; font-size: 1.7rem; color: var(--text); cursor: pointer; }
 .hero { background: radial-gradient(1100px 500px at 85% -10%, rgba(201,162,39,.16), transparent 60%), linear-gradient(160deg, var(--ink) 0%, var(--navy) 75%, var(--navy-soft) 100%); color: #fff; overflow: hidden; }
-.hero .container { display: flex; align-items: center; gap: 56px; padding-top: 78px; padding-bottom: 84px; flex-wrap: wrap; }
+.hero .container { display: flex; align-items: center; gap: 52px; padding-top: 58px; padding-bottom: 62px; flex-wrap: wrap; }
 .hero-text { flex: 1 1 520px; }
 .hero .kicker { text-transform: uppercase; letter-spacing: 2.5px; font-size: .74rem; font-weight: 700; color: var(--gold-soft); margin-bottom: 18px; }
 .hero h1 { font-size: clamp(2.15rem, 4.8vw, 3.5rem); line-height: 1.06; font-weight: 700; letter-spacing: -.042em; margin-bottom: 20px; }
 .hero h1 em { font-style: normal; font-weight: 400; color: var(--gold-soft); }
 .hero .mission { font-size: 1.12rem; color: #cdd8ec; max-width: 600px; margin-bottom: 14px; }
 .hero .positioning { font-size: .86rem; color: #93a5c4; letter-spacing: .3px; margin-bottom: 30px; max-width: 620px; }
-.hero-photo { flex: 0 0 auto; position: relative; }
+/* The photo aligns to the top of the text block rather than its centre,
+   which reads as composed instead of floating. */
+.hero-photo { flex: 0 0 auto; position: relative; align-self: flex-start; margin-top: 14px; }
 .hero-photo img { width: 230px; height: 266px; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow-lg); display: block; }
 .hero-photo::after { content: ""; position: absolute; inset: 14px -14px -14px 14px; border: 2px solid rgba(201,162,39,.5); border-radius: var(--radius); z-index: -1; }
 .btn { display: inline-block; padding: 13px 26px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: .92rem; letter-spacing: .2px; transition: all .18s; cursor: pointer; }
@@ -75,7 +177,7 @@ nav.main .menu-btn { display: none; background: none; border: none; font-size: 1
 .btn-ghost:hover { background: rgba(255,255,255,.1); }
 .btn-navy { background: var(--navy); color: #fff; }
 .btn-navy:hover { background: var(--ink); transform: translateY(-2px); }
-.btn-line { border: 1.5px solid var(--navy); color: var(--navy); }
+.btn-line { border: 1.5px solid var(--text-strong); color: var(--text-strong); }
 .btn-line:hover { background: var(--navy); color: #fff; }
 .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
 .statband { background: var(--ink); border-top: 1px solid rgba(255,255,255,.08); }
@@ -86,79 +188,91 @@ nav.main .menu-btn { display: none; background: none; border: none; font-size: 1
    steady while the count-up animation runs. */
 .stat .num { font-family: var(--font-mono); font-size: 2.5rem; font-weight: 600; line-height: 1; letter-spacing: -.03em; color: var(--gold); font-variant-numeric: tabular-nums; }
 .stat .lbl { color: #93a5c4; font-size: .76rem; margin-top: 8px; letter-spacing: .06em; text-transform: uppercase; }
-section { padding: 78px 0; }
-section.tint { background: #f1eee6; }
+section { padding: 62px 0; }
+section.tint { background: var(--bg-tint); }
 section.dark { background: var(--ink); color: #fff; }
-.eyebrow { text-transform: uppercase; letter-spacing: 2.5px; font-size: .72rem; font-weight: 700; color: var(--gold); margin-bottom: 12px; }
-h2.title { font-size: clamp(1.65rem, 3.1vw, 2.25rem); font-weight: 650; line-height: 1.12; letter-spacing: -.034em; margin-bottom: 14px; }
-.lede { color: var(--grey); max-width: 700px; margin-bottom: 40px; font-size: 1.02rem; }
+.eyebrow { text-transform: uppercase; letter-spacing: 2.5px; font-size: .72rem; font-weight: 700; color: var(--gold-text); margin-bottom: 12px; }
+h2.title { font-size: clamp(1.65rem, 3.1vw, 2.25rem); font-weight: 650; line-height: 1.12; letter-spacing: -.034em; margin-bottom: 12px; }
+.lede { color: var(--text-muted); max-width: 700px; margin-bottom: 30px; font-size: 1.02rem; }
 section.dark .lede { color: #aab8d0; }
-.grid { display: grid; gap: 24px; }
+.grid { display: grid; gap: 20px; }
 .grid.cols-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
 .grid.cols-3 { grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
-.card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px 30px; box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 26px; box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s; }
 .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-.card .icon { font-size: 1.5rem; margin-bottom: 14px; display: block; }
-.card h3 { font-size: 1.12rem; margin-bottom: 10px; color: var(--navy); }
-.card p { font-size: .93rem; color: var(--grey); }
-.card .more { display: inline-block; margin-top: 14px; color: var(--navy); font-weight: 600; font-size: .88rem; text-decoration: none; }
-.card .more:hover { color: var(--gold); }
-.article-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; }
+/* Icons are inline SVG on currentColor, so each one takes its card's accent
+   and stays crisp at any density. The emoji set they replaced rendered
+   differently on every OS and could not be coloured. */
+.card .icon { display: block; margin-bottom: 15px; line-height: 0; color: var(--accent, var(--text-strong)); }
+.card .icon svg { width: 27px; height: 27px; display: block; overflow: visible; }
+.card:hover .icon svg { transform: translateY(-1px); }
+.card .icon svg { transition: transform .26s var(--ease-out); }
+.card.has-cover { overflow: hidden; }
+.card .cover { display: block; width: calc(100% + 60px); max-width: none; height: auto; aspect-ratio: 1200 / 630; object-fit: cover; margin: -26px -26px 20px; border-bottom: 1px solid var(--border); }
+.card h3 { font-size: 1.12rem; margin-bottom: 10px; color: var(--text-strong); }
+.card p { font-size: .93rem; color: var(--text-muted); }
+.card .more { display: inline-block; margin-top: 14px; color: var(--text-strong); font-weight: 600; font-size: .88rem; text-decoration: none; }
+.card .more:hover { color: var(--gold-text); }
+.article-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; }
 .article-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-.article-card .tag { align-self: flex-start; background: #f0e9d4; color: #8a6d10; font-size: .72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; }
+.article-card .tag { align-self: flex-start; background: var(--chip-bg); color: var(--gold-text); font-size: .72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; }
 .article-card h3 { font-size: 1.15rem; line-height: 1.35; margin-bottom: 10px; }
-.article-card h3 a { color: var(--ink); text-decoration: none; }
-.article-card h3 a:hover { color: var(--navy); }
-.article-card p { color: var(--grey); font-size: .92rem; flex: 1; }
-.article-card .meta { margin-top: 18px; font-size: .8rem; color: #9aa3b2; }
-.achieve { display: flex; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.article-card h3 a { color: var(--text); text-decoration: none; }
+.article-card h3 a:hover { color: var(--text-strong); }
+.article-card p { color: var(--text-muted); font-size: .92rem; flex: 1; }
+.article-card .meta { margin-top: 18px; font-size: .8rem; color: var(--text-muted); }
+.achieve { display: flex; gap: 20px; padding: 17px 0; border-bottom: 1px solid var(--border); }
 .achieve:last-child { border-bottom: none; }
-.achieve .when { flex: 0 0 110px; font-size: .8rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; padding-top: 4px; }
+.achieve .when { flex: 0 0 110px; font-size: .8rem; font-weight: 700; color: var(--gold-text); text-transform: uppercase; letter-spacing: 1px; padding-top: 4px; }
 .achieve .what h3 { font-size: 1.05rem; margin-bottom: 4px; }
-.achieve .what p { color: var(--grey); font-size: .92rem; }
+.achieve .what p { color: var(--text-muted); font-size: .92rem; }
 .timeline { position: relative; margin-top: 10px; }
 .timeline::before { content: ""; position: absolute; left: 19px; top: 0; bottom: 0; width: 2px; background: linear-gradient(var(--gold), var(--navy)); }
-.t-item { position: relative; padding: 0 0 52px 64px; }
+.t-item { position: relative; padding: 0 0 40px 64px; }
 .t-item:last-child { padding-bottom: 0; }
-.t-item .dot { position: absolute; left: 8px; top: 4px; width: 24px; height: 24px; border-radius: 50%; background: var(--paper); border: 3px solid var(--gold); box-shadow: 0 0 0 5px var(--paper); }
-.t-item .era { font-size: .78rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); }
+.t-item .dot { position: absolute; left: 8px; top: 4px; width: 24px; height: 24px; border-radius: 50%; background: var(--bg); border: 3px solid var(--gold); box-shadow: 0 0 0 5px var(--bg); }
+.t-item .era { font-size: .78rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-text); }
 .t-item h3 { font-size: 1.3rem; margin: 6px 0 2px; }
-.t-item .org { color: var(--grey); font-style: italic; font-size: .95rem; margin-bottom: 12px; }
-.t-item .story { max-width: 720px; margin-bottom: 14px; color: #333a46; }
+.t-item .org { color: var(--text-muted); font-style: italic; font-size: .95rem; margin-bottom: 12px; }
+.t-item .story { max-width: 720px; margin-bottom: 14px; color: var(--text-soft); }
 .t-item ul { margin-left: 20px; max-width: 720px; }
-.t-item li { margin-bottom: 8px; font-size: .95rem; color: #333a46; }
+.t-item li { margin-bottom: 8px; font-size: .95rem; color: var(--text-soft); }
 .t-item .chip-row { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
-.chip { background: #fff; border: 1px solid var(--line); color: var(--navy); font-size: .78rem; font-weight: 600; padding: 5px 13px; border-radius: 99px; }
+.chip { background: var(--surface-2); border: 1px solid var(--border); color: var(--text-strong); font-size: .78rem; font-weight: 600; padding: 5px 13px; border-radius: 99px; }
 .t-item { padding-right: 190px; }
-.company-card { position: absolute; right: 0; top: 26px; width: 156px; display: flex; flex-direction: column; align-items: center; text-align: center; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 14px 18px; box-shadow: var(--shadow); text-decoration: none; transition: all .18s; }
-.company-card img { width: 56px; height: 56px; border-radius: 14px; background: #fff; padding: 4px; border: 1px solid var(--line); margin-bottom: 12px; }
-.company-card .cname { font-family: var(--font-sans); font-weight: 700; font-size: .9rem; color: var(--ink); line-height: 1.25; }
-.company-card .visit { margin-top: 8px; font-size: .74rem; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--gold); }
+.company-card { position: absolute; right: 0; top: 26px; width: 156px; display: flex; flex-direction: column; align-items: center; text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 14px 18px; box-shadow: var(--shadow); text-decoration: none; transition: all .18s; }
+.company-card img { width: 56px; height: 56px; border-radius: 14px; background: #fff; padding: 4px; border: 1px solid var(--border); margin-bottom: 12px; }
+.company-card .cname { font-family: var(--font-sans); font-weight: 700; font-size: .9rem; color: var(--text); line-height: 1.25; }
+.company-card .visit { margin-top: 8px; font-size: .74rem; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--gold-text); }
 .company-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: var(--gold); }
 .company-stack { position: absolute; right: 0; top: 26px; width: 156px; display: flex; flex-direction: column; gap: 14px; }
 .company-stack .company-card { position: static; width: 100%; }
 
-.res { background: var(--white); border: 1px solid var(--line); border-left: 4px solid var(--gold); border-radius: 10px; padding: 26px 28px; margin-bottom: 18px; box-shadow: var(--shadow); }
+.res { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 10px; padding: 22px 24px; margin-bottom: 14px; box-shadow: var(--shadow); }
 .res h3 { font-size: 1.08rem; margin-bottom: 6px; }
+/* A linked credential heading keeps heading colour and weight, and signals the
+   link with a gold rule instead of a colour change. */
+.res h3 a { color: inherit; font-weight: inherit; text-decoration: none; border-bottom: 1.5px solid var(--gold); padding-bottom: 1px; transition: border-color .2s var(--ease-out), color .2s var(--ease-out); }
+.res h3 a:hover { color: var(--text-strong); border-bottom-color: var(--text-strong); }
 .res .status { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 12px; border-radius: 99px; margin-left: 10px; vertical-align: 2px; }
-.status.live { background: #e3f2e6; color: #1d7a2e; }
-.status.progress { background: #fdf3d7; color: #946d00; }
-.status.planned { background: #e8edf5; color: var(--navy); }
-.res p { color: var(--grey); font-size: .93rem; }
-.res a { color: var(--navy); font-weight: 600; text-decoration: none; }
-.res a:hover { color: var(--gold); }
-.pull { border-left: 4px solid var(--gold); padding: 8px 0 8px 28px; margin: 40px 0; font-family: var(--font-sans); font-weight: 500; letter-spacing: -.028em; font-size: 1.4rem; line-height: 1.4; color: var(--navy); max-width: 760px; }
+.status.live { background: var(--st-live-bg); color: var(--st-live-fg); }
+.status.progress { background: var(--st-prog-bg); color: var(--st-prog-fg); }
+.status.planned { background: var(--st-plan-bg); color: var(--st-plan-fg); }
+.res p { color: var(--text-muted); font-size: .93rem; }
+.res a { color: var(--text-strong); font-weight: 600; text-decoration: none; }
+.res a:hover { color: var(--gold-text); }
+.pull { border-left: 4px solid var(--gold); padding: 8px 0 8px 28px; margin: 30px 0; font-family: var(--font-sans); font-weight: 500; letter-spacing: -.028em; font-size: 1.4rem; line-height: 1.4; color: var(--text-strong); max-width: 760px; }
 .cta-band { background: linear-gradient(135deg, var(--navy) 0%, var(--ink) 100%); color: #fff; text-align: center; }
 .cta-band h2 { font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -.025em; margin-bottom: 12px; }
 .cta-band p { color: #aab8d0; max-width: 560px; margin: 0 auto 28px; }
 .contact-list { list-style: none; }
 .contact-list li { margin-bottom: 16px; font-size: 1.05rem; }
-.contact-list a { color: var(--navy); font-weight: 600; text-decoration: none; }
-.contact-list a:hover { color: var(--gold); }
-.prose p { margin-bottom: 18px; max-width: 740px; }
-.prose strong { color: var(--navy); }
-.kicker { text-transform: uppercase; letter-spacing: 1px; font-size: .8rem; font-weight: 700; color: var(--grey); }
-footer { background: var(--ink); color: #8fa0bd; padding: 56px 0 40px; font-size: .9rem; }
+.contact-list a { color: var(--text-strong); font-weight: 600; text-decoration: none; }
+.contact-list a:hover { color: var(--gold-text); }
+.prose p { margin-bottom: 15px; max-width: 740px; }
+.prose strong { color: var(--text-strong); }
+.kicker { text-transform: uppercase; letter-spacing: 1px; font-size: .8rem; font-weight: 700; color: var(--text-muted); }
+footer { background: var(--ink); color: #8fa0bd; padding: 46px 0 32px; font-size: .9rem; }
 footer .cols { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 36px; }
 footer h4 { color: #fff; font-size: .95rem; margin-bottom: 14px; font-family: var(--font-sans); }
 footer a { color: #aab8d0; text-decoration: none; display: block; margin-bottom: 8px; }
@@ -227,14 +341,19 @@ footer .bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 22px; 
 /* Stat numbers count up. Tabular figures stop the width jumping. */
 .stat .num { font-variant-numeric: tabular-nums; }
 @media (max-width: 760px) {
-  nav.main .links { display: none; position: absolute; top: 66px; left: 0; right: 0; background: var(--paper); flex-direction: column; align-items: flex-start; padding: 14px 28px 22px; border-bottom: 1px solid var(--line); box-shadow: var(--shadow); }
+  nav.main .links { display: none; position: absolute; top: 66px; left: 0; right: 0; background: var(--bg); flex-direction: column; align-items: flex-start; padding: 14px 28px 22px; border-bottom: 1px solid var(--border); box-shadow: var(--shadow); }
   nav.main .links.open { display: flex; }
+  /* The toggle is a sibling of .links, not a child, so collapsing the menu
+     never hides it. On mobile it sits in the bar next to the hamburger. */
+  nav.main .links { margin-left: 0; }
+  nav.main .theme-toggle { order: 2; margin-left: auto; margin-right: 12px; }
+  nav.main .menu-btn { order: 3; }
   nav.main .links a { margin: 9px 0; font-size: 1rem; }
   nav.main .menu-btn { display: block; }
-  .hero .container { padding-top: 52px; padding-bottom: 56px; gap: 36px; }
+  .hero .container { padding-top: 40px; padding-bottom: 44px; gap: 30px; }
   .hero-photo { order: -1; }
   .hero-photo img { width: 170px; height: 196px; }
-  section { padding: 56px 0; }
+  section { padding: 46px 0; }
   footer .cols { grid-template-columns: 1fr; gap: 26px; }
   .achieve { flex-direction: column; gap: 4px; }
   .t-item { padding-right: 0; }
@@ -247,7 +366,7 @@ footer .bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 22px; 
 }
 /* ---------- CV request form ---------- */
 .cv-form { display: flex; gap: 12px; flex-wrap: wrap; max-width: 560px; }
-.cv-form input[type="email"] { flex: 1 1 300px; padding: 13px 18px; border: 1.5px solid var(--line); border-radius: 8px; font-size: .95rem; font-family: inherit; background: #fff; color: var(--ink); }
+.cv-form input[type="email"] { flex: 1 1 300px; padding: 13px 18px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 16px; font-family: inherit; background: var(--surface); color: var(--text); }
 .cv-form input[type="email"]:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,162,39,.18); }
 .cv-status { margin-top: 14px; font-size: .92rem; font-weight: 600; }
 .cv-status.ok { color: #1d7a2e; }
@@ -276,17 +395,17 @@ footer .bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 22px; 
   .orcid-go { margin-left: 0; width: 100%; }
 }
 
-.wa-user { font-family: var(--font-mono); font-weight: 600; letter-spacing: -.02em; color: var(--navy); }
+.wa-user { font-family: var(--font-mono); font-weight: 600; letter-spacing: -.02em; color: var(--text-strong); }
 .copy-btn {
   font-family: var(--font-mono); font-size: .72rem; font-weight: 600;
   letter-spacing: .06em; text-transform: uppercase;
-  color: var(--navy); background: #fff;
-  border: 1.5px solid var(--line); border-radius: 99px;
+  color: var(--text-strong); background: var(--surface);
+  border: 1.5px solid var(--border); border-radius: 99px;
   padding: 5px 13px; cursor: pointer;
   transition: color .2s var(--ease-out), border-color .2s var(--ease-out), background .2s var(--ease-out);
 }
-.copy-btn:hover { border-color: var(--gold); color: var(--gold); }
-.copy-btn.copied { background: #e3f2e6; border-color: #1d7a2e; color: #1d7a2e; }
+.copy-btn:hover { border-color: var(--gold); color: var(--gold-text); }
+.copy-btn.copied { background: var(--st-live-bg); border-color: var(--st-live-fg); color: var(--st-live-fg); }
 
 
 /* Inline logo cards on list pages (Resources, AI Learning) */
@@ -336,7 +455,7 @@ footer a:focus-visible,
 @media (min-width: 761px) and (max-width: 1024px) {
   .container { padding: 0 24px; }
   nav.main .links a { margin-left: 16px; font-size: .84rem; }
-  .hero .container { gap: 36px; padding-top: 60px; padding-bottom: 64px; }
+  .hero .container { gap: 34px; padding-top: 48px; padding-bottom: 52px; }
   .hero-photo img { width: 200px; height: 232px; }
   .grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
   .statband .container { grid-template-columns: repeat(2, 1fr); }
@@ -355,3 +474,198 @@ footer a:focus-visible,
 .res .company-card img{width:auto;height:36px;max-width:150px;object-fit:contain;margin-bottom:0;padding:0;border:none;border-radius:6px;background:transparent;}
 .res .company-card .cname{font-size:.85rem;}
 .res .company-card .visit{margin-top:0;margin-left:14px;white-space:nowrap;}
+
+/* ============================================================
+   ACCENT SYSTEM
+   One hue per kind of content. A card declares its category with
+   a modifier class; every accented property reads --accent, which
+   falls back to the heading colour when no category is set.
+   Five hues total, and no card ever mixes two.
+   ============================================================ */
+.a-ops   { --accent: var(--a-ops); }
+.a-ai    { --accent: var(--a-ai); }
+.a-edu   { --accent: var(--a-edu); }
+.a-write { --accent: var(--a-write); }
+.a-build { --accent: var(--a-build); }
+
+/* Cards carry the accent as a top rule that fills in on hover.
+   The rule is the only coloured surface: text stays on the readable
+   token, so contrast never depends on the accent. */
+.card { position: relative; overflow: hidden; }
+.card::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--accent, var(--text-strong));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--dur) var(--ease-out);
+}
+.card[class*="a-"]::before { transform: scaleX(.22); }
+.card[class*="a-"]:hover::before { transform: scaleX(1); }
+.card[class*="a-"]:hover { border-color: var(--accent); box-shadow: var(--shadow-accent); }
+.card[class*="a-"] h3 { color: var(--accent); }
+.card[class*="a-"] .more { color: var(--accent); }
+.card[class*="a-"] .icon { color: var(--accent); }
+
+/* Credential blocks take the accent on their left rule. */
+.res[class*="a-"] { border-left-color: var(--accent); }
+.res[class*="a-"] h3 a { border-bottom-color: var(--accent); }
+.res[class*="a-"] h3 a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* Milestone date stamps pick up the accent of their row. */
+.achieve[class*="a-"] .when { color: var(--accent); }
+
+/* ============================================================
+   THEME TOGGLE
+   ============================================================ */
+.theme-toggle {
+  margin-left: 20px; width: 34px; height: 34px; flex: 0 0 auto;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: transparent; border: 1px solid var(--border); border-radius: 9px;
+  color: var(--text-muted); cursor: pointer; padding: 0;
+  transition: color .2s var(--ease-out), border-color .2s var(--ease-out), background .2s var(--ease-out);
+}
+.theme-toggle:hover { color: var(--text); border-color: var(--accent, var(--gold)); background: var(--surface); }
+.theme-toggle svg { width: 17px; height: 17px; display: block; }
+.theme-toggle .icon-sun { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+/* Theme change is a colour crossfade, never a layout move. Transitions are
+   applied only while the toggle runs, so first paint stays instant. */
+.theme-anim, .theme-anim *, .theme-anim *::before, .theme-anim *::after {
+  transition: background-color .28s var(--ease-out), border-color .28s var(--ease-out), color .28s var(--ease-out) !important;
+}
+
+/* ============================================================
+   MOTION REFINEMENTS
+   ============================================================ */
+/* Links in prose grow an underline from the left instead of switching colour. */
+.res p a, .lede a, .prose p a {
+  background-image: linear-gradient(var(--accent, var(--gold)), var(--accent, var(--gold)));
+  background-size: 0% 1.5px; background-repeat: no-repeat; background-position: 0 100%;
+  transition: background-size .3s var(--ease-out), color .2s var(--ease-out);
+  padding-bottom: 2px;
+}
+.res p a:hover, .lede a:hover, .prose p a:hover { background-size: 100% 1.5px; }
+
+/* Card lift gains a slight scale so the shadow reads as depth, not a drop. */
+.card, .article-card, .company-card {
+  transition: transform .26s var(--ease-out), box-shadow .26s var(--ease-out), border-color .26s var(--ease-out);
+}
+.card:hover, .article-card:hover { transform: translateY(-5px) scale(1.007); }
+
+/* Nav underline sweeps in rather than appearing. */
+nav.main .links a { position: relative; border-bottom-color: transparent !important; }
+nav.main .links a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: var(--gold); transform: scaleX(0); transform-origin: left;
+  transition: transform .24s var(--ease-out);
+}
+nav.main .links a:hover::after { transform: scaleX(1); }
+nav.main .links a.active::after { transform: scaleX(1); }
+
+/* Buttons settle rather than snap. */
+.btn { transition: transform .2s var(--ease-out), background .2s var(--ease-out), color .2s var(--ease-out), box-shadow .2s var(--ease-out); }
+.btn-gold:hover, .btn-navy:hover { box-shadow: var(--shadow-accent); }
+
+/* Company logo cards lift their mark slightly on hover. */
+.company-card img { transition: transform .26s var(--ease-out); }
+.company-card:hover img { transform: translateY(-2px) scale(1.04); }
+
+/* Everything above is motion. Anyone who asked the OS to stop animations
+   gets none of it. */
+@media (prefers-reduced-motion: reduce) {
+  .card::before, nav.main .links a::after { transition: none; }
+  .card:hover, .article-card:hover { transform: none; }
+  .company-card:hover img { transform: none; }
+  .theme-anim, .theme-anim *, .theme-anim *::before, .theme-anim *::after { transition: none !important; }
+}
+
+/* ============================================================
+   BRAND MARKS
+   Where a company has no licensed logo asset on this site, the card
+   shows a typographic monogram built from the site's own type system
+   instead of a 128px favicon pulled off a third-party endpoint.
+   It is sharp at any density, loads with the page, cannot 404, and
+   carries no third-party request.
+   ============================================================ */
+.company-card .mark {
+  width: 56px; height: 56px; border-radius: 14px; margin-bottom: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-weight: 600; letter-spacing: -.02em;
+  background: linear-gradient(145deg, var(--accent, var(--navy)), color-mix(in srgb, var(--accent, var(--navy)) 62%, #000));
+  color: #fff; border: 1px solid rgba(255,255,255,.14);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18);
+  transition: transform .26s var(--ease-out);
+}
+.company-card .mark[data-len="2"] { font-size: 1.28rem; }
+.company-card .mark[data-len="3"] { font-size: 1.02rem; }
+.company-card .mark[data-len="4"] { font-size: .84rem; }
+.company-card:hover .mark { transform: translateY(-2px) scale(1.04); }
+
+/* Real logo files keep a white plate, because most brand marks are drawn
+   for light backgrounds and would disappear on the dark theme. */
+.company-card img { background: #fff; }
+
+/* ============================================================
+   TOUCH AND SMALL SCREENS
+   ============================================================ */
+
+/* Hover effects belong to devices that can hover. On a touchscreen a :hover
+   rule sticks after the tap, so a card stays lifted until you tap elsewhere.
+   Gating them on (hover: hover) removes that entirely. */
+@media (hover: none) {
+  .card:hover, .article-card:hover, .company-card:hover,
+  .btn-gold:hover, .btn-navy:hover, .orcid-badge:hover { transform: none; }
+  .card[class*="a-"]:hover::before { transform: scaleX(.22); }
+  .company-card:hover img, .company-card:hover .mark, .card:hover .icon svg { transform: none; }
+}
+
+/* Touch targets. iOS asks for 44px, Android for 48dp. Padding does the work
+   so nothing moves visually on desktop. */
+@media (max-width: 760px) {
+  nav.main .menu-btn { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+  nav.main .theme-toggle { width: 44px; height: 44px; }
+  nav.main .links a { min-height: 44px; display: flex; align-items: center; width: 100%; margin: 2px 0; }
+  .btn { padding: 15px 26px; min-height: 48px; display: inline-flex; align-items: center; justify-content: center; }
+  .copy-btn { min-height: 40px; padding: 8px 15px; }
+  .contact-list a, footer a { display: inline-block; padding: 4px 0; min-height: 34px; }
+  .cv-form button { width: 100%; }
+  .cv-form input[type="email"] { flex: 1 1 100%; }
+  /* Card covers are full-bleed, so their negative margin must track the
+     card padding, which drops on small screens. */
+  .card { padding: 22px 20px; }
+  .card .cover { width: calc(100% + 40px); margin: -22px -20px 18px; }
+  .res { padding: 20px 18px; }
+  .pull { font-size: 1.18rem; padding-left: 20px; }
+  h2.title { font-size: clamp(1.45rem, 6vw, 1.9rem); }
+  .topbar .container { justify-content: center; text-align: center; font-size: .74rem; }
+  .stat .num { font-size: 2.1rem; }
+}
+
+/* Very small phones, iPhone SE and similar. */
+@media (max-width: 380px) {
+  body { font-size: 16px; }
+  .container { padding-left: max(18px, env(safe-area-inset-left)); padding-right: max(18px, env(safe-area-inset-right)); }
+  .card { padding: 20px 17px; }
+  .card .cover { width: calc(100% + 34px); margin: -20px -17px 16px; }
+  .hero-photo img { width: 150px; height: 174px; }
+  .cta-row { width: 100%; }
+  .cta-row .btn { width: 100%; }
+  .company-card { padding: 10px 14px; }
+  .t-item { padding-left: 48px; }
+  .timeline::before { left: 15px; }
+  .t-item .dot { left: 4px; width: 20px; height: 20px; }
+}
+
+/* Landscape phones: the hero should not eat the whole viewport. */
+@media (max-height: 480px) and (orientation: landscape) {
+  .hero .container { padding-top: 30px; padding-bottom: 32px; }
+  nav.main { position: static; }
+}
+
+/* The sticky nav must not hide an anchor target when a link jumps mid-page. */
+:target { scroll-margin-top: 84px; }
+[id] { scroll-margin-top: 84px; }
+
+/* Safe area at the foot of the page, for the iPhone home indicator. */
+footer { padding-bottom: max(32px, env(safe-area-inset-bottom)); }
