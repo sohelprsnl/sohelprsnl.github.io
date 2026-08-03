@@ -8,6 +8,46 @@
   var reduced = window.matchMedia &&
                 window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+
+  /* ---------- 0. Theme toggle ----------
+     The theme is already applied by the inline boot script in <head>.
+     This only wires the button, remembers the choice, and keeps following
+     the OS until the visitor makes an explicit choice. */
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById("themeToggle");
+    var mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+
+    function apply(theme, remember) {
+      /* Transitions are switched on only for the duration of the change,
+         so page load stays instant and the switch still reads as a fade. */
+      document.body.classList.add("theme-anim");
+      root.setAttribute("data-theme", theme);
+      if (remember) { try { localStorage.setItem("theme", theme); } catch (e) {} }
+      if (btn) btn.setAttribute("aria-label",
+        theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
+      window.setTimeout(function () {
+        document.body.classList.remove("theme-anim");
+      }, 320);
+    }
+
+    if (btn) {
+      apply(root.getAttribute("data-theme") || "light", false);
+      btn.addEventListener("click", function () {
+        apply(root.getAttribute("data-theme") === "dark" ? "light" : "dark", true);
+      });
+    }
+
+    /* Follow the OS only while the visitor has not chosen for themselves. */
+    if (mq && mq.addEventListener) {
+      mq.addEventListener("change", function (e) {
+        var chosen = null;
+        try { chosen = localStorage.getItem("theme"); } catch (err) {}
+        if (!chosen) apply(e.matches ? "dark" : "light", false);
+      });
+    }
+  })();
+
   /* ---------- 1. Footer year ---------- */
   var yr = document.getElementById("yr");
   if (yr) yr.textContent = new Date().getFullYear();

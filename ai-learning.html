@@ -2,14 +2,31 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>
+/* Theme boot. Inline and synchronous on purpose: it must set the attribute
+   before first paint, otherwise a dark-mode visitor sees a white flash. */
+(function(){try{
+  var s=localStorage.getItem("theme");
+  var d=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.setAttribute("data-theme", s || (d?"dark":"light"));
+}catch(e){}})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Learning Journey, Md. Sohel Rana</title>
 <meta name="description" content="A public log of one apparel professional's AI learning journey, coursework, applied tools, and what actually works in garment merchandising.">
 <meta name="author" content="Md. Sohel Rana">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#0e1b2e">
+<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d141f" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://sohelprsnl.com/ai-learning.html">
 <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="apple-mobile-web-app-title" content="Sohel Rana">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Md. Sohel Rana">
 <meta property="og:locale" content="en_US">
@@ -57,11 +74,15 @@
       <a href="resources.html">Resources</a>
       <a href="contact.html">Contact</a>
     </div>
+    <button class="theme-toggle" type="button" id="themeToggle" aria-label="Switch between light and dark theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
   </div>
 </nav>
 
 <header class="hero" id="main">
-  <div class="container" style="padding-top:56px;padding-bottom:60px">
+  <div class="container" style="padding-top:42px;padding-bottom:46px">
     <div class="hero-text">
       <p class="kicker">AI learning journey</p>
       <h1>Learning AI the way I learned merchandising: <em>by doing.</em></h1>
@@ -84,11 +105,24 @@
   <div class="container">
     <p class="eyebrow reveal">Formal study</p>
     <h2 class="title reveal">Coursework</h2>
-    <div style="margin-top:20px">
-      <div class="res reveal">
-        <h3>AI for Professional Success (AiPS) <span class="status live">Completed</span></h3>
+    <div style="margin-top:16px">
+      <div class="res a-ai reveal">
+        <h3><a href="https://myaiintl.com/programs.html#aiap" target="_blank" rel="noopener">AiAP &mdash; AI Agents for Professional Excellence</a> <span class="status progress">In progress</span></h3>
+        <p>No-code AI agent certification &middot; Institute: myAi &middot; 3 months, started 3 August 2026. Professionals design and ship working AI agents on their own real workflows. Graduates earn the myAi Certified AI Automation Strategist credential.</p>
+        <a class="company-card" href="https://myaiintl.com/programs.html#aiap" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="https://myaiintl.com/assets/brand/myai-logo.svg" alt="myAi logo"><span class="cname">myAi</span><span class="visit">Visit website &#8599;</span></a>
+        <p style="margin-top:14px"><strong>What the program covers</strong></p>
+        <ul>
+          <li><strong>Build first, theory second:</strong> a live agent running from the early sessions.</li>
+          <li><strong>No code required:</strong> agents built on no-code tooling, not programming.</li>
+          <li><strong>Portfolio of automations:</strong> real workflows automated end to end.</li>
+          <li><strong>Certification:</strong> myAi Certified AI Automation Strategist.</li>
+        </ul>
+        <p class="positioning" style="font-style:italic">My target: agents that take real work off a merchandiser&rsquo;s desk.</p>
+      </div>
+      <div class="res a-ai reveal">
+        <h3><a href="https://myaiintl.com/programs.html#aips" target="_blank" rel="noopener">AiPS &mdash; AI for Professional Success</a> <span class="status live">Completed</span></h3>
         <p>AI capacity-building program &middot; Institute: myAi &middot; 19 May 2026 to 17 July 2026. Structured AI study run alongside the day job, covering prompt engineering, productivity, career acceleration, fundamentals, leadership, and business applications.</p>
-        <a class="company-card" href="https://myaiintl.com/" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="https://myaiintl.com/assets/brand/myai-logo.svg" alt="myAi logo"><span class="cname">myAi</span><span class="visit">Visit website &#8599;</span></a>
+        <a class="company-card" href="https://myaiintl.com/programs.html#aips" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="https://myaiintl.com/assets/brand/myai-logo.svg" alt="myAi logo"><span class="cname">myAi</span><span class="visit">Visit website &#8599;</span></a>
         <p style="margin-top:14px"><strong>Topics &amp; outcomes</strong></p>
         <ul>
           <li><strong>Advanced Prompt Engineering:</strong> Master the grammar of AI fluency.</li>
@@ -100,14 +134,6 @@
         </ul>
         <p class="positioning" style="font-style:italic">Be AI Fluent</p>
       </div>
-      <div class="res reveal">
-        <h3>Post Graduate Diploma in Garment Business (PGD-GB) <span class="status progress">In progress</span></h3>
-        <p>IBA, University of Dhaka &middot; started 11 July 2025, ongoing. The business framework around the technology.</p>
-        <div class="company-stack">
-        <a class="company-card" href="https://www.iba-du.edu/" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/logos/iba.png" alt="IBA, University of Dhaka logo"><span class="cname">IBA, University of Dhaka</span><span class="visit">Visit website &#8599;</span></a>
-        <a class="company-card" href="https://www.sicip.gov.bd/" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/logos/sicip.png" alt="SICIP logo"><span class="cname">SICIP</span><span class="visit">Visit website &#8599;</span></a>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -116,19 +142,19 @@
   <div class="container">
     <p class="eyebrow reveal">Applied today</p>
     <h2 class="title reveal">How I already use AI in merchandising work</h2>
-    <div class="grid cols-3" style="margin-top:30px">
+    <div class="grid cols-3" style="margin-top:22px">
       <div class="card reveal">
-        <span class="icon">&#128202;</span>
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3.2 21h17.6"/><rect x="5" y="12" width="3.6" height="6"/><rect x="10.2" y="7.4" width="3.6" height="10.6"/><rect x="15.4" y="10" width="3.6" height="8"/></svg></span>
         <h3>Reporting &amp; analysis</h3>
         <p>ChatGPT, Claude, and Gemini run through the daily workflow, weekly reports, vendor data consolidation, supplier-performance and capacity analysis, production follow-up updates, presentation (PPT) preparation, and meeting prep, alongside Power BI and advanced Excel.</p>
       </div>
       <div class="card reveal">
-        <span class="icon">&#9993;&#65039;</span>
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2.6" y="5" width="18.8" height="14" rx="2.4"/><path d="m3.4 6.8 8.6 6 8.6-6"/></svg></span>
         <h3>Business communication</h3>
         <p>Faster, cleaner correspondence with Poland HQ and 35 vendors, AI-drafted, human-judged. The judgment is the job; AI just removes the typing.</p>
       </div>
       <div class="card reveal">
-        <span class="icon">&#128221;</span>
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.8H7a2.2 2.2 0 0 0-2.2 2.2v14a2.2 2.2 0 0 0 2.2 2.2h10a2.2 2.2 0 0 0 2.2-2.2V8z"/><path d="M14 2.8V8h5.2"/><path d="M8.6 12.6h6.8M8.6 16.2h4.6"/></svg></span>
         <h3>Writing &amp; publishing</h3>
         <p>Research support for the weekly newsletter and daily posts, AI helps gather; fourteen years on the floor decides what&rsquo;s true.</p>
       </div>
@@ -136,25 +162,25 @@
   </div>
 </section>
 
-<section>
+<section class="tint">
   <div class="container">
     <p class="eyebrow reveal">Built, not just studied</p>
     <h2 class="title reveal">Projects shipped with AI</h2>
     <p class="lede reveal">Three live sites, all hand-built with AI assistance, no framework and no agency. The source for each is public. <a href="https://github.com/sohelprsnl" target="_blank" rel="noopener me">See the code on GitHub &rarr;</a></p>
-    <div class="grid cols-2" style="margin-top:30px">
-      <div class="card reveal">
-        <span class="icon">&#127760;</span>
+    <div class="grid cols-2" style="margin-top:22px">
+      <div class="card a-build has-cover reveal">
+        <img class="cover" loading="lazy" decoding="async" width="1200" height="630" src="assets/card-sohelprsnl.jpg" alt="Cover card for sohelprsnl.com: Md. Sohel Rana, Merchandising Team Leader, LPP S.A. Bangladesh">
         <h3>This website, sohelprsnl.com</h3>
         <p>Designed and built my own personal knowledge hub, structure, copy, and code, working hands-on with AI tools instead of hiring it out. Proof that an apparel merchandiser can ship digital work.</p>
       </div>
-      <div class="card reveal">
-        <span class="icon">&#128218;</span>
+      <div class="card a-build has-cover reveal">
+        <img class="cover" loading="lazy" decoding="async" width="1200" height="630" src="assets/card-pgd-archive.jpg" alt="Cover card for the PGD-GB Programme Archive: 46 lecturers, 108 classes, 3 modules, 30 credits">
         <h3>PGD-GB Batch 11 Programme Archive</h3>
         <p>Built the complete public archive of my IBA-SICIP programme: 46 lecturer profiles, 108 dated classes with search and filters, 3 modules, 30 credits, 40 industry module topics, and the full Module 3 attachment process. One self-contained page, no framework, all data structured by hand with AI assistance.</p>
         <a class="more" href="https://sohelprsnl.com/pgd-gb-archive/" target="_blank" rel="noopener">Visit the archive &rarr;</a>
       </div>
-      <div class="card reveal">
-        <span class="icon">&#127891;</span>
+      <div class="card a-build has-cover reveal">
+        <img class="cover" loading="lazy" decoding="async" width="1200" height="630" src="assets/card-pgd-results.jpg" alt="Cover card for the PGD-GB Batch 11 Result Checker: roll and name lookup, transcript, CGPA">
         <h3>PGD-GB Batch 11 result checker</h3>
         <p>Built and published a result-checking website for my PGD-GB batchmates at IBA-DU, classmates check their results in seconds instead of scanning PDFs.</p>
         <a class="more" href="https://sohelprsnl.com/pgd-gb-results/" target="_blank" rel="noopener">Visit the site &rarr;</a>
@@ -163,35 +189,35 @@
   </div>
 </section>
 
-<section class="tint">
+<section>
   <div class="container">
     <p class="eyebrow reveal">The log</p>
     <h2 class="title reveal">Learning journal</h2>
     <p class="lede reveal">Newest first. Updated as milestones land.</p>
     <div>
       <div class="achieve reveal">
+        <div class="when">Aug 2026</div>
+        <div class="what"><h3>Started AiAP &mdash; AI Agents for Professional Excellence</h3><p>Joined the myAi cohort that began 3 August 2026. Three months, no code, building working AI agents on real merchandising workflows, toward the myAi Certified AI Automation Strategist credential.</p></div>
+      </div>
+      <div class="achieve reveal">
         <div class="when">Jul 2026</div>
         <div class="what"><h3>Published the PGD-GB Batch 11 Programme Archive</h3><p>A full archive of the IBA-SICIP programme at sohelprsnl.com/pgd-gb-archive: 46 lecturers, 108 classes, 3 modules, 40 industry module topics. Data compiled from official records, then built into one searchable page.</p></div>
       </div>
       <div class="achieve reveal">
         <div class="when">Jul 2026</div>
-        <div class="what"><h3>Completed AI for Professional Success (AiPS)</h3><p>Finished the 2-month program with myAi on 17 July 2026, covering prompt engineering, productivity, career acceleration, AI fundamentals, leadership, and business applications.</p></div>
+        <div class="what"><h3>Completed AiPS &mdash; AI for Professional Success</h3><p>Finished the 2-month program with myAi on 17 July 2026, covering prompt engineering, productivity, career acceleration, AI fundamentals, leadership, and business applications.</p></div>
       </div>
       <div class="achieve reveal">
         <div class="when">Jun 2026</div>
         <div class="what"><h3>Built and launched sohelprsnl.com</h3><p>My own personal website, planned, written, and built hands-on with AI tools.</p></div>
       </div>
       <div class="achieve reveal">
-        <div class="when">2026</div>
+        <div class="when">Jun 2026</div>
         <div class="what"><h3>Shipped a result-checking site for PGD-GB Batch 11</h3><p>A small web tool for IBA-DU batchmates, first public project built with AI assistance.</p></div>
       </div>
       <div class="achieve reveal">
         <div class="when">May 2026</div>
-        <div class="what"><h3>Started AI for Professional Success (AiPS)</h3><p>2-month AI Capacity Building Program with myAi began 19 May 2026, first formal AI study alongside daily tool use.</p></div>
-      </div>
-      <div class="achieve reveal">
-        <div class="when">Jul 2025</div>
-        <div class="what"><h3>Enrolled: PGD in Garment Business, IBA-DU</h3><p>Program began 11 July 2025, pairing operating experience with formal business training at Bangladesh&rsquo;s top business school.</p></div>
+        <div class="what"><h3>Started AiPS &mdash; AI for Professional Success</h3><p>2-month AI Capacity Building Program with myAi began 19 May 2026, first formal AI study alongside daily tool use.</p></div>
       </div>
       <div class="achieve reveal">
         <div class="when">2024&ndash;25</div>
