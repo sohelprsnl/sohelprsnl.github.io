@@ -11,6 +11,8 @@
   document.documentElement.setAttribute("data-theme", s || (d?"dark":"light"));
 }catch(e){}})();
 </script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'none'; object-src 'none'; frame-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://myaiintl.com; connect-src 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact, Md. Sohel Rana</title>
 <meta name="description" content="Contact Md. Sohel Rana, merchandising, sourcing, and vendor-management leadership in Bangladesh RMG.">
@@ -47,6 +49,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <noscript><style>.reveal,.stagger>*{opacity:1!important;transform:none!important}.scroll-progress{display:none}</style></noscript>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "url": "https://sohelprsnl.com/contact.html",
+  "name": "Contact Md. Sohel Rana",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Md. Sohel Rana",
+    "url": "https://sohelprsnl.com/",
+    "email": "mailto:sohel.prsnl@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Dhaka",
+      "addressCountry": "BD"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/in/sohelprsnl/",
+      "https://orcid.org/0009-0008-7153-4479",
+      "https://github.com/sohelprsnl"
+    ]
+  }
+}
+</script>
 </head>
 <body>
 
@@ -82,7 +108,7 @@
 </nav>
 
 <header class="hero" id="main">
-  <div class="container" style="padding-top:34px;padding-bottom:38px">
+  <div class="container" style="padding-top:28px;padding-bottom:32px">
     <div class="hero-text">
       <p class="kicker">Contact</p>
       <h1>Talk to me.</h1>
@@ -111,58 +137,14 @@
 <section class="tint" id="cv">
   <div class="container">
     <p class="eyebrow reveal">Get the CV</p>
-    <h2 class="title reveal">Want the CV?</h2>
-    <p class="lede reveal">Please enter your valid email address and click Submit. The CV will be automatically sent to your email address.</p>
-    <form id="cvForm" class="cv-form reveal" novalidate>
-      <input type="email" id="cvEmail" name="email" placeholder="your.email@company.com" required autocomplete="email">
-      <input type="text" id="cvCompany" name="company" tabindex="-1" autocomplete="off" style="position:absolute;left:-5000px" aria-hidden="true">
-      <button type="submit" class="btn btn-gold" id="cvSubmit">Submit</button>
-    </form>
-    <p id="cvStatus" class="cv-status" role="status"></p>
+    <h2 class="title reveal">Ask me for the CV.</h2>
+    <p class="lede reveal">Two pages, every number verified. Send me a line and I will reply with it, usually the same day. The button below opens your own email client with the subject already filled in, so nothing is collected or stored on this site.</p>
+    <div class="cta-row reveal">
+      <a class="btn btn-gold" href="mailto:sohel.prsnl@gmail.com?subject=CV%20request%20via%20sohelprsnl.com&amp;body=Hello%20Sohel%2C%0A%0APlease%20send%20me%20your%20CV.%0A%0AName%3A%0ACompany%3A%0ARole%20or%20reason%3A%0A%0AThank%20you.">Email me for the CV</a>
+      <a class="btn btn-line" href="https://www.linkedin.com/in/sohelprsnl/" target="_blank" rel="noopener">Message me on LinkedIn</a>
+    </div>
   </div>
 </section>
-
-<script>
-(function () {
-  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8zjeQcAExU3fBaLJWpN59IKNkxvIxyGKjN9iGy5_pfedFq158vqCXzT6y5_74tRt5/exec";
-  var form = document.getElementById("cvForm");
-  var emailEl = document.getElementById("cvEmail");
-  var status = document.getElementById("cvStatus");
-  var btn = document.getElementById("cvSubmit");
-  form.addEventListener("submit", function (ev) {
-    ev.preventDefault();
-    var email = emailEl.value.trim();
-    var valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
-    if (!valid) {
-      status.textContent = "Please enter a valid email address.";
-      status.className = "cv-status err";
-      return;
-    }
-    btn.disabled = true;
-    btn.textContent = "Sending...";
-    status.textContent = "";
-    var data = new URLSearchParams();
-    data.append("email", email);
-    data.append("company", document.getElementById("cvCompany").value);
-    // Apps Script web apps don't return CORS headers, so we use no-cors:
-    // the request reaches the server and sends the email; we just can't read the reply.
-    fetch(SCRIPT_URL, { method: "POST", mode: "no-cors", body: data })
-      .then(function () {
-        status.textContent = "Request sent. The CV should reach " + email + " within a few minutes, so please check your spam folder too. If nothing arrives, email sohel.prsnl@gmail.com and I will send it directly.";
-        status.className = "cv-status ok";
-        form.reset();
-      })
-      .catch(function () {
-        status.textContent = "Something went wrong. Please email sohel.prsnl@gmail.com directly and I'll send the CV.";
-        status.className = "cv-status err";
-      })
-      .finally(function () {
-        btn.disabled = false;
-        btn.textContent = "Submit";
-      });
-  });
-})();
-</script>
 
 <section class="cta-band">
   <div class="container">
