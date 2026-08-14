@@ -265,7 +265,7 @@ section.dark .lede { color: #aab8d0; }
 .res p { color: var(--text-muted); font-size: .93rem; }
 .res a { color: var(--text-strong); font-weight: 600; text-decoration: none; }
 .res a:hover { color: var(--gold-text); }
-.pull { border-left: 4px solid var(--gold); padding: 8px 0 8px 28px; margin: 30px 0; font-family: var(--font-sans); font-weight: 500; letter-spacing: -.028em; font-size: 1.4rem; line-height: 1.4; color: var(--text-strong); max-width: 760px; }
+.pull { border-left: 4px solid var(--gold); padding: 8px 0 8px 28px; margin: 22px 0; font-family: var(--font-sans); font-weight: 500; letter-spacing: -.028em; font-size: 1.4rem; line-height: 1.4; color: var(--text-strong); max-width: 760px; }
 .cta-band { background: linear-gradient(135deg, var(--navy) 0%, var(--ink) 100%); color: #fff; text-align: center; }
 .cta-band h2 { font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -.025em; margin-bottom: 12px; }
 .cta-band p { color: #aab8d0; max-width: 560px; margin: 0 auto 28px; }
@@ -277,7 +277,7 @@ section.dark .lede { color: #aab8d0; }
 .prose strong { color: var(--text-strong); }
 .kicker { text-transform: uppercase; letter-spacing: 1px; font-size: .8rem; font-weight: 700; color: var(--text-muted); }
 footer { background: var(--ink); color: #8fa0bd; padding: 46px 0 32px; font-size: .9rem; }
-footer .cols { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 36px; }
+footer .cols { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 28px; }
 /* Footer column labels are h3, not h4: every page ends on an h2 in the CTA
    band, so h4 here skipped a level and broke the document outline for
    screen readers. Visual size is unchanged. */
@@ -369,15 +369,20 @@ footer .bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 22px; 
   .company-stack .company-card { margin: 0; }
   .company-card img { margin-bottom: 0; width: 40px; height: 40px; }
   .company-card .visit { margin-top: 0; margin-left: auto; }
-  .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,.07); }
+  /* Four stacked full-width rows spent ~400px on four numbers. A 2x2 grid
+     halves that and keeps all four visible in one glance on a phone. */
+  .statband .container { grid-template-columns: repeat(2, 1fr); }
+  .stat { padding: 22px 14px; border-right: 1px solid rgba(255,255,255,.07); border-bottom: 1px solid rgba(255,255,255,.07); }
+  .stat:nth-child(even) { border-right: none; }
+  .stat:nth-last-child(-n+2) { border-bottom: none; }
+  .stat .lbl { font-size: .7rem; }
 }
-/* ---------- CV request form ---------- */
-.cv-form { display: flex; gap: 12px; flex-wrap: wrap; max-width: 560px; }
-.cv-form input[type="email"] { flex: 1 1 300px; padding: 13px 18px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 16px; font-family: inherit; background: var(--surface); color: var(--text); }
-.cv-form input[type="email"]:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,162,39,.18); }
-.cv-status { margin-top: 14px; font-size: .92rem; font-weight: 600; }
-.cv-status.ok { color: #1d7a2e; }
-.cv-status.err { color: #b3261e; }
+/* The CV request form was removed in August 2026. It POSTed a visitor's email
+   cross-origin to a Google Apps Script endpoint with mode:"no-cors", which is
+   close to the signature automated scanners use to identify credential
+   harvesting, and the domain had been classified as phishing by Check Point.
+   The CV is now requested by a plain mailto link: no data collected, no
+   third-party endpoint, nothing to abuse. Its styles are deleted with it. */
 .contact-list li { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .contact-list svg { width: 22px; height: 22px; flex: 0 0 auto; }
 /* ---------- ORCID badge (Publications hero) ---------- */
