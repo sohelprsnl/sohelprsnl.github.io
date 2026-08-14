@@ -357,12 +357,17 @@ footer .bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 22px; 
   nav.main .menu-btn { order: 3; }
   nav.main .links a { margin: 9px 0; font-size: 1rem; }
   nav.main .menu-btn { display: block; }
-  .hero .container { padding-top: 40px; padding-bottom: 44px; gap: 30px; }
+  .hero .container { padding-top: 32px; padding-bottom: 36px; gap: 24px; }
   .hero-photo { order: -1; }
   .hero-photo img { width: 170px; height: 196px; }
   section { padding: 36px 0; }
   footer .cols { grid-template-columns: 1fr; gap: 26px; }
-  .achieve { flex-direction: column; gap: 4px; }
+  /* The row flips to a column here, which moves the flex main axis from
+     horizontal to vertical. That turns the 110px flex-basis on .when from a
+     column width into a forced 110px HEIGHT, leaving ~90px of dead space under
+     every date. flex:none lets it size to its own single line of text. */
+  .achieve { flex-direction: column; gap: 3px; }
+  .achieve .when { flex: none; padding-top: 0; }
   .t-item { padding-right: 0; }
   .company-card { position: static; flex-direction: row; width: auto; gap: 12px; padding: 12px 18px; margin: 6px 0 14px; text-align: left; }
   .company-stack { position: static; width: auto; gap: 8px; margin: 6px 0 14px; }
