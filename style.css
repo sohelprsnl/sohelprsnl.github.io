@@ -188,17 +188,21 @@ nav.main .menu-btn { display: none; background: none; border: none; font-size: 1
    steady while the count-up animation runs. */
 .stat .num { font-family: var(--font-mono); font-size: 2.5rem; font-weight: 600; line-height: 1; letter-spacing: -.03em; color: var(--gold); font-variant-numeric: tabular-nums; }
 .stat .lbl { color: #93a5c4; font-size: .76rem; margin-top: 8px; letter-spacing: .06em; text-transform: uppercase; }
-section { padding: 62px 0; }
+/* Vertical rhythm. Tightened from 62px: the longer pages (AI Learning,
+   Resources, Newsletter, Publications) were spending more height on gaps
+   between sections than on content. Density comes from spacing, never
+   from smaller type. */
+section { padding: 48px 0; }
 section.tint { background: var(--bg-tint); }
 section.dark { background: var(--ink); color: #fff; }
 .eyebrow { text-transform: uppercase; letter-spacing: 2.5px; font-size: .72rem; font-weight: 700; color: var(--gold-text); margin-bottom: 12px; }
 h2.title { font-size: clamp(1.65rem, 3.1vw, 2.25rem); font-weight: 650; line-height: 1.12; letter-spacing: -.034em; margin-bottom: 12px; }
-.lede { color: var(--text-muted); max-width: 700px; margin-bottom: 30px; font-size: 1.02rem; }
+.lede { color: var(--text-muted); max-width: 700px; margin-bottom: 22px; font-size: 1.02rem; }
 section.dark .lede { color: #aab8d0; }
-.grid { display: grid; gap: 20px; }
+.grid { display: grid; gap: 17px; }
 .grid.cols-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
 .grid.cols-3 { grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 26px; box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 22px; box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s; }
 .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 /* Icons are inline SVG on currentColor, so each one takes its card's accent
    and stays crisp at any density. The emoji set they replaced rendered
@@ -213,15 +217,15 @@ section.dark .lede { color: #aab8d0; }
 .card p { font-size: .93rem; color: var(--text-muted); }
 .card .more { display: inline-block; margin-top: 14px; color: var(--text-strong); font-weight: 600; font-size: .88rem; text-decoration: none; }
 .card .more:hover { color: var(--gold-text); }
-.article-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; }
+.article-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; }
 .article-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-.article-card .tag { align-self: flex-start; background: var(--chip-bg); color: var(--gold-text); font-size: .72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; }
+.article-card .tag { align-self: flex-start; background: var(--chip-bg); color: var(--gold-text); font-size: .72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; margin-bottom: 11px; }
 .article-card h3 { font-size: 1.15rem; line-height: 1.35; margin-bottom: 10px; }
 .article-card h3 a { color: var(--text); text-decoration: none; }
 .article-card h3 a:hover { color: var(--text-strong); }
 .article-card p { color: var(--text-muted); font-size: .92rem; flex: 1; }
-.article-card .meta { margin-top: 18px; font-size: .8rem; color: var(--text-muted); }
-.achieve { display: flex; gap: 20px; padding: 17px 0; border-bottom: 1px solid var(--border); }
+.article-card .meta { margin-top: 13px; font-size: .8rem; color: var(--text-muted); }
+.achieve { display: flex; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--border); }
 .achieve:last-child { border-bottom: none; }
 .achieve .when { flex: 0 0 110px; font-size: .8rem; font-weight: 700; color: var(--gold-text); text-transform: uppercase; letter-spacing: 1px; padding-top: 4px; }
 .achieve .what h3 { font-size: 1.05rem; margin-bottom: 4px; }
@@ -248,7 +252,7 @@ section.dark .lede { color: #aab8d0; }
 .company-stack { position: absolute; right: 0; top: 26px; width: 156px; display: flex; flex-direction: column; gap: 14px; }
 .company-stack .company-card { position: static; width: 100%; }
 
-.res { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 10px; padding: 22px 24px; margin-bottom: 14px; box-shadow: var(--shadow); }
+.res { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 10px; padding: 18px 22px; margin-bottom: 11px; box-shadow: var(--shadow); }
 .res h3 { font-size: 1.08rem; margin-bottom: 6px; }
 /* A linked credential heading keeps heading colour and weight, and signals the
    link with a gold rule instead of a colour change. */
@@ -274,7 +278,10 @@ section.dark .lede { color: #aab8d0; }
 .kicker { text-transform: uppercase; letter-spacing: 1px; font-size: .8rem; font-weight: 700; color: var(--text-muted); }
 footer { background: var(--ink); color: #8fa0bd; padding: 46px 0 32px; font-size: .9rem; }
 footer .cols { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 36px; }
-footer h4 { color: #fff; font-size: .95rem; margin-bottom: 14px; font-family: var(--font-sans); }
+/* Footer column labels are h3, not h4: every page ends on an h2 in the CTA
+   band, so h4 here skipped a level and broke the document outline for
+   screen readers. Visual size is unchanged. */
+footer h3, footer h4 { color: #fff; font-size: .95rem; font-weight: 600; letter-spacing: -.015em; margin-bottom: 14px; font-family: var(--font-sans); }
 footer a { color: #aab8d0; text-decoration: none; display: block; margin-bottom: 8px; }
 footer a:hover { color: var(--gold-soft); }
 footer .brandline { font-family: var(--font-sans); color: #fff; font-size: 1.2rem; margin-bottom: 10px; }
@@ -353,7 +360,7 @@ footer .bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 22px; 
   .hero .container { padding-top: 40px; padding-bottom: 44px; gap: 30px; }
   .hero-photo { order: -1; }
   .hero-photo img { width: 170px; height: 196px; }
-  section { padding: 46px 0; }
+  section { padding: 36px 0; }
   footer .cols { grid-template-columns: 1fr; gap: 26px; }
   .achieve { flex-direction: column; gap: 4px; }
   .t-item { padding-right: 0; }
@@ -669,3 +676,217 @@ nav.main .links a.active::after { transform: scaleX(1); }
 
 /* Safe area at the foot of the page, for the iPhone home indicator. */
 footer { padding-bottom: max(32px, env(safe-area-inset-bottom)); }
+
+/* ============================================================
+   ARCHIVE GRIDS, NEWSLETTER AND PUBLICATIONS
+   Thirty issues stacked full-width ran to nearly ten screens.
+   Two columns halves the scroll without shrinking a single card,
+   and the auto-fit minimum keeps long article titles readable
+   before it drops to one column on narrow screens.
+   ============================================================ */
+.archive-grid { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); align-items: start; }
+@media (max-width: 760px) { .archive-grid { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   HOME, CAPABILITY GRID
+   The Home page summarises what the About page explains, so it
+   deliberately avoids the boxed card treatment used there: rules
+   and whitespace instead of six more containers. Keeps the landing
+   page scannable and stops the two pages looking like the same
+   content pasted twice.
+   ============================================================ */
+.cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 40px; margin-top: 6px; }
+.cap { padding: 20px 0 18px; border-top: 1px solid var(--border); }
+.cap h3 { font-size: 1.02rem; font-weight: 650; letter-spacing: -.02em; color: var(--text-strong); margin-bottom: 5px; }
+.cap p { font-size: .9rem; color: var(--text-muted); line-height: 1.55; margin: 0; }
+
+@media (max-width: 900px) { .cap-grid { grid-template-columns: repeat(2, 1fr); gap: 0 32px; } }
+@media (max-width: 620px) { .cap-grid { grid-template-columns: 1fr; } .cap { padding: 16px 0 14px; } }
+
+/* ============================================================
+   ABOUT, EXPERTISE CARDS
+   These six cards categorise functions rather than link somewhere,
+   so an icon would be decoration. A mono index numeral does the
+   same ordering job using type the site already loads, costs no
+   extra request, and stays sharp at any density.
+   ============================================================ */
+.card .card-tag {
+  display: block; margin-bottom: 12px;
+  font-family: var(--font-mono); font-size: .78rem; font-weight: 600;
+  letter-spacing: .1em; color: var(--gold-text);
+  font-variant-numeric: tabular-nums;
+}
+.xgrid .card { display: flex; flex-direction: column; }
+.xgrid .card h3 { margin-bottom: 8px; }
+
+/* ============================================================
+   CAREER JOURNEY, EXPANDED ROLE ENTRIES
+   Scoped to .timeline.roles so the plain .timeline used elsewhere,
+   and the .company-card on Resources and AI Learning, are untouched.
+
+   The design problem: a recruiter needs company, role and period in
+   about two seconds, but a sourcing director wants the whole scope of
+   work. Progressive disclosure solves both. Everything above the
+   <details> is the two-second read. Everything inside it is the full
+   job description, one native element, no JavaScript, keyboard
+   operable by default and reachable by browser find-in-page.
+   ============================================================ */
+
+/* Quick index above the timeline. Four links, no decoration. */
+.role-jump {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  margin: 0 0 34px;
+}
+.role-jump a {
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 12px 15px; text-decoration: none;
+  background: var(--surface); border: 1px solid var(--border);
+  border-left: 3px solid var(--gold); border-radius: 10px;
+  transition: border-color .2s var(--ease-out), transform .2s var(--ease-out), box-shadow .2s var(--ease-out);
+}
+.role-jump a:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--gold); border-left-color: var(--gold); }
+.role-jump .rj-co { font-weight: 700; font-size: .9rem; letter-spacing: -.018em; color: var(--text); line-height: 1.25; }
+.role-jump .rj-yr { font-family: var(--font-mono); font-size: .7rem; font-weight: 500; letter-spacing: .04em; color: var(--text-muted); }
+
+/* The expanded entries carry their own logo, so the floating company
+   card and the 190px gutter it needed are both dropped here. */
+.timeline.roles .t-item { padding-right: 0; padding-bottom: 52px; }
+
+/* ---- Role header: logo plate, then the identity block ---- */
+.role-head { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 16px; }
+
+/* One fixed plate size for every logo. object-fit keeps each mark at its
+   true aspect ratio inside it, so nothing is stretched and all four read
+   as the same visual weight. The plate stays white in both themes because
+   these marks are drawn for light backgrounds. */
+.role-logo {
+  flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
+  width: 84px; height: 66px; padding: 8px;
+  background: #fff; border: 1px solid var(--border); border-radius: 12px;
+  box-shadow: var(--shadow); overflow: hidden;
+  transition: transform .22s var(--ease-out), border-color .22s var(--ease-out), box-shadow .22s var(--ease-out);
+}
+.role-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.role-logo:hover { transform: translateY(-2px); border-color: var(--gold); box-shadow: var(--shadow-lg); }
+
+.role-id { min-width: 0; }
+.timeline.roles .t-item .era { margin-bottom: 5px; }
+.timeline.roles .t-item h3 { font-size: 1.42rem; margin: 0 0 3px; }
+.role-note { font-weight: 500; font-size: .82em; color: var(--text-muted); letter-spacing: -.01em; }
+.timeline.roles .t-item .org { font-style: normal; font-weight: 600; color: var(--text-strong); font-size: .97rem; margin-bottom: 4px; }
+.role-brands { font-family: var(--font-mono); font-size: .76rem; letter-spacing: .03em; color: var(--text-muted); }
+
+/* ---- Body ---- */
+.timeline.roles .t-item .story { max-width: 74ch; margin-bottom: 16px; }
+.timeline.roles .chip-row { margin-bottom: 20px; }
+.timeline.roles .chip-row.scope { margin-top: 20px; margin-bottom: 0; }
+.timeline.roles .chip-row.scope .chip { background: var(--chip-bg); border-color: transparent; }
+
+h4.rsub {
+  font-family: var(--font-mono); font-size: .72rem; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--gold-text); margin: 0 0 10px;
+}
+.timeline.roles .t-item ul { margin-left: 19px; max-width: 74ch; }
+.timeline.roles .t-item li { margin-bottom: 7px; }
+.timeline.roles .t-item li::marker { color: var(--gold); }
+
+/* Career impact reads as a claim, so it gets a rule beside it rather
+   than another bullet list that blends into the responsibilities. */
+.impact {
+  margin-top: 22px; padding: 16px 20px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-left: 3px solid var(--gold); border-radius: 10px;
+}
+.impact ul { margin-bottom: 0 !important; }
+.impact li:last-child { margin-bottom: 0; }
+
+/* Two-step career progression inside a single employer. */
+.progression { margin: 0 0 20px; display: grid; gap: 10px; }
+.prog-step {
+  display: flex; gap: 14px; align-items: baseline;
+  padding: 11px 16px; background: var(--bg-tint);
+  border-radius: 10px; font-size: .93rem; color: var(--text-soft);
+}
+.prog-when {
+  flex: 0 0 88px; font-family: var(--font-mono); font-size: .72rem;
+  font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--gold-text);
+}
+.prog-what strong { color: var(--text); font-weight: 650; }
+
+/* ---- The disclosure ---- */
+.role-more { margin-top: 20px; border-top: 1px solid var(--border-soft); }
+.role-more summary {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 2px; cursor: pointer; list-style: none;
+  min-height: 48px;
+  color: var(--text-strong); font-weight: 650; font-size: .93rem;
+  letter-spacing: -.012em;
+  transition: color .2s var(--ease-out);
+}
+.role-more summary::-webkit-details-marker { display: none; }
+/* Chevron drawn in CSS. No icon font, no extra request. */
+.role-more summary::before {
+  content: ""; flex: 0 0 auto;
+  width: 8px; height: 8px; margin-left: 2px;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg); transform-origin: 60% 60%;
+  transition: transform .24s var(--ease-out);
+}
+.role-more[open] summary::before { transform: rotate(45deg); }
+.role-more summary:hover { color: var(--gold-text); }
+.role-more summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+.sum-meta {
+  margin-left: auto; font-family: var(--font-mono);
+  font-size: .7rem; font-weight: 500; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--text-muted);
+}
+.role-more-body { padding: 4px 0 8px; }
+.rgroup { margin-bottom: 22px; }
+.rgroup:last-child { margin-bottom: 4px; }
+.rgroup h5 {
+  font-size: .95rem; font-weight: 650; letter-spacing: -.016em;
+  color: var(--text); margin: 0 0 8px;
+  padding-left: 12px; border-left: 2px solid var(--gold);
+}
+.timeline.roles .rgroup li { font-size: .93rem; margin-bottom: 6px; }
+
+/* ---- Tablet ---- */
+@media (max-width: 900px) {
+  .role-jump { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---- Mobile ----
+   The logo drops above the identity block rather than beside it, so the
+   role title gets the full column width and never wraps to three lines. */
+@media (max-width: 760px) {
+  .role-jump { grid-template-columns: 1fr; gap: 8px; margin-bottom: 26px; }
+  .role-jump a { flex-direction: row; align-items: baseline; justify-content: space-between; gap: 12px; min-height: 48px; padding: 11px 14px; }
+  .timeline.roles .t-item { padding-bottom: 42px; }
+  .role-head { flex-direction: column; gap: 12px; margin-bottom: 14px; }
+  .role-logo { width: 76px; height: 58px; }
+  .timeline.roles .t-item h3 { font-size: 1.22rem; }
+  .timeline.roles .t-item .org { font-size: .92rem; }
+  .prog-step { flex-direction: column; gap: 3px; padding: 12px 14px; }
+  .prog-when { flex: none; }
+  .impact { padding: 14px 16px; }
+  .rgroup h5 { padding-left: 10px; }
+  .role-more summary { padding: 15px 2px; }
+  .sum-meta { display: none; }
+}
+
+@media (max-width: 380px) {
+  .timeline.roles .t-item ul { margin-left: 17px; }
+  .role-logo { width: 70px; height: 54px; }
+}
+
+/* A closed <details> hides its content from print. Force every one open so
+   a printed or PDF-saved copy carries the complete job description. */
+@media print {
+  .role-jump { display: none !important; }
+  .role-more[open] summary::before, .role-more summary::before { display: none; }
+  .role-more-body { display: block !important; }
+  .t-item.role { break-inside: avoid; }
+  .role-logo { box-shadow: none; }
+}

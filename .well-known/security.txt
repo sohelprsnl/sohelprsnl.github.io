@@ -1,0 +1,10 @@
+# Security contact for sohelprsnl.com — RFC 9116
+# Personal professional portfolio. Static site, no user accounts,
+# no payment processing, no data collection beyond a single opt-in
+# CV request form.
+
+Contact: mailto:sohel.prsnl@gmail.com
+Expires: 2027-08-10T00:00:00.000Z
+Preferred-Languages: en, bn
+Canonical: https://sohelprsnl.com/.well-known/security.txt
+Policy: https://sohelprsnl.com/about.html
