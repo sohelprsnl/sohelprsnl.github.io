@@ -900,3 +900,17 @@ h4.rsub {
   .t-item.role { break-inside: avoid; }
   .role-logo { box-shadow: none; }
 }
+
+
+/* Five-stat band (added 2026-09-05 with the LinkedIn followers stat).
+   Above 1024px the five sit in one explicit row. Below it the layout drops
+   to two columns, so the fifth stat spans the full width instead of sitting
+   as an orphan next to an empty cell. */
+@media (min-width: 1025px) {
+  .statband .container { grid-template-columns: repeat(5, 1fr); }
+}
+@media (max-width: 1024px) {
+  .statband .container > .stat:last-child { grid-column: 1 / -1; border-right: none; }
+  .statband .container > .stat:nth-last-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.07); }
+  .statband .container > .stat:last-child { border-bottom: none; }
+}
