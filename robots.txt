@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /_tools-card-studio.html
-Disallow: /_git-clone/
 
 Sitemap: https://sohelprsnl.com/sitemap.xml
