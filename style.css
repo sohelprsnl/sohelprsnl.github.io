@@ -472,6 +472,9 @@ footer a:focus-visible,
 @media (min-width: 761px) and (max-width: 1024px) {
   .container { padding: 0 24px; }
   nav.main .links a { margin-left: 16px; font-size: .84rem; }
+  /* 9 menu items since the Projects page: keep the name on one line and tighten the links. */
+  nav.main .brand { white-space: nowrap; flex-shrink: 0; margin-right: 12px; }
+  nav.main .links a { margin-left: 12px; font-size: .8rem; line-height: 1.25; }
   .hero .container { gap: 34px; padding-top: 48px; padding-bottom: 52px; }
   .hero-photo img { width: 200px; height: 232px; }
   .grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
@@ -913,4 +916,15 @@ h4.rsub {
   .statband .container > .stat:last-child { grid-column: 1 / -1; border-right: none; }
   .statband .container > .stat:nth-last-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.07); }
   .statband .container > .stat:last-child { border-bottom: none; }
+}
+
+/* ---------- Collapsed menu on small laptops and tablets ----------
+   Nine menu items (Projects added Sep 2026) no longer fit in one bar below
+   ~940px, so the hamburger menu takes over earlier than the mobile layout. */
+@media (min-width: 761px) and (max-width: 940px) {
+  nav.main .links { display: none; position: absolute; top: 66px; left: 0; right: 0; margin-left: 0; background: var(--bg); flex-direction: column; align-items: flex-start; padding: 14px 28px 22px; border-bottom: 1px solid var(--border); box-shadow: var(--shadow); }
+  nav.main .links.open { display: flex; }
+  nav.main .links a { min-height: 44px; display: flex; align-items: center; width: 100%; margin: 2px 0; font-size: 1rem; }
+  nav.main .theme-toggle { order: 2; margin-left: auto; margin-right: 12px; width: 44px; height: 44px; }
+  nav.main .menu-btn { order: 3; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
 }
