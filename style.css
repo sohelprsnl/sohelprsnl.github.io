@@ -149,11 +149,11 @@ img { max-width: 100%; }
 .topbar a:hover { color: #fff; }
 nav.main { position: sticky; top: 0; z-index: 200; background: var(--nav-bg); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
 nav.main .container { display: flex; align-items: center; justify-content: flex-start; height: 66px; }
-nav.main .brand { font-family: var(--font-sans); font-weight: 700; font-size: 1.1rem; letter-spacing: -.035em; color: var(--text); text-decoration: none; }
+nav.main .brand { font-family: var(--font-sans); font-weight: 700; font-size: 1.1rem; letter-spacing: -.035em; color: var(--text); text-decoration: none; white-space: nowrap; flex-shrink: 0; }
 nav.main .brand span { color: var(--gold-text); }
 nav.main .brand .brand-mark { font-family: var(--font-mono); font-size: .74rem; font-weight: 600; letter-spacing: .02em; color: var(--gold-text); vertical-align: 2px; margin-left: 3px; }
-nav.main .links { display: flex; align-items: center; margin-left: auto; }
-nav.main .links a { color: var(--text-muted); text-decoration: none; margin-left: 24px; font-size: .875rem; font-weight: 600; letter-spacing: -.01em; padding-bottom: 4px; border-bottom: 2px solid transparent; transition: color .2s var(--ease-out), border-color .2s var(--ease-out); }
+nav.main .links { display: flex; align-items: center; margin-left: auto; flex-wrap: nowrap; }
+nav.main .links a { color: var(--text-muted); text-decoration: none; margin-left: 24px; font-size: .875rem; font-weight: 600; letter-spacing: -.01em; white-space: nowrap; padding-bottom: 4px; border-bottom: 2px solid transparent; transition: color .2s var(--ease-out), border-color .2s var(--ease-out); }
 nav.main .links a:hover { color: var(--text); }
 nav.main .links a.active { color: var(--text); border-bottom-color: var(--gold); }
 nav.main .menu-btn { display: none; background: none; border: none; font-size: 1.7rem; color: var(--text); cursor: pointer; }
@@ -560,6 +560,7 @@ footer a:focus-visible,
    ============================================================ */
 /* Links in prose grow an underline from the left instead of switching colour. */
 .res p a, .lede a, .prose p a {
+  color: var(--gold-text); text-decoration: none;
   background-image: linear-gradient(var(--accent, var(--gold)), var(--accent, var(--gold)));
   background-size: 0% 1.5px; background-repeat: no-repeat; background-position: 0 100%;
   transition: background-size .3s var(--ease-out), color .2s var(--ease-out);
@@ -928,3 +929,21 @@ h4.rsub {
   nav.main .theme-toggle { order: 2; margin-left: auto; margin-right: 12px; width: 44px; height: 44px; }
   nav.main .menu-btn { order: 3; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
 }
+
+/* ---------- Compact project list (AI Learning) ---------- */
+.mini-list { display: block; margin-top: 20px; border-top: 1px solid var(--border); }
+.mini-list a { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px;
+  padding: 13px 4px; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit;
+  transition: background .18s var(--ease-out), padding-left .18s var(--ease-out); }
+.mini-list a:hover, .mini-list a:focus-visible { background: color-mix(in srgb, var(--gold) 9%, transparent); padding-left: 10px; }
+.mini-list b { font-size: .98rem; font-weight: 700; color: var(--text); letter-spacing: -.01em; }
+.mini-list span { font-size: .9rem; color: var(--text-muted); }
+.mini-list a:hover b { color: var(--gold-text); }
+.mini-list a::after { content: "\2192"; margin-left: auto; color: var(--text-muted); font-size: .95rem; }
+.mini-list a:hover::after { color: var(--gold-text); }
+@media (max-width: 560px) {
+  .mini-list a { gap: 2px; }
+  .mini-list b, .mini-list span { flex: 0 0 100%; }
+  .mini-list a::after { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .mini-list a { transition: none; } }
