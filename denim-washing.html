@@ -26,7 +26,9 @@ body{background:#081426;color:#e8ecf3;font:14px/1.45 "IBM Plex Sans",-apple-syst
 .bar{display:flex;align-items:center;gap:14px;padding:10px 18px;padding-top:max(10px,env(safe-area-inset-top));border-bottom:1px solid #16263d;background:#03203f;flex-wrap:wrap}
 .bar img.lock{height:34px;width:auto;display:block;flex:none}
 .bar .t{flex:1 1 240px;min-width:0}
-.bar .t b{display:block;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .t h1{display:block;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.01em;color:#fff}
+.skip{position:absolute;left:-9999px;top:0;z-index:50;background:#c8202f;color:#fff;padding:10px 14px;border-radius:0 0 8px 0;font-weight:600}
+.skip:focus{left:0}
 .bar .t span{color:#9fb0c6;font-size:12px}
 .btn{appearance:none;border:1px solid #2b4560;background:#0c2748;color:#e8ecf3;border-radius:8px;padding:0 12px;min-height:36px;font:600 13px/1 inherit;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none;white-space:nowrap}
 .btn:hover{background:#123356}
@@ -84,10 +86,12 @@ body{background:#081426;color:#e8ecf3;font:14px/1.45 "IBM Plex Sans",-apple-syst
 </style>
 </head>
 <body>
+<a class="skip" href="#stage">Skip to the slides</a>
 <header class="bar">
-  <img class="lock" src="assets/rx-lockup.png" width="941" height="320" alt="RMG Xpress Insights by Sohel">
-  <div class="t"><b>Denim Washing: A Buyer's Introduction</b><span>85 slides &middot; eleven sections &middot; for buyers, merchandisers and product developers</span></div>
-  <a class="btn" href="projects.html">&larr; Projects</a>
+  <a href="index.html" aria-label="sohelprsnl.com home"><img class="lock" src="assets/rx-lockup.png" width="941" height="320" alt="RMG Xpress Insights by Sohel"></a>
+  <div class="t"><h1>Denim Washing: A Buyer's Introduction</h1><span>85 slides &middot; eleven sections &middot; for buyers, merchandisers and product developers</span></div>
+  <a class="btn" href="index.html">Home</a>
+  <a class="btn" href="projects.html">Projects</a>
   <a class="btn" href="assets/denim/Denim-Washing-A-Buyers-Introduction.pdf" download>PDF</a>
   <a class="btn pri" href="assets/denim/Denim-Washing-A-Buyers-Introduction.pptx" download>Download PPTX</a>
   <button class="btn hide-s" type="button" id="fs">Full screen</button>
