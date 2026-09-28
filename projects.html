@@ -166,11 +166,11 @@
       <article class="card a-ops has-cover reveal" id="pm-visit-planner">
         <img class="cover" loading="lazy" decoding="async" width="1200" height="630" src="assets/card-tool-visit-planner.jpg" alt="Cover card for the Production Merchandiser Visit Planner: 4-week ETD, calendar, Outlook drafts">
         <h3>Production Merchandiser Visit Planner</h3>
-        <p class="proj-meta">Aug 2026 &middot; LPP S.A. &middot; Windows desktop app</p>
+        <p class="proj-meta">Aug to Sep 2026 &middot; LPP S.A. &middot; Windows desktop app</p>
         <p>Production merchandisers planned weekly factory visits by hand from the order export. It took time, and inspection windows were easy to miss. I built a planner that reads the PM allocation and the weekly master order export, then builds the visit plan for the week.</p>
         <p class="proj-label">What it does</p>
-        <ul class="proj-list"><li>Plans backwards from the ex-factory date, derived from the vendor pickup date.</li><li>Covers a 4-week ETD horizon by default, with adjustable windows.</li><li>Lets the team edit the plan, save each week to history and export a CSV.</li><li>Adds visits to the Office 365 calendar and creates Outlook drafts.</li></ul>
-        <p class="proj-foot">Packaged as a Windows installer (v1.0.2). Runs offline, needs no admin rights and uploads no data. Verified with test suites for file handling (22 cases), data persistence (16 steps) and calendar output (11 cases).</p>
+        <ul class="proj-list"><li>Plans backwards from the ex-factory date, derived from the vendor pickup date.</li><li>Covers a 4-week ETD horizon by default, with adjustable windows.</li><li>Keeps a built-in PM allocation list the team can edit, export and import. A loaded Excel file is used for that session only.</li><li>Checks factory names before planning. A name with the first two words right is matched to the order file, and anything unclear is asked.</li><li>Shows each file&rsquo;s load status with the live time left, and lets the user lock, change or clear a file.</li><li>Lets the team edit the plan, save each week to history and export a CSV.</li><li>Adds visits to the Office 365 calendar and creates Outlook drafts.</li><li>Backs up all planner data to one file, to keep it safe or move it to a new computer.</li></ul>
+        <p class="proj-foot">Packaged as a Windows installer (v1.0.6). Runs offline, needs no admin rights and uploads no data. A 94-test regression suite gives identical results in the browser and the desktop app, and a real 112,933-row order export plans exactly as it did in the first certified version.</p>
         <a class="more" href="tools/pm-visit-planner.html">Try the demo &rarr;</a>
       </article>
     </div>
