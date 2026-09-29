@@ -134,13 +134,13 @@
     <p class="lede reveal">Tools for supplier data, reporting and production follow-up. Each one has a live demo with made-up data, so you can try it in your browser.</p>
     <div class="proj-grid">
       <article class="card a-ops has-cover reveal" id="contact-mailing-manager">
-        <img class="cover" loading="lazy" decoding="async" width="1200" height="630" src="assets/card-tool-contact-mailing.jpg" alt="Cover card for the Contact and Mailing Manager: address checks, MX lookup, clean lists">
-        <h3>Contact Mailing Manager</h3>
-        <p class="proj-meta">Sep 2026 &middot; LPP S.A.</p>
-        <p>Supplier mailing lists held wrong and outdated addresses. Mails bounced and suppliers missed updates. I built a browser tool to clean and maintain the supplier contact master.</p>
+        <img class="cover" loading="lazy" decoding="async" width="1200" height="630" src="assets/card-tool-contact-mailing.jpg" alt="Cover card for Contact &amp; Mailing Manager: address checks, company confirmations, Outlook drafts">
+        <h3>Contact &amp; Mailing Manager</h3>
+        <p class="proj-meta">Sep 2026 &middot; LPP S.A. &middot; Windows desktop app</p>
+        <p>Supplier mailing lists held wrong and outdated addresses. Mails bounced and suppliers missed updates. I built Contact &amp; Mailing Manager to clean the supplier contact master and keep it confirmed with each company.</p>
         <p class="proj-label">What it does</p>
-        <ul class="proj-list"><li>Validates every address and flags technical risks.</li><li>Checks whether each company domain has a mail server (MX). It sends domain names only.</li><li>Groups problem contacts so each supplier gets its own correction list.</li><li>Builds a clean &ldquo;Ready to Mail&rdquo; list for Outlook CC or BCC.</li><li>Records Office 365 bounce messages to confirm what actually failed.</li><li>Saves dated versions of the contact list for each correction round.</li></ul>
-        <p class="proj-foot">All data stays on the user&rsquo;s computer.</p>
+        <ul class="proj-list"><li>Checks every email address and mobile number, flags likely typos, disposable and role addresses, and shows the reason under each health label.</li><li>Checks whether each company domain has a mail server (MX). It sends domain names only, and only after the user agrees.</li><li>Loads Excel, CSV, Google or Outlook contacts, vCard, Word tables and JSON, several files at once, with a column check before anything loads.</li><li>Sends each company its confirmation sheet with an Outlook email draft, one per company with only its own sheet attached, then imports the returned sheets and lists every change before it is written.</li><li>Organises contacts into groups. Deleting a group never deletes its contacts.</li><li>Records Office 365 bounces from the bounce messages or pasted addresses, and keeps bounced and do-not-mail addresses out of every list.</li><li>Builds a clean &ldquo;Ready to Mail&rdquo; list for Outlook, with saved lists, batches and copy by company.</li><li>Keeps a change history for every contact, dated versions, duplicate merging and a restore bin, and backs up everything to one file with an optional password.</li></ul>
+        <p class="proj-foot">Packaged as a Windows installer (v1.0.3). Runs offline, needs no admin rights and uploads no data. Checked end to end: 32 desktop tests, and the same page running in the browser in six colour themes and at phone width.</p>
         <a class="more" href="tools/contact-mailing-manager.html">Try the demo &rarr;</a>
       </article>
       <article class="card a-ops has-cover reveal" id="supplier-swot-chart-builder">
