@@ -1,0 +1,201 @@
+[
+  {
+    "section": "tools",
+    "id": "contact-mailing-manager",
+    "accent": "a-ops",
+    "cover": "assets/card-tool-contact-mailing.jpg",
+    "cover_alt": "Cover card for Contact & Mailing Manager: address checks, company confirmations, Outlook drafts",
+    "title": "Contact & Mailing Manager",
+    "meta": "Sep 2026 · LPP S.A. · Windows desktop app",
+    "intro": "Supplier mailing lists held wrong and outdated addresses. Mails bounced and suppliers missed updates. I built Contact & Mailing Manager to clean the supplier contact master and keep it confirmed with each company.",
+    "list_label": "What it does",
+    "points": [
+      "Checks every email address and mobile number, flags likely typos, disposable and role addresses, and shows the reason under each health label.",
+      "Checks whether each company domain has a mail server (MX). It sends domain names only, and only after the user agrees.",
+      "Loads Excel, CSV, Google or Outlook contacts, vCard, Word tables and JSON, several files at once, with a column check before anything loads.",
+      "Sends each company its confirmation sheet with an Outlook email draft, one per company with only its own sheet attached, then imports the returned sheets and lists every change before it is written.",
+      "Organises contacts into groups. Deleting a group never deletes its contacts.",
+      "Records Office 365 bounces from the bounce messages or pasted addresses, and keeps bounced and do-not-mail addresses out of every list.",
+      "Builds a clean “Ready to Mail” list for Outlook, with saved lists, batches and copy by company.",
+      "Keeps a change history for every contact, dated versions, duplicate merging and a restore bin, and backs up everything to one file with an optional password."
+    ],
+    "footnote": "Packaged as a Windows installer (v1.0.3). Runs offline, needs no admin rights and uploads no data. Checked end to end: 32 desktop tests, and the same page running in the browser in six colour themes and at phone width.",
+    "link_label": "Try the demo",
+    "link_url": "tools/contact-mailing-manager.html"
+  },
+  {
+    "section": "tools",
+    "id": "supplier-swot-chart-builder",
+    "accent": "a-ops",
+    "cover": "assets/card-tool-swot-charts.jpg",
+    "cover_alt": "Cover card for SWOT Studio: supplier SWOT decks, factory library, DD review, 4K decks",
+    "title": "SWOT Studio: Supplier SWOT Deck Builder",
+    "meta": "Sep 2026 · LPP S.A. · Windows desktop app",
+    "intro": "Supplier review decks needed the same eight pages for every factory and every season. Building them by hand was slow, and the numbers were easy to get wrong. I built a studio that keeps one factory library and the order data, then builds the full SWOT deck for any factory or category.",
+    "list_label": "What it does",
+    "points": [
+      "Keeps one factory library: basic information, the four SWOT boxes, up to 3 photos, SC and QA audit reports and contacts, with two lock levels.",
+      "Reads and writes every Excel format, including a one-factory form the supplier fills and sends back.",
+      "Holds order, shipped and late quantities per season and factory, shows each factory’s SWOT status and flags shipped above order.",
+      "Rechecks the order data against the weekly DD order export and changes only what the user approves.",
+      "Builds the 8-page deck for one factory, a category or all factories: cover, factory information, SWOT, order comparison, punctuality, audit reports and contacts.",
+      "Exports PowerPoint, PDF and JPEG in 4K, single charts for mails, and the order summary to Excel.",
+      "Includes a guidebook with a picture of every screen, saved as an A4 PDF.",
+      "Backs up all data to one file, to keep it safe or move it to a new computer."
+    ],
+    "footnote": "Packaged as a Windows installer (v1.0.6). Runs offline, needs no admin rights and uploads no data. Checked end to end on a library of 151 factories and a DD export of 118,474 order lines.",
+    "link_label": "Try the demo",
+    "link_url": "tools/swot-chart-builder.html"
+  },
+  {
+    "section": "tools",
+    "id": "merchandising-kpi-dashboard",
+    "accent": "a-ops",
+    "cover": "assets/card-tool-kpi-dashboard.jpg",
+    "cover_alt": "Cover card for KPI Pulse: 10 KPI sheets, 14 filters, live Excel export",
+    "title": "KPI Pulse for Merchandising Management",
+    "meta": "Aug to Sep 2026 · LPP S.A. · Windows desktop app",
+    "intro": "Management needed a clear view of order status and team performance. The data sat in running and shipped order sheets that took hours to summarise. I built KPI Pulse: drop the orders workbook, and the KPI sheets build themselves.",
+    "list_label": "What it does",
+    "points": [
+      "Builds 10 KPI sheets: executive dashboard, supplier vs brand, supplier performance, buyer dashboard, PO KPIs by season, buyer, workload and split, a SWOT prep sheet by season, merchandiser and supplier, and a data quality check.",
+      "Offers 14 filters with multi-select, all built from the team’s own data, and recalculates every figure the moment one changes.",
+      "Sorts seasons in calendar order and keeps every KPI sheet fitted to the window, in light or dark theme.",
+      "Exports one Excel workbook where the same 14 filters keep working: every KPI sheet is a live formula over the order sheets, checked against the page cell by cell (6,412 cells, 0 differences).",
+      "Keeps a history of every workbook loaded, inside the app. Open an earlier order book again, as of today or as on the day it was loaded; label, pin, download or delete; back up the whole history to one zip and import it back.",
+      "Shows a four-step loader with a live clock and a Ready screen with the numbers before the dashboard opens.",
+      "Prints any sheet on A4 landscape, saves it as PDF, or exports it as CSV.",
+      "Ships a blank input template with the 42 column headers, formats, dropdowns and one worked order per sheet."
+    ],
+    "footnote": "Packaged as a Windows installer (v1.1.0). Runs offline, needs no admin rights and uploads no data. Checked end to end on a real order book of 3,362 rows: 14 desktop tests, the LibreOffice recalculation of every live cell, and the same page running in the browser.",
+    "link_label": "Try the demo",
+    "link_url": "tools/kpi-dashboard.html"
+  },
+  {
+    "section": "tools",
+    "id": "pm-visit-planner",
+    "accent": "a-ops",
+    "cover": "assets/card-tool-visit-planner.jpg",
+    "cover_alt": "Cover card for the Production Merchandiser Visit Planner: 4-week ETD, calendar, Outlook drafts",
+    "title": "Production Merchandiser Visit Planner",
+    "meta": "Aug to Sep 2026 · LPP S.A. · Windows desktop app",
+    "intro": "Production merchandisers planned weekly factory visits by hand from the order export. It took time, and inspection windows were easy to miss. I built a planner that reads the PM allocation and the weekly master order export, then builds the visit plan for the week.",
+    "list_label": "What it does",
+    "points": [
+      "Plans backwards from the ex-factory date, derived from the vendor pickup date.",
+      "Covers a 4-week ETD horizon by default, with adjustable windows.",
+      "Keeps a built-in PM allocation list the team can edit, export and import. A loaded Excel file is used for that session only.",
+      "Checks factory names before planning. A name with the first two words right is matched to the order file, and anything unclear is asked.",
+      "Shows each file’s load status with the live time left, and lets the user lock, change or clear a file.",
+      "Lets the team edit the plan, save each week to history and export a CSV.",
+      "Adds visits to the Office 365 calendar and creates Outlook drafts.",
+      "Backs up all planner data to one file, to keep it safe or move it to a new computer."
+    ],
+    "footnote": "Packaged as a Windows installer (v1.0.6). Runs offline, needs no admin rights and uploads no data. A 94-test regression suite gives identical results in the browser and the desktop app, and a real 112,933-row order export plans exactly as it did in the first certified version.",
+    "link_label": "Try the demo",
+    "link_url": "tools/pm-visit-planner.html"
+  },
+  {
+    "section": "web",
+    "id": "pgd-gb-attachment",
+    "accent": "a-build",
+    "cover": "assets/card-pgd-attachment.jpg",
+    "cover_alt": "Cover card for the PGD-GB Batch 11 Industry Attachment and Final Defense",
+    "title": "PGD-GB Industry Attachment Report & Final Defense",
+    "meta": "Aug 2026 · IBA, University of Dhaka",
+    "intro": "My Module 3 internship study: sustainable and ethical sourcing practices and their challenges in the Bangladeshi RMG industry, seen from a buying and liaison office. I published the full report and the defense deck as one site.",
+    "list_label": "What it holds",
+    "points": [
+      "The full report: eight sections, five tables, six figures, references and appendices.",
+      "The 12-slide defense deck in HD, with PPTX and PDF downloads.",
+      "Defense schedule: Board 05, Slot 1, Wednesday 19 August 2026, online.",
+      "Evidence from woven-bottoms sourcing at the LPP S.A. Bangladesh Liaison Office."
+    ],
+    "footnote": "Supervisor: Mohammad Saif Noman Khan, Associate Professor, IBA.",
+    "link_label": "Visit the attachment site",
+    "link_url": "https://sohelprsnl.com/pgdgb-attachment/"
+  },
+  {
+    "section": "web",
+    "id": "pgd-gb-archive",
+    "accent": "a-build",
+    "cover": "assets/card-pgd-archive.jpg",
+    "cover_alt": "Cover card for the PGD-GB Programme Archive: 46 lecturers, 108 classes, 3 modules, 30 credits",
+    "title": "PGD-GB Batch 11 Programme Archive",
+    "meta": "Jun 2026 · IBA, University of Dhaka",
+    "intro": "Course details for the IBA-SICIP Post Graduate Diploma in Garment Business were spread across notices, groups and files. Classmates had no single place to find them. I built an independent archive of the programme for Batch 11.",
+    "list_label": "What it holds",
+    "points": [
+      "Searchable profiles of 46 faculty and industry lecturers.",
+      "Full history of 108 classes across 3 modules, filterable by module, subject and lecturer.",
+      "The Module 3 industry attachment guide: schedule, forms, report structure and defence format.",
+      "A link to the batch result checker."
+    ],
+    "footnote": "A student-made archive, not an official IBA or SICIP publication.",
+    "link_label": "Visit the archive",
+    "link_url": "https://sohelprsnl.com/pgd-gb-archive/"
+  },
+  {
+    "section": "web",
+    "id": "pgd-gb-results",
+    "accent": "a-build",
+    "cover": "assets/card-pgd-results.jpg",
+    "cover_alt": "Cover card for the PGD-GB Batch 11 Result Checker: roll and name lookup, transcript, CGPA",
+    "title": "PGD-GB Batch 11 Result Checker",
+    "meta": "Jun 2026 · IBA, University of Dhaka",
+    "intro": "Classmates had no simple way to view their own marks and transcript. I extracted marks from scanned PDF result sheets, checked the grade and GPA logic in Excel, and built the page on GitHub Pages.",
+    "list_label": "What it does",
+    "points": [
+      "Each student looks up their own result with roll number and name.",
+      "Shows course marks, grades, grade points and cumulative GPA.",
+      "Prints or saves the marksheet as PDF.",
+      "Works on mobile, and search engines do not index it."
+    ],
+    "footnote": "Unofficial and student-made. Official IBA records take precedence.",
+    "link_label": "Visit the result checker",
+    "link_url": "https://sohelprsnl.com/pgd-gb-results/"
+  },
+  {
+    "section": "web",
+    "id": "portfolio-website",
+    "accent": "a-build",
+    "cover": "assets/card-sohelprsnl-2026.jpg",
+    "cover_alt": "Cover card for sohelprsnl.com: Md. Sohel Rana, Merchandising Team Leader, Dhaka.",
+    "title": "Personal Portfolio Website, sohelprsnl.com",
+    "meta": "Jun 2026 · Personal",
+    "intro": "A CV and a LinkedIn profile could not show my full work in one place. I designed and built this site without a developer, using AI tools.",
+    "list_label": "What it covers",
+    "points": [
+      "Career history, achievements and core skills in merchandising, sourcing and supplier management.",
+      "My weekly newsletter, RMG Xpress Insights by Sohel, with 32 issues.",
+      "Published articles and industry writing.",
+      "Education, certifications and contact details.",
+      "Links to my independent web projects."
+    ],
+    "footnote": "",
+    "link_label": "See the code on GitHub",
+    "link_url": "https://github.com/sohelprsnl/sohelprsnl.github.io"
+  },
+  {
+    "section": "open",
+    "id": "denim-washing-deck",
+    "accent": "a-build",
+    "cover": "assets/card-denim-washing.jpg",
+    "cover_alt": "Cover card for Denim Washing: A Buyer's Introduction, an 86-slide open training deck",
+    "title": "Denim Washing: A Buyer’s Introduction",
+    "meta": "Sep 2026 · RMG Xpress Insights by Sohel",
+    "intro": "Buyers and young merchandisers approve washes they cannot yet read. I wrote an 86-slide deck that explains what each wash is, what it does to the garment, what it costs and where it goes wrong. This is the open edition, with no company data in it.",
+    "list_label": "What it covers",
+    "points": [
+      "Denim basics: indigo, ring dyeing, weight, stretch and why the same wash looks different on different fabrics.",
+      "Wet processes: rinse, enzyme, stone, bleach, acid, vintage, tinting, overdye and garment dyeing.",
+      "Dry and localised work: whiskering, sanding, grinding, destroy, PP spray, resin and 3D crinkle.",
+      "Advanced technology: laser, ozone and low-liquor systems, and what each one replaces.",
+      "Building and approving a wash, quality risk, buyer checkpoints, cost, lead time and MOQ.",
+      "Safety, restricted substances, water and effluent, and how to read a sustainability claim."
+    ],
+    "footnote": "Read it slide by slide, or download the PDF. Published on Zenodo, DOI <a href=\"https://doi.org/10.5281/zenodo.22930682\">10.5281/zenodo.22930682</a>. Free to use and share with credit under CC BY-NC 4.0.",
+    "link_label": "Open the deck",
+    "link_url": "denim-washing.html"
+  }
+]
