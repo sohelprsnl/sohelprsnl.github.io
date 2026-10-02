@@ -1,0 +1,44 @@
+# Rebuilds the newsletter cards on articles.html and index.html
+# whenever data/newsletter.json changes (for example, after a Pages CMS save).
+# If the data has an error, the run fails and the live pages stay as they were.
+name: Build newsletter pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - data/newsletter.json
+      - scripts/build_newsletter.py
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-newsletter
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Rebuild pages from data/newsletter.json
+        run: python3 scripts/build_newsletter.py
+
+      - name: Commit the rebuilt pages
+        run: |
+          if git diff --quiet -- articles.html index.html; then
+            echo "Pages already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add articles.html index.html
+          git commit -m "Rebuild newsletter pages from data/newsletter.json"
+          git push
