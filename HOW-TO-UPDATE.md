@@ -16,6 +16,7 @@ The site is plain HTML on GitHub Pages. Nothing to pay for, nothing to log in to
 | Home page numbers | The five big numbers under the photo |
 | Home page achievements | The "Latest achievements" list |
 | Projects | Every project card, in three sections |
+| AI learning journal | The dated log on AI Learning |
 | AI coursework | The Coursework list on AI Learning |
 | Certifications and training | The list on Resources |
 
