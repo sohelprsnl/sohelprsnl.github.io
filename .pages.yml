@@ -1,0 +1,36 @@
+# Pages CMS settings (https://app.pagescms.org)
+# Gives a form for adding newsletter issues. Each save commits
+# data/newsletter.json; a GitHub Action then rebuilds the pages.
+content:
+  - name: newsletter
+    label: Newsletter issues
+    type: file
+    path: data/newsletter.json
+    format: json
+    list: true
+    description: Oldest first. Add each new issue at the bottom. The site shows the newest first and updates the counts.
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: url
+        label: LinkedIn link
+        type: string
+        required: true
+        description: Full link starting with https://
+      - name: category
+        label: Category tag
+        type: string
+        required: true
+        description: For example, Sourcing & Costing
+      - name: month
+        label: Month published
+        type: date
+        required: true
+        options:
+          format: yyyy-MM
+      - name: summary
+        label: One-line summary
+        type: text
+        required: true
