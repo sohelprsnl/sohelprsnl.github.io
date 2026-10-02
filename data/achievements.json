@@ -2,49 +2,45 @@
   {
     "when": "Season 2026",
     "title": "97% on-time delivery at LPP",
-    "accent": "a-ops",
     "text": "Latest season, across 35 vendors and ~3 million pieces a year, while growing Dhaka office order volume 10% against target.",
     "link_label": "See the role in full",
-    "link_url": "journey.html"
+    "link_url": "journey.html",
+    "accent": "a-ops"
   },
   {
     "when": "2025–26",
     "title": "8 new vendors sourced and onboarded",
-    "accent": "a-ops",
     "text": "Evaluated and brought into LPP’s Bangladesh supply base across denim, woven bottoms, and accessories, with vendor-sharing strategies to balance capacity across brands.",
-    "link_label": "",
-    "link_url": ""
+    "accent": "a-ops"
   },
   {
     "when": "Aug 2026",
     "title": "Completed the PGD in Garment Business, IBA, University of Dhaka",
-    "accent": "a-edu",
-    "text": "Fourteen years of operating experience set against formal business method at the country’s top business school, finishing with a supervised industry attachment at LPP.",
+    "text": "Fifteen years of operating experience set against formal business method at the country’s top business school, finishing with a supervised industry attachment at LPP.",
     "link_label": "See the full programme",
-    "link_url": "resources.html"
+    "link_url": "resources.html",
+    "accent": "a-edu"
   },
   {
     "when": "2026",
     "title": "myAi certification track, AiPS and AiAP",
-    "accent": "a-ai",
-    "text": "Completed AI for Professional Success on 17 July 2026; started the three-month AI Agents for Professional Excellence programme on 18 August 2026, toward the Certified AI Automation Strategist credential.",
+    "text": "Completed AI for Professional Success on 17-July-2026; started the three-month AI Agents for Professional Excellence programme on 18-August-2026, toward the Certified AI Automation Strategist credential.",
     "link_label": "See the coursework",
-    "link_url": "ai-learning.html"
+    "link_url": "ai-learning.html",
+    "accent": "a-ai"
   },
   {
     "when": "2026",
     "title": "Built this site and the PGD-GB Batch 11 archive",
-    "accent": "a-build",
     "text": "Both planned, written and built hands-on with AI tools, no agency and no framework. The archive is the public record of my IBA-SICIP batch: 46 lecturers, 108 dated classes, 3 modules, 30 credits.",
     "link_label": "Visit the archive",
-    "link_url": "https://sohelprsnl.com/pgd-gb-archive/"
+    "link_url": "https://sohelprsnl.com/pgd-gb-archive/",
+    "accent": "a-build"
   },
   {
     "when": "Ongoing",
     "title": "RMG Xpress Insights by Sohel, every week",
-    "accent": "a-write",
-    "text": "Read by merchandisers, sourcing managers, and brand-side buyers, alongside a LinkedIn audience of more than 10,000 followers and daily posts.",
-    "link_label": "",
-    "link_url": ""
+    "text": "Read by merchandisers, sourcing managers, and brand-side buyers, alongside a LinkedIn audience of more than 11,000 followers and daily posts.",
+    "accent": "a-write"
   }
 ]
