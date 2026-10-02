@@ -1,7 +1,25 @@
-# Pages CMS settings (https://app.pagescms.org)
-# Gives a form for adding newsletter issues. Each save commits
-# data/newsletter.json; a GitHub Action then rebuilds the pages.
+# Pages CMS settings for sohelprsnl.com (https://app.pagescms.org)
+#
+# Two ways to edit:
+#   1. Forms. Each form below saves one file in data/. A GitHub Action then
+#      rebuilds the pages. Counts ("All 32 issues", "Nine projects") update
+#      on their own. Takes about two minutes to go live.
+#   2. Pages (raw). Every HTML page opened as code. Use this for text that
+#      has no form: headings, paragraphs, the about page, the career journey.
+#      Do not edit the parts between <!-- NAME:START --> and <!-- NAME:END -->;
+#      the build overwrites them from the data files.
+#
+# Colour accents used in the forms:
+#   a-ops operations (blue)   a-edu education   a-ai AI
+#   a-build things built      a-write writing
+
+media:
+  input: assets
+  output: assets
+  categories: [image]
+
 content:
+  # ---------------------------------------------------------------- forms
   - name: newsletter
     label: Newsletter issues
     type: file
@@ -18,7 +36,9 @@ content:
         label: LinkedIn link
         type: string
         required: true
-        description: Full link starting with https://
+        pattern:
+          regex: "^https://"
+          message: Must start with https://
       - name: category
         label: Category tag
         type: string
@@ -34,3 +54,274 @@ content:
         label: One-line summary
         type: text
         required: true
+
+  - name: publications
+    label: Publications
+    type: file
+    path: data/publications.json
+    format: json
+    list: true
+    description: Oldest first. Add each new paper at the bottom. The site shows the newest first.
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: url
+        label: DOI link
+        type: string
+        required: true
+        description: For example, https://doi.org/10.5281/zenodo.21400562
+        pattern:
+          regex: "^https://"
+          message: Must start with https://
+      - name: tag
+        label: Tag
+        type: string
+        required: true
+        description: For example, Preprint · Zenodo
+      - name: month
+        label: Month published
+        type: date
+        required: true
+        options:
+          format: yyyy-MM
+      - name: summary
+        label: One-line summary
+        type: text
+        required: true
+      - name: meta
+        label: Publisher and DOI line
+        type: string
+        required: true
+        description: Shown after the month. For example, Zenodo · DOI 10.5281/zenodo.21400562
+
+  - name: home-stats
+    label: Home page numbers
+    type: file
+    path: data/home-stats.json
+    format: json
+    list: true
+    description: The five big numbers under the home page photo. Keep it to five so the row fits.
+    fields:
+      - name: number
+        label: Number
+        type: string
+        required: true
+        description: For example, 14+ or 97%
+      - name: label
+        label: Label
+        type: string
+        required: true
+
+  - name: achievements
+    label: Home page achievements
+    type: file
+    path: data/achievements.json
+    format: json
+    list: true
+    description: The "Latest achievements" list on the home page, shown in this order. Put the newest at the top.
+    fields:
+      - name: when
+        label: When
+        type: string
+        required: true
+        description: For example, Season 2026, Aug 2026, Ongoing
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: text
+        label: Text
+        type: text
+        required: true
+      - name: link_label
+        label: Link text (optional)
+        type: string
+        description: For example, See the role in full
+      - name: link_url
+        label: Link (optional)
+        type: string
+        description: A page on this site such as journey.html, or a full https:// address
+      - name: accent
+        label: Colour accent
+        type: select
+        required: true
+        default: a-ops
+        options:
+          values: [a-ops, a-edu, a-ai, a-build, a-write]
+
+  - name: projects
+    label: Projects
+    type: file
+    path: data/projects.json
+    format: json
+    list: true
+    description: Every card on the projects page. The section picks where the card appears. Counts update on their own.
+    fields:
+      - name: section
+        label: Section
+        type: select
+        required: true
+        default: tools
+        options:
+          values:
+            - value: tools
+              label: Merchandising tools
+            - value: web
+              label: Web projects
+            - value: open
+              label: Open resources
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: id
+        label: Page anchor
+        type: string
+        description: Lowercase with dashes, for example kpi-pulse. Lets you link to the card as projects.html#kpi-pulse.
+        pattern:
+          regex: "^[a-z0-9-]*$"
+          message: Lowercase letters, numbers and dashes only
+      - name: meta
+        label: Date, client, type
+        type: string
+        required: true
+        description: For example, Sep 2026 · LPP S.A. · Windows desktop app
+      - name: intro
+        label: Introduction
+        type: text
+        required: true
+      - name: list_label
+        label: List heading
+        type: string
+        default: What it does
+      - name: points
+        label: Bullet points
+        type: string
+        list: true
+      - name: footnote
+        label: Footnote (optional)
+        type: text
+        description: Small text under the list. Plain text, or a link written as HTML.
+      - name: link_label
+        label: Button text
+        type: string
+        description: For example, Try the demo
+      - name: link_url
+        label: Button link
+        type: string
+      - name: cover
+        label: Cover image
+        type: image
+        description: 1200 x 630 works best. Leave empty for a card with no picture.
+      - name: cover_alt
+        label: Cover image description
+        type: string
+        description: One line for screen readers and search engines
+      - name: accent
+        label: Colour accent
+        type: select
+        required: true
+        default: a-ops
+        options:
+          values: [a-ops, a-edu, a-ai, a-build, a-write]
+
+  - name: coursework
+    label: AI coursework
+    type: file
+    path: data/coursework.json
+    format: json
+    list: true
+    description: The Coursework list on the AI Learning page.
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: status
+        label: Status text
+        type: string
+        required: true
+        description: For example, Completed, In progress, Completed · August 2026
+      - name: status_style
+        label: Status colour
+        type: select
+        required: true
+        default: live
+        options:
+          values:
+            - value: live
+              label: Green (completed)
+            - value: progress
+              label: Amber (in progress)
+      - name: accent
+        label: Colour accent
+        type: select
+        required: true
+        default: a-ai
+        options:
+          values: [a-ops, a-edu, a-ai, a-build, a-write]
+      - name: details
+        label: Details (HTML)
+        type: code
+        required: true
+        description: Paragraphs as <p>...</p>. Copy an existing entry to keep the same look.
+
+  - name: certifications
+    label: Certifications and training
+    type: file
+    path: data/certifications.json
+    format: json
+    list: true
+    description: The "Certifications & training" list on the Resources page.
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: status
+        label: Status text
+        type: string
+        required: true
+      - name: status_style
+        label: Status colour
+        type: select
+        required: true
+        default: live
+        options:
+          values:
+            - value: live
+              label: Green (completed)
+            - value: progress
+              label: Amber (in progress)
+      - name: accent
+        label: Colour accent
+        type: select
+        required: true
+        default: a-edu
+        options:
+          values: [a-ops, a-edu, a-ai, a-build, a-write]
+      - name: details
+        label: Details (HTML)
+        type: code
+        required: true
+        description: Paragraphs as <p>...</p>. Copy an existing entry to keep the same look.
+
+  # ------------------------------------------------------- pages (raw)
+  - name: pages
+    label: Pages (raw HTML)
+    type: group
+    description: Full page code. For text with no form above. Leave the START/END marked blocks alone.
+    items:
+      - { name: page-index, label: Home, type: file, path: index.html, format: code }
+      - { name: page-about, label: About, type: file, path: about.html, format: code }
+      - { name: page-journey, label: Career Journey, type: file, path: journey.html, format: code }
+      - { name: page-articles, label: Newsletter, type: file, path: articles.html, format: code }
+      - { name: page-publications, label: Publications, type: file, path: publications.html, format: code }
+      - { name: page-projects, label: Projects, type: file, path: projects.html, format: code }
+      - { name: page-ai, label: AI Learning, type: file, path: ai-learning.html, format: code }
+      - { name: page-resources, label: Resources, type: file, path: resources.html, format: code }
+      - { name: page-contact, label: Contact, type: file, path: contact.html, format: code }
+      - { name: page-denim, label: Denim washing, type: file, path: denim-washing.html, format: code }
+      - { name: page-style, label: Stylesheet (advanced), type: file, path: style.css, format: code }

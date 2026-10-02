@@ -1,0 +1,23 @@
+[
+  {
+    "title": "AiAP — AI Agents for Professional Excellence",
+    "status": "In progress",
+    "status_style": "progress",
+    "accent": "a-ai",
+    "details": "<p>No-code AI agent certification · myAi · 3 months, started 18 August 2026. Leads to the myAi Certified AI Automation Strategist credential. <a href=\"ai-learning.html\">Full syllabus and progress →</a></p>"
+  },
+  {
+    "title": "AiPS — AI for Professional Success",
+    "status": "Completed",
+    "status_style": "live",
+    "accent": "a-ai",
+    "details": "<p>AI capacity-building program · myAi · 19 May 2026 to 17 July 2026. Six modules, from prompt engineering to business application. <a href=\"ai-learning.html\">Full syllabus and outcomes →</a></p>"
+  },
+  {
+    "title": "Industrial Training, International Classic Composite Ltd. (ICCL)",
+    "status": "Completed",
+    "status_style": "live",
+    "accent": "a-edu",
+    "details": "<p>Knitting &amp; Dyeing Department · 2011 (Session 2007–2011, City University, B.Sc. in Textile Engineering)</p>\n<p>Completed an 8-week industrial training program focused on knitting, dyeing, quality control, and utility services. Gained practical exposure to textile manufacturing processes, production operations, and industrial best practices within a large-scale composite textile facility.</p>\n<a class=\"company-card\" href=\"https://www.linkedin.com/company/international-classic-composite-ltd/\" target=\"_blank\" rel=\"noopener\"><span class=\"mark a-edu\" data-len=\"4\" role=\"img\" aria-label=\"International Classic Composite Ltd. logo\">ICCL</span><span class=\"cname\">International Classic Composite Ltd.</span><span class=\"visit\">View on LinkedIn ↗</span></a>"
+  }
+]

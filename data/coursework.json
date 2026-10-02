@@ -1,0 +1,16 @@
+[
+  {
+    "title": "AiAP — AI Agents for Professional Excellence",
+    "status": "In progress",
+    "status_style": "progress",
+    "accent": "a-ai",
+    "details": "<p>No-code AI agent certification · Institute: myAi · 3 months, started 18 August 2026. Professionals design and ship working AI agents on their own real workflows. Graduates earn the myAi Certified AI Automation Strategist credential.</p>\n<a class=\"company-card\" href=\"https://myaiintl.com/programs.html#aiap\" target=\"_blank\" rel=\"noopener\"><img loading=\"lazy\" decoding=\"async\" src=\"https://myaiintl.com/assets/brand/myai-logo.svg\" alt=\"myAi logo\"><span class=\"cname\">myAi</span><span class=\"visit\">Visit website ↗</span></a>\n<p style=\"margin-top:14px\">The agents I build on this course go here when it finishes in November 2026.</p>\n<p>The hands-on record so far sits above: three live sites I designed, wrote and built myself with AI tools, no agency and no framework. <a href=\"#built\">See the projects →</a></p>"
+  },
+  {
+    "title": "AiPS — AI for Professional Success",
+    "status": "Completed",
+    "status_style": "live",
+    "accent": "a-ai",
+    "details": "<p>AI capacity-building program · Institute: myAi · 19 May 2026 to 17 July 2026. Structured AI study run alongside the day job, covering prompt engineering, productivity, career acceleration, fundamentals, leadership, and business applications.</p>\n<a class=\"company-card\" href=\"https://myaiintl.com/programs.html#aips\" target=\"_blank\" rel=\"noopener\"><img loading=\"lazy\" decoding=\"async\" src=\"https://myaiintl.com/assets/brand/myai-logo.svg\" alt=\"myAi logo\"><span class=\"cname\">myAi</span><span class=\"visit\">Visit website ↗</span></a>\n<p style=\"margin-top:14px\"><strong>What I kept</strong></p>\n<ul>\n  <li><strong>Prompt engineering, applied:</strong> the daily workflow now runs on structured prompts, correspondence with Poland HQ and vendors, weekly reporting, vendor data consolidation, and presentation prep.</li>\n  <li><strong>The limit I set:</strong> AI drafts, I decide. Nothing goes out under my name that I have not checked.</li>\n</ul>"
+  }
+]
