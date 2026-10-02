@@ -325,9 +325,9 @@ content:
       - { name: page-contact, label: Contact, type: file, path: contact.html, format: code }
       - { name: page-denim, label: Denim washing, type: file, path: denim-washing.html, format: code }
       - { name: page-404, label: Error page (404), type: file, path: 404.html, format: code }
-      - { name: tool-contact, label: Demo, Contact & Mailing Manager, type: file, path: tools/contact-mailing-manager.html, format: code }
-      - { name: tool-swot, label: Demo, SWOT Studio, type: file, path: tools/swot-chart-builder.html, format: code }
-      - { name: tool-kpi, label: Demo, KPI Pulse, type: file, path: tools/kpi-dashboard.html, format: code }
-      - { name: tool-planner, label: Demo, PM Visit Planner, type: file, path: tools/pm-visit-planner.html, format: code }
+      - { name: tool-contact, label: "Demo: Contact & Mailing Manager", type: file, path: tools/contact-mailing-manager.html, format: code }
+      - { name: tool-swot, label: "Demo: SWOT Studio", type: file, path: tools/swot-chart-builder.html, format: code }
+      - { name: tool-kpi, label: "Demo: KPI Pulse", type: file, path: tools/kpi-dashboard.html, format: code }
+      - { name: tool-planner, label: "Demo: PM Visit Planner", type: file, path: tools/pm-visit-planner.html, format: code }
       - { name: page-sitemap, label: Sitemap (advanced), type: file, path: sitemap.xml, format: code }
       - { name: page-style, label: Stylesheet (advanced), type: file, path: style.css, format: code }
