@@ -227,6 +227,28 @@ content:
         options:
           values: [a-ops, a-edu, a-ai, a-build, a-write]
 
+  - name: journal
+    label: AI learning journal
+    type: file
+    path: data/journal.json
+    format: json
+    list: true
+    description: The dated log on the AI Learning page, shown in this order. Put the newest at the top.
+    fields:
+      - name: when
+        label: When
+        type: string
+        required: true
+        description: For example, Aug 2026 or 2024–25
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: text
+        label: Text
+        type: text
+        required: true
+
   - name: coursework
     label: AI coursework
     type: file

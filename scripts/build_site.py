@@ -9,6 +9,7 @@ Each data file fills one or more marked regions in the HTML pages:
   data/achievements.json    index.html "Latest achievements"
   data/projects.json        projects.html cards (three sections), project counts
   data/coursework.json      ai-learning.html "Coursework"
+  data/journal.json         ai-learning.html "Learning journal"
   data/certifications.json  resources.html "Certifications & training"
 
 A region sits between <!-- NAME:START ... --> and <!-- NAME:END -->.
@@ -214,6 +215,20 @@ def build_achievements(pages):
     return f"{len(items)} achievements"
 
 
+# ---------- learning journal ----------
+
+def build_journal(pages):
+    items = load("journal.json", ("when", "title", "text"))
+    blocks = ["\n".join([
+        '      <div class="achieve reveal">',
+        f'        <div class="when">{esc(j["when"])}</div>',
+        f'        <div class="what"><h3>{esc(j["title"])}</h3><p>{esc(j["text"])}</p></div>',
+        "      </div>",
+    ]) for j in items]
+    pages["ai-learning.html"] = fill(pages["ai-learning.html"], "JOURNAL", "\n".join(blocks), 6, "ai-learning.html")
+    return f"{len(items)} journal entries"
+
+
 # ---------- projects ----------
 
 def project_card(pr):
@@ -304,7 +319,7 @@ def build_courses(pages):
 PAGES = ("index.html", "articles.html", "publications.html", "projects.html",
          "ai-learning.html", "resources.html")
 STEPS = (build_newsletter, build_publications, build_stats, build_achievements,
-         build_projects, build_courses)
+         build_journal, build_projects, build_courses)
 
 
 def main():
