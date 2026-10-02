@@ -288,6 +288,8 @@ content:
         label: Details (HTML)
         type: code
         required: true
+        options:
+          format: html
         description: Paragraphs as <p>...</p>. Copy an existing entry to keep the same look.
 
   - name: certifications
@@ -328,6 +330,8 @@ content:
         label: Details (HTML)
         type: code
         required: true
+        options:
+          format: html
         description: Paragraphs as <p>...</p>. Copy an existing entry to keep the same look.
 
   # ------------------------------------------------------- pages (raw)
