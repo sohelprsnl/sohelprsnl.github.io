@@ -17,9 +17,9 @@
       "My Buyers List: buyer contacts with brand, department and subclass filled from the orders, an inactive list built from buyers who have orders but no contact, checks for missing or duplicate emails, and a styled two-sheet Excel export.",
       "Dashboard with live figures from the same formulas: order status, ETD due in 7 and 30 days, overdue milestones in red and amber, orders by buyer and supplier.",
       "DLO vs Agent pages that compare the liaison office's own orders with agent orders from the same export, by buyer, brand and season, and by price band when the export carries prices.",
-      "KPI Pulse loads beside the chart and is fed both sheets, so the ten KPI sheets rebuild from the live data. Exports the chart to Excel with colours, formats and formulas kept, and backs everything up to one file."
+      "KPI Pulse loads beside the chart and is fed both sheets, so the ten KPI sheets rebuild from the live data. Exports the chart to Excel with colours, formats and formulas kept, and backs everything up to one file. The demo includes a made-up weekly DD export, so the import and the DLO vs Agent pages can be tried too."
     ],
-    "footnote": "Packaged as a Windows installer (v1.2.16). Runs offline, needs no admin rights and uploads no data. In daily use on a real order book of 381 running and 3,079 shipped orders. Every change is tested in the browser with the real data before it is built into the installer.",
+    "footnote": "Packaged as a Windows installer (v1.2.17). Runs offline, needs no admin rights and uploads no data. In daily use on a real order book of 381 running and 3,079 shipped orders. Every change is tested in the browser with the real data before it is built into the installer.",
     "link_label": "Try the demo",
     "link_url": "tools/production-follow-up-master.html"
   },

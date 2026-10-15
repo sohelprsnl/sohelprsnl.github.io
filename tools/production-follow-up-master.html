@@ -517,18 +517,12 @@ body.fullview .xl-toolbar{padding:4px 8px;}
     <!-- ===================== KPI PULSE (embedded) ===================== -->
     <section class="panel kpipanel" id="panel-kpi">
       <div class="kpi-bar">
-        <b>KPI Pulse</b><span class="st" id="kpiStatus" style="display:none">not loaded yet</span>
-        <button class="btn sm" id="btnKpiRefresh" style="display:none">Refresh from chart</button>
-        <button class="btn sm" id="btnKpiFull" style="display:none">&#9974; Full screen</button>
+        <b>KPI Pulse</b><span class="st" id="kpiStatus">not loaded yet</span>
+        <button class="btn sm" id="btnKpiRefresh" title="Send the current chart (both sheets) to KPI Pulse again">Refresh from chart</button>
+        <button class="btn sm" id="btnKpiFull" title="Show KPI Pulse full screen. Esc to come back.">&#9974; Full screen</button>
       </div>
       <div class="kpi-miss" id="kpiMiss" style="display:none"></div>
-      <div style="padding:22px 26px;max-width:760px;font-size:14px;line-height:1.6">
-        <h2 style="margin:0 0 8px">KPI Pulse runs as its own demo</h2>
-        <p>In the real app this page loads KPI Pulse beside the chart and feeds it both sheets. On the website the two demos are separate pages, so try it in two steps:</p>
-        <ol style="padding-left:20px"><li>On <b>Running Orders</b>, click <b>Export .xlsx</b>. The sample chart downloads with both sheets.</li><li>Open the <a href="kpi-dashboard.html" target="_blank" rel="noopener"><b>KPI Pulse demo</b></a> and drop that file in. Ten KPI sheets build from it.</li></ol>
-        <p><a class="btn primary" href="kpi-dashboard.html" target="_blank" rel="noopener">Open the KPI Pulse demo</a></p>
-      </div>
-      <iframe id="kpiFrame" title="KPI Pulse" allow="fullscreen *; clipboard-write *" style="display:none"></iframe>
+      <iframe id="kpiFrame" title="KPI Pulse" allow="fullscreen *; clipboard-write *"></iframe>
     </section>
 
     <!-- ===================== DASHBOARD ===================== -->
@@ -573,7 +567,7 @@ body.fullview .xl-toolbar{padding:4px 8px;}
         <div class="dropzone" id="dropzone">
           <div style="font-weight:700;margin-bottom:4px;">Drop this week's DD_BD / report BD export here</div>
           <div class="small">or</div>
-          <div style="margin-top:8px;"><button class="btn primary sm" id="btnPickFile">Choose DD file</button><input type="file" id="fileInput" accept=".xlsx,.xls" style="display:none"></div>
+          <div style="margin-top:8px;"><button class="btn primary sm" id="btnPickFile">Choose DD file</button> <button class="btn sm" onclick="window.__DEMO_FEED_DD__&&window.__DEMO_FEED_DD__()" title="A made-up weekly export with orders at my factories and at agents, for the DLO vs Agent pages">Load the sample DD file (demo)</button><input type="file" id="fileInput" accept=".xlsx,.xls" style="display:none"></div>
         </div>
         <details style="margin-top:12px"><summary class="small" style="cursor:pointer;font-weight:700">What the import does</summary>
         <div class="notice info" style="margin-top:8px;">
@@ -1212,6 +1206,40 @@ running.sort(function(a,b){ return a.etd<b.etd?-1:a.etd>b.etd?1:0; });
 shipped.sort(function(a,b){ return a.etd<b.etd?-1:a.etd>b.etd?1:0; });
 document.getElementById("seed-running-data").textContent = JSON.stringify(running);
 document.getElementById("seed-shipped-data").textContent = JSON.stringify(shipped);
+window.__DEMO_BUYERS__ = BUY.map(function(b){ return b.name; });
+window.__DEMO_SUPPLIERS__ = SUP.slice();
+/* ---------- sample DD export (the weekly main order file) ---------- */
+var AGENTS = ["Eastbridge Sourcing (Demo)","Meridian Agency (Demo)","Pacific Link Trading (Demo)"];
+var AGENT_SUP = ["Delta Apparel Co (Demo)","Sunrise Garments (Demo)","Coral Knitwear (Demo)","Zenith Denim (Demo)","Prime Woven Ltd (Demo)","Ocean Trousers (Demo)"];
+function ddRows(){
+  var H=["supplier","intake","buyer","brand","dept","subclass","product_type","order_season","style_id","order_id","exact_qty","cost_price","vendor_pickup_date","transport_type","status","factory","agent_id","price_category","currency_code"];
+  var rows=[H], band=function(p){ return p<6?"LIP":p<10?"MIP":"HIP"; };
+  function push(r,st,agent,sup,qty,fob,etd){ rows.push([sup,r.orderIntake,r.buyer,r.brand,r.dept,r.subclass,r.productType,r.season,r.style,r.orderId,qty,fob,etd,r.transport,st,sup,agent,band(fob),"USD"]); }
+  var k=0;
+  running.forEach(function(r){ k++;
+    var st = k%23===0 ? "cancelled" : (k%9===0 ? "booked" : "ordered");
+    var qty = k%11===0 ? r.qty+ri(1,4)*100 : r.qty;             /* a few quantity changes */
+    var etd = k%7===0 ? iso(Math.max(1,(new Date(r.etd).getTime()-T0)/86400000+7)) : r.etd;   /* a few ETD moves */
+    push(r,st,"Dhaka Office",r.supplier,qty,r.fob,etd); });
+  shipped.forEach(function(r){ push(r,pick(["in_transport","in_port","planned_to_dc","delivered","delivered"]),"Dhaka Office",r.supplier,r.qty,r.fob,r.etd); });
+  /* new orders at my factories, not yet in the chart */
+  for(var i=0;i<12;i++){ var n=base(monday(ri(70,110))+7); push(n,"ordered","Dhaka Office",n.supplier,n.qty,n.fob,n.etd); }
+  /* agent orders of the same buyers */
+  for(var j=0;j<420;j++){ var a=base(monday(ri(-200,105))+7), lead=(new Date(a.etd).getTime()-T0)/86400000;
+    var st = lead>10 ? pick(["ordered","ordered","booked","new"]) : pick(["in_transport","in_port","delivered","delivered","planned_to_dc"]);
+    if(rnd()<0.03) st="cancelled";
+    var fob=Math.round(a.fob*(0.85+rnd()*0.35)*10)/10;
+    push(a,st,pick(AGENTS),pick(AGENT_SUP),a.qty,fob,a.etd); }
+  return rows;
+}
+function ddFile(){
+  var wb=XLSX.utils.book_new(), ws=XLSX.utils.aoa_to_sheet(ddRows());
+  XLSX.utils.book_append_sheet(wb,ws,"Export");
+  var buf=XLSX.write(wb,{type:"array",bookType:"xlsx"});
+  var d=new Date(T0), nm="DD_BD_demo_"+("0"+d.getUTCDate()).slice(-2)+"-"+MON[d.getUTCMonth()]+"-"+String(d.getUTCFullYear()).slice(-2)+".xlsx";
+  return new File([buf],nm,{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+}
+window.__DEMO_DD__ = ddFile;
 window.__DEMO_CONTACTS__ = { defaultCc:"team.demo@example.com", contacts: BUY.map(function(b){
   var n=b.name.toLowerCase().replace(/\s+/g,".");
   return { brand:b.brand, department:b.rep, name:b.name, title:pick(["Fashion Buyer","Senior Fashion Buyer","Fashion Merchant"]), to:n+"@example.com", cc:"assistant."+n.split(".")[1]+"@example.com" }; }) };
@@ -1230,9 +1258,19 @@ function ribbon(){
   var el=document.createElement("div"); el.className="dk-rib"; el.setAttribute("role","region"); el.setAttribute("aria-label","Demo version");
   el.innerHTML='<div class="dk-in"><span class="dk-tag">DEMO</span>'
     +'<span class="dk-txt">Sample data only. All buyers, factories, POs and figures are made up. Your edits stay in this browser. Emails are only drafts that you download.</span>'
-    +'<span class="dk-btns"><button type="button" class="dk-b" id="dkReset" title="Delete your changes and start again with fresh sample data">Reset demo</button>'
+    +'<span class="dk-btns"><button type="button" class="dk-b" id="dkDD" title="Build a made-up weekly DD export and open it on the Import Main DD page">Load sample DD file</button>'
+    +'<button type="button" class="dk-b" id="dkDown" title="Download the same made-up DD export as .xlsx">Download sample DD</button>'
+    +'<button type="button" class="dk-b" id="dkReset" title="Delete your changes and start again with fresh sample data">Reset demo</button>'
     +'<a class="dk-b" href="https://sohelprsnl.com/projects.html#follow-up-master">&larr; Back to projects</a></span></div>';
   document.body.insertBefore(el, document.body.firstChild);
+  function feedDD(){
+    var inp=document.getElementById("fileInput"), f=ddFile(), dt=new DataTransfer(); dt.items.add(f); inp.files=dt.files;
+    var nav=document.querySelector('.navbtn[data-tab="import"]'); if(nav) nav.click();
+    setTimeout(function(){ inp.dispatchEvent(new Event("change",{bubbles:true})); }, 150);
+  }
+  el.querySelector("#dkDD").addEventListener("click", feedDD);
+  el.querySelector("#dkDown").addEventListener("click", function(){ var f=ddFile(), a=document.createElement("a"); a.href=URL.createObjectURL(f); a.download=f.name; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },1500); });
+  window.__DEMO_FEED_DD__ = feedDD;
   el.querySelector("#dkReset").addEventListener("click", function(){
     try{ localStorage.removeItem("fum-stalls"); }catch(e){}
     var rq=indexedDB.deleteDatabase("lpp_followup_master");
@@ -1362,8 +1400,8 @@ const FIELD_ALIASES = {
 /* Status values of the DD export, in lifecycle order (from DD_ 28-Sep-26.xlsx). The Rules page adds any new value it meets in an import. */
 const DD_STATUSES = ['new','quick_ordered','ordered','booked','in_transport','in_port','planned_to_dc','delivered','cancelled'];
 const DEFAULT_CONFIG = {
-  buyers:[],
-  suppliers:[],
+  buyers: window.__DEMO_BUYERS__ || [],
+  suppliers: window.__DEMO_SUPPLIERS__ || [],
   renameRules:[],
   addStatuses:["ordered","new"],
   colRules: JSON.parse(JSON.stringify(DEFAULT_COL_RULES)),
@@ -4544,7 +4582,7 @@ document.getElementById('rvExport').addEventListener('click',()=>{
    KPI Pulse.html is loaded in a frame from the path in config.kpiPath (default ../KPI Pulse/KPI Pulse.html).
    On open, and whenever the chart changed since the last send, the Master builds the same workbook Export .xlsx writes
    and posts it into the frame. KPI Pulse handles it like a dropped file. Nothing comes back into the chart. */
-const KPI={ready:false, sentGen:-1, sentRows:'', loadedAt:null, timer:null, pending:false, pathHint:'about:blank'};   // desktop app: both pages sit in one folder
+const KPI={ready:false, sentGen:-1, sentRows:'', loadedAt:null, timer:null, pending:false, pathHint:'kpi-pulse-embed.html'};   // desktop app: both pages sit in one folder
 function kpiStamp(){ return calcGen+'|'+STATE.running.length+'|'+STATE.shipped.length+'|'+(STATE.lastImportAt||''); }
 function kpiSend(force){ stallNote('sending chart to KPI Pulse');
   const fr=document.getElementById('kpiFrame'); if(!fr.contentWindow) return;
@@ -4565,10 +4603,10 @@ window.addEventListener('message',e=>{
 function masterKpiActive(){ return document.getElementById('panel-kpi').classList.contains('active'); }
 function renderKPI(){
   const own=(STATE.config.kpiPath && STATE.config.kpiPath!==DEFAULT_CONFIG.kpiPath)? STATE.config.kpiPath : '';   // a path you typed yourself wins; the default is only a hint
-  const path=own||KPI.pathHint||'../KPI Pulse/KPI Pulse.html', fr=document.getElementById('kpiFrame');
+  const path=KPI.pathHint, fr=document.getElementById('kpiFrame');   /* demo: the embedded KPI Pulse sits beside this page */
   if(fr.dataset.src!==path){ KPI.ready=false; KPI.sentRows=''; fr.dataset.src=path; fr.src=path;
     clearTimeout(KPI.timer); KPI.timer=setTimeout(()=>{ if(!KPI.ready && !own && !KPI.pathHint){ KPI.pathHint='KPI Pulse.html'; renderKPI(); return; }   // desktop layout: both files in one folder
-      if(!KPI.ready && KPI.pathHint!=='about:blank'){ const m=document.getElementById('kpiMiss'); m.style.display=''; m.innerHTML=`<div class="notice warn"><b>KPI Pulse did not answer from <code>${esc(path)}</code>.</b><br>Check that KPI Pulse.html is at that path, relative to this file (expected at E:\\Claude Cowork\\KPI Pulse\\KPI Pulse.html), and that it is the version with the Follow-Up Master bridge.<div class="btnrow" style="margin-top:8px"><input class="inp" id="kpiPath" style="width:300px" value="${esc(path)}"><button class="btn sm" id="btnKpiPath">Use this path</button></div></div>`;
+      if(!KPI.ready){ const m=document.getElementById('kpiMiss'); m.style.display=''; m.innerHTML=`<div class="notice warn"><b>KPI Pulse did not answer from <code>${esc(path)}</code>.</b><br>Check that KPI Pulse.html is at that path, relative to this file (expected at E:\\Claude Cowork\\KPI Pulse\\KPI Pulse.html), and that it is the version with the Follow-Up Master bridge.<div class="btnrow" style="margin-top:8px"><input class="inp" id="kpiPath" style="width:300px" value="${esc(path)}"><button class="btn sm" id="btnKpiPath">Use this path</button></div></div>`;
       document.getElementById('btnKpiPath').onclick=()=>{ const v=document.getElementById('kpiPath').value.trim(); if(!v) return; STATE.config.kpiPath=v; saveConfig(); renderKPI(); }; document.getElementById('kpiStatus').textContent='not loaded'; } }, 8000); }
   else kpiSend(false);
 }
@@ -4618,7 +4656,7 @@ function progressFailed(msg){ stopProgress(); document.getElementById('ddProgres
 let ddWorkerURL=null;
 function ddWorkerSource(){
   const lib=document.getElementById('xlsxlib').textContent;
-  const helpers='const MON='+JSON.stringify(MON)+';\n'+[ymdToSerial, serialToYMD, serialToISO, parseDateInput, normId].map(f=>f.toString()).join('\n');
+  const helpers='const MON='+JSON.stringify(MON)+';\n'+[ymdToSerial, serialToYMD, serialToISO, parseDateInput, parseDateInputRaw, dateOk, normId].map(f=>f.toString()).join('\n');   /* every helper parseDateInput calls must travel with it */
   const body = `
 function normHeader(h){ return String(h||'').trim().toLowerCase(); }
 self.onmessage=function(e){
@@ -4995,7 +5033,7 @@ function renderDashboard(){
 /* ===================================================================== RULES TAB */
 
 /* ---- site footer: full card at the bottom of the Dashboard and About pages only ---- */
-const APP_VERSION='1.2.16';
+const APP_VERSION='1.2.17';
 function stallRender(){ const el=document.getElementById('stallLog'); if(!el) return; const a=stallRead();
   el.textContent = a.length ? a.slice().reverse().map(x=>x.at.replace('T',' ').slice(0,19)+'  '+(x.gap? (x.gap/1000).toFixed(1)+' s  ' : '')+x.what+(x.keysInLast10s!=null?'  keys:'+x.keysInLast10s:'')+(x.page?'  page:'+String(x.page).trim():'')+(x.ver?'  v'+x.ver:'')).join('\n') : 'No pause longer than 1.5 s recorded.';
   const h=document.getElementById('stallHint'); if(h) h.textContent=a.length? a.length+' line(s)' : ''; }
