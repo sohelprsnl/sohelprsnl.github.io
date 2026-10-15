@@ -15,7 +15,7 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects, Md. Sohel Rana</title>
-<meta name="description" content="Nine projects by Md. Sohel Rana: four merchandising tools with live demos, four web projects, and an open denim washing training deck.">
+<meta name="description" content="Ten projects by Md. Sohel Rana: five merchandising tools with live demos, four web projects, and an open denim washing training deck.">
 <meta name="author" content="Md. Sohel Rana">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
@@ -34,7 +34,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://sohelprsnl.com/projects.html">
 <meta property="og:title" content="Projects | Md. Sohel Rana">
-<meta property="og:description" content="Nine projects: four merchandising tools with live demos, four web projects and an open training deck, all built with AI assistance.">
+<meta property="og:description" content="Ten projects: five merchandising tools with live demos, four web projects and an open training deck, all built with AI assistance.">
 <meta property="og:image" content="https://sohelprsnl.com/assets/og-card-sohel-2026.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -117,9 +117,9 @@
     <div class="hero-text">
       <p class="kicker">Projects</p>
       <h1>Projects</h1>
-      <p class="mission">Nine projects I built with AI-assisted development. Four solve daily merchandising problems at LPP. Four serve my PGD-GB studies, my batch and my own work. One is an open training deck for the trade.</p>
+      <p class="mission">Ten projects I built with AI-assisted development. Five solve daily merchandising problems at LPP. Four serve my PGD-GB studies, my batch and my own work. One is an open training deck for the trade.</p>
       <div class="proj-jump">
-        <a class="btn btn-gold" href="#work-tools">Merchandising tools (4)</a>
+        <a class="btn btn-gold" href="#work-tools">Merchandising tools (5)</a>
         <a class="btn btn-ghost" href="#web-projects">Web projects (4)</a>
         <a class="btn btn-ghost" href="#open-resources">Open resources (1)</a>
       </div>
@@ -131,9 +131,19 @@
   <div class="container">
     <p class="eyebrow reveal">Built for LPP S.A.</p>
     <h2 class="title reveal">Merchandising tools</h2>
-    <p class="lede reveal">Tools for supplier data, reporting and production follow-up. Each one has a live demo with made-up data, so you can try it in your browser.</p>
+    <p class="lede reveal">Tools for production follow-up, supplier data and reporting. Each one has a live demo with made-up data, so you can try it in your browser.</p>
     <div class="proj-grid">
       <!-- PROJECTS-TOOLS:START (generated from data, edit in Pages CMS, not here) -->
+      <article class="card a-ops has-cover reveal" id="follow-up-master">
+        <img class="cover" loading="lazy" decoding="async" width="1200" height="630" src="assets/card-tool-follow-up-master.jpg" alt="Cover card for Follow-Up Master: Excel-style grid, live formulas, DD import, buyer status emails">
+        <h3>Follow-Up Master: Production Follow-Up for Merchandising</h3>
+        <p class="proj-meta">Sep to Oct 2026 · LPP S.A. · Windows desktop app</p>
+        <p>Every week the production follow-up chart was rebuilt by hand in Excel from the main order export, and the weekly status emails to each buyer were typed out one by one. I built Follow-Up Master to hold the chart as a live app: the same 42 columns, the same formulas, with the import, the checks and the buyer emails built in.</p>
+        <p class="proj-label">What it does</p>
+        <ul class="proj-list"><li>Keeps Running Orders and Shipped Orders in an Excel-style grid: 42 columns A to AP, live formulas with row-relative references, filters with counts, a subtotal row that follows every filter, frozen panes, copy and paste over blocks, undo and redo, and a Done mark per row that clears itself when the order changes.</li><li>Imports the weekly main order export (DD) and shows every change before it is applied: new orders, quantity, price, ETD and transport updates, cancelled and missing orders. Deleted orders stay in a change log and can be restored.</li><li>TNA &amp; Critical Path: 15 checks across both sheets, such as sewing started before PP approval, fabric inhouse less than 3 days before sewing, shipment sample not sent with the ETD close, and duplicate PO numbers. Each check lists its rows and opens them in the sheet.</li><li>Auto Production Reports: pick an ETD cut-off (ETD weeks run Monday to Monday) and a shipped period, tick the buyers, and download one Outlook draft per buyer with To, CC, subject and the order table filled in. Columns, headers and a note below the table are configurable. Nothing is sent from the app.</li><li>My Buyers List: buyer contacts with brand, department and subclass filled from the orders, an inactive list built from buyers who have orders but no contact, checks for missing or duplicate emails, and a styled two-sheet Excel export.</li><li>Dashboard with live figures from the same formulas: order status, ETD due in 7 and 30 days, overdue milestones in red and amber, orders by buyer and supplier.</li><li>DLO vs Agent pages that compare the liaison office's own orders with agent orders from the same export, by buyer, brand and season, and by price band when the export carries prices.</li><li>KPI Pulse loads beside the chart and is fed both sheets, so the ten KPI sheets rebuild from the live data. Exports the chart to Excel with colours, formats and formulas kept, and backs everything up to one file.</li></ul>
+        <p class="proj-foot">Packaged as a Windows installer (v1.2.16). Runs offline, needs no admin rights and uploads no data. In daily use on a real order book of 381 running and 3,079 shipped orders. Every change is tested in the browser with the real data before it is built into the installer.</p>
+        <a class="more" href="tools/production-follow-up-master.html">Try the demo &rarr;</a>
+      </article>
       <article class="card a-ops has-cover reveal" id="contact-mailing-manager">
         <img class="cover" loading="lazy" decoding="async" width="1200" height="630" src="assets/card-tool-contact-mailing.jpg" alt="Cover card for Contact &amp; Mailing Manager: address checks, company confirmations, Outlook drafts">
         <h3>Contact &amp; Mailing Manager</h3>
