@@ -567,7 +567,11 @@ body.fullview .xl-toolbar{padding:4px 8px;}
         <div class="dropzone" id="dropzone">
           <div style="font-weight:700;margin-bottom:4px;">Drop this week's DD_BD / report BD export here</div>
           <div class="small">or</div>
-          <div style="margin-top:8px;"><button class="btn primary sm" id="btnPickFile">Choose DD file</button> <button class="btn sm" onclick="window.__DEMO_FEED_DD__&&window.__DEMO_FEED_DD__()" title="A made-up weekly export with orders at my factories and at agents, for the DLO vs Agent pages">Load the sample DD file (demo)</button><input type="file" id="fileInput" accept=".xlsx,.xls" style="display:none"></div>
+          <div style="margin-top:8px;"><button class="btn primary sm" id="btnPickFile">Choose DD file</button><input type="file" id="fileInput" accept=".xlsx,.xls" style="display:none"></div>
+        </div>
+        <div class="notice info" id="ddDemoBox" style="margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px">
+          <div style="flex:1 1 320px"><b>Try with demo data.</b> A made-up weekly DD export in the real layout: 63 columns, 941 rows, orders at the demo factories and at three demo agents. Load it, confirm the update, then open the DLO vs Agent pages.</div>
+          <div class="btnrow"><button class="btn primary sm" onclick="window.__DEMO_FEED_DD__&&window.__DEMO_FEED_DD__()">Load demo DD file</button><button class="btn sm" onclick="window.__DEMO_DOWN_DD__&&window.__DEMO_DOWN_DD__()">Download .xlsx</button></div>
         </div>
         <details style="margin-top:12px"><summary class="small" style="cursor:pointer;font-weight:700">What the import does</summary>
         <div class="notice info" style="margin-top:8px;">
@@ -1285,8 +1289,9 @@ function ribbon(){
     setTimeout(function(){ inp.dispatchEvent(new Event("change",{bubbles:true})); }, 150);
   }
   el.querySelector("#dkDD").addEventListener("click", feedDD);
-  el.querySelector("#dkDown").addEventListener("click", function(){ var f=ddFile(), a=document.createElement("a"); a.href=URL.createObjectURL(f); a.download=f.name; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },1500); });
-  window.__DEMO_FEED_DD__ = feedDD;
+  function downDD(){ var f=ddFile(), a=document.createElement("a"); a.href=URL.createObjectURL(f); a.download=f.name; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },1500); }
+  el.querySelector("#dkDown").addEventListener("click", downDD);
+  window.__DEMO_FEED_DD__ = feedDD; window.__DEMO_DOWN_DD__ = downDD;
   el.querySelector("#dkReset").addEventListener("click", function(){
     try{ localStorage.removeItem("fum-stalls"); }catch(e){}
     var rq=indexedDB.deleteDatabase("lpp_followup_master");
