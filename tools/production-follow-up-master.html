@@ -6,12 +6,12 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Follow-Up Master: Production Follow-Up for Merchandising</title>
 <link rel="canonical" href="https://sohelprsnl.com/tools/production-follow-up-master.html">
-<meta name="description" content="The LPP production follow-up chart as an app: Running and Shipped Orders in an Excel-like grid with live formulas, DD import, TNA checks, buyer contacts and weekly buyer status emails. Demo with made-up data.">
+<meta name="description" content="The production follow-up chart as an app: Running and Shipped Orders in an Excel-like grid with live formulas, DD import, TNA checks, buyer contacts and weekly buyer status emails. Demo with made-up data.">
 <meta name="author" content="Md. Sohel Rana">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="RMG Xpress Insights by Sohel">
 <meta property="og:title" content="Follow-Up Master: Production Follow-Up for Merchandising">
-<meta property="og:description" content="The LPP production follow-up chart as an app: Running and Shipped Orders in an Excel-like grid with live formulas, DD import, TNA checks, buyer contacts and weekly buyer status emails. Demo with made-up data.">
+<meta property="og:description" content="The production follow-up chart as an app: Running and Shipped Orders in an Excel-like grid with live formulas, DD import, TNA checks, buyer contacts and weekly buyer status emails. Demo with made-up data.">
 <meta property="og:url" content="https://sohelprsnl.com/tools/production-follow-up-master.html">
 <meta property="og:image" content="https://sohelprsnl.com/assets/card-tool-follow-up-master.jpg">
 <meta property="og:image:width" content="1200">
@@ -1758,7 +1758,7 @@ function cfStyle(sheet,rowIdx,ci){
     const v=cellValue(sheet,rowIdx,ci); if(typeof v!=='string') return '';
     const s=v.toUpperCase();
     if(s.includes('DELAY BY SUPPLIER')) return 'background:#FF0000;color:#fff;font-weight:700;';
-    if(s.includes('ONTIME')||s.includes('DELAY BY LPP')) return 'background:#70AD47;color:#fff;font-weight:700;';
+    if(s.includes('ONTIME')||s.includes('DELAY BY BUYER')) return 'background:#70AD47;color:#fff;font-weight:700;';
   }
   return '';
 }
@@ -5117,7 +5117,7 @@ function renderRules0(){
       <tr><td class="mono">${p}</td><td>Plan date within the amber window and ${a} (${esc(labelFor(COLUMNS[LETTER_TO_IDX[a]],'running').trim())}) is blank</td><td><span style="background:#FFC000;padding:1px 10px;">&nbsp;</span> amber</td></tr>`).join('')+
     `<tr><td class="mono">AO</td><td>Contains "SHIPPED"</td><td><span style="background:#70AD47;color:#fff;font-weight:700;padding:1px 6px;">bold white on green</span></td></tr>
      <tr><td class="mono">AP</td><td>Contains "DELAY BY SUPPLIER"</td><td><span style="background:#FF0000;color:#fff;font-weight:700;padding:1px 6px;">bold white on red</span></td></tr>
-     <tr><td class="mono">AP</td><td>Contains "ONTIME" or "DELAY BY LPP"</td><td><span style="background:#70AD47;color:#fff;font-weight:700;padding:1px 6px;">bold white on green</span> (as in your chart)</td></tr></tbody>`;
+     <tr><td class="mono">AP</td><td>Contains "ONTIME" or "DELAY BY BUYER"</td><td><span style="background:#70AD47;color:#fff;font-weight:700;padding:1px 6px;">bold white on green</span> (as in your chart)</td></tr></tbody>`;
   const ad=document.getElementById('amberDays'); ad.value=STATE.config.amberDays||7;
   ad.onchange=()=>{ STATE.config.amberDays=Math.max(1,Math.min(60,+ad.value||7)); saveConfig(); toast('Amber window set to '+STATE.config.amberDays+' days.'); };
   const bt=document.getElementById('buyerTags'); bt.innerHTML=STATE.config.buyers.map((b,i)=>`<span class="tag">${esc(b)}<button data-i="${i}" data-list="buyers">&times;</button></span>`).join('');
@@ -5896,7 +5896,7 @@ loadAll().then(()=>focusGrid());
     <div class="sf-who">
       <span class="sf-k">Compiled and built by</span>
       <span class="sf-n">Md. Sohel Rana</span>
-      <span class="sf-role">LPP S. A. Dhaka Liaison Office (DLO)</span>
+      <a class="sf-role" href="https://sohelprsnl.com" target="_blank" rel="noopener" style="text-decoration:none">sohelprsnl.com</a>
     </div>
     <div class="sf-about">
       <b>Production Follow-Up for Merchandising</b>
