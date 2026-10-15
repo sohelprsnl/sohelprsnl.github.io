@@ -570,7 +570,7 @@ body.fullview .xl-toolbar{padding:4px 8px;}
           <div style="margin-top:8px;"><button class="btn primary sm" id="btnPickFile">Choose DD file</button><input type="file" id="fileInput" accept=".xlsx,.xls" style="display:none"></div>
         </div>
         <div class="notice info" id="ddDemoBox" style="margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px">
-          <div style="flex:1 1 320px"><b>Try with demo data.</b> A made-up weekly DD export in the real layout: 63 columns, 941 rows, orders at the demo factories and at three demo agents. Load it, confirm the update, then open the DLO vs Agent pages.</div>
+          <div style="flex:1 1 320px"><b>Try with demo data.</b> Last week's made-up export is already loaded, so the DLO vs Agent pages are full. Load this week's export to see the import at work: 63 columns, 941 rows, 12 new orders, quantity and ETD changes and 6 cancellations. Confirm the update, then the DLO vs Agent pages refresh.</div>
           <div class="btnrow"><button class="btn primary sm" onclick="window.__DEMO_FEED_DD__&&window.__DEMO_FEED_DD__()">Load demo DD file</button><button class="btn sm" onclick="window.__DEMO_DOWN_DD__&&window.__DEMO_DOWN_DD__()">Download .xlsx</button></div>
         </div>
         <details style="margin-top:12px"><summary class="small" style="cursor:pointer;font-weight:700">What the import does</summary>
@@ -1234,16 +1234,16 @@ function ddRow(r,st,agent,sup,qty,fob,etdN){
     delivered? ddDateCell(etdN+ri(62,85)) : "", pick(["Chittagong","Chittagong","Chittagong","Dhaka"]), pick(["SANTANDER","BNP PARIBAS","HSBC"]), "Reverse Factoring", pick(["180 Days","180 Days","120 Days"]),
     pick(["100%Cotton","98%Cotton 2%Elastane","65%Polyester 35%Cotton"]), "PCS", 1, "", false, "GARMENT", ostat, pick(["no RFID","no RFID","HT"]), "LPP"];
 }
-function ddRows(){
-  var rows=[DD_HDR], k=0;
+function ddRows(mode){
+  var base_=mode==="baseline"; var rows=[DD_HDR], k=0;
   function lead(r){ return (new Date(r.etd).getTime()-T0)/86400000; }
   running.forEach(function(r){ k++;
-    var st = k%23===0 ? "Cancelled" : (k%9===0 ? "BOOKED" : "Ordered");
-    var qty = k%11===0 ? r.qty+ri(1,4)*100 : r.qty;             /* a few quantity changes */
-    var e = lead(r); if(k%7===0) e=Math.max(1,e+7);              /* a few ETD moves */
+    var st = base_ ? "Ordered" : (k%23===0 ? "Cancelled" : (k%9===0 ? "BOOKED" : "Ordered"));
+    var qty = (!base_ && k%11===0) ? r.qty+ri(1,4)*100 : r.qty;             /* a few quantity changes */
+    var e = lead(r); if(!base_ && k%7===0) e=Math.max(1,e+7);              /* a few ETD moves */
     rows.push(ddRow(r,st,"Dhaka Office",r.supplier,qty,r.fob,e)); });
   shipped.forEach(function(r){ rows.push(ddRow(r,pick(["DELIVERED","DELIVERED","DELIVERED","IN_TRANSPORT","IN_PORT","PLANNED_TO_DC"]),"Dhaka Office",r.supplier,r.qty,r.fob,lead(r))); });
-  for(var i=0;i<12;i++){ var n=base(monday(ri(70,110))+7); rows.push(ddRow(n,i<3?"New":"Ordered","Dhaka Office",n.supplier,n.qty,n.fob,lead(n))); }   /* new orders at my factories */
+  if(!base_) for(var i=0;i<12;i++){ var n=base(monday(ri(70,110))+7); rows.push(ddRow(n,i<3?"New":"Ordered","Dhaka Office",n.supplier,n.qty,n.fob,lead(n))); }   /* new orders at my factories */
   for(var j=0;j<420;j++){ var a=base(monday(ri(-200,105))+7), L=lead(a);
     var st = L>10 ? pick(["Ordered","Ordered","BOOKED","New"]) : pick(["IN_TRANSPORT","IN_PORT","DELIVERED","DELIVERED","PLANNED_TO_DC"]);
     if(rnd()<0.06) st="Cancelled";
@@ -1251,12 +1251,12 @@ function ddRows(){
     rows.push(ddRow(a,st,pick(AGENTS),pick(AGENT_SUP),a.qty,fob,L)); }
   return rows;
 }
-function ddFile(){
-  var rows=ddRows(), wb=XLSX.utils.book_new(), ws=XLSX.utils.aoa_to_sheet(rows);
+function ddFile(mode){
+  var rows=ddRows(mode), wb=XLSX.utils.book_new(), ws=XLSX.utils.aoa_to_sheet(rows);
   var DATE_COLS=[25,27,29,30,32,37,49]; for(var r=1;r<rows.length;r++) DATE_COLS.forEach(function(c){ var a=XLSX.utils.encode_cell({r:r,c:c}), cell=ws[a]; if(cell && typeof cell.v==="number"){ cell.t="n"; cell.z="yyyy-mm-dd"; } });
   XLSX.utils.book_append_sheet(wb,ws,"Export");
   var buf=XLSX.write(wb,{type:"array",bookType:"xlsx"});
-  var d=new Date(T0), nm="DD_BD_model_demo_"+("0"+d.getUTCDate()).slice(-2)+"-"+MON[d.getUTCMonth()]+"-"+String(d.getUTCFullYear()).slice(-2)+".xlsx";
+  var d=new Date(T0), nm=(mode==="baseline"?"DD_BD_model_demo_baseline_":"DD_BD_model_demo_")+("0"+d.getUTCDate()).slice(-2)+"-"+MON[d.getUTCMonth()]+"-"+String(d.getUTCFullYear()).slice(-2)+".xlsx";
   return new File([buf],nm,{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
 }
 window.__DEMO_DD__ = ddFile;
@@ -1283,15 +1283,29 @@ function ribbon(){
     +'<button type="button" class="dk-b" id="dkReset" title="Delete your changes and start again with fresh sample data">Reset demo</button>'
     +'<a class="dk-b" href="https://sohelprsnl.com/projects.html#follow-up-master">&larr; Back to projects</a></span></div>';
   document.body.insertBefore(el, document.body.firstChild);
-  function feedDD(){
-    var inp=document.getElementById("fileInput"), f=ddFile(), dt=new DataTransfer(); dt.items.add(f); inp.files=dt.files;
-    var nav=document.querySelector('.navbtn[data-tab="import"]'); if(nav) nav.click();
+  function feedDD(mode){
+    var inp=document.getElementById("fileInput"), f=ddFile(mode), dt=new DataTransfer(); dt.items.add(f); inp.files=dt.files;
+    if(mode!=="baseline"){ var nav=document.querySelector('.navbtn[data-tab="import"]'); if(nav) nav.click(); }
     setTimeout(function(){ inp.dispatchEvent(new Event("change",{bubbles:true})); }, 150);
   }
-  el.querySelector("#dkDD").addEventListener("click", feedDD);
-  function downDD(){ var f=ddFile(), a=document.createElement("a"); a.href=URL.createObjectURL(f); a.download=f.name; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },1500); }
+  /* First visit: load last week's export silently and confirm it (it changes nothing in the chart), so the
+     DLO vs Agent pages are full from the start. "Load demo DD file" then brings this week's export with changes. */
+  function autoBaseline(){
+    var F=window.__FUM__; if(!F || !F.DDX) { setTimeout(autoBaseline, 400); return; }
+    if(F.DDX.cur) return;                                   /* a DD is already confirmed */
+    var active=document.querySelector('.navbtn.active'), tab=active? active.dataset.tab : '';
+    feedDD("baseline");
+    var tries=0; (function waitConfirm(){
+      var btn=document.getElementById("btnConfirmImport"), card=document.getElementById("importPreviewCard");
+      if(btn && card && card.style.display!=="none"){ btn.click(); setTimeout(function(){ var b=document.querySelector('.navbtn[data-tab="'+(tab||'dashboard')+'"]'); if(b && tab!=='import') b.click(); }, 1200); return; }
+      if(++tries<60) setTimeout(waitConfirm, 250);
+    })();
+  }
+  setTimeout(autoBaseline, 1500);
+  el.querySelector("#dkDD").addEventListener("click", function(){ feedDD("week"); });
+  function downDD(){ var f=ddFile("week"), a=document.createElement("a"); a.href=URL.createObjectURL(f); a.download=f.name; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },1500); }
   el.querySelector("#dkDown").addEventListener("click", downDD);
-  window.__DEMO_FEED_DD__ = feedDD; window.__DEMO_DOWN_DD__ = downDD;
+  window.__DEMO_FEED_DD__ = function(){ feedDD("week"); }; window.__DEMO_DOWN_DD__ = downDD;
   el.querySelector("#dkReset").addEventListener("click", function(){
     try{ localStorage.removeItem("fum-stalls"); }catch(e){}
     var rq=indexedDB.deleteDatabase("lpp_followup_master");
