@@ -850,7 +850,7 @@ body.fullview .xl-toolbar{padding:4px 8px;}
       <div class="card lockable">
         <div class="card-head"><h3>Default CC and sender</h3><span class="hint">used in every draft</span></div>
         <div class="card-pad ct-settings">
-          <label>Default CC (every email)<input id="ctDefaultCc" class="inp" placeholder="name@lpp.com; name@lpp.com"></label>
+          <label>Default CC (every email)<input id="ctDefaultCc" class="inp" placeholder="name@example.com; name@example.com"></label>
           <label>Merchandiser name (used in the export file name)<input id="ctMer" class="inp" placeholder="e.g. your first name"></label>
         </div>
       </div>
@@ -890,7 +890,7 @@ body.fullview .xl-toolbar{padding:4px 8px;}
               <label>Title<input class="inp" data-sig="title" placeholder="Merchandiser"></label>
               <label>Department<input class="inp" data-sig="dept" placeholder="Merchandising"></label>
               <label>Mobile<input class="inp" data-sig="mobile" placeholder="01XXXXXXXXX"></label>
-              <label>E-mail<input class="inp" data-sig="email" placeholder="name@lpp.com"></label>
+              <label>E-mail<input class="inp" data-sig="email" placeholder="name@example.com"></label>
               <label>Office<input class="inp" data-sig="office" placeholder="Your office name"></label>
               <label>Website<input class="inp" data-sig="web" placeholder="www.example.com"></label>
               <label class="wide">Address<input class="inp" data-sig="address" placeholder="Street, floor, area, postcode, city, country"></label>
@@ -2421,7 +2421,7 @@ function ctMerName(){
    The example row carries Status "example" and is skipped on import, so a forgotten row never lands in the list. */
 const CT_TPL_H=['Brand','Dept (Auto)','Dept (Report)','Subclass','Buyer Name','Designation','To','CC','Default CC','Status'];
 const CT_TPL_W=[12,20,22,30,24,22,30,34,34,12];
-const CT_TPL_EX=['Cropp',"ladies' CROPP",'Ladies Denim','jeans_trousers, jeans_shorts','Example Buyer (delete this row)','Fashion Merchant','first.last@lpp.com','colleague@lpp.com','name@lpp.com; name2@lpp.com','example'];
+const CT_TPL_EX=['Cropp',"ladies' CROPP",'Ladies Denim','jeans_trousers, jeans_shorts','Example Buyer (delete this row)','Fashion Merchant','first.last@example.com','colleague@example.com','name@example.com; name2@example.com','example'];
 const CT_TPL_SKIP=/^\s*(example|sample|template)\s*$/i;
 function ctTplSheet(title, intro, blanks, color){
   const X=window.XLSX_STYLE||XLSX;
