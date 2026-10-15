@@ -1211,32 +1211,48 @@ window.__DEMO_SUPPLIERS__ = SUP.slice();
 /* ---------- sample DD export (the weekly main order file) ---------- */
 var AGENTS = ["Eastbridge Sourcing (Demo)","Meridian Agency (Demo)","Pacific Link Trading (Demo)"];
 var AGENT_SUP = ["Delta Apparel Co (Demo)","Sunrise Garments (Demo)","Coral Knitwear (Demo)","Zenith Denim (Demo)","Prime Woven Ltd (Demo)","Ocean Trousers (Demo)"];
+/* The sample export mirrors the real weekly DD_BD export: the same 63 columns in the same order, the same
+   status spellings (DELIVERED, Ordered, IN_TRANSPORT ...), and a similar mix. Every name and number is invented. */
+var DD_HDR=["style_id","order_id","status","style_full_name","brand","dept","class","subclass","order_season","intake","style_line","style_collection","cost_price_pln","retail_price","product_type","fashion_level","buyer","product_manager","origin_country","shipping_country","agent_id","supplier","factory","exact_qty","total_of_elements","planned_delivery_date","pdd_week","planned_pickup_date","vpd_week","vendor_pickup_date","actual_delivery_date","delivery_week","actual_pickup_date","transport_type","user_comments","cost_price","buyer_comments","submission_date","order_intake","currency_code","price_category","hangtag_price","po_comments","uda_eco","inbound_cost","vpn","exchange_rate","inco_term","eco_composition","last_real_delivery_in_dc_date  (from CT)","lading_port","bank","payment_method_type","payment_terms","composition","uom_id","element_in_set","element_in_pack","eu_south","order type","Order_Status","RFID","company"];
+function ddDateCell(n){ return Math.round(T0/86400000)+25569+n; }   /* Excel date serial, shown as a date by the number format */
+function weekOf(n){ var d=new Date(T0+n*86400000), y=new Date(Date.UTC(d.getUTCFullYear(),0,4)); return Math.max(1,Math.round(((d-y)/86400000+((y.getUTCDay()+6)%7))/7)+1); }
+function ddRow(r,st,agent,sup,qty,fob,etdN){
+  var band = fob<6?"LIP":fob<10?"MIP":"HIP";
+  var retail = Math.round(fob*(3.2+rnd()*1.2))-0.01;
+  var delivered = /DELIVERED|IN_TRANSPORT|IN_PORT|PLANNED_TO_DC/.test(st);
+  var ostat = st==="Cancelled"?"Cancelled": st==="New"?"New":"ORDERED";
+  var fx = pick([3.65,3.75]);
+  return [r.style, r.orderId, st, "N/A", r.brand, r.dept, r.subclass.replace(/^jeans_|^trousers_|^shirts_|^skirts_|^jackets_/,"K_"), r.subclass, r.season, r.orderIntake,
+    pick(["LADY","CASUAL","KID BOY","KID GIRL","MEN"]), pick(["Core","Core 26/2","Basicology","Denim Collection","Seasonal"]), Math.round(fob*fx*100)/100, retail, r.productType,
+    pick(["Commercial Fashion","Seasonal BS","Core","CF_New","Base"]), r.buyer, "", "Bangladesh", "Bangladesh", agent, sup, sup, qty, qty,
+    ddDateCell(etdN+75), weekOf(etdN+75), ddDateCell(etdN-14), weekOf(etdN-14), ddDateCell(etdN), delivered? ddDateCell(etdN+ri(60,80)) : "", delivered? weekOf(etdN+70) : "", delivered? ddDateCell(etdN+ri(-3,6)) : "",
+    r.transport, "", fob, "", ddDateCell(etdN-ri(90,160)), r.orderIntake, "USD", band, retail, "", "", pick([2.7,1.84,2.27]), "", fx, "FOB", "",
+    delivered? ddDateCell(etdN+ri(62,85)) : "", pick(["Chittagong","Chittagong","Chittagong","Dhaka"]), pick(["SANTANDER","BNP PARIBAS","HSBC"]), "Reverse Factoring", pick(["180 Days","180 Days","120 Days"]),
+    pick(["100%Cotton","98%Cotton 2%Elastane","65%Polyester 35%Cotton"]), "PCS", 1, "", false, "GARMENT", ostat, pick(["no RFID","no RFID","HT"]), "LPP"];
+}
 function ddRows(){
-  var H=["supplier","intake","buyer","brand","dept","subclass","product_type","order_season","style_id","order_id","exact_qty","cost_price","vendor_pickup_date","transport_type","status","factory","agent_id","price_category","currency_code"];
-  var rows=[H], band=function(p){ return p<6?"LIP":p<10?"MIP":"HIP"; };
-  function push(r,st,agent,sup,qty,fob,etd){ rows.push([sup,r.orderIntake,r.buyer,r.brand,r.dept,r.subclass,r.productType,r.season,r.style,r.orderId,qty,fob,etd,r.transport,st,sup,agent,band(fob),"USD"]); }
-  var k=0;
+  var rows=[DD_HDR], k=0;
+  function lead(r){ return (new Date(r.etd).getTime()-T0)/86400000; }
   running.forEach(function(r){ k++;
-    var st = k%23===0 ? "cancelled" : (k%9===0 ? "booked" : "ordered");
+    var st = k%23===0 ? "Cancelled" : (k%9===0 ? "BOOKED" : "Ordered");
     var qty = k%11===0 ? r.qty+ri(1,4)*100 : r.qty;             /* a few quantity changes */
-    var etd = k%7===0 ? iso(Math.max(1,(new Date(r.etd).getTime()-T0)/86400000+7)) : r.etd;   /* a few ETD moves */
-    push(r,st,"Dhaka Office",r.supplier,qty,r.fob,etd); });
-  shipped.forEach(function(r){ push(r,pick(["in_transport","in_port","planned_to_dc","delivered","delivered"]),"Dhaka Office",r.supplier,r.qty,r.fob,r.etd); });
-  /* new orders at my factories, not yet in the chart */
-  for(var i=0;i<12;i++){ var n=base(monday(ri(70,110))+7); push(n,"ordered","Dhaka Office",n.supplier,n.qty,n.fob,n.etd); }
-  /* agent orders of the same buyers */
-  for(var j=0;j<420;j++){ var a=base(monday(ri(-200,105))+7), lead=(new Date(a.etd).getTime()-T0)/86400000;
-    var st = lead>10 ? pick(["ordered","ordered","booked","new"]) : pick(["in_transport","in_port","delivered","delivered","planned_to_dc"]);
-    if(rnd()<0.03) st="cancelled";
+    var e = lead(r); if(k%7===0) e=Math.max(1,e+7);              /* a few ETD moves */
+    rows.push(ddRow(r,st,"Dhaka Office",r.supplier,qty,r.fob,e)); });
+  shipped.forEach(function(r){ rows.push(ddRow(r,pick(["DELIVERED","DELIVERED","DELIVERED","IN_TRANSPORT","IN_PORT","PLANNED_TO_DC"]),"Dhaka Office",r.supplier,r.qty,r.fob,lead(r))); });
+  for(var i=0;i<12;i++){ var n=base(monday(ri(70,110))+7); rows.push(ddRow(n,i<3?"New":"Ordered","Dhaka Office",n.supplier,n.qty,n.fob,lead(n))); }   /* new orders at my factories */
+  for(var j=0;j<420;j++){ var a=base(monday(ri(-200,105))+7), L=lead(a);
+    var st = L>10 ? pick(["Ordered","Ordered","BOOKED","New"]) : pick(["IN_TRANSPORT","IN_PORT","DELIVERED","DELIVERED","PLANNED_TO_DC"]);
+    if(rnd()<0.06) st="Cancelled";
     var fob=Math.round(a.fob*(0.85+rnd()*0.35)*10)/10;
-    push(a,st,pick(AGENTS),pick(AGENT_SUP),a.qty,fob,a.etd); }
+    rows.push(ddRow(a,st,pick(AGENTS),pick(AGENT_SUP),a.qty,fob,L)); }
   return rows;
 }
 function ddFile(){
-  var wb=XLSX.utils.book_new(), ws=XLSX.utils.aoa_to_sheet(ddRows());
+  var rows=ddRows(), wb=XLSX.utils.book_new(), ws=XLSX.utils.aoa_to_sheet(rows);
+  var DATE_COLS=[25,27,29,30,32,37,49]; for(var r=1;r<rows.length;r++) DATE_COLS.forEach(function(c){ var a=XLSX.utils.encode_cell({r:r,c:c}), cell=ws[a]; if(cell && typeof cell.v==="number"){ cell.t="n"; cell.z="yyyy-mm-dd"; } });
   XLSX.utils.book_append_sheet(wb,ws,"Export");
   var buf=XLSX.write(wb,{type:"array",bookType:"xlsx"});
-  var d=new Date(T0), nm="DD_BD_demo_"+("0"+d.getUTCDate()).slice(-2)+"-"+MON[d.getUTCMonth()]+"-"+String(d.getUTCFullYear()).slice(-2)+".xlsx";
+  var d=new Date(T0), nm="DD_BD_model_demo_"+("0"+d.getUTCDate()).slice(-2)+"-"+MON[d.getUTCMonth()]+"-"+String(d.getUTCFullYear()).slice(-2)+".xlsx";
   return new File([buf],nm,{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
 }
 window.__DEMO_DD__ = ddFile;
