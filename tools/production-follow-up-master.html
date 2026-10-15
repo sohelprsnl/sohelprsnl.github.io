@@ -1292,7 +1292,8 @@ function ribbon(){
      DLO vs Agent pages are full from the start. "Load demo DD file" then brings this week's export with changes. */
   function autoBaseline(){
     var F=window.__FUM__; if(!F || !F.DDX) { setTimeout(autoBaseline, 400); return; }
-    if(F.DDX.cur) return;                                   /* a DD is already confirmed */
+    if(F.DDX.cur && F.DVA && F.DVA.rows && F.DVA.rows.length) return;   /* a DD with agent rows is already confirmed */
+    if(F.DDX.cur){ F.DDX.unlocked=true; }                     /* a DD saved by an older demo build with no agent rows: replace it */
     var active=document.querySelector('.navbtn.active'), tab=active? active.dataset.tab : '';
     feedDD("baseline");
     var tries=0; (function waitConfirm(){
@@ -1830,6 +1831,8 @@ async function loadAll(){
     const cfg = await idbGet('config','main');
     if(cfg && cfg.value) STATE.config = Object.assign(JSON.parse(JSON.stringify(DEFAULT_CONFIG)), cfg.value);
     if(!STATE.config.colRules) STATE.config.colRules = JSON.parse(JSON.stringify(DEFAULT_COL_RULES));
+    if(!(STATE.config.buyers||[]).length) STATE.config.buyers=(window.__DEMO_BUYERS__||[]).slice();   /* demo: a saved config from an older demo build had empty lists */
+    if(!(STATE.config.suppliers||[]).length) STATE.config.suppliers=(window.__DEMO_SUPPLIERS__||[]).slice();
     const meta = await idbGet('config','meta'); STATE.lastImportAt = meta && meta.value ? meta.value.lastImportAt : null;
     const sv = await idbGet('config','seedVersion');
     const run = await idbAll('running'), shp = await idbAll('shipped');
@@ -5880,7 +5883,7 @@ async function renderLog(){
 
 function renderAll(){ stallNote('renderAll after a change'); ppsRuleAll(); planFmtAll(); updateUndoBtns(); renderGrid(true); renderDashboard(); try{ const n=REVIEW_CHECKS.reduce((t,c)=>t+(c.level==='info'?0:c.run().length),0); document.getElementById('reviewDot').classList.toggle('show',n>0); }catch(e){} }
 setInterval(()=>{ if(stallWhat!=='idle' && !XL.editing && performance.now()-stallLast<400) stallWhat='idle'; },3000);
-window.__FUM__ = {DDX, STATE, XL, displayOf, cellValue, rawCell, toInternal, toExcel, COLUMNS, LETTER_TO_IDX, BLANK, isErr, serialToISO, invalidate, cfStyle};
+window.__FUM__ = {DDX, DVA, STATE, XL, displayOf, cellValue, rawCell, toInternal, toExcel, COLUMNS, LETTER_TO_IDX, BLANK, isErr, serialToISO, invalidate, cfStyle};
 loadAll().then(()=>focusGrid());
 })();
 </script>
