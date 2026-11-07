@@ -2356,7 +2356,7 @@ function uniq(list){ var s={}, o=[]; list.forEach(function(x){ if(x && !s[x]){s[
 function domainOf(r){ var e=String(r.email||''); var i=e.lastIndexOf('@'); return i<0?'':e.slice(i+1).toLowerCase() }
 
 /* A group cell can carry several tags, because one contact is enlisted for
-   several product lines: "Sinsay (Ladies PJ, Mens T-Shirt); RCMH (Knit)".
+   several product lines: "Kite (Ladies PJ, Mens T-Shirt); RCMH (Knit)".
    Grouping and filtering work on the individual tags, so a contact appears in
    every list that actually owns it. The table still shows the cell as written. */
 var TAG_CACHE = {};

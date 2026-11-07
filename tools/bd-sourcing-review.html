@@ -957,9 +957,9 @@ body.fullview .xl-toolbar{padding:4px 8px;}
             <h4>What it does</h4>
             <ul>
               <li>While a DD file is read, every supplier whose name equals <b>From</b> (upper and lower case ignored, spaces at the ends ignored) is replaced with <b>To</b>. This runs before matching, before new-order detection and before updates.</li>
-              <li>Purpose: one factory, one name in the chart, even when the DD export uses a sister-company or legal name. Current rule: Bottoms Gallery (Pvt) Ltd becomes Trouser World ( Pvt ) Ltd. [BD].</li>
+              <li>Purpose: one factory, one name in the chart, even when the DD export uses a sister-company or legal name. Current rule: Sister Denim (Pvt) Ltd becomes Alpha Denim Ltd (Demo).</li>
               <li>It applies on every import, to new orders and to updates. It does not rename rows already in the chart. Edit those by hand if needed.</li>
-              <li>The whole name must match. "Bottoms Gallery" alone would not match "Bottoms Gallery (Pvt) Ltd".</li>
+              <li>The whole name must match. "Sister Denim" alone would not match "Sister Denim (Pvt) Ltd".</li>
             </ul>
             <h4>How to check</h4>
             <ul><li>After an import, search the chart for the From name. It should not appear on any updated or new row. Make sure the To name is also in rule 2.</li></ul>
@@ -2136,7 +2136,7 @@ function ctEnsure(){
   return STATE.config.contacts;
 }
 function ctNorm(s){ return String(s||'').normalize('NFKD').replace(/[̀-ͯ]/g,'').replace(/ł/g,'l').replace(/Ł/g,'L').toLowerCase().replace(/[^a-z0-9]/g,''); }
-/* buyer key: accents and case ignored, word order ignored ("Machaj Marta" = "Marta Machaj") */
+/* buyer key: accents and case ignored, word order ignored ("Novak Maria" = "Maria Novak") */
 function ctKey(s){ return String(s||'').trim().split(/\s+/).map(ctNorm).filter(Boolean).sort().join(' '); }
 function ctEmails(s){ return String(s||'').split(/[;,\s]+/).map(x=>x.trim().replace(/^<|>$/g,'')).filter(Boolean); }
 const CT_EMAIL_RE=/^[^\s@<>;,()]+@[^\s@<>;,()]+\.[a-z]{2,}$/i;
