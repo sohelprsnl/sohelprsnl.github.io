@@ -2901,11 +2901,11 @@ function masterCatBox(){
   box.querySelectorAll("button[data-rmmain]").forEach(function(b){ b.addEventListener("click",function(){ var m=b.getAttribute("data-rmmain"); MED.mains=MED.mains.filter(function(x){return x!==m;}); MED.alls=MED.alls.filter(function(x){return x!==m;}); MED.prods=MED.prods.filter(function(x){return x.split("|")[0]!==m;}); masterCatBox(); }); });
   box.querySelectorAll("button[data-rmall]").forEach(function(b){ b.addEventListener("click",function(){ var m=b.getAttribute("data-rmall"); MED.alls=MED.alls.filter(function(x){return x!==m;}); masterCatBox(); }); });
   box.querySelectorAll("button[data-rmprod]").forEach(function(b){ b.addEventListener("click",function(){ var id=b.getAttribute("data-rmprod"); MED.prods=MED.prods.filter(function(x){return x!==id;}); masterCatBox(); }); });
-  box.querySelector("#mAddMain").addEventListener("click",function(){ var v=clean(prompt("New main category, written exactly as the deck folder name (for example: KNIT SUPPLIERS - SINSAY):")||""); if(!v) return; catAdd(M.cats,v,""); masterFinalize(); if(MED.mains.indexOf(v)<0) MED.mains.push(v); masterSave(); masterCatBox(); });
+  box.querySelector("#mAddMain").addEventListener("click",function(){ var v=clean(prompt("New main category, written exactly as the deck folder name (for example: KNIT SUPPLIERS - KITE):")||""); if(!v) return; catAdd(M.cats,v,""); masterFinalize(); if(MED.mains.indexOf(v)<0) MED.mains.push(v); masterSave(); masterCatBox(); });
   box.querySelector("#mAddProd").addEventListener("click",function(){
     var m=MED.mains.length===1?MED.mains[0]:clean(prompt("Under which main category? Type it exactly as listed:\n"+M.cats.mains.join("\n"),MED.mains[0]||"")||"");
     if(!m) return; var real=M.cats.mains.filter(function(x){return x.toUpperCase()===m.toUpperCase();})[0]; if(!real){ alert("Main category not found: "+m+". Add it with + new main first."); return; } m=real;
-    var v=clean(prompt("New product category under "+nice(m)+", written exactly as the subfolder name (for example: SINSAY MENS SHORTS):")||""); if(!v) return;
+    var v=clean(prompt("New product category under "+nice(m)+", written exactly as the subfolder name (for example: KITE MENS SHORTS):")||""); if(!v) return;
     catAdd(M.cats,m,v); masterFinalize(); if(MED.mains.indexOf(m)<0) MED.mains.push(m); MED.prods.push(m+"|"+v); MED.alls=MED.alls.filter(function(x){return x!==m;}); masterSave(); masterCatBox(); });
 }
 function masterCommit(lock){
