@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>LPP BD Sourcing Review: DLO against Agents</title>
-<link rel="canonical" href="https://sohelprsnl.com/tools/lpp-bd-sourcing-review.html">
+<title>BD Sourcing Review: DLO against Agents</title>
+<link rel="canonical" href="https://sohelprsnl.com/tools/bd-sourcing-review.html">
 <meta name="description" content="Every order in the Main DD, Dhaka Liaison Office against agents: volume, median FOB, supplier, agent and buyer scorecards, with PDF, PowerPoint and Excel export. Demo with made-up data.">
 <meta name="author" content="Md. Sohel Rana">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="RMG Xpress Insights by Sohel">
-<meta property="og:title" content="LPP BD Sourcing Review: DLO against Agents">
+<meta property="og:title" content="BD Sourcing Review: DLO against Agents">
 <meta property="og:description" content="Every order in the Main DD, Dhaka Liaison Office against agents: volume, median FOB, supplier, agent and buyer scorecards, with PDF, PowerPoint and Excel export. Demo with made-up data.">
-<meta property="og:url" content="https://sohelprsnl.com/tools/lpp-bd-sourcing-review.html">
+<meta property="og:url" content="https://sohelprsnl.com/tools/bd-sourcing-review.html">
 <meta property="og:image" content="https://sohelprsnl.com/assets/card-tool-sourcing-review.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -488,7 +488,7 @@ body.fullview .xl-toolbar{padding:4px 8px;}
     <button class="navbtn" data-tab="dva"><span class="ic">&#9680;</span>My Orders vs Agent Volume</button>
     <button class="navbtn" data-tab="price"><span class="ic">&#36;</span>My Orders vs Agent Price</button>
     <button class="navbtn" data-tab="kpi"><span class="ic">&#9673;</span>KPI Pulse</button>
-    <div class="navlabel">LPP BD Sourcing Review</div>
+    <div class="navlabel">BD Sourcing Review</div>
     <button class="navbtn" data-tab="bdva"><span class="ic">&#9680;</span>DLO vs Agent/Direct Volume</button>
     <button class="navbtn" data-tab="bprice"><span class="ic">&#36;</span>DLO vs Agent/Direct Price</button>
     <button class="navbtn" data-tab="bscore"><span class="ic">&#9733;</span>Supplier Scorecard</button>
@@ -728,7 +728,7 @@ body.fullview .xl-toolbar{padding:4px 8px;}
       </details>
       <details class="rule-help card card-pad" id="dvaHelpBd" style="margin-top:14px;border-top:1px solid var(--border);display:none"><summary>How this page works</summary>
         <ul>
-          <li><b>Source:</b> every row of the last imported Main DD, all LPP BD buyers, brands, suppliers and agents. Your chart is not used here.</li>
+          <li><b>Source:</b> every row of the last imported Main DD, all BD buyers, brands, suppliers and agents. Your chart is not used here.</li>
           <li><b>DLO</b> = agent_id "Dhaka Office". <b>Agent</b> = any other agent_id, including blank, "0_Direct Supplier" and other offices. Cancelled rows are left out.</li>
           <li><b>Scope</b> follows the DD status: Pipeline = statuses ticked in Rules card 4 (not yet shipped); Shipping &amp; shipped = every other status; All = both.</li>
           <li><b>Measure:</b> PO count, quantity (exact_qty), or FOB value = quantity &times; cost_price. FOB value needs a DD with cost_price; rows without a price count as 0.</li>
@@ -741,7 +741,7 @@ body.fullview .xl-toolbar{padding:4px 8px;}
 
     <!-- ===================== SUPPLIER SCORECARD ===================== -->
     <section class="panel" id="panel-bscore">
-      <div class="topbar"><div><h1>Supplier Scorecard</h1><div class="desc">One supplier's LPP BD business from the last Main DD: volume, seasons, buyers, products, DLO vs agents, and price against the other suppliers in the same brand + subclass. For supplier visits and management reviews. Export as PDF, PowerPoint or Excel.</div></div>
+      <div class="topbar"><div><h1>Supplier Scorecard</h1><div class="desc">One supplier's BD business from the last Main DD: volume, seasons, buyers, products, DLO vs agents, and price against the other suppliers in the same brand + subclass. For supplier visits and management reviews. Export as PDF, PowerPoint or Excel.</div></div>
         <div class="pillrow" id="scPills"></div></div>
       <div class="card"><div class="card-pad dva-ctl">
         <label>Channel <span class="seg" id="scCh"><button data-v="all" class="on">All</button><button data-v="dlo">Dhaka Office</button><button data-v="agent">Agent/Direct</button></span></label>
@@ -1165,7 +1165,7 @@ body.fullview .xl-toolbar{padding:4px 8px;}
             <details style="margin-top:6px"><summary>Responsiveness log</summary><div class="btnrow" style="margin:6px 0"><button class="btn sm" id="stallCopy">Copy</button><button class="btn sm ghost" id="stallClear">Clear</button><span class="hint" id="stallHint"></span></div><pre id="stallLog" style="white-space:pre-wrap;font-size:11px;max-height:220px;overflow:auto;background:var(--bg2,#f4f6fa);padding:8px;border-radius:6px"></pre></details></li>
           <li><b>Two lists can be locked.</b> My Buyers List and Rules card 1 (Your buyers) open locked. Click the lock to edit, lock them again when you are done. The lock stops a stray keystroke, it is not a password.</li>
           <li><b>Two blank templates.</b> <b>Blank template</b> on the order sheets writes an empty follow-up chart, columns A to AQ, with example rows and a Read me sheet. <b>Blank template</b> on My Buyers List writes an empty contact sheet with the right headers, one example row and a Read me sheet. Fill either one and bring it back in with Load order file or Import Excel.</li>
-          <li><b>Every page exports what you see.</b> TNA &amp; Critical Path, the two My Orders vs Agent pages and the two LPP BD Sourcing Review pages each have an Export button that writes the rows on screen, scope, filters and search box included, with no row limit. Breakdown sheets are added only for the dimensions that vary in that view.</li>
+          <li><b>Every page exports what you see.</b> TNA &amp; Critical Path, the two My Orders vs Agent pages and the two BD Sourcing Review pages each have an Export button that writes the rows on screen, scope, filters and search box included, with no row limit. Breakdown sheets are added only for the dimensions that vary in that view.</li>
         </ul>
       </div>
 
@@ -1272,7 +1272,7 @@ return XLSX; })();
 </script>
 <script id="demo-kit">
 /* ==========================================================================
-   Demo kit for sohelprsnl.com/tools/lpp-bd-sourcing-review.html
+   Demo kit for sohelprsnl.com/tools/bd-sourcing-review.html
    Builds a made-up Main DD export (the same 63 columns as the real DD_BD export)
    and imports it on the first visit, so the six review pages are full.
    Dates are relative to the first visit. Every buyer, supplier, agent, PO and
@@ -1379,7 +1379,7 @@ ribbon("Sample data only. Every buyer, supplier, agent, PO and price is made up.
   [["Load sample DD","Build the made-up Main DD export again and import it",feed],
    ["Download sample DD","Download the same made-up DD export as .xlsx",function(){ download(ddFile()); }],
    ["Reset demo","Delete this browser's demo data and start again",function(){ resetDb("lpp_bd_sourcing_review"); }]],
-  "lpp-bd-sourcing-review", function(){ setTimeout(firstVisit, 1500); });
+  "bd-sourcing-review", function(){ setTimeout(firstVisit, 1500); });
 })();
 </script>
 <script type="application/json" id="seed-running-data">[]</script>
@@ -1838,7 +1838,7 @@ function cfStyle(sheet,rowIdx,ci){
 }
 
 /* ===================================================================== INDEXEDDB */
-/* One source, two apps: <html data-app="sourcing"> turns this page into LPP BD Sourcing Review (DD only, own database). */
+/* One source, two apps: <html data-app="sourcing"> turns this page into BD Sourcing Review (DD only, own database). */
 const SRC_MODE=document.documentElement.dataset.app==='sourcing';
 const DB_NAME=SRC_MODE?'lpp_bd_sourcing_review':'lpp_followup_master', DB_VERSION=2;
 let dbp=null;
@@ -3096,7 +3096,7 @@ document.getElementById('xlTable').addEventListener('mousedown',e=>{
 }, true);
 
 /* ===================================================================== NAV */
-/* LPP BD Sourcing Review: its two pages reuse the My Orders panels, fed by every DD row instead of my chart */
+/* BD Sourcing Review: its two pages reuse the My Orders panels, fed by every DD row instead of my chart */
 const PANEL_OF={bdva:'dva', bprice:'price'};
 document.querySelectorAll('.navbtn[data-tab]').forEach(btn=>btn.addEventListener('click',()=>{
   commitEdit();
@@ -4903,7 +4903,7 @@ async function saveCurrentDD(P, summary){
   const bRows=(P.exp||[]).filter(r=>myB.has(sgNorm(r.buyer))).map(r=>({orderId:r.orderId, buyer:r.buyer, brand:r.brand, dept:r.dept, subclass:r.subclass, productType:r.productType, season:r.season, style:r.style, supplier:r.supplier, factory:r.factory, agent:r.agent||'', status:r.status, qty:r.qty, etd:r.etd, transport:r.transport, priceCat:r.priceCat||'', fob:(r.fob!=null&&r.fob!==''&&!isNaN(r.fob))? Number(r.fob) : null, currency:r.currency||'', inco:r.inco||'', uom:r.uom||'', elements:r.elements||''}));
   DVA_MY.rows=bRows; DVA_MY.meta={fileName:meta.fileName, lastModified:meta.lastModified||null, uploadedAt:DDX.cur.uploadedAt, hasAgent:bRows.some(r=>r.agent)};
   if(persistOK){ await idbPut('config',{k:'ddBuyerRows', value:bRows}).catch(()=>{}); await idbPut('config',{k:'ddBuyerMeta', value:DVA_MY.meta}).catch(()=>{}); }
-  /* LPP BD Sourcing Review: every DD row, kept as compact tuples */
+  /* BD Sourcing Review: every DD row, kept as compact tuples */
   { const all=(P.exp||[]); DVA_BD.rows=all; DVA_BD.meta=PRC_BD.meta={fileName:meta.fileName, uploadedAt:DDX.cur.uploadedAt, n:all.length, hasAgent:all.some(r=>r.agent), hasFob:!!P.hasFob}; BD_LOADED=true;
     if(persistOK){ const tup=all.map(r=>BD_F.map(k=> k==='fob'? ((r.fob!=null&&r.fob!==''&&!isNaN(r.fob))? Number(r.fob) : null) : (r[k]==null? '' : r[k])));
       await idbPut('config',{k:'ddAllRows', value:{f:BD_F, rows:tup}}).catch(saveFailed); await idbPut('config',{k:'ddAllMeta', value:DVA_BD.meta}).catch(()=>{}); }
@@ -5180,8 +5180,8 @@ stallRender();
 const APP_BUILD_DATE=(function(){ try{ const d=new Date(document.lastModified); if(!isNaN(d)) return fmtDate(ymdToSerial(d.getFullYear(),d.getMonth()+1,d.getDate()),'dd mmm yyyy'); }catch(e){} return '03 Oct 2026'; })();   // file save date, read from the file itself
 function mountSiteFooter(){ const t=document.getElementById('siteFootTpl'); if(!t || document.querySelector('.sitefoot')) return;
   if(SRC_MODE){ const f0=t.content.firstElementChild.cloneNode(true), ab=f0.querySelector('.sf-about');
-    ab.innerHTML='<b>LPP BD Sourcing Review</b><span>Import the DD. The review updates itself.</span><span>Shows the Dhaka Office (DLO) against agents and direct suppliers for LPP Bangladesh: volume, prices, supplier scorecards, price benchmarks, and agent and buyer scorecards, with PDF, PowerPoint and Excel export.</span><span class="sf-off">Works offline. Your data stays on this computer and is never uploaded.</span>';
-    f0.querySelector('.sf-bar > span').innerHTML='<span class="sfVer">LPP BD Sourcing Review</span><span class="sfdot">&middot;</span>DLO against agents and direct suppliers';
+    ab.innerHTML='<b>BD Sourcing Review</b><span>Import the DD. The review updates itself.</span><span>Shows the Dhaka Office (DLO) against agents and direct suppliers for LPP Bangladesh: volume, prices, supplier scorecards, price benchmarks, and agent and buyer scorecards, with PDF, PowerPoint and Excel export.</span><span class="sf-off">Works offline. Your data stays on this computer and is never uploaded.</span>';
+    f0.querySelector('.sf-bar > span').innerHTML='<span class="sfVer">BD Sourcing Review</span><span class="sfdot">&middot;</span>DLO against agents and direct suppliers';
     ['panel-import','panel-dva'].forEach(id=>{ const sec=document.getElementById(id); if(sec) sec.appendChild(f0.cloneNode(true)); });
     document.querySelectorAll('.sfBuild').forEach(e=>e.textContent=APP_BUILD_DATE); return; }
   ['panel-dashboard','panel-roadmap'].forEach(id=>{ const sec=document.getElementById(id); if(!sec) return; sec.appendChild(t.content.firstElementChild.cloneNode(true)); });
@@ -5190,7 +5190,7 @@ function mountSiteFooter(){ const t=document.getElementById('siteFootTpl'); if(!
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',mountSiteFooter); else mountSiteFooter();
 /* ---- sidebar groups + theme ---- */
 (function(){
-  const GRP={'Order Master':1,'My Orders Analysis':2,'LPP BD Sourcing Review':2,'Configure':3,'Reference':4}; let g=1;
+  const GRP={'Order Master':1,'My Orders Analysis':2,'BD Sourcing Review':2,'Configure':3,'Reference':4}; let g=1;
   document.querySelectorAll('.sidebar .navlabel, .sidebar .navbtn').forEach(el=>{ if(el.classList.contains('navlabel')){ g=GRP[el.textContent.trim()]||g; el.dataset.grp=g; } else el.dataset.grp=g; });
   document.querySelectorAll('.sidebar .navbtn').forEach(b=>{ const p=document.getElementById('panel-'+b.dataset.tab); if(p&&!p.dataset.grp) p.dataset.grp=b.dataset.grp; });
 })();
@@ -5613,7 +5613,7 @@ function dvxFindings(rows, d, a){
     if(pg.length) F.push([R, `<b>${pg.length} categories with a price gap</b>: DLO is dearer by more than 3%. Biggest: ${esc(pg[0].k)} (${prcGapTxt(pg[0].gap)}).`]); }
   el.innerHTML=F.map(([c,t])=>`<div class="dvx-f"><i style="background:${c}"></i><div>${t}</div></div>`).join('')+'<div class="dva-note" style="margin-top:8px">Big = at least 3% of the total in view. Every line follows the filters and the measure.</div>';
 }
-/* ---- LPP BD Sourcing Review: competitor view (BD mode only) ---- */
+/* ---- BD Sourcing Review: competitor view (BD mode only) ---- */
 let BD_LAST=null;
 function bdExtraRender(rows){
   const box=document.getElementById('bdExtra'); if(!DVA.bd){ box.style.display='none'; BD_LAST=null; return; } box.style.display='';
@@ -5801,7 +5801,7 @@ function dvaExport(){
    Joins DVA.rows (my buyers' DD rows) with PRC.book (PO -> price, written by DDs that carry cost_price). */
 let PRC={book:{}, meta:null, scope:'all', f:{buyer:[],brand:[],sub:[],band:[],season:[],qty:[]}, min:3, usd:true, fobOnly:false, perPiece:false, q:'', bound:false, last:null};
 const PRC_MY=PRC, PRC_BD={book:{}, meta:null, scope:'all', f:{buyer:[],brand:[],sub:[],band:[],season:[],qty:[]}, min:3, usd:true, fobOnly:false, perPiece:false, q:'', last:null, bd:true};
-/* ---- LPP BD Sourcing Review mode ----
+/* ---- BD Sourcing Review mode ----
    Every DD row of the last import, any buyer, any supplier. DLO = agent_id "Dhaka Office"; every other agent_id (or blank) = Agent.
    Cancelled rows are left out. Rows are saved at import as 'ddAllRows' and read the first time a BD page opens. */
 const BD_F=['orderId','buyer','brand','dept','subclass','productType','season','style','supplier','factory','agent','status','qty','etd','transport','priceCat','fob','currency','inco','uom','elements'];
@@ -5810,7 +5810,7 @@ async function bdLoad(){ if(BD_LOADED) return; BD_LOADED=true;
   try{ const r=await idbGet('config','ddAllRows'); const v=r&&r.value; const m=await idbGet('config','ddAllMeta');
     DVA_BD.rows= v&&v.rows? bdNormalize(v.rows.map(t=>{ const o={}; v.f.forEach((k,i)=>o[k]=t[i]); return o; })) : [];
     DVA_BD.meta=PRC_BD.meta= m&&m.value? m.value : null; }catch(e){ DVA_BD.rows=[]; DVA_BD.meta=PRC_BD.meta=null; } }
-const BD_TXT={dva:['DLO vs Agent/Direct Volume','Every order in the last Main DD: Dhaka Office (DLO) against every agent and direct supplier (Agent/Direct), all LPP BD buyers and suppliers. Wherever a page says Agent, it means agents and direct suppliers together.'],
+const BD_TXT={dva:['DLO vs Agent/Direct Volume','Every order in the last Main DD: Dhaka Office (DLO) against every agent and direct supplier (Agent/Direct), all BD buyers and suppliers. Wherever a page says Agent, it means agents and direct suppliers together.'],
   price:['DLO vs Agent/Direct Price','Dhaka Office FOB against agent and direct-supplier FOB (Agent/Direct) for every order in the Main DD, compared inside the same brand + subclass. Prices come from the cost_price column of the last imported DD.']};
 let MY_TXT=null;
 async function setBD(on){
@@ -6196,7 +6196,7 @@ async function renderLog(){
 }
 
 
-/* ===================================================================== SUPPLIER SCORECARD (LPP BD Sourcing Review)
+/* ===================================================================== SUPPLIER SCORECARD (BD Sourcing Review)
    One DD supplier at a time: volume, seasons, buyers, products, DLO vs agents, price against the other suppliers
    in the same brand + subclass, factories, and (for my own orders) shipped quantity and punctuality from my chart.
    Source: every row of the last Main DD (ddAllRows). DLO = agent_id "Dhaka Office". USD prices only.
@@ -6396,7 +6396,7 @@ function scHTML(D, anon){
   const totRow=(rows,label,extra)=>{ const t=rows.reduce((a,r)=>({po:a.po+r.po,qty:a.qty+r.qty,val:a.val+r.val,pq:a.pq+r.pq,dqty:a.dqty+r.dqty}),{po:0,qty:0,val:0,pq:0,dqty:0}); return `<tr class="tot"><td>${label}</td>${extra||''}<td class="n">${t.po.toLocaleString()}</td><td class="n">${scQty(t.qty)}</td><td class="n">${t.val?scMoney(t.val):''}</td><td class="n">${t.pq?scPrice(t.val/t.pq):''}</td><td class="n">${t.qty?Math.round(t.dqty/t.qty*100)+'%':''}</td></tr>`; };
   const std=(rows,first)=>rows.map(r=>tr([[esc(first(r))],[r.po.toLocaleString(),1],[scQty(r.qty),1],[r.val?scMoney(r.val):'',1],[scPrice(r.avg),1],[sh(r),1]]));
   const stdHead=lab=>[[lab],['POs',1],['Qty (pcs)',1],['FOB value',1],['Avg FOB',1],['DLO %',1]];
-  let h=`<div class="sc-ban"><div style="position:relative;z-index:1"><div class="k">Supplier Scorecard · LPP BD sourcing review</div><h2>${esc(D.sup)}</h2><div>${F.map(x=>`<span class="sc-chip">${esc(x)}</span>`).join('')}</div></div><div class="m">LPP S.A. Dhaka Liaison Office<br>Source: Main DD ${esc(meta.fileName||'')}${meta.uploadedAt?'<br>DD imported '+esc(fmtDT(meta.uploadedAt)):''}<br>Report date ${fmtDate(todaySerial(),'dd-mmm-yy')}</div></div>`;
+  let h=`<div class="sc-ban"><div style="position:relative;z-index:1"><div class="k">Supplier Scorecard · BD sourcing review</div><h2>${esc(D.sup)}</h2><div>${F.map(x=>`<span class="sc-chip">${esc(x)}</span>`).join('')}</div></div><div class="m">LPP S.A. Dhaka Liaison Office<br>Source: Main DD ${esc(meta.fileName||'')}${meta.uploadedAt?'<br>DD imported '+esc(fmtDT(meta.uploadedAt)):''}<br>Report date ${fmtDate(todaySerial(),'dd-mmm-yy')}</div></div>`;
   const K=[[H.po.toLocaleString(),'Order lines (POs)'],[scQty(H.qty),'Order quantity (pcs)'],[H.val?scMoney(H.val):'–','FOB value (USD)'],[H.avg!=null?scPrice(H.avg):'–','Average FOB, qty-weighted'],[dl+'%','Through Dhaka Office (qty)'],[D.buyers,'Buyers'],[D.seasons,'Seasons'],[D.factories,'Factories']];
   h+=`<div class="sc-kpis">${K.map((k,i)=>`<div class="sc-k" style="--c:${i===4?(dl>=50?SCP.g:SCP.amb):SC_KC[i]}"><div class="v">${k[0]}</div><div class="l">${k[1]}</div></div>`).join('')}</div>`;
   /* volume by season + who brings the orders */
@@ -6503,7 +6503,7 @@ function scPpt(){
     s.addText(D.sup,{x:1.15,y:2.5,w:9.5,h:1.1,fontSize:38,bold:true,color:'FFFFFF',fontFace:FONT,fit:'shrink'});
     s.addText(F,{x:1.15,y:3.6,w:9.5,h:0.45,fontSize:13,color:'D1FAE5',fontFace:FONT});
     s.addText([{text:H.po.toLocaleString()+' POs',options:{bold:true}},{text:'    '+scQty(H.qty)+' pcs'},{text:'    '+(H.val?scMoney(H.val):'')+' FOB'},{text:'    '+dl+'% via Dhaka Office'}],{x:1.15,y:4.4,w:10,h:0.4,fontSize:14,color:'FFFFFF',fontFace:FONT});
-    s.addText('LPP S.A. Dhaka Liaison Office  ·  LPP BD sourcing review  ·  '+fmtDate(todaySerial(),'dd-mmm-yy'),{x:1.15,y:6.6,w:10,h:0.35,fontSize:11,color:'A7F3D0',fontFace:FONT}); }
+    s.addText('LPP S.A. Dhaka Liaison Office  ·  BD sourcing review  ·  '+fmtDate(todaySerial(),'dd-mmm-yy'),{x:1.15,y:6.6,w:10,h:0.35,fontSize:11,color:'A7F3D0',fontFace:FONT}); }
   /* 2 at a glance */
   { const s=p.addSlide({masterName:'SC'}); head(s,'Business at a glance');
     const K=[[H.po.toLocaleString(),'Order lines (POs)'],[scQty(H.qty),'Order quantity (pcs)'],[H.val?scMoney(H.val):'–','FOB value (USD)'],[H.avg!=null?scPrice(H.avg):'–','Average FOB, qty-weighted'],[dl+'%','Through Dhaka Office (qty)'],[String(D.buyers),'Buyers'],[String(D.seasons),'Seasons'],[String(D.factories),'Factories']];
@@ -6644,7 +6644,7 @@ function rpVolFindings(V){ const F=[], u=V.unit, X=V.X;
   if(pg.length) F.push(`<b>${pg.length} categories with a price gap</b> (DLO dearer by more than 3%). Biggest: ${esc(pg[0].k)}.`);
   return F; }
 function rpVolHTML(){
-  const V=rpVolData(), u=V.unit, X=V.X, kick=DVA.bd?'LPP BD sourcing review':'My orders analysis', sp=dvaPct(V.d,V.a);
+  const V=rpVolData(), u=V.unit, X=V.X, kick=DVA.bd?'BD sourcing review':'My orders analysis', sp=dvaPct(V.d,V.a);
   let h=rpBanner('dva',kick);
   h+=totPdf(dvaFiltered(),DVA.scope,DVA.bd,DVA.f);
   h+=rpKpis([[sp+'%','DLO share',sp>=50?SCP.g:SCP.amb],[dvaFmt(V.d),'DLO '+u,SCP.g],[dvaFmt(V.a),'Agent '+u+' to win',SCP.amb],[dvaFmt(V.d+V.a),'Total '+u,SCP.sl],
@@ -6678,7 +6678,7 @@ function rpPrcData(){
   return {all,priced,D,A,groups,cmp,wg,sups,buyers};
 }
 function rpPrcHTML(){
-  const P=rpPrcData(), kick=PRC.bd?'LPP BD sourcing review':'My orders analysis', cmp=P.cmp, ch=cmp.filter(g=>g.gap<=-3).length, dr=cmp.filter(g=>g.gap>=3).length;
+  const P=rpPrcData(), kick=PRC.bd?'BD sourcing review':'My orders analysis', cmp=P.cmp, ch=cmp.filter(g=>g.gap<=-3).length, dr=cmp.filter(g=>g.gap>=3).length;
   let h=rpBanner('price',kick);
   h+=totPdf(prcRows().all,PRC.scope,PRC.bd,PRC.f);
   h+=rpKpis([[P.priced.length.toLocaleString(),'POs priced of '+P.all.length.toLocaleString()],[P.D.length?scPrice(prcMedian(P.D.map(x=>x.p))):'–','DLO median FOB ('+P.D.length+' POs)',SCP.g],[P.A.length?scPrice(prcMedian(P.A.map(x=>x.p))):'–','Agent median FOB ('+P.A.length+' POs)',SCP.amb],[P.wg==null?'–':prcGapTxt(P.wg),'DLO vs Agent, matched groups',P.wg==null?SCP.sl:P.wg<=-3?SCP.g:P.wg>=3?SCP.red:SCP.sl],
@@ -6722,7 +6722,7 @@ function rpDeck(kind, kicker, coverLine){
   return D; }
 function dvaPpt(){
   dvaRefreshSets(); DVA_U=null; if(!dvaUniverse().length){ toast('Nothing to export yet.'); return; } if(!window.PptxGenJS){ toast('The PowerPoint library is missing from this page.'); return; }
-  const V=rpVolData(), u=V.unit, X=V.X, sp=dvaPct(V.d,V.a), kick=DVA.bd?'LPP BD sourcing review':'My orders analysis';
+  const V=rpVolData(), u=V.unit, X=V.X, sp=dvaPct(V.d,V.a), kick=DVA.bd?'BD sourcing review':'My orders analysis';
   const D=rpDeck('dva',kick,`DLO ${sp}%   ·   DLO ${dvaFmt(V.d)} ${u}   ·   Agent ${dvaFmt(V.a)} ${u}`), C=D.C, p=D.p; totSlide(D, dvaFiltered(), DVA.scope, DVA.bd);
   { const s=D.slide('At a glance'); D.kpis(s,[[sp+'%','DLO share',sp>=50?C.G:C.A],[dvaFmt(V.d),'DLO '+u,C.G],[dvaFmt(V.a),'Agent '+u+' to win',C.A],[dvaFmt(V.d+V.a),'Total '+u,C.SL],[V.agents.length,'Agents active',C.T],[new Set(V.rows.map(r=>r.buyer)).size,'Buyers in view',C.I],[X.wb?X.wb.k:'–','Weakest brand'+(X.wb?': '+X.wb.p+'% DLO':''),C.R],[X.ag?X.ag.k:'–','Biggest agent'+(X.ag?': '+X.ag.p+'%':''),C.A]]);
     s.addText(rpVolFindings(V).slice(0,4).map(t=>({text:t.replace(/<[^>]+>/g,''),options:{bullet:{code:'25CF'},paraSpaceAfter:4}})),{x:0.5,y:4.95,w:12.3,h:2.1,fontSize:12,color:'0F172A',fontFace:C.F,valign:'top'}); }
@@ -6742,7 +6742,7 @@ function dvaPpt(){
 }
 function prcPpt(){
   dvaRefreshSets(); DVA_U=null; if(!dvaUniverse().length){ toast('Nothing to export yet.'); return; } if(!window.PptxGenJS){ toast('The PowerPoint library is missing from this page.'); return; }
-  const P=rpPrcData(), cmp=P.cmp, kick=PRC.bd?'LPP BD sourcing review':'My orders analysis', ch=cmp.filter(g=>g.gap<=-3).length, dr=cmp.filter(g=>g.gap>=3).length;
+  const P=rpPrcData(), cmp=P.cmp, kick=PRC.bd?'BD sourcing review':'My orders analysis', ch=cmp.filter(g=>g.gap<=-3).length, dr=cmp.filter(g=>g.gap>=3).length;
   const D=rpDeck('price',kick,`${cmp.length} groups compared   ·   DLO cheaper in ${ch}   ·   DLO dearer in ${dr}`), C=D.C, p=D.p; totSlide(D, prcRows().all, PRC.scope, PRC.bd);
   { const s=D.slide('At a glance'); D.kpis(s,[[P.priced.length.toLocaleString(),'POs priced of '+P.all.length.toLocaleString()],[P.D.length?scPrice(prcMedian(P.D.map(x=>x.p))):'–','DLO median FOB',C.G],[P.A.length?scPrice(prcMedian(P.A.map(x=>x.p))):'–','Agent median FOB',C.A],[P.wg==null?'–':prcGapTxt(P.wg),'DLO vs Agent, matched groups',P.wg==null?C.SL:P.wg<=-3?C.G:P.wg>=3?C.R:C.SL],[cmp.length,'Groups compared',C.T],[ch,'Groups where DLO is cheaper',C.G],[dr,'Groups where DLO is dearer',C.R],[cmp.filter(g=>g.quad==='push').length,'PUSH groups',C.I]]); }
   { const s=D.slide('DLO price against agents','Median FOB gap per brand + subclass, biggest groups   ·   green = DLO cheaper, red = DLO dearer',C.R); const c=cmp.slice().sort((x,y)=>(y.D.length+y.A.length)-(x.D.length+x.A.length)).slice(0,14).reverse();
@@ -6762,7 +6762,7 @@ function prcPpt(){
 }
 window.__RPT__={dvaHTML:()=>rpVolHTML().html, prcHTML:()=>rpPrcHTML().html, base:rpBase};
 
-/* ===================================================================== SUPPLIER PRICE BENCHMARK (LPP BD Sourcing Review)
+/* ===================================================================== SUPPLIER PRICE BENCHMARK (BD Sourcing Review)
    Pick one supplier; its closest competitors are added automatically: the suppliers with the most priced POs in the same
    brand + subclass + price band. Prices are compared only inside those categories, USD only, median FOB by default.
    100 = market median of the category. Source: every row of the last Main DD. */
@@ -6902,7 +6902,7 @@ function bnHTML(B, anon, screen){
   const fv=fView(BN.f,{qty:PRC_QTY_LBL}); [['season','Season'],['brand','Brand'],['sub','Subclass'],['band','Price band'],['qty','Qty band']].forEach(([k,l])=>{ if(fv[k]) F.push(l+': '+fv[k]); });
   const card=(t,sub,c,b)=>`<div class="sc-card" style="--c:${c}"><h3><b>${t}</b><span>${sub||''}</span></h3><div class="b">${b}</div></div>`;
   const dot=i=>`<i style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${BN_COL[i%BN_COL.length]};margin-right:6px"></i>`;
-  let h=`<div class="sc-ban"><div style="position:relative;z-index:1"><div class="k">Supplier Price Benchmark · LPP BD sourcing review</div><h2>${esc(B.mainName)}</h2><div>${['against '+B.comps.length+' closest competitor'+(B.comps.length===1?'':'s')].concat(F).map(x=>`<span class="sc-chip">${esc(x)}</span>`).join('')}</div></div><div class="m">LPP S.A. Dhaka Liaison Office<br>Source: Main DD ${esc(meta.fileName||'')}<br>Report date ${fmtDate(todaySerial(),'dd-mmm-yy')}</div></div>`;
+  let h=`<div class="sc-ban"><div style="position:relative;z-index:1"><div class="k">Supplier Price Benchmark · BD sourcing review</div><h2>${esc(B.mainName)}</h2><div>${['against '+B.comps.length+' closest competitor'+(B.comps.length===1?'':'s')].concat(F).map(x=>`<span class="sc-chip">${esc(x)}</span>`).join('')}</div></div><div class="m">LPP S.A. Dhaka Liaison Office<br>Source: Main DD ${esc(meta.fileName||'')}<br>Report date ${fmtDate(todaySerial(),'dd-mmm-yy')}</div></div>`;
   if(screen) h+=`<div class="sc-card" style="--c:${SCP.sl}"><h3><b>Suppliers compared</b><span>picked automatically: most priced POs in the same brand + subclass + price band</span></h3><div class="b" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">`+
     B.S.map((s,i)=>`<span style="display:inline-flex;align-items:center;gap:6px;border:1px solid #e2e8f0;border-radius:16px;padding:4px 10px;font-size:12px;font-weight:${i?600:800}">${dot(i)}${esc(s)}${i?` <span class="oth">${(B.ranked.find(o=>o.s===s)||{}).cats||0} shared</span><b data-rm="${esc(s)}" title="Remove" style="cursor:pointer;color:#94a3b8;margin-left:2px">×</b>`:' <span class="oth">main</span>'}</span>`).join('')+
     (B.ranked.filter(o=>!B.S.includes(o.s)).length? `<select class="inp" style="max-width:280px" onchange="this.dataset.add=this.value" id="bnAddSel"><option value="">+ add another competitor…</option>${B.ranked.filter(o=>!B.S.includes(o.s)).slice(0,40).map(o=>`<option value="${esc(o.s)}">${esc(o.s)} (${o.cats} shared)</option>`).join('')}</select>` : '')+`<button class="btn sm ghost" id="bnAuto">Auto pick again</button></div></div>`;
@@ -6948,7 +6948,7 @@ function bnPdf(){ if(!BN.last||!BN.last.cats.length){ toast('Pick a supplier fir
 function bnPpt(){ const B=BN.last; if(!B||!B.cats.length){ toast('Pick a supplier first.'); return; } if(!window.PptxGenJS){ toast('The PowerPoint library is missing from this page.'); return; }
   const nm=bnNm(B,BN.anon), mi=B.index[0]&&B.index[0].idx;
   const realTitle=rpTitle; rpTitle=()=> 'Supplier Price Benchmark'; const realBase=rpBase; rpBase=()=>bnBase(); const realMeta=rpMeta; rpMeta=()=>{ const m=DVA_BD.meta||{}; return {file:m.fileName||'', at:m.uploadedAt||''}; }; const realChips=rpChips; rpChips=()=>[B.mainName+' against '+B.comps.length+' competitors', BN.w==='wavg'?'Qty-weighted FOB':'Median FOB', 'Min '+BN.min+' priced POs'];
-  try{ const D=rpDeck('price','LPP BD sourcing review',`${B.mainName}   ·   price index ${mi!=null?mi.toFixed(1):'–'}   ·   ${B.cats.length} categories`), C=D.C, p=D.p, cols=BN_COL.map(c=>c.slice(1).toUpperCase());
+  try{ const D=rpDeck('price','BD sourcing review',`${B.mainName}   ·   price index ${mi!=null?mi.toFixed(1):'–'}   ·   ${B.cats.length} categories`), C=D.C, p=D.p, cols=BN_COL.map(c=>c.slice(1).toUpperCase());
     { const s=D.slide('Price index','100 = market median of the same categories   ·   below 100 = cheaper',C.G); const it=B.index.filter(x=>x.idx!=null).slice().reverse();
       s.addChart(p.ChartType.bar,[{name:'Index',labels:it.map(x=>nm(x.s)),values:it.map(x=>+x.idx.toFixed(1))}],{x:0.5,y:1.3,w:7.2,h:5.6,barDir:'bar',chartColors:it.map(x=>cols[x.i%cols.length]),showValue:true,dataLabelFontSize:10,dataLabelFormatCode:'0.0',catAxisLabelFontSize:10,valAxisMinVal:Math.floor(Math.min(80,...it.map(x=>x.idx))/5)*5,valAxisLabelFontSize:9,valGridLine:{color:'E2E8F0',size:0.5},showLegend:false});
       s.addTable(D.T([['Competitor'],['Shared',1],['Cheaper',1],['Dearer',1],['Avg gap',1]], B.pairs.map(x=>[nm(x.s),x.shared,[x.win,{color:C.G,bold:true}],[x.loss,{color:C.R,bold:true}],[x.avg==null?'':(x.avg>0?'+':'')+x.avg.toFixed(1)+'%',{bold:true,color:x.avg==null?C.M:x.avg<=-3?C.G:x.avg>=3?C.R:C.SL}]]),C.A),D.TO({x:8.0,y:1.45,w:4.8,colW:[2.0,0.7,0.7,0.7,0.7]})); }
@@ -7031,7 +7031,7 @@ function totSlide(D, rows, scope, bd){ const T=totCalc(rows), C=D.C, p=D.p; if(!
   if(scope==='all'){ s.addText('Open: '+(T.open.d+T.open.a).toLocaleString()+' POs (DLO '+T.open.d.toLocaleString()+' · Agent '+T.open.a.toLocaleString()+')      Shipped: '+(T.shipped.d+T.shipped.a).toLocaleString()+' POs (DLO '+T.shipped.d.toLocaleString()+' · Agent '+T.shipped.a.toLocaleString()+')',{x:0.8,y:yy,w:11.8,h:0.32,fontSize:12,color:'334155',fontFace:F}); yy+=0.36; }
   if(notes.length) s.addText(notes.join('   '),{x:0.8,y:yy,w:11.8,h:0.3,fontSize:11,color:'64748B',fontFace:F}); }
 
-/* ===================================================================== AGENT SCORECARD and BUYER SCORECARD (LPP BD Sourcing Review)
+/* ===================================================================== AGENT SCORECARD and BUYER SCORECARD (BD Sourcing Review)
    Both read every non-cancelled DD row. Channels: DLO (Dhaka Office), Agent (real agents), direct suppliers and other LPP offices apart.
    Prices: DD cost_price, USD; a category = brand + subclass + price band; a median needs at least ENT_MIN priced POs on a side. */
 const ENT_MIN=3;
@@ -7105,7 +7105,7 @@ function entHTML(X, screen){ const S=ENT[X.kind], meta=DVA_BD.meta||{}, fv=fView
   const chips=[S.scope==='open'?'Pipeline':S.scope==='shipped'?'Shipping & shipped':'All orders except cancelled'].concat(fv.season?['Season: '+fv.season]:[]);
   const card=(t,sub,c,b)=>`<div class="sc-card" style="--c:${c}"><h3><b>${t}</b><span>${sub||''}</span></h3><div class="b">${b}</div></div>`;
   const pc=v=>v==null?'':`<span class="${v<=-3?'gch':v>=3?'gdr':''}">${(v>0?'+':'')+v.toFixed(1)}%</span>`;
-  let h=`<div class="sc-ban"><div style="position:relative;z-index:1"><div class="k">${X.kind==='agent'?'Agent scorecard':'Buyer scorecard'} · LPP BD sourcing review</div><h2>${esc(X.name)}</h2><div>${chips.map(x=>`<span class="sc-chip">${esc(x)}</span>`).join('')}</div></div><div class="m">LPP S.A. Dhaka Liaison Office<br>Source: Main DD ${esc(meta.fileName||'')}<br>Report date ${fmtDate(todaySerial(),'dd-mmm-yy')}</div></div>`;
+  let h=`<div class="sc-ban"><div style="position:relative;z-index:1"><div class="k">${X.kind==='agent'?'Agent scorecard':'Buyer scorecard'} · BD sourcing review</div><h2>${esc(X.name)}</h2><div>${chips.map(x=>`<span class="sc-chip">${esc(x)}</span>`).join('')}</div></div><div class="m">LPP S.A. Dhaka Liaison Office<br>Source: Main DD ${esc(meta.fileName||'')}<br>Report date ${fmtDate(todaySerial(),'dd-mmm-yy')}</div></div>`;
   const kp=(K)=>`<div class="sc-kpis">${K.map(k=>`<div class="sc-k" style="--c:${k[2]}"><div class="v${String(k[0]).length>13?' long':''}">${esc(String(k[0]))}</div><div class="l">${esc(k[1])}</div></div>`).join('')}</div>`;
   if(X.kind==='agent'){ const A=X.A;
     h+=kp([[A.po.toLocaleString(),'POs',SCP.amb],[scQty(A.qty),'Quantity (pcs)',SCP.teal],[A.pq?scMoney(A.val):'–','FOB value (USD)',SCP.ind],[A.avg!=null?scPrice(A.avg):'–','Average FOB, qty-weighted',SCP.sl],
@@ -7150,7 +7150,7 @@ function entPpt(kind){ const X=ENT[kind].last; if(!X){ toast('Pick '+(kind==='ag
   const strip=h=>String(h).replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"');
   const rT=rpTitle, rB=rpBase, rC=rpChips, rM=rpMeta; rpTitle=()=> kind==='agent'?'Agent Scorecard':'Buyer Scorecard'; rpBase=()=>entBase(kind); rpChips=()=>[X.name, ENT[kind].scope==='open'?'Pipeline':ENT[kind].scope==='shipped'?'Shipping & shipped':'All orders except cancelled']; rpMeta=()=>{ const m=DVA_BD.meta||{}; return {file:m.fileName||'', at:m.uploadedAt||''}; };
   try{ const cover= kind==='agent'? `${X.name}   ·   ${X.A.po.toLocaleString()} POs   ·   ${X.share}% of agent POs` : `${X.name}   ·   DLO ${entPct(X.D.po,X.A.po)}% of POs   ·   ${X.agents.length} agents`;
-    const D=rpDeck('dva','LPP BD sourcing review',cover), C=D.C, p=D.p;
+    const D=rpDeck('dva','BD sourcing review',cover), C=D.C, p=D.p;
     { const s=D.slide('At a glance'); if(kind==='agent'){ const A=X.A; D.kpis(s,[[A.po.toLocaleString(),'POs',C.A],[scQty(A.qty),'Quantity (pcs)',C.T],[A.pq?scMoney(A.val):'–','FOB value (USD)',C.I],[A.avg!=null?scPrice(A.avg):'–','Average FOB',C.SL],[X.share+'%','Share of agent POs',C.A],['#'+X.rank+' of '+X.nAg,'Rank among agents',C.R],[String(X.buyers.length),'Buyers',C.G],[String(X.facs.length),'Factories',C.T]]); }
       else { const Dd=X.D, A=X.A; D.kpis(s,[[entPct(Dd.po,A.po)+'%','DLO share of POs',C.G],[(Dd.po+A.po).toLocaleString(),'POs (DLO + agents)',C.SL],[Dd.po.toLocaleString(),'DLO POs',C.G],[A.po.toLocaleString(),'Agent POs',C.A],[entPct(Dd.qty,A.qty)+'%','DLO share of qty',C.T],[Dd.pq&&A.pq?entPct(Dd.val,A.val)+'%':'–','DLO share of value',C.I],[String(X.agents.length),'Agents used',C.A],[String(X.cats.filter(c=>c.act==='WIN BACK').length),'Categories to win back',C.R]]); }
       s.addText(X.find.map(f=>({text:strip(f),options:{bullet:true,breakLine:true}})),{x:0.5,y:4.55,w:12.3,h:2.3,fontSize:12,color:'0F172A',fontFace:C.F,valign:'top',paraSpaceAfter:4}); }
@@ -7185,9 +7185,9 @@ function entXls(kind){ const X=ENT[kind].last; if(!X){ toast('Pick '+(kind==='ag
 function renderAll(){ stallNote('renderAll after a change'); ppsRuleAll(); planFmtAll(); updateUndoBtns(); renderGrid(true); renderDashboard(); try{ const n=REVIEW_CHECKS.reduce((t,c)=>t+(c.level==='info'?0:c.run().length),0); document.getElementById('reviewDot').classList.toggle('show',n>0); }catch(e){} }
 setInterval(()=>{ if(stallWhat!=='idle' && !XL.editing && performance.now()-stallLast<400) stallWhat='idle'; },3000);
 
-/* ---- LPP BD Sourcing Review: the same page with only the DD pages ---- */
+/* ---- BD Sourcing Review: the same page with only the DD pages ---- */
 function srcSetup(){
-  document.title='LPP BD Sourcing Review';
+  document.title='BD Sourcing Review';
   { const P=document.getElementById('panel-import'); P.querySelector('.topbar h1').textContent='Import DD';
     P.querySelector('.topbar .desc').textContent='Load the latest Main DD export (DD_BD). Every row is saved on this computer, and the four review pages read it. Importing a new DD replaces the old one.';
     const st=P.querySelectorAll('#ddSteps .step'); if(st[2]) st[2].remove(); if(st[3]){ st[3].lastChild.textContent='Saved'; st[3].querySelector('span').textContent='3'; }
@@ -7196,14 +7196,14 @@ function srcSetup(){
   const sb=document.querySelector('.sidebar');
   const keep=new Set(['import','bdva','bprice','bscore','bbench','bagent','bbuyer']);
   sb.querySelectorAll('.navbtn').forEach(b=>{ if(!keep.has(b.dataset.tab)) b.remove(); });
-  sb.querySelectorAll('.navlabel').forEach(l=>{ if(l.textContent.trim()!=='LPP BD Sourcing Review') l.remove(); });
+  sb.querySelectorAll('.navlabel').forEach(l=>{ if(l.textContent.trim()!=='BD Sourcing Review') l.remove(); });
   const imp=sb.querySelector('.navbtn[data-tab="import"]'), lab=sb.querySelector('.navlabel'), brand=sb.querySelector('.brand');
   const l0=document.createElement('div'); l0.className='navlabel'; l0.style.paddingTop='4px'; l0.textContent='Main DD';
   brand.after(l0); l0.after(imp); lab.textContent='Sourcing Review';
   const SR_LOGO='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="30" height="30" aria-hidden="true"><rect width="100" height="100" rx="20" fill="#12305a"/><text x="50" y="58" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="38" fill="#fff">SR</text><rect x="18" y="68" width="38" height="12" rx="4" fill="#34d399"/><rect x="58" y="68" width="24" height="12" rx="4" fill="#fbbf24"/></svg>';
-  const mk=brand.querySelector('.mark'); mk.innerHTML=SR_LOGO; mk.style.background='transparent'; mk.style.boxShadow='0 0 0 1px rgba(255,255,255,.25)'; mk.style.overflow='hidden'; mk.title='LPP BD Sourcing Review';
+  const mk=brand.querySelector('.mark'); mk.innerHTML=SR_LOGO; mk.style.background='transparent'; mk.style.boxShadow='0 0 0 1px rgba(255,255,255,.25)'; mk.style.overflow='hidden'; mk.title='BD Sourcing Review';
   const fav=document.createElement('link'); fav.rel='icon'; fav.type='image/svg+xml'; fav.href='data:image/svg+xml,'+encodeURIComponent(SR_LOGO.replace(' width="30" height="30"','')); document.head.querySelectorAll('link[rel~="icon"]').forEach(l=>l.remove()); document.head.appendChild(fav);
-  brand.querySelector('.name').textContent='Sourcing Review'; brand.querySelector('.sub').textContent='LPP BD · DLO vs agents';
+  brand.querySelector('.name').textContent='Sourcing Review'; brand.querySelector('.sub').textContent='BD · DLO vs agents';
   sb.querySelectorAll('.navbtn').forEach(b=>b.classList.remove('active'));
   imp.childNodes.forEach(n=>{ if(n.nodeType===3&&/Import Main DD/.test(n.textContent)) n.textContent='Import DD'; });
   document.querySelectorAll('.sitefoot').forEach(f=>f.remove());

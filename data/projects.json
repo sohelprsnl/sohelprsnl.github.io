@@ -1,13 +1,13 @@
 [
   {
     "section": "tools",
-    "id": "lpp-bd-sourcing-review",
+    "id": "bd-sourcing-review",
     "accent": "a-ops",
     "cover": "assets/card-tool-sourcing-review.jpg",
-    "cover_alt": "Cover card for LPP BD Sourcing Review: DLO against agents, volume, median FOB, scorecards",
-    "title": "LPP BD Sourcing Review: DLO against Agents",
+    "cover_alt": "Cover card for BD Sourcing Review: DLO against agents, volume, median FOB, scorecards",
+    "title": "BD Sourcing Review: DLO against Agents",
     "meta": "Nov 2026 · LPP S.A. · Windows desktop app",
-    "intro": "How much LPP BD business does the Dhaka Liaison Office hold against agents, and at what price? The answer sits in the Main DD, more than 100,000 order lines. I built LPP BD Sourcing Review to read every row and answer it on six pages, ready to share with management.",
+    "intro": "How much BD business does the Dhaka Liaison Office hold against agents, and at what price? The answer sits in the Main DD, more than 100,000 order lines. I built BD Sourcing Review to read every row and answer it on six pages, ready to share with management.",
     "list_label": "What it does",
     "points": [
       "Imports the Main DD export (DD_BD) and reads every row in about half a minute. The DD stays saved until a newer one is imported.",
@@ -21,7 +21,7 @@
     ],
     "footnote": "Packaged as a Windows installer (v1.1.4). Runs offline, needs no admin rights and uploads no data. The same page also opens in a browser.",
     "link_label": "Try the demo",
-    "link_url": "tools/lpp-bd-sourcing-review.html"
+    "link_url": "tools/bd-sourcing-review.html"
   },
   {
     "section": "tools",
