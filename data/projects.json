@@ -1,6 +1,54 @@
 [
   {
     "section": "tools",
+    "id": "lpp-bd-sourcing-review",
+    "accent": "a-ops",
+    "cover": "assets/card-tool-sourcing-review.jpg",
+    "cover_alt": "Cover card for LPP BD Sourcing Review: DLO against agents, volume, median FOB, scorecards",
+    "title": "LPP BD Sourcing Review: DLO against Agents",
+    "meta": "Nov 2026 · LPP S.A. · Windows desktop app",
+    "intro": "How much LPP BD business does the Dhaka Liaison Office hold against agents, and at what price? The answer sits in the Main DD, more than 100,000 order lines. I built LPP BD Sourcing Review to read every row and answer it on six pages, ready to share with management.",
+    "list_label": "What it does",
+    "points": [
+      "Imports the Main DD export (DD_BD) and reads every row in about half a minute. The DD stays saved until a newer one is imported.",
+      "DLO vs Agent Volume: POs, quantity and FOB value, DLO against agents, broken down by buyer, brand, department, subclass, season, factory and agent, with key findings in plain words.",
+      "DLO vs Agent Price: median FOB of DLO against agents inside the same brand and subclass, with price bands and an action per group, such as win back or fix price.",
+      "Supplier Scorecard and Supplier Price Benchmark: one supplier's volume, seasons, buyers, products and price against its closest competitors, for visits and management reviews. Competitor names can be hidden as Supplier A, B, C.",
+      "Agent Scorecard: one agent's buyers, categories and price against DLO.",
+      "Buyer Scorecard: one buyer's DLO share, the agents and DLO suppliers used, and where DLO can win more.",
+      "One clear channel rule: a PO under a direct supplier or Shanghai Office counts as DLO when its supplier is a Dhaka Office supplier, otherwise as agent.",
+      "Exports every page to PDF, PowerPoint and Excel with the same file name."
+    ],
+    "footnote": "Packaged as a Windows installer (v1.1.4). Runs offline, needs no admin rights and uploads no data. The same page also opens in a browser.",
+    "link_label": "Try the demo",
+    "link_url": "tools/lpp-bd-sourcing-review.html"
+  },
+  {
+    "section": "tools",
+    "id": "development-follow-up-master",
+    "accent": "a-ops",
+    "cover": "assets/card-tool-development-chart.jpg",
+    "cover_alt": "Cover card for Development Follow-Up Master: supplier development chart, lead time, adoption, supplier emails",
+    "title": "Development Follow-Up Master: Supplier Development Chart",
+    "meta": "Nov 2026 · LPP S.A. · Windows desktop app",
+    "intro": "Supplier development lives in an Excel chart, one row per style, colour and sample. I built Development Follow-Up Master to hold that chart as an app and to answer the questions behind it: which suppliers send samples on time, and which developments turn into orders.",
+    "list_label": "What it does",
+    "points": [
+      "Dashboard and Management Summary: developments, samples submitted, orders, adoption, average lead time, on-time rate, pending and overdue samples, with a development-to-order funnel and a season comparison.",
+      "Supplier Performance: submitted, DO received, adoption and lead time per supplier, a scorecard for each supplier and a side-by-side compare.",
+      "Adoption Analysis and Lead Time: sample lead time from the swatch or document date to submission, checked against the DLO standard sample lead time by department, fabric and local or imported.",
+      "Development Database that works like an Excel sheet: filters, sorting, add and edit rows, and export of the full database or the LPP format to Excel.",
+      "Imports supplier charts, matches supplier names to the master list, splits a style with several colours into one row per colour, and shows every change before it is applied.",
+      "Checks 15 database rules, such as AWB format, remarks, start dates and a lead time of 13 to 40 days, and fixes the ones it can.",
+      "Prepares the seasonal development chart request for each supplier as an Outlook draft, with a blank template or the supplier's own rows attached. Nothing is sent from the app.",
+      "Takes a snapshot before every import, bulk change and delete, with backup and restore to one file."
+    ],
+    "footnote": "Packaged as a Windows installer (v1.0.0). Runs offline, needs no admin rights and uploads no data. The same page also opens in a browser.",
+    "link_label": "Try the demo",
+    "link_url": "tools/development-follow-up-master.html"
+  },
+  {
+    "section": "tools",
     "id": "follow-up-master",
     "accent": "a-ops",
     "cover": "assets/card-tool-follow-up-master.jpg",
