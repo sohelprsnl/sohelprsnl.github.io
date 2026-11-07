@@ -23,7 +23,7 @@
 <meta name="author" content="Md. Sohel Rana">
 <!-- Self-contained. It fetches nothing and sends nothing. blob: is only the CSV files it hands you. -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
-<meta name="description" content="Reads a Running Orders and Shipped Orders workbook in the browser and builds the LPP merchandising KPI sheets from it, using the same rules the Excel model holds in its formulas. Exports the whole set back to Excel.">
+<meta name="description" content="Reads a Running Orders and Shipped Orders workbook in the browser and builds the merchandising KPI sheets from it, using the same rules the Excel model holds in its formulas. Exports the whole set back to Excel.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#080B12" media="(prefers-color-scheme: dark)">
@@ -710,7 +710,7 @@ body.modal-on{overflow:hidden}
 <body>
 <div class="topbar" role="banner"><div class="topin">
   <div class="brand">
-    <img class="blogo" src="data:image/png;base64,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" alt="LPP" width="46" height="46" decoding="async">
+    <img class="blogo" src="data:image/png;base64,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" alt="KPI Pulse" width="46" height="46" decoding="async">
     <div class="btxt">
       <h1 class="n tsweep">KPI Pulse</h1>
       <span class="s">for Merchandising Management &middot; Drop the orders. The KPI sheets build themselves.</span>
@@ -941,7 +941,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
 </script>
 <script>
 /* ==========================================================================
-   LPP Production Dynamic Management Dashboard
+   Production Dynamic Management Dashboard
    Part 1 - the calculation engine
 
    Every rule below is the rule the Excel workbook holds in its formulas,
@@ -1657,7 +1657,7 @@ var W_PERF  = [2,30,14,12,12,12,14,15,12,12,12,13,13,13,13,13];
 /* One title system for the nine KPI sheets: the tab name in the band, then
    one subtitle line = what the sheet is | as of | which filters it follows. */
 function sheetHead(g, name, cols, what, follows, lines){
-  setCell(g, 1, B, '  LPP BANGLADESH   |   ' + name, {s:'title', merge:[1, cols]});
+  setCell(g, 1, B, '  DEMO SOURCING OFFICE   |   ' + name, {s:'title', merge:[1, cols]});
   setRowH(g, 1, 30);
   setCell(g, 2, B, '  ' + what + '   |   As of ' + fmtDMY(TODAY) + '   |   ' + follows,
     {s:'sub', merge:[1, cols]});
@@ -1679,7 +1679,7 @@ function heroBands(g, title, sub, lines){
    ========================================================================== */
 function sheetExec(M){
   var KP = M.K, g = newGrid('EXEC DASHBOARD', W_EXEC), i;
-  setCell(g, 1, B, '  LPP BANGLADESH   |   KPI PULSE FOR MERCHANDISING MANAGEMENT',
+  setCell(g, 1, B, '  DEMO SOURCING OFFICE   |   KPI PULSE FOR MERCHANDISING MANAGEMENT',
     {s:'titleBig', merge:[1,18]});
   setRowH(g, 1, 30);
   setCell(g, 2, B, '  Source: ' + M.fileName + '   |   As of: ' + fmtDMY(TODAY) +
@@ -1718,7 +1718,7 @@ function sheetExec(M){
     [17,'CRITICAL ORDERS','EX-FACTORY OVERDUE','SHIPMENT RISK (DUE 14D)','PENDING VESSEL BOOKING',
         KP.CRITICAL, KP.EXF_OVERDUE, KP.SHIP_RISK, KP.PEND_VESSEL,
         '#,##0','#,##0','#,##0','#,##0', 'a','a','w','a'],
-    [20,'PENDING FABRIC IN-HOUSE','PENDING PP APPROVAL','PENDING SEWING START','PENDING SHIPMENT SAMPLE',
+    [20,'PENDING FABRIC IN-SOL','PENDING PP APPROVAL','PENDING SEWING START','PENDING SHIPMENT SAMPLE',
         KP.PEND_FABIN, KP.PEND_PP, KP.PEND_SEW, KP.PEND_SMP,
         '#,##0','#,##0','#,##0','#,##0', 'a','a','a','a']
   ];
@@ -5150,9 +5150,9 @@ function packWorkbook(sheets, opts){
     'xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" ' +
     'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
     '<dc:title>' + xmlEsc(APP_FULL) + '</dc:title>' +
-    '<dc:creator>LPP S. A. Dhaka Liaison Office</dc:creator>' +
+    '<dc:creator>Dhaka Liaison Office</dc:creator>' +
     '<dc:description>' + xmlEsc(APP_NAME + ' v' + APP_VERSION + ', build ' + APP_BUILD + '. ' + APP_TAGLINE + ' Compiled and built by Md. Sohel Rana.') + '</dc:description>' +
-    '<cp:lastModifiedBy>LPP S. A. Dhaka Liaison Office</cp:lastModifiedBy>' +
+    '<cp:lastModifiedBy>Dhaka Liaison Office</cp:lastModifiedBy>' +
     '<dcterms:created xsi:type="dcterms:W3CDTF">' + iso + '</dcterms:created>' +
     '<dcterms:modified xsi:type="dcterms:W3CDTF">' + iso + '</dcterms:modified>' +
     '</cp:coreProperties>');
@@ -5160,7 +5160,7 @@ function packWorkbook(sheets, opts){
     '<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" ' +
     'xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">' +
     '<Application>' + xmlEsc(APP_FULL) + '</Application>' +
-    '<Company>LPP S. A. Dhaka Liaison Office</Company></Properties>');
+    '<Company>Dhaka Liaison Office</Company></Properties>');
 
   return makeZip(files);
 }
@@ -5323,7 +5323,7 @@ function liveHelpers(g, M, scope){
      separated by commas. The test splits the cell on the comma, pads both
      sides with a bar, and looks the column value up inside it. TRIM collapses
      any run of spaces to one, and the two "| " / " |" passes drop the space
-     that sits next to a comma, so "Cropp, House" and "Cropp,House" both work.
+     that sits next to a comma, so "North, Sol" and "North,Sol" both work.
      Checked against the data first: no filterable value holds a comma or an
      Excel wildcard, so the split and the search are safe. */
   function LISTOF(cell){
@@ -5757,14 +5757,14 @@ function picksBlock(g, M, r0){
 /* ==========================================================================
    Part 6 - the input format, shown on the front page and downloadable
 
-   Everything here is read from LPP_Production Follow-up Sohel.xlsx: the 42
+   Everything here is read from the production follow-up workbook: the 42
    headers, the allowed values the model keeps on _CALC, the nine plan-date
    formulas and the ORDER STATUS ladder that the Running Orders sheet carries,
    and one real order from each sheet.
    ========================================================================== */
 var TPL_HDR = ["Supplier", "Intake", "Buyer", "Mer", "Brand", "Dept", "Subclass", "Type of Garments", "Product Type -OA", "Fabric/Yarn source", "Season", "Style#", "PO#/order_id", "Order Quantity", "FOB", "Color", "First Shipment Date", "Current Shipment Date (ETD)/vendor_pickup_date", "Transport Type", "Plan Fabric / Yarn  booking date", "ActualFabric / Yarn  booking date", "Plan Fabric / Yarn  Approval date", "Actual Fabric / Yarn  Approval date", "Inhoused & OK", "Plan fabric Inhouse date", "Actual fabric inhouse date", "Plan PP approval Date", "Actual PP Approval Date", "PP Status// When to send PP?", "PPS Security Tag", "Plan Sewing Start date", "Actual Sewing Start Date/ Plan", "Production Status", "Plan Shipment Sample sending Date", "Actual Shipment sample sending date", "Plan Vessel Booking date", "Actual Vessel Booking  date", "Plan Ex factory date", "Actual Ex factory date", "Remarks", "ORDER STATUS", "Punctuality"];
 var TPL_HDR_SHIP = ["Supplier", "Intake", "Buyer", "Mer", "Brand", "Dept", "Subclass", "Type of Garments", "Product Type -OA", "Fabric/Yarn source", "Season", "Style#", "PO#/order_id", "Order Quantity", "FOB", "Color", "First Shipment Date", "Current ETD/vendor_pickup_date", "Transport Type", "Plan Fabric / Yarn  booking date", "ActualFabric / Yarn  booking date", "Plan Fabric / Yarn  Approval date", "Actual Fabric / Yarn  Approval date", "Fabric Status: Inhoused & OK", "Plan fabric Inhouse date", "Actual fabric inhouse date", "Plan PP approval Date", "Actual PP Approval Date", "PP Status// When to send PP?", "PPS Security Tag", "Plan Sewing Start date", "Actual Sewing Start Date", "Production Status", "Plan Shipment Sample sending Date", "Actual Shipment sample sending date", "Plan Vessel Booking date", "Actual Vessel Booking  date", "Plan Ex factory date", "Actual Ex factory date", "Remarks", "ORDER STATUS", "Punctuality"];
-var TPL_LIST = {"supplier": ["Golden Thread Ltd (Demo)", "Alpha Denim Ltd (Demo)", "Riverside Denim Mills (Demo)", "Northstar Knit Ltd (Demo)", "Harbor Shirts Ltd (Demo)", "Orbit Accessories Ltd (Demo)", "Green Valley Apparel (Demo)", "Lotus Apparel Ltd (Demo)", "Summit Fashion Ltd (Demo)", "Starlight Garments (Demo)", "Maple Trousers Ltd (Demo)", "Coral Knitwear (Demo)", "Zenith Denim (Demo)", "Crescent Woven Ltd (Demo)", "Prime Woven Ltd (Demo)", "Bluewave Jeans Ltd (Demo)"], "buyer": ["Maria Novak", "Ola Wren", "Ewa Linden", "Julia Stone", "Nina Hart", "Kasia Moor", "Anna Brook", "Zofia Lake", "Marta Field", "Iga Rowan", "Lena Frost", "Hana Vale", "Rita Shore", "Dora Pike", "Emma Gale", "Vera Moss", "Olga Reed", "Ida Wolfe", "Nora Glen", "Kira Dale", "Mila Hope", "Tina Lark", "Field Marta", "Sara Mint", "Lea Cove", "Ada Fern", "Una Brae", "Eva Rook", "Ina Holt", "Ola Birch", "Pia North", "Liv Stone"], "mer": ["Sohel"], "brand": ["Cropp", "House", "Mohito", "Reserved", "Sinsay"], "dept": ["accessories CROPP", "accessories RES", "ladies' acc SINSAY", "ladies' CROPP", "ladies' HOUSE", "ladies' MOHITO", "men's CROPP", "men's HOUSE"], "subclass": ["BL_jackets", "BL_trousers", "CA_jeans_trousers", "CA_other_denim", "CA_shorts_woven", "CA_trousers", "jackets", "jeans", "jeans_jacket", "jeans_others", "jeans_shorts", "jeans_trousers", "L_bags", "L_belts&wallets", "L_gifts", "L_wallets", "M_bags", "other_denim", "outer_jackets", "RL_jeans_trousers", "RL_other_denim", "shirts", "shirts_l_s", "shirts_s_s", "shorts", "shorts_woven", "skirts", "skirts_woven", "trousers", "trousers_woven"], "ptype": ["AD - Additional EC", "AU - Additional PD", "BA - Base", "BS - Basic", "CF - Core Fashion", "CR - Core", "DC - Dress Code", "FS - Fashion", "KI - Key Item", "LC - Licence", "MM - Moneymaker", "PM - Premium", "RG - Regular", "TE – Test", "TP - To Be Printed", "WA - Wall"], "fabsrc": ["Imported", "Local"], "season": ["AW 2024", "AW 2025", "AW 2026", "SS 2024", "SS 2025", "SS 2026", "SS 2027"], "transport": ["Air", "Air DAP", "Air FCA", "Sea", "Sea Air", "Sea Fast", "Sea KCH", "Sea-Air"], "prodStatus": ["Completed", "PO not yet released", "Sewing -wash OK", "Sewing running", "Sewing start plan-8-Sep"], "orderStatus": ["FABRIC APPROVAL PENDING", "FABRIC BOOKING PENDING", "FABRIC INHOUSE PENDING", "GARMENT PRODUCTION PENDING", "PP PENDING", "SHIPMENT SAMPLE PENDING", "SHIPPED"], "garment": ["Woven", "Accessories"], "punct": ["Ontime", "Delay by Supplier", "DELAYED BY FTY", "Plan-On-time"]};
+var TPL_LIST = {"supplier": ["Alpha Denim Ltd (Demo)", "Bluewave Jeans Ltd (Demo)", "Crescent Woven Ltd (Demo)", "Harbor Shirts Ltd (Demo)", "Maple Trousers Ltd (Demo)", "Riverside Denim Mills (Demo)", "Northstar Knit Ltd (Demo)", "Orbit Accessories Ltd (Demo)"], "buyer": ["Maria Novak", "Ola Wren", "Ewa Linden", "Julia Stone", "Nina Hart", "Kasia Moor", "Anna Brook", "Zofia Lake"], "mer": ["Demo"], "brand": ["Kite", "Mira", "North", "Sol", "Vela"], "dept": ["accessories NORTH", "accessories MIRA", "ladies' acc KITE", "ladies' NORTH", "ladies' SOL", "ladies' VELA", "men's NORTH", "men's SOL"], "subclass": ["BL_jackets", "BL_trousers", "CA_jeans_trousers", "CA_other_denim", "CA_shorts_woven", "CA_trousers", "jackets", "jeans", "jeans_jacket", "jeans_others", "jeans_shorts", "jeans_trousers", "L_bags", "L_belts&wallets", "L_gifts", "L_wallets", "M_bags", "other_denim", "outer_jackets", "RL_jeans_trousers", "RL_other_denim", "shirts", "shirts_l_s", "shirts_s_s", "shorts", "shorts_woven", "skirts", "skirts_woven", "trousers", "trousers_woven"], "ptype": ["AD - Additional EC", "AU - Additional PD", "BA - Base", "BS - Basic", "CF - Core Fashion", "CR - Core", "DC - Dress Code", "FS - Fashion", "KI - Key Item", "LC - Licence", "MM - Moneymaker", "PM - Premium", "RG - Regular", "TE – Test", "TP - To Be Printed", "WA - Wall"], "fabsrc": ["Imported", "Local"], "season": ["AW 2024", "AW 2025", "AW 2026", "SS 2024", "SS 2025", "SS 2026", "SS 2027"], "transport": ["Air", "Air DAP", "Air FCA", "Sea", "Sea Air", "Sea Fast", "Sea KCH", "Sea-Air"], "prodStatus": ["Completed", "PO not yet released", "Sewing -wash OK", "Sewing running", "Sewing start plan-8-Sep"], "orderStatus": ["FABRIC APPROVAL PENDING", "FABRIC BOOKING PENDING", "FABRIC INHOUSE PENDING", "GARMENT PRODUCTION PENDING", "PP PENDING", "SHIPMENT SAMPLE PENDING", "SHIPPED"], "garment": ["Woven", "Accessories"], "punct": ["Ontime", "Delay by Supplier", "DELAYED BY FTY", "Plan-On-time"]};
 /* [kind, rule, list key, number format, Excel formula]
    t text, n number, m money, d typed date, f plan date from a formula,
    c calculated text */
@@ -5812,8 +5812,8 @@ var TPL_SPEC = [
   ["c", "Formula. Reads the actual-date columns in order and names the first one still empty.", null, null, "IF($L{n}=0,\" \",IF($U{n}=0,\"FABRIC BOOKING PENDING\",IF($W{n}=0,\"FABRIC APPROVAL PENDING\",IF($Z{n}=0,\"FABRIC INHOUSE PENDING\",IF($AB{n}=0,\"PP PENDING\",IF($AF{n}=0,\"GARMENT PRODUCTION PENDING\",IF($AI{n}=0,\" SHIPMENT SAMPLE PENDING\",IF($AK{n}=0,\" VESSEL BOOKING PENDING\",IF($AM{n}=0,\"EX FACTORY PENDING\",\"SHIPPED\")))))))))"],
   ["t", "Ontime, Delay by Supplier or DELAYED BY FTY once shipped. Running orders carry Plan-On-time, which counts as no rating.", "punct", null, null]
 ];
-var TPL_RUN = ["Alpha Denim Ltd (Demo)", "Intake 1", "Emma Gale", "Sohel", "Sinsay", "ladies' acc SINSAY", "L_bags", "Accessories", "RG - Regular", "Imported", "SS 2027", "495MB", 11532161, 440, 2.25, "", "", ["D", 2026, 9, 21], "Sea", ["D", 2026, 6, 3], ["D", 2026, 5, 16], ["D", 2026, 5, 19], ["D", 2026, 5, 14], "Yes", ["D", 2026, 8, 17], ["D", 2026, 8, 10], ["D", 2026, 8, 22], ["D", 2026, 6, 22], "Approved", "", ["D", 2026, 8, 22], ["D", 2026, 9, 7], "Sewing running", ["D", 2026, 9, 7], "", ["D", 2026, 9, 7], "", ["D", 2026, 9, 14], "", "", "SHIPMENT SAMPLE PENDING", "Plan-On-time"];
-var TPL_SHIP = ["Orbit Accessories Ltd (Demo)", "Intake 7", "Ola Wren", "Sohel", "Cropp", "men's CROPP", "trousers_woven", "Woven", "BS - Basic", "", "SS 2024", "8297Y", 10301406, 7100, 9.35, "", "", ["D", 2023, 10, 19], "Sea KCH", "", "", "", "", "Yes", ["D", 2023, 9, 14], ["D", 2023, 9, 20], ["D", 2023, 9, 19], ["D", 2023, 9, 23], "Approved", "", ["D", 2023, 9, 9], ["D", 2023, 9, 14], "Completed", ["D", 2023, 10, 5], ["D", 2025, 4, 19], ["D", 2023, 10, 5], ["D", 2025, 4, 19], ["D", 2023, 10, 12], ["D", 2025, 4, 26], "", "SHIPPED", "Ontime"];
+var TPL_RUN = ["Orbit Accessories Ltd (Demo)", "Intake 1", "Ola Wren", "Demo", "Kite", "ladies' acc KITE", "L_bags", "Accessories", "RG - Regular", "Imported", "SS 2027", "495MB", 11532161, 440, 2.25, "", "", ["D", 2026, 9, 21], "Sea", ["D", 2026, 6, 3], ["D", 2026, 5, 16], ["D", 2026, 5, 19], ["D", 2026, 5, 14], "Yes", ["D", 2026, 8, 17], ["D", 2026, 8, 10], ["D", 2026, 8, 22], ["D", 2026, 6, 22], "Approved", "", ["D", 2026, 8, 22], ["D", 2026, 9, 7], "Sewing running", ["D", 2026, 9, 7], "", ["D", 2026, 9, 7], "", ["D", 2026, 9, 14], "", "", "SHIPMENT SAMPLE PENDING", "Plan-On-time"];
+var TPL_SHIP = ["Crescent Woven Ltd (Demo)", "Intake 7", "Maria Novak", "Demo", "North", "men's NORTH", "trousers_woven", "Woven", "BS - Basic", "", "SS 2024", "8297Y", 10301406, 7100, 9.35, "", "", ["D", 2023, 10, 19], "Sea KCH", "", "", "", "", "Yes", ["D", 2023, 9, 14], ["D", 2023, 9, 20], ["D", 2023, 9, 19], ["D", 2023, 9, 23], "Approved", "", ["D", 2023, 9, 9], ["D", 2023, 9, 14], "Completed", ["D", 2023, 10, 5], ["D", 2025, 4, 19], ["D", 2023, 10, 5], ["D", 2025, 4, 19], ["D", 2023, 10, 12], ["D", 2025, 4, 26], "", "SHIPPED", "Ontime"];
 
 /* the column letter for spec index i (0 = A) */
 function tplCol(i){ return colLetterOf(i) }
