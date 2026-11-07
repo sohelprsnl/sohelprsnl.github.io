@@ -11,7 +11,7 @@
   document.documentElement.setAttribute("data-theme", s || (d?"dark":"light"));
 }catch(e){}})();
 </script>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'none'; object-src 'none'; frame-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://myaiintl.com; connect-src 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'none'; object-src 'none'; frame-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://myaiintl.com https://msr.goatcounter.com; connect-src 'self' https://msr.goatcounter.com">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects, Md. Sohel Rana</title>
@@ -317,12 +317,14 @@
       </div>
     </div>
     <div class="bottom">
-      <div>&copy; <span id="yr">2026</span> Md. Sohel Rana &middot; sohelprsnl.com</div>
+      <div>&copy; <span id="yr">2026</span> Md. Sohel Rana &middot; sohelprsnl.com<span id="visitorsWrap" hidden> &middot; <span id="visitorCount"></span> visitors</span></div>
       <div>Bangladesh RMG, from the inside.</div>
     </div>
   </div>
 </footer>
 
 <script src="motion.js" defer></script>
+<script data-goatcounter="https://msr.goatcounter.com/count" async src="assets/goatcounter.js"></script>
+<script src="assets/visitors.js" defer></script>
 </body>
 </html>
