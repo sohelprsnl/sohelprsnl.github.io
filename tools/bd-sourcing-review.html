@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>BD Sourcing Review: DLO against Agents</title>
+<title>BD Sourcing Review: Orders and Capacity</title>
 <link rel="canonical" href="https://sohelprsnl.com/tools/bd-sourcing-review.html">
-<meta name="description" content="Every order in the Main DD, Dhaka Liaison Office against agents: volume, median FOB, supplier, agent and buyer scorecards, with PDF, PowerPoint and Excel export. Demo with made-up data.">
+<meta name="description" content="Every order in the Main DD, Dhaka Liaison Office (DLO) and agents: volume, median FOB, supplier, agent and buyer scorecards, cancelled orders, and DLO and agent capacity analysis, with PDF, PowerPoint and Excel export. Demo with made-up data.">
 <meta name="author" content="Md. Sohel Rana">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="RMG Xpress Insights by Sohel">
-<meta property="og:title" content="BD Sourcing Review: DLO against Agents">
-<meta property="og:description" content="Every order in the Main DD, Dhaka Liaison Office against agents: volume, median FOB, supplier, agent and buyer scorecards, with PDF, PowerPoint and Excel export. Demo with made-up data.">
+<meta property="og:title" content="BD Sourcing Review: Orders and Capacity">
+<meta property="og:description" content="Every order in the Main DD, Dhaka Liaison Office (DLO) and agents: volume, median FOB, supplier, agent and buyer scorecards, cancelled orders, and DLO and agent capacity analysis, with PDF, PowerPoint and Excel export. Demo with made-up data.">
 <meta property="og:url" content="https://sohelprsnl.com/tools/bd-sourcing-review.html">
 <meta property="og:image" content="https://sohelprsnl.com/assets/card-tool-sourcing-review.jpg">
 <meta property="og:image:width" content="1200">
@@ -495,6 +495,11 @@ body.fullview .xl-toolbar{padding:4px 8px;}
     <button class="navbtn" data-tab="bbench"><span class="ic">&#9878;</span>Supplier Price Benchmark</button>
     <button class="navbtn" data-tab="bagent"><span class="ic">&#9670;</span>Agent Scorecard</button>
     <button class="navbtn" data-tab="bbuyer"><span class="ic">&#9786;</span>Buyer Scorecard</button>
+    <button class="navbtn" data-tab="bcxl"><span class="ic">&#10007;</span>Cancelled Orders</button>
+    <div class="navlabel">Capacity Analysis</div>
+    <button class="navbtn" data-tab="bcap"><span class="ic">&#9636;</span>DLO Capacity</button>
+    <button class="navbtn" data-tab="bcapa"><span class="ic">&#9637;</span>Agent Capacity</button>
+    <button class="navbtn" data-tab="bcaps"><span class="ic">&#9673;</span>Capacity Summary</button>
     <div class="navlabel">Configure</div>
     <button class="navbtn" data-tab="rules"><span class="ic">&#402;</span>Rules</button>
     <button class="navbtn" data-tab="contacts"><span class="ic">&#9993;</span>My Buyers List</button>
@@ -681,7 +686,7 @@ body.fullview .xl-toolbar{padding:4px 8px;}
       <div class="topbar"><div><h1 id="dvaH1">My Orders vs Agent Volume</h1><div class="desc" id="dvaDesc">Your orders (DLO, from your Running and Shipped sheets) against the agent orders of the same buyers in the Main DD. Rebuilt from your chart and every DD import.</div></div>
         <div class="pillrow" id="dvaPills"></div></div>
       <div class="card"><div class="card-pad dva-ctl" id="dvaCtl">
-        <label>Scope <span class="seg" id="dvaScope"><button data-v="open" class="on">Open orders</button><button data-v="shipped">Shipped orders</button><button data-v="all">All orders</button></span></label>
+        <label>Scope <span class="seg" id="dvaScope"><button data-v="open" class="on">Open orders</button><button data-v="etd">Pipeline from ETD</button><button data-v="shipped">Shipped orders</button><button data-v="all">All orders</button></span> <input type="date" class="inp bdEtd" title="ETD from this date onwards" style="width:150px;display:none"></label>
         <label>Measure <span class="seg" id="dvaMeasure"><button data-v="po" class="on">PO count</button><button data-v="qty">Quantity</button><button data-v="val" style="display:none">FOB value</button></span></label>
         <span class="ms-lbl">Buyer <span class="ms" id="dvaBuyer"></span></span>
         <span class="ms-lbl">Brand <span class="ms" id="dvaBrand"></span></span>
@@ -729,8 +734,8 @@ body.fullview .xl-toolbar{padding:4px 8px;}
       <details class="rule-help card card-pad" id="dvaHelpBd" style="margin-top:14px;border-top:1px solid var(--border);display:none"><summary>How this page works</summary>
         <ul>
           <li><b>Source:</b> every row of the last imported Main DD, all BD buyers, brands, suppliers and agents. Your chart is not used here.</li>
-          <li><b>DLO</b> = agent_id "Dhaka Office". <b>Agent</b> = any other agent_id, including blank, "0_Direct Supplier" and other offices. Cancelled rows are left out.</li>
-          <li><b>Scope</b> follows the DD status: Pipeline = statuses ticked in Rules card 4 (not yet shipped); Shipping &amp; shipped = every other status; All = both.</li>
+          <li><b>DLO</b> = agent_id "Dhaka Office". <b>Agent/Direct</b> = any other agent and direct supplier. A PO with agent_id blank, "0_Direct Supplier" or Shanghai Office goes to the side its supplier mostly works with: more POs under Dhaka Office = DLO, else Agent/Direct. Cancelled rows are left out.</li>
+          <li><b>Scope</b> follows the DD status: Pipeline = new, ordered, quick_ordered and booked (not yet shipped); Pipeline from ETD = Pipeline POs with ETD on or after the date you pick; Shipping &amp; shipped = every other status; All = both. Cancelled POs are left out.</li>
           <li><b>Measure:</b> PO count, quantity (exact_qty), or FOB value = quantity &times; cost_price. FOB value needs a DD with cost_price; rows without a price count as 0.</li>
           <li><b>Categories to go after</b> groups the orders by brand + subclass. <b>WIN BACK</b>: DLO already makes it and its median FOB is level with or below the agents (within 3%). <b>PRICE GAP</b>: DLO makes it but is dearer by more than 3%. <b>NEW FOR DLO</b>: agents have orders, DLO has none. <b>CHECK PRICE</b>: fewer than 3 priced POs on one side.</li>
           <li><b>Factories</b> use the DD factory column (the supplier when the factory is blank or a placeholder). Shared = the factory works for DLO and for agents, the quickest place to win orders. Agent-only = a factory DLO does not use yet. DLO-only = no agent orders there.</li>
@@ -747,7 +752,7 @@ body.fullview .xl-toolbar{padding:4px 8px;}
         <label>Channel <span class="seg" id="scCh"><button data-v="all" class="on">All</button><button data-v="dlo">Dhaka Office</button><button data-v="agent">Agent/Direct</button></span></label>
         <span class="ms-lbl" id="scAgWrap" style="display:none">Agent <span class="ms" id="scAgent"></span></span>
         <span class="ms-lbl">Supplier <span class="ms" id="scSup"><input class="inp" id="scSupIn" placeholder="Type 2 or 3 words of the supplier name…" autocomplete="off" spellcheck="false" style="width:360px"><div class="ms-pop" id="scSupPop" style="display:none;width:430px"></div></span></span>
-        <label>Scope <span class="seg" id="scScope"><button data-v="open">Pipeline</button><button data-v="shipped">Shipping &amp; shipped</button><button data-v="all" class="on">All (no cancelled)</button></span></label>
+        <label>Scope <span class="seg" id="scScope"><button data-v="open">Pipeline</button><button data-v="etd">Pipeline from ETD</button><button data-v="shipped">Shipping &amp; shipped</button><button data-v="all" class="on">All (no cancelled)</button></span> <input type="date" class="inp bdEtd" title="ETD from this date onwards" style="width:150px;display:none"></label>
         <span class="ms-lbl">Season <span class="ms" id="scSeason"></span></span>
         <span class="ms-lbl">Buyer <span class="ms" id="scBuyer"></span></span>
         <button class="btn sm ghost" id="scReset">Reset filters</button>
@@ -764,7 +769,7 @@ body.fullview .xl-toolbar{padding:4px 8px;}
       <div class="topbar"><div><h1>Agent Scorecard</h1><div class="desc">One agent against DLO: which buyers use it, in which categories, at what price against DLO, and which of its factories already work with DLO. Source: the last Main DD.</div></div><div class="pillrow" id="agPills"></div></div>
       <div class="card"><div class="card-pad dva-ctl">
         <span class="ms-lbl">Agent <span class="ms" id="agPick"><input class="inp" id="agIn" placeholder="Type 2 or 3 words of the agent name…" autocomplete="off" spellcheck="false" style="width:360px"><div class="ms-pop" id="agPop" style="display:none;width:430px"></div></span></span>
-        <label>Scope <span class="seg" id="agScope"><button data-v="open">Pipeline</button><button data-v="shipped">Shipping &amp; shipped</button><button data-v="all" class="on">All (no cancelled)</button></span></label>
+        <label>Scope <span class="seg" id="agScope"><button data-v="open">Pipeline</button><button data-v="etd">Pipeline from ETD</button><button data-v="shipped">Shipping &amp; shipped</button><button data-v="all" class="on">All (no cancelled)</button></span> <input type="date" class="inp bdEtd" title="ETD from this date onwards" style="width:150px;display:none"></label>
         <span class="ms-lbl">Season <span class="ms" id="agSeason"></span></span>
         <button class="btn sm ghost" id="agReset">Reset filters</button>
       </div>
@@ -779,7 +784,7 @@ body.fullview .xl-toolbar{padding:4px 8px;}
       <div class="topbar"><div><h1>Buyer Scorecard</h1><div class="desc">One buyer: DLO share against agents, which agents the buyer uses and for what, and where DLO is cheaper but not used. Source: the last Main DD.</div></div><div class="pillrow" id="byPills"></div></div>
       <div class="card"><div class="card-pad dva-ctl">
         <span class="ms-lbl">Buyer <span class="ms" id="byPick"><input class="inp" id="byIn" placeholder="Type 2 or 3 words of the buyer name…" autocomplete="off" spellcheck="false" style="width:360px"><div class="ms-pop" id="byPop" style="display:none;width:430px"></div></span></span>
-        <label>Scope <span class="seg" id="byScope"><button data-v="open">Pipeline</button><button data-v="shipped">Shipping &amp; shipped</button><button data-v="all" class="on">All (no cancelled)</button></span></label>
+        <label>Scope <span class="seg" id="byScope"><button data-v="open">Pipeline</button><button data-v="etd">Pipeline from ETD</button><button data-v="shipped">Shipping &amp; shipped</button><button data-v="all" class="on">All (no cancelled)</button></span> <input type="date" class="inp bdEtd" title="ETD from this date onwards" style="width:150px;display:none"></label>
         <span class="ms-lbl">Season <span class="ms" id="bySeason"></span></span>
         <button class="btn sm ghost" id="byReset">Reset filters</button>
       </div>
@@ -790,6 +795,66 @@ body.fullview .xl-toolbar{padding:4px 8px;}
       <div id="byBody"></div>
     </section>
 
+    <section class="panel" id="panel-bcxl">
+      <div class="topbar"><div><h1>Cancelled Orders</h1><div class="desc">Cancelled POs in the last Main DD: how much was cancelled, at DLO against agents and direct suppliers, per supplier, agent, buyer and season. Cancel % = cancelled quantity of all quantity ordered, cancelled POs included.</div></div><div class="pillrow" id="cxPills"></div></div>
+      <div class="card"><div class="card-pad dva-ctl">
+        <label>Channel <span class="seg" id="cxChan"><button data-v="all" class="on">All</button><button data-v="DLO">Dhaka Office</button><button data-v="Agent">Agent/Direct</button></span></label>
+        <span class="ms-lbl">Season <span class="ms" id="cxSeason"></span></span>
+        <span class="ms-lbl">Buyer <span class="ms" id="cxBuyer"></span></span>
+        <span class="ms-lbl">Brand <span class="ms" id="cxBrand"></span></span>
+        <span class="ms-lbl">Dept <span class="ms" id="cxDept"></span></span>
+        <label title="Very large POs are often capacity bookings that are cancelled and re-issued. They can hide the real picture."><input type="checkbox" id="cxBigOff" checked> Leave out POs of <input class="inp" id="cxBig" type="number" min="1000" step="10000" value="100000" style="width:96px"> pcs or more</label>
+        <button class="btn sm ghost" id="cxReset">Reset filters</button>
+      </div>
+      <div class="card-pad" style="border-top:1px solid var(--border-soft);padding-top:10px;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center">
+        <label>Sort tables by <span class="seg" id="cxSort"><button data-v="qty" class="on">Cancelled qty</button><button data-v="pct">Cancel %</button></span></label>
+        <span class="hint" id="cxSortHint">Cancel % sort lists only rows with 10 or more POs ordered.</span>
+        <span style="flex:1"></span>
+        <button class="btn sm" id="cxPdf">Export PDF</button><button class="btn sm" id="cxPpt">Export PowerPoint</button><button class="btn sm ghost" id="cxXls">Export Excel</button>
+      </div><div class="ms-chips" id="cxChips" style="display:none"></div></div>
+      <div id="cxBody"></div>
+    </section>
+
+    <section class="panel" id="panel-bcaps">
+      <div class="topbar"><div><h1>Capacity Summary</h1><div class="desc">DLO and agent capacity analysis from the two capacity files: how much capacity is offered to the buyer, how much is booked and where it is free, for DLO, for agents and in total. Each is analysed on its own, never mixed. Import the files in the DLO Capacity and Agent Capacity tabs.</div></div><div class="pillrow" id="capSPills"></div></div>
+      <div class="card"><div class="card-pad dva-ctl">
+        <label>Window <span class="seg" id="capSWin"><button data-v="3" class="on">Next 3 months</button><button data-v="6">Next 6 months</button><button data-v="0">All months</button></span></label>
+        <span class="hint">Target utilisation band: 60 to 80% (occupied of offered).</span>
+        <span style="flex:1"></span><button class="btn sm" id="capSPdf">Export PDF</button><button class="btn sm" id="capSPpt">Export PowerPoint</button><button class="btn sm ghost" id="capSXls">Export Excel</button>
+      </div></div>
+      <div id="capSBody"></div>
+    </section>
+
+    <section class="panel" id="panel-bcap">
+      <div class="topbar"><div><h1>DLO Capacity</h1><div class="desc">Analysis of the DLO capacity file: monthly capacity, capacity offered to the buyer, occupied and free space per supplier, month by month.</div></div><div class="pillrow" id="capDPills"></div></div>
+      <div class="card"><div class="card-pad"><b>DLO capacity file</b><div class="hint">Excel file with a sheet "Capacity" (merch, SUPPLIER, Product type, Brand, monthly capacity, lines, then Offered / Occupied / Free Space per month). Example: Capacity_DO_AW26_2026-11-06.xlsx</div>
+          <div style="margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="btn sm primary" id="capDPick">Import DLO capacity file</button><input type="file" id="capDFile" accept=".xlsx,.xls,.xlsm" style="display:none"><span class="hint" id="capDInfo">No file yet.</span></div></div>
+      <div class="card-pad dva-ctl" style="border-top:1px solid var(--border-soft);padding-top:10px">
+        <label>Window <span class="seg" id="capDWin"><button data-v="3" class="on">Next 3 months</button><button data-v="6">Next 6 months</button><button data-v="0">All months</button></span></label>
+        <span class="ms-lbl">Product type <span class="ms" id="capDType"></span></span>
+        <span class="ms-lbl">Merch <span class="ms" id="capDGrp"></span></span>
+        <span class="ms-lbl">Brand <span class="ms" id="capDBrand"></span></span>
+        <button class="btn sm ghost" id="capDReset">Reset filters</button>
+        <span style="flex:1"></span><button class="btn sm" id="capDPdf">Export PDF</button><button class="btn sm" id="capDPpt">Export PowerPoint</button><button class="btn sm ghost" id="capDXls">Export Excel</button>
+      </div><div class="ms-chips" id="capDChips" style="display:none"></div></div>
+      <div id="capDBody"></div>
+    </section>
+
+    <section class="panel" id="panel-bcapa">
+      <div class="topbar"><div><h1>Agent Capacity (Kite)</h1><div class="desc">Analysis of the agent capacity file (Kite capacity booking): monthly capacity, capacity offered to the buyer, occupied and free space per agent factory, month by month.</div></div><div class="pillrow" id="capAPills"></div></div>
+      <div class="card"><div class="card-pad"><b>Agent capacity file</b><div class="hint">Excel file with a sheet "Capacity Booking" (AGENT, FACTORY, Brand, Product type, monthly capacity, lines, then Offered / Occupied / Free Space per month). Example: Capacity_Agents_AW26_2026-11-06.xlsx</div>
+          <div style="margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="btn sm primary" id="capAPick">Import agent capacity file</button><input type="file" id="capAFile" accept=".xlsx,.xls,.xlsm" style="display:none"><span class="hint" id="capAInfo">No file yet.</span></div></div>
+      <div class="card-pad dva-ctl" style="border-top:1px solid var(--border-soft);padding-top:10px">
+        <label>Window <span class="seg" id="capAWin"><button data-v="3" class="on">Next 3 months</button><button data-v="6">Next 6 months</button><button data-v="0">All months</button></span></label>
+        <span class="ms-lbl">Product type <span class="ms" id="capAType"></span></span>
+        <span class="ms-lbl">Agent <span class="ms" id="capAGrp"></span></span>
+        <span class="ms-lbl">Brand <span class="ms" id="capABrand"></span></span>
+        <button class="btn sm ghost" id="capAReset">Reset filters</button>
+        <span style="flex:1"></span><button class="btn sm" id="capAPdf">Export PDF</button><button class="btn sm" id="capAPpt">Export PowerPoint</button><button class="btn sm ghost" id="capAXls">Export Excel</button>
+      </div><div class="ms-chips" id="capAChips" style="display:none"></div></div>
+      <div id="capABody"></div>
+    </section>
+
     <section class="panel" id="panel-bbench">
       <div class="topbar"><div><h1>Supplier Price Benchmark</h1><div class="desc">Pick one supplier. Its closest competitors are added automatically: the suppliers with the most priced POs in the same brand + subclass + price band. Prices are compared only inside those categories. Source: the last Main DD. Export as PDF, PowerPoint or Excel.</div></div>
         <div class="pillrow" id="bnPills"></div></div>
@@ -797,7 +862,7 @@ body.fullview .xl-toolbar{padding:4px 8px;}
         <label>Channel <span class="seg" id="bnCh"><button data-v="all" class="on">All</button><button data-v="dlo">Dhaka Office</button><button data-v="agent">Agent/Direct</button></span></label>
         <span class="ms-lbl">Supplier <span class="ms" id="bnSup"><input class="inp" id="bnSupIn" placeholder="Type 2 or 3 words of the supplier name…" autocomplete="off" spellcheck="false" style="width:360px"><div class="ms-pop" id="bnSupPop" style="display:none;width:430px"></div></span></span>
         <label>Competitors <select class="inp" id="bnN" style="width:70px"><option>3</option><option selected>4</option><option>6</option><option>8</option></select></label>
-        <label>Scope <span class="seg" id="bnScope"><button data-v="open">Pipeline</button><button data-v="shipped">Shipping &amp; shipped</button><button data-v="all" class="on">All (no cancelled)</button></span></label>
+        <label>Scope <span class="seg" id="bnScope"><button data-v="open">Pipeline</button><button data-v="etd">Pipeline from ETD</button><button data-v="shipped">Shipping &amp; shipped</button><button data-v="all" class="on">All (no cancelled)</button></span> <input type="date" class="inp bdEtd" title="ETD from this date onwards" style="width:150px;display:none"></label>
         <label>Price <span class="seg" id="bnW"><button data-v="med" class="on">Median</button><button data-v="wavg">Qty-weighted</button></span></label>
         <span class="ms-lbl">Season <span class="ms" id="bnSeason"></span></span>
         <span class="ms-lbl">Brand <span class="ms" id="bnBrand"></span></span>
@@ -820,7 +885,7 @@ body.fullview .xl-toolbar{padding:4px 8px;}
       <div class="topbar"><div><h1 id="prcH1">My Orders vs Agent Price</h1><div class="desc" id="prcDesc">Your FOB (from your chart) against agent FOB (from the DD) for the same buyers, compared inside the same brand + subclass. Agent prices come from every DD that carries cost_price and stay in a price book, so the page keeps working when a DD arrives without prices.</div></div>
         <div class="pillrow" id="prcPills"></div></div>
       <div class="card"><div class="card-pad dva-ctl" id="prcCtl">
-        <label>Scope <span class="seg" id="prcScope"><button data-v="open">Open orders</button><button data-v="shipped">Shipped orders</button><button data-v="all" class="on">All orders</button></span></label>
+        <label>Scope <span class="seg" id="prcScope"><button data-v="open">Open orders</button><button data-v="etd">Pipeline from ETD</button><button data-v="shipped">Shipped orders</button><button data-v="all" class="on">All orders</button></span> <input type="date" class="inp bdEtd" title="ETD from this date onwards" style="width:150px;display:none"></label>
         <span class="ms-lbl">Buyer <span class="ms" id="prcBuyer"></span></span>
         <span class="ms-lbl">Brand <span class="ms" id="prcBrand"></span></span>
         <span class="ms-lbl">Subclass <span class="ms" id="prcSub"></span></span>
@@ -1002,7 +1067,7 @@ body.fullview .xl-toolbar{padding:4px 8px;}
         <div class="card-head"><h3>Default CC and sender</h3><span class="hint">used in every draft</span></div>
         <div class="card-pad ct-settings">
           <label>Default CC (every email)<input id="ctDefaultCc" class="inp" placeholder="name@example.com; name@example.com"></label>
-          <label>Merchandiser name (used in the export file name)<input id="ctMer" class="inp" placeholder="e.g. Sohel"></label>
+          <label>Merchandiser name (used in the export file name)<input id="ctMer" class="inp" placeholder="e.g. Demo"></label>
         </div>
       </div>
       <div class="card lockable">
@@ -1165,7 +1230,7 @@ body.fullview .xl-toolbar{padding:4px 8px;}
             <details style="margin-top:6px"><summary>Responsiveness log</summary><div class="btnrow" style="margin:6px 0"><button class="btn sm" id="stallCopy">Copy</button><button class="btn sm ghost" id="stallClear">Clear</button><span class="hint" id="stallHint"></span></div><pre id="stallLog" style="white-space:pre-wrap;font-size:11px;max-height:220px;overflow:auto;background:var(--bg2,#f4f6fa);padding:8px;border-radius:6px"></pre></details></li>
           <li><b>Two lists can be locked.</b> My Buyers List and Rules card 1 (Your buyers) open locked. Click the lock to edit, lock them again when you are done. The lock stops a stray keystroke, it is not a password.</li>
           <li><b>Two blank templates.</b> <b>Blank template</b> on the order sheets writes an empty follow-up chart, columns A to AQ, with example rows and a Read me sheet. <b>Blank template</b> on My Buyers List writes an empty contact sheet with the right headers, one example row and a Read me sheet. Fill either one and bring it back in with Load order file or Import Excel.</li>
-          <li><b>Every page exports what you see.</b> TNA &amp; Critical Path, the two My Orders vs Agent pages and the two BD Sourcing Review pages each have an Export button that writes the rows on screen, scope, filters and search box included, with no row limit. Breakdown sheets are added only for the dimensions that vary in that view.</li>
+          <li><b>Every page exports what you see.</b> TNA &amp; Critical Path, and the two My Orders vs Agent pages each have an Export button that writes the rows on screen, scope, filters and search box included, with no row limit. Breakdown sheets are added only for the dimensions that vary in that view.</li>
         </ul>
       </div>
 
@@ -1274,7 +1339,8 @@ return XLSX; })();
 /* ==========================================================================
    Demo kit for sohelprsnl.com/tools/bd-sourcing-review.html
    Builds a made-up Main DD export (the same 63 columns as the real DD_BD export)
-   and imports it on the first visit, so the six review pages are full.
+   and imports it on the first visit, so the review pages are full. Two made-up
+   capacity files (DLO and agents) fill the three capacity pages the same way.
    Dates are relative to the first visit. Every buyer, supplier, agent, PO and
    price below is invented.
    ========================================================================== */
@@ -1372,12 +1438,51 @@ function feed(){
 }
 function firstVisit(){
   var F=window.__FUM__; if(!F || !F.DDX){ setTimeout(firstVisit, 400); return; }
-  if(F.DDX.cur) return;          /* a sample DD is already saved in this browser */
-  feed();
+  capFirst(function(){ if(F.DDX.cur) return;          /* a sample DD is already saved in this browser */
+    feed(); });
 }
-ribbon("Sample data only. Every buyer, supplier, agent, PO and price is made up. Your filters and imports stay in this browser.",
-  [["Load sample DD","Build the made-up Main DD export again and import it",feed],
+/* ---------- made-up capacity files (DLO "Capacity" sheet and agent "Capacity Booking" sheet), months from the current month ---------- */
+var MONF=["January","February","March","April","May","June","July","August","September","October","November","December"];
+function capMonths(n){ var d=new Date(T0), y=d.getUTCFullYear(), m=d.getUTCMonth(), out=[]; for(var i=0;i<n;i++){ var mm=(m+i)%12, yy=y+Math.floor((m+i)/12); out.push(MONF[mm]+"'"+String(yy).slice(2)); } return out; }
+var MERCHS=["Arif (Demo)","Bina (Demo)","Rafi (Demo)","Tania (Demo)","Zaman (Demo)"];
+var DLO_CAP=[["Alpha Denim Ltd (Demo)","denim","KITE+MIRA",900000,60],["Bluewave Jeans Ltd (Demo)","denim","KITE",700000,48],["Crescent Woven Ltd (Demo)","light woven","MIRA+NORTH",500000,40],
+  ["Harbor Shirts Ltd (Demo)","light woven","KITE+MIRA",450000,36],["Maple Trousers Ltd (Demo)","woven","KITE",600000,44],["Riverside Denim Mills (Demo)","denim","KITE+MIRA",1200000,80],
+  ["Northstar Woven Ltd (Demo)","woven","MIRA+NORTH",550000,38],["Lotus Apparel Ltd (Demo)","knit","KITE",1500000,90],["Coastline Knit Ltd (Demo)","knit","KITE+MIRA",2000000,110],
+  ["Evergreen Knitwear Ltd (Demo)","knit","KITE",1800000,95],["Sunbeam Sweaters Ltd (Demo) - 12gg","sweater","KITE",250000,300],["Sunbeam Sweaters Ltd (Demo) - multi gg","sweater","KITE",150000,200],
+  ["Granite Outerwear Ltd (Demo)","outwear","MIRA+NORTH",300000,30],["Willow Knit Composite (Demo)","knit","KITE+MIRA",1600000,85],["Bayside Apparel Ltd (Demo)","woven","KITE",400000,32],["Orchid Denim Ltd (Demo)","denim","KITE",650000,46]];
+var AG_CAP=[["Eastbridge Sourcing (Demo)","Delta Apparel Co (Demo)","KITE","light knit",900000,40],["Eastbridge Sourcing (Demo)","Zenith Denim (Demo)","KITE","denim",500000,30],["Meridian Agency (Demo)","Sunrise Garments (Demo)","KITE","light knit",700000,34],
+  ["Meridian Agency (Demo)","Prime Woven Ltd (Demo)","KITE+MIRA","woven",450000,28],["Pacific Link Trading (Demo)","Coral Knitwear (Demo)","KITE","light knit",800000,38],["Pacific Link Trading (Demo)","Ocean Trousers (Demo)","KITE","denim",400000,26],
+  ["Silverline Buying House (Demo)","Summit Fashion Ltd (Demo)","KITE+MIRA","woven",350000,22],["Silverline Buying House (Demo)","Golden Thread Ltd (Demo)","KITE","light knit",600000,30],["Eastbridge Sourcing (Demo)","Green Valley Apparel (Demo)","KITE","sweaters",200000,150],
+  ["Meridian Agency (Demo)","Starlight Garments (Demo)","KITE","woven",300000,20]];
+function capRow(lead, cap, nM, prof){ var r=lead.slice(), i; for(i=0;i<nM;i++){
+    var off= prof==="nooffer"? null : Math.round(cap*(0.45+rnd()*0.2)/10000)*10000;
+    var f= prof==="idle"? 0 : prof==="over"? (i<3? 1.05+rnd()*0.25 : Math.max(0,0.8-i*0.12)) : prof==="nooffer"? (i<3? 0.4 : 0) : Math.max(0,(i<3? 0.3+rnd()*0.5 : 0.6-i*0.08+rnd()*0.1));
+    var occ= prof==="nooffer"? Math.round(cap*f/1000)*1000 : Math.round((off||0)*f/1000)*1000;
+    r.push(off, occ, off==null? null : off-occ); } return r; }
+function capSheet(kind){
+  seed = 20261108; var nM=11, mons=capMonths(nM), lab=[], hdr, rows=[], i;
+  if(kind==="dlo"){ lab=[null,null,null,null,null,null]; hdr=["merch","SUPPLIER","Product type","Brand","Supplier Monthly Capacity","Total Line"];
+    DLO_CAP.forEach(function(s,j){ var prof= j===5||j===8? "over" : j===12? "idle" : "ok"; rows.push(capRow([MERCHS[j%MERCHS.length], s[0], s[1], s[2], s[3], s[4]], s[3], nM, prof)); }); }
+  else { lab=[null,null,null,null,null,null,null]; hdr=[null,"AGENT","FACTORY","Brand","Product type","Supplier Tot Monthly Capacity","Total Line"];
+    AG_CAP.forEach(function(s,j){ var prof= j===1||j===4? "over" : j===9? "nooffer" : j===6? "idle" : "ok"; rows.push(capRow([null, s[0], s[1], s[2], s[3], s[4], s[5]], s[4], nM, prof)); }); }
+  mons.forEach(function(m){ lab.push(m,null,null); hdr.push(kind==="dlo"?"Offered":"Offered for the buyer","Occupied","Free Space"); });
+  var aoa=[[kind==="dlo"?"merch":null], lab, hdr].concat(rows), wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(aoa), kind==="dlo"?"Capacity":"Capacity Booking");
+  var buf=XLSX.write(wb,{type:"array",bookType:"xlsx"});
+  return new File([buf],(kind==="dlo"?"Capacity_DLO_demo_":"Capacity_Agents_demo_")+stamp()+".xlsx",{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+}
+function capFeed(done){
+  var back=document.querySelector('.navbtn.active'), backTab=back&&back.dataset.tab, steps=[["bcap","capDFile","dlo"],["bcapa","capAFile","ag"]];
+  function step(k){ if(k>=steps.length){ var nb=backTab&&document.querySelector('.navbtn[data-tab="'+backTab+'"]'); if(nb) nb.click(); try{ localStorage.setItem("srDemoCap1","1"); }catch(e){} if(done) setTimeout(done,300); return; }
+    var st=steps[k], nav=document.querySelector('.navbtn[data-tab="'+st[0]+'"]'); if(nav) nav.click();
+    setTimeout(function(){ var inp=document.getElementById(st[1]); if(!inp){ step(k+1); return; } var dt=new DataTransfer(); dt.items.add(capSheet(st[2])); inp.files=dt.files; inp.dispatchEvent(new Event("change",{bubbles:true})); setTimeout(function(){ step(k+1); },1500); },700); }
+  step(0);
+}
+function capFirst(next){ var have=false; try{ have=localStorage.getItem("srDemoCap1")==="1"; }catch(e){} if(have){ next(); return; } capFeed(next); }
+ribbon("Sample data only. Every buyer, supplier, agent, PO, price and capacity figure is made up. Your filters and imports stay in this browser.",
+  [["Load sample DD","Build the made-up Main DD export and capacity files again and import them",function(){ capFeed(feed); }],
    ["Download sample DD","Download the same made-up DD export as .xlsx",function(){ download(ddFile()); }],
+   ["Download sample capacity","Download the two made-up capacity files as .xlsx",function(){ download(capSheet("dlo")); setTimeout(function(){ download(capSheet("ag")); },800); }],
    ["Reset demo","Delete this browser's demo data and start again",function(){ resetDb("lpp_bd_sourcing_review"); }]],
   "bd-sourcing-review", function(){ setTimeout(firstVisit, 1500); });
 })();
@@ -1420,7 +1525,7 @@ document.addEventListener('keydown', ()=>{ const t=Date.now(); if(t-stallKeyAt>1
 window.addEventListener('error', e=>{ const a=stallRead(); a.push({at:new Date().toISOString(), gap:0, what:'ERROR '+String(e.message).slice(0,120)+' line '+(e.lineno||'')}); stallWrite(a); });
 
 /* =====================================================================
-   SCHEMA — columns A..AQ (AQ Shipped Quantity added 4 Nov 2026) as in "Production Follow up chart (Sohel)"
+   SCHEMA — columns A..AQ (AQ Shipped Quantity added 4 Nov 2026) as in "Production Follow up chart"
    w = Excel column width, fmt = Excel number format, src = refreshed by Main DD import
    ===================================================================== */
 const COLUMNS = [
@@ -3115,6 +3220,10 @@ document.querySelectorAll('.navbtn[data-tab]').forEach(btn=>btn.addEventListener
   if(tab==='bbench'){ bdLoad().then(renderBN); }
   if(tab==='bagent'){ bdLoad().then(()=>entRender('agent')); }
   if(tab==='bbuyer'){ bdLoad().then(()=>entRender('buyer')); }
+  if(tab==='bcxl'){ bdLoad().then(cxRender); }
+  if(tab==='bcaps'){ capRenderS(); }
+  if(tab==='bcap'){ bdLoad().then(()=>capRender('D')); }
+  if(tab==='bcapa'){ bdLoad().then(()=>capRender('A')); }
   if(tab==='import') renderDDPage();
   if(tab==='backup'){ renderBackup(); renderLog(); }
   if(tab==='contacts') renderContacts();
@@ -4904,7 +5013,7 @@ async function saveCurrentDD(P, summary){
   DVA_MY.rows=bRows; DVA_MY.meta={fileName:meta.fileName, lastModified:meta.lastModified||null, uploadedAt:DDX.cur.uploadedAt, hasAgent:bRows.some(r=>r.agent)};
   if(persistOK){ await idbPut('config',{k:'ddBuyerRows', value:bRows}).catch(()=>{}); await idbPut('config',{k:'ddBuyerMeta', value:DVA_MY.meta}).catch(()=>{}); }
   /* BD Sourcing Review: every DD row, kept as compact tuples */
-  { const all=(P.exp||[]); DVA_BD.rows=all; DVA_BD.meta=PRC_BD.meta={fileName:meta.fileName, uploadedAt:DDX.cur.uploadedAt, n:all.length, hasAgent:all.some(r=>r.agent), hasFob:!!P.hasFob}; BD_LOADED=true;
+  if(SRC_MODE) { const all=(P.exp||[]); DVA_BD.rows=all; DVA_BD.meta=PRC_BD.meta={fileName:meta.fileName, uploadedAt:DDX.cur.uploadedAt, n:all.length, hasAgent:all.some(r=>r.agent), hasFob:!!P.hasFob}; BD_LOADED=true;
     if(persistOK){ const tup=all.map(r=>BD_F.map(k=> k==='fob'? ((r.fob!=null&&r.fob!==''&&!isNaN(r.fob))? Number(r.fob) : null) : (r[k]==null? '' : r[k])));
       await idbPut('config',{k:'ddAllRows', value:{f:BD_F, rows:tup}}).catch(saveFailed); await idbPut('config',{k:'ddAllMeta', value:DVA_BD.meta}).catch(()=>{}); }
     DVA_BD.rows=bdNormalize(all); }
@@ -5168,7 +5277,7 @@ function renderDashboard(){
 /* ===================================================================== RULES TAB */
 
 /* ---- site footer: full card at the bottom of the Dashboard and About pages only ---- */
-const APP_VERSION='1.2.44';
+const APP_VERSION='1.2.68';
 function stallRender(){ const el=document.getElementById('stallLog'); if(!el) return; const a=stallRead();
   el.textContent = a.length ? a.slice().reverse().map(x=>x.at.replace('T',' ').slice(0,19)+'  '+(x.gap? (x.gap/1000).toFixed(1)+' s  ' : '')+x.what+(x.keysInLast10s!=null?'  keys:'+x.keysInLast10s:'')+(x.page?'  page:'+String(x.page).trim():'')+(x.ver?'  v'+x.ver:'')).join('\n') : 'No pause longer than 1.5 s recorded.';
   const h=document.getElementById('stallHint'); if(h) h.textContent=a.length? a.length+' line(s)' : ''; }
@@ -5311,12 +5420,19 @@ const bdChan=r=>{ if(r.chanForce) return r.chanForce; const a=sgNorm(r.agent); r
    A supplier that is itself an agent in the agent_id column keeps its direct POs as Agent.
    Agent name for a moved PO: the supplier itself when it is an agent_id, else the agent the supplier uses most, else the DD value. */
 function bdNormalize(rows){ const sup=new Map(), agents=new Map(), key=r=>sgNorm(r.supplier);
-  const special=a=> /direct/.test(a) || (/\boffice\b/.test(a) && a!=='dhaka office');
-  rows.forEach(r=>{ if(String(r.status||'').toLowerCase()==='cancelled') return; const a=sgNorm(r.agent); if(special(a)) return;
+  /* blank agent_id (Sohel, 8 Nov 2026): the supplier decides. Its POs under Dhaka Office against its POs under agents and direct suppliers;
+     more DLO POs = DLO, else Agent/Direct (its main agent, else 0_Direct Supplier). A supplier seen nowhere else stays Agent/Direct. */
+  const special=a=> !a || /direct/.test(a) || (/\boffice\b/.test(a) && a!=='dhaka office');
+  rows.forEach(r=>{ if(String(r.status||'').toLowerCase()==='cancelled') return; const a=sgNorm(r.agent); const k=key(r);
+    if(special(a)){ if(a && /direct/.test(a) && k){ const o=sup.get(k)||{dlo:0,ag:new Map(),dir:0}; o.dir++; sup.set(k,o); } return; }
     if(a && a!=='dhaka office') agents.set(a, String(r.agent).trim());
-    const k=key(r); if(!k) return; const o=sup.get(k)||{dlo:0,ag:new Map()}; if(a==='dhaka office') o.dlo++; else { const nm=String(r.agent||'').trim(); o.ag.set(nm,(o.ag.get(nm)||0)+1); } sup.set(k,o); });
+    if(!k) return; const o=sup.get(k)||{dlo:0,ag:new Map(),dir:0}; if(a==='dhaka office') o.dlo++; else { const nm=String(r.agent||'').trim(); o.ag.set(nm,(o.ag.get(nm)||0)+1); } sup.set(k,o); });
   let n=0; const out=rows.map(r=>{ const a=sgNorm(r.agent); if(!special(a)) return r; n++;
     const k=key(r), o=sup.get(k), agN=o? [...o.ag.values()].reduce((t,v)=>t+v,0) : 0;
+    if(!a){ const dir=o? o.dir : 0;
+      if(o && o.dlo>agN+dir) return Object.assign({}, r, {agent:'Dhaka Office', agentDD:'(blank)', chanForce:'DLO'});
+      const name= agents.get(k) || (agN? [...o.ag.entries()].sort((x,y)=>y[1]-x[1])[0][0] : dir? '0_Direct Supplier' : 'Agent blank in DD');
+      return Object.assign({}, r, {agent:name, agentDD:'(blank)', chanForce:'Agent'}); }
     if(o && o.dlo>agN) return Object.assign({}, r, {agent:'Dhaka Office', agentDD:r.agent, chanForce:'DLO'});
     const name= agents.get(k) || (/\boffice\b/.test(a)? String(r.agent).trim() : (agN? [...o.ag.entries()].sort((x,y)=>y[1]-x[1])[0][0] : String(r.agent).trim()));
     return Object.assign({}, r, {agent:name, agentDD:r.agent, chanForce:'Agent'}); });
@@ -5327,10 +5443,24 @@ const dvaIsDLO=r=> sgNorm(r.agent)==='dhaka office' || DVA_MYSUP.has(sgNorm(r.su
    DLO side  = every row of my chart: Running Orders (sheet "open") and Shipped Orders -all (sheet "shipped"). Buyers, brand, season, qty, ETD, FOB come from the chart.
    Agent side = DD rows of my buyers that are NOT DLO (agent_id not Dhaka Office, supplier not mine, PO not in my chart). Sheet by DD status: open = statuses ticked in Rules card 4, shipped = the rest except cancelled.
    Buyer names are shown in the chart's spelling. */
+/* BD Sourcing Review scope (Sohel, 8 Nov 2026): Pipeline = new, ordered, quick_ordered, booked. Shipping & shipped = every other status except cancelled.
+   Pipeline from ETD = Pipeline POs whose ETD (vendor pickup date) is on or after the date picked (default today). Rules card 4 no longer decides these pages. */
+const BD_OPEN=new Set(['new','ordered','quick_ordered','booked']);
+const BDX={etd:null};
+const bdEtdFrom=()=> BDX.etd || todayISO();
+const bdKind=r=>{ const st=String(r.status||'').toLowerCase(); return st==='cancelled'? 'cancel' : BD_OPEN.has(st)? 'open' : 'shipped'; };
+const bdIn=(scope,r)=>{ const k=bdKind(r); if(k==='cancel') return false; return scope==='all' || (scope==='etd'? k==='open' && String(r.etd||'')>=bdEtdFrom() : k===scope); };
+const bdEtdTxt=()=>{ const n=isoToSerial(bdEtdFrom()); return n? fmtDate(n,'dd-mmm-yy') : bdEtdFrom(); };
+const bdScopeTxt=s=> s==='open'?'Pipeline':s==='shipped'?'Shipping & shipped':s==='etd'?'Pipeline, ETD from '+bdEtdTxt():'All orders except cancelled';
+function bdEtdSync(){ document.querySelectorAll('.bdEtd').forEach(i=>{ const seg=i.parentElement.querySelector('.seg'), on=seg&&seg.querySelector('button.on'); i.value=bdEtdFrom(); i.style.display= on&&on.dataset.v==='etd'? '' : 'none'; }); }
+function bdRerender(){ const t=(document.querySelector('.navbtn.active')||{}).dataset||{}; PRC_CHART=null; BN_BASE=null;
+  ({bdva:renderDVA, bprice:renderPRC, bscore:renderSC, bbench:renderBN, bagent:()=>entRender('agent'), bbuyer:()=>entRender('buyer'), bcap:()=>capRender('D'), bcapa:()=>capRender('A')}[t.tab]||(()=>{}))(); setTimeout(bdEtdSync,0); }
+document.addEventListener('change',e=>{ const i=e.target.closest&&e.target.closest('.bdEtd'); if(!i) return; BDX.etd= i.value || null; bdRerender(); });
+document.addEventListener('click',e=>{ if(e.target.closest&&e.target.closest('.seg')) setTimeout(bdEtdSync,0); });
 let DVA_U=null;
 function dvaUniverse(){
   if(DVA_U) return DVA_U;
-  if(DVA.bd){ const openSt=new Set(STATE.config.addStatuses.map(x=>x.toLowerCase())); const out=[], oth=[];
+  if(DVA.bd){ const openSt=BD_OPEN; const out=[], oth=[];
     DVA.rows.forEach(r=>{ const st=String(r.status||'').toLowerCase(); if(st==='cancelled') return; const ch=bdChan(r);
       const o=Object.assign({}, r, {side: ch==='DLO'? 'DLO' : 'Agent', chan:ch, sheet: openSt.has(st)? 'open' : 'shipped', orderId:String(r.orderId), ddStatus:r.status, qty:Number(r.qty)||0, src:'DD'});
       (ch==='DLO'||ch==='Agent'? out : oth).push(o); });
@@ -5349,7 +5479,7 @@ function dvaUniverse(){
     out.push(Object.assign({}, r, {side:'Agent', sheet: openSt.has(st)?'open':'shipped', buyer: canon.get(sgNorm(b))||b, orderId:String(r.orderId), status:r.status, ddStatus:r.status, qty:Number(r.qty)||0, src:'DD'})); });
   DVA_U=out; return out;
 }
-const rowScopeOK=(scope,r)=> scope==='all' || r.sheet===scope;
+const rowScopeOK=(scope,r)=> scope==='all' || r.sheet===scope || (scope==='etd' && r.sheet==='open' && String(r.etd||'')>=bdEtdFrom());
 /* Rows of a scope: my chart rows of that scope, plus agent DD rows of the SAME buyers only. A buyer with no order in my chart for that scope is not shown. */
 function dvaScoped(scope){ if(DVA.bd) return dvaUniverse().filter(r=>rowScopeOK(scope,r)); const U=dvaUniverse().filter(r=>rowScopeOK(scope,r)); const mine=new Set(U.filter(r=>r.side==='DLO').map(r=>sgNorm(r.buyer))); return U.filter(r=>r.side==='DLO'||mine.has(sgNorm(r.buyer))); }
 /* DD rows that the DD calls DLO (or sit at my suppliers) but whose PO is not in my chart: shown as a warning, never counted */
@@ -5518,7 +5648,7 @@ function renderDVA(){
     msStep(f, rows, r=>r.agent, 'agent', 'dvaAgent', R, {src: rows.filter(r=>r.side==='Agent'), noCut:true});
     msStep(f, rows, r=>r.supplier, 'supplier', 'dvaSupplier', R, {src: rows.filter(r=>r.side==='DLO'), noCut:true});
     msChips('dvaChips', f, [['buyer','Buyer'],['brand','Brand'],['season','Season'],['dept','Dept'],['sub','Subclass'],['agent','Agent'],['supplier','DLO supplier']], R, 'dvaReset'); }
-  document.getElementById('dvaScopeNote').textContent = DVA.bd ? (DVA.scope==='open' ? 'Open = DD rows with status '+STATE.config.addStatuses.join(', ') : DVA.scope==='shipped' ? 'Shipped = DD rows with any other status except cancelled' : 'All = every DD row except cancelled') : DVA.scope==='open' ? 'Open = my Running Orders sheet + agent DD rows with status '+STATE.config.addStatuses.join(', ') : DVA.scope==='shipped' ? 'Shipped = my Shipped Orders sheet + agent DD rows with any other status except cancelled' : 'All = both sheets + all agent DD rows except cancelled';
+  document.getElementById('dvaScopeNote').textContent = DVA.bd ? (DVA.scope==='open' ? 'Pipeline = DD rows with status new, ordered, quick_ordered or booked' : DVA.scope==='etd' ? 'Pipeline from ETD = Pipeline rows with ETD on or after '+bdEtdTxt() : DVA.scope==='shipped' ? 'Shipped = DD rows with any other status except cancelled' : 'All = every DD row except cancelled') : DVA.scope==='open' ? 'Open = my Running Orders sheet + agent DD rows with status '+STATE.config.addStatuses.join(', ') : DVA.scope==='shipped' ? 'Shipped = my Shipped Orders sheet + agent DD rows with any other status except cancelled' : 'All = both sheets + all agent DD rows except cancelled';
 
   const rows=dvaFiltered(); const {d,a}=dvaSplit(rows); document.getElementById('dvaTot').innerHTML=totHTML(rows,DVA.scope,DVA.bd,DVA.f);
   const f=DVA.f, gapRows=dvaGapRows(DVA.scope).filter(r=>(!f.buyer.length||f.buyer.some(b=>sgNorm(b)===sgNorm(r.buyer)))&&fHas(f.brand,r.brand)&&fHas(f.season,r.season)&&fHas(f.dept,r.dept)&&fHas(f.sub,r.subclass));
@@ -5721,7 +5851,7 @@ function dvaExport(){
   dvaRefreshSets(); DVA_U=null;
   const rows=dvaSearched(dvaFiltered());
   if(!rows.length){ toast('Nothing to export in this view.'); return; }
-  const f=fView(DVA.f), scopeTxt = DVA.scope==='open'?'Open orders':DVA.scope==='shipped'?'Shipped orders':'All orders';
+  const f=fView(DVA.f), scopeTxt = DVA.bd? bdScopeTxt(DVA.scope) : DVA.scope==='open'?'Open orders':DVA.scope==='shipped'?'Shipped orders':'All orders';
   const {d,a}=dvaSplit(rows);
   const dloRows=rows.filter(r=>r.side==='DLO'), agRows=rows.filter(r=>r.side==='Agent');
   const qty=rs=>rs.reduce((t,r)=>t+(Number(r.qty)||0),0);
@@ -5730,7 +5860,7 @@ function dvaExport(){
 
   const sum=[
     {Item:'Scope', Value:scopeTxt},
-    {Item:'Scope means', Value: DVA.scope==='open'?'my Running Orders + agent DD rows with status '+STATE.config.addStatuses.join(', '):DVA.scope==='shipped'?'my Shipped Orders + agent DD rows with any other status, cancelled excluded':'both sheets + all agent DD rows except cancelled'},
+    {Item:'Scope means', Value: DVA.bd? (DVA.scope==='open'?'DD rows with status new, ordered, quick_ordered or booked':DVA.scope==='etd'?'DD rows with status new, ordered, quick_ordered or booked and ETD on or after '+bdEtdTxt():DVA.scope==='shipped'?'DD rows with any other status, cancelled excluded':'every DD row except cancelled') : DVA.scope==='open'?'my Running Orders + agent DD rows with status '+STATE.config.addStatuses.join(', '):DVA.scope==='shipped'?'my Shipped Orders + agent DD rows with any other status, cancelled excluded':'both sheets + all agent DD rows except cancelled'},
     {Item:'Measure on screen', Value:DVA.measure==='qty'?'Quantity':'PO count'},
     {Item:'Filter: Buyer', Value:f.buyer||'All'},
     {Item:'Filter: Brand', Value:f.brand||'All'},
@@ -5821,7 +5951,9 @@ async function setBD(on){
   document.getElementById('prcH1').textContent=T.price[0]; document.getElementById('prcDesc').textContent=T.price[1];
   document.getElementById('dvaSearch').value=DVA.q; document.getElementById('prcSearch').value=PRC.q; document.getElementById('prcMin').value=PRC.min;
   const SL= on? {open:'Pipeline', shipped:'Shipping & shipped', all:'All (no cancelled)'} : {open:'Open orders', shipped:'Shipped orders', all:'All orders'};
-  document.querySelectorAll('#dvaScope button, #prcScope button').forEach(b=>{ if(SL[b.dataset.v]) b.textContent=SL[b.dataset.v]; });
+  document.querySelectorAll('#dvaScope button, #prcScope button').forEach(b=>{ if(SL[b.dataset.v]) b.textContent=SL[b.dataset.v]; if(b.dataset.v==='etd') b.style.display= on? '' : 'none'; });
+  if(!on){ if(DVA_MY.scope==='etd') DVA_MY.scope='open'; if(PRC_MY.scope==='etd') PRC_MY.scope='all'; }
+  setTimeout(bdEtdSync,0);
   const vb=document.querySelector('#dvaMeasure button[data-v="val"]'); if(vb) vb.style.display= on? '' : 'none'; if(DVA_MY.measure==='val') DVA_MY.measure='po';
   document.getElementById('bdExtra').style.display= on? '' : 'none';
   document.getElementById('dvaHelpMy').style.display= on? 'none' : ''; document.getElementById('dvaHelpBd').style.display= on? '' : 'none';
@@ -6045,7 +6177,7 @@ function prcExport(){
   if(!priced.length){ toast('Nothing priced in this view.'); return; }
   const keep=new Set(priced.map(x=>String(x.r.orderId)+'|'+x.side));
   const all=PRC.q? base.all.filter(r=>keep.has(String(r.orderId)+'|'+r.side)) : base.all;
-  const f=fView(PRC.f,{qty:PRC_QTY_LBL}), scopeTxt=PRC.scope==='open'?'Open orders':PRC.scope==='shipped'?'Shipped orders':'All orders except cancelled';
+  const f=fView(PRC.f,{qty:PRC_QTY_LBL}), scopeTxt=PRC.bd? bdScopeTxt(PRC.scope) : PRC.scope==='open'?'Open orders':PRC.scope==='shipped'?'Shipped orders':'All orders except cancelled';
   const qtyTxt={s:'under 1,000', m:'1,000 to 5,000', l:'over 5,000'};
   const D=priced.filter(x=>x.side==='DLO'), A=priced.filter(x=>x.side==='Agent');
   const groups=prcGroups(all, priced), cmp=groups.filter(g=>g.ok);
@@ -6305,12 +6437,12 @@ const scMonday=iso=>{ const m=/^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso||'')); 
 const SC_V={ch:['Cheaper','ch'], dr:['Dearer','dr'], lv:['Level','lv'], na:['Too few to compare','na']};
 
 function scData(){
-  const all=DVA_BD.rows||[]; const openS=new Set(STATE.config.addStatuses.map(x=>x.toLowerCase()));
-  const kind=r=>{ const st=String(r.status||'').toLowerCase(); return st==='cancelled'? 'cancel' : openS.has(st)? 'open' : 'shipped'; };
+  const all=DVA_BD.rows||[];
+  const kind=bdKind;
   const key=sgNorm(SC.sup), f=SC.f;
   const sel=r=> fHas(f.season,r.season) && fHas(f.buyer,r.buyer);
   const supAll=all.filter(r=>sgNorm(r.supplier)===key && scChOK(r));
-  const mkt=all.filter(r=>{ const k=kind(r); return k!=='cancel' && (SC.scope==='all'||k===SC.scope) && sel(r); });
+  const mkt=all.filter(r=> bdIn(SC.scope,r) && sel(r));
   /* the channel filter cuts this supplier's own orders; the price comparison keeps every other supplier in every channel */
   const mine=mkt.filter(r=>sgNorm(r.supplier)===key && scChOK(r));
   const D={sup:SC.sup, mine};
@@ -6350,7 +6482,7 @@ function scData(){
   return D;
 }
 const scName=(D,anon)=>s=> anon? (D.alias.get(s)||'Supplier') : s;
-function scFilterTxt(){ return [SC.ch==='all'? 'All channels' : SC_CH[SC.ch]+(SC.ch==='agent'&&SC.ag.length? ': '+SC.ag.join(', ') : ''), SC.scope==='open'?'Pipeline':SC.scope==='shipped'?'Shipping & shipped':'All orders except cancelled', SC.f.season.length? 'Season: '+SC.f.season.join(', ') : 'All seasons', SC.f.buyer.length? 'Buyer: '+SC.f.buyer.join(', ') : 'All buyers']; }
+function scFilterTxt(){ return [SC.ch==='all'? 'All channels' : SC_CH[SC.ch]+(SC.ch==='agent'&&SC.ag.length? ': '+SC.ag.join(', ') : ''), bdScopeTxt(SC.scope), SC.f.season.length? 'Season: '+SC.f.season.join(', ') : 'All seasons', SC.f.buyer.length? 'Buyer: '+SC.f.buyer.join(', ') : 'All buyers']; }
 
 /* ---------- SVG charts (screen and PDF) ---------- */
 const scX=s=>esc(String(s));
@@ -6699,7 +6831,7 @@ function rpDeck(kind, kicker, coverLine){
   const p=new PptxGenJS(); p.layout='LAYOUT_WIDE'; p.title=rpBase(kind); p.company='Dhaka Liaison Office';
   const C={G:'1F6B45',GD:'0F3D27',G2:'2E8B57',T:'0E7490',I:'4338CA',A:'D97706',R:'B42318',SL:'334155',M:'64748B',F:'Calibri'}; const M=rpMeta(kind), chips=rpChips(kind).join('   ·   ');
   p.defineSlideMaster({title:'RP',background:{color:'FFFFFF'},objects:[{rect:{x:0,y:0,w:13.333,h:0.12,fill:{color:C.G}}},{rect:{x:0,y:7.2,w:13.333,h:0.3,fill:{color:'F1F5F9'}}},
-    {text:{text:rpTitle(kind)+'  ·  Dhaka Liaison Office  ·  Source: Main DD '+M.file,options:{x:0.5,y:7.2,w:10.5,h:0.3,fontSize:9,color:C.M,fontFace:C.F}}}],slideNumber:{x:12.4,y:7.2,w:0.6,h:0.3,fontSize:9,color:C.M,fontFace:C.F}});
+    {text:{text:rpTitle(kind)+'  ·  Dhaka Liaison Office  ·  '+(M.src||'Source: Main DD '+M.file),options:{x:0.5,y:7.2,w:10.5,h:0.3,fontSize:9,color:C.M,fontFace:C.F}}}],slideNumber:{x:12.4,y:7.2,w:0.6,h:0.3,fontSize:9,color:C.M,fontFace:C.F}});
   const s=p.addSlide(); s.background={color:C.GD};
   s.addShape(p.ShapeType.ellipse,{x:9.2,y:-1.6,w:6,h:6,fill:{color:C.G,transparency:35},line:{color:C.G,transparency:100}}); s.addShape(p.ShapeType.ellipse,{x:10.6,y:3.9,w:4.2,h:4.2,fill:{color:C.G2,transparency:55},line:{color:C.G2,transparency:100}});
   s.addShape(p.ShapeType.rect,{x:0.8,y:2.15,w:0.12,h:2.0,fill:{color:C.A},line:{color:C.A}});
@@ -6707,7 +6839,7 @@ function rpDeck(kind, kicker, coverLine){
   s.addText(rpTitle(kind),{x:1.15,y:2.5,w:9.5,h:1.0,fontSize:38,bold:true,color:'FFFFFF',fontFace:C.F,fit:'shrink'});
   s.addText(chips,{x:1.15,y:3.55,w:9.5,h:0.6,fontSize:12.5,color:'D1FAE5',fontFace:C.F,valign:'top'});
   if(coverLine) s.addText(coverLine,{x:1.15,y:4.4,w:10,h:0.4,fontSize:14,color:'FFFFFF',bold:true,fontFace:C.F});
-  s.addText('Dhaka Liaison Office  ·  '+fmtDate(todaySerial(),'dd-mmm-yy'),{x:1.15,y:6.6,w:10,h:0.35,fontSize:11,color:'A7F3D0',fontFace:C.F});
+  s.addText((SRC_MODE? 'BD Sourcing Review: DD · Cancellations · Capacity  ·  ' : '')+'Dhaka Liaison Office  ·  '+fmtDate(todaySerial(),'dd-mmm-yy'),{x:1.15,y:6.6,w:11,h:0.35,fontSize:11,color:'A7F3D0',fontFace:C.F});
   const D={p,C,
     slide:(title,sub,c)=>{ const s=p.addSlide({masterName:'RP'}); s.addShape(p.ShapeType.rect,{x:0.5,y:0.42,w:0.09,h:0.52,fill:{color:c||C.G},line:{color:c||C.G}}); s.addText(title,{x:0.72,y:0.32,w:12,h:0.5,fontSize:24,bold:true,color:'0F172A',fontFace:C.F}); s.addText(sub||chips,{x:0.72,y:0.8,w:12,h:0.3,fontSize:11,color:C.M,fontFace:C.F}); return s; },
     T:(hdr,rows,c)=>[hdr.map(h=>({text:h[0],options:{bold:true,color:'FFFFFF',fill:{color:c||C.G},align:h[1]?'right':'left'}})), ...rows.map((r,ri)=>r.map((x,ci)=>({text:String(Array.isArray(x)?(x[0]==null?'':x[0]):(x==null?'':x)),options:Object.assign({align:hdr[ci][1]?'right':'left',fill:{color:ri%2?'F8FAFC':'FFFFFF'},color:'0F172A'},Array.isArray(x)?(x[1]||{}):{})})))],
@@ -6771,8 +6903,8 @@ const BN_DIMS=[['brand','Brand',r=>r.brand],['buyer','Buyer',r=>r.buyer],['dept'
 const BN_COL=['#1f6b45','#d97706','#0e7490','#7c3aed','#be123c','#4338ca','#ca8a04','#0f766e','#64748b'];
 const bnKey=r=>(r.brand||'(blank)')+' · '+(r.subclass||'(blank)')+' · '+(String(r.priceCat||'').trim()||'no band');
 let BN_BASE=null;
-function bnBase0(){ const src=DVA_BD.rows||[], st0=STATE.config.addStatuses.join('|'); if(BN_BASE&&BN_BASE.src===src&&BN_BASE.scope===BN.scope&&BN_BASE.st===st0) return BN_BASE.rr;
-  const openS=new Set(STATE.config.addStatuses.map(x=>x.toLowerCase())); const rr=src.filter(r=>{ const st=String(r.status||'').toLowerCase(); if(st==='cancelled'||scFob(r)==null) return false; return BN.scope==='all'||(openS.has(st)?'open':'shipped')===BN.scope; });
+function bnBase0(){ const src=DVA_BD.rows||[], st0=BN.scope+'|'+bdEtdFrom(); if(BN_BASE&&BN_BASE.src===src&&BN_BASE.scope===BN.scope&&BN_BASE.st===st0) return BN_BASE.rr;
+  const rr=src.filter(r=>{ if(scFob(r)==null) return false; return bdIn(BN.scope,r); });
   BN_BASE={src,scope:BN.scope,st:st0,rr}; return rr; }
 function bnRows(){ const f=BN.f; if(!f.season.length&&!f.brand.length&&!f.sub.length&&!f.band.length&&!f.qty.length) return bnBase0();
   return bnBase0().filter(r=> fHas(f.season,r.season) && fHas(f.brand,r.brand) && fHas(f.sub,r.subclass) && fHas(f.band,r.priceCat) && fHas(f.qty,prcQtyBand(r))); }
@@ -6898,7 +7030,7 @@ function bnDimTbl(B,dk,nm,dot,max){ const rows=B.dimOf(dk)||[], lab=BN_DIMS.find
   const head=[[lab],['Categories',1]].concat(B.S.map((s,i)=>[dot(i)+esc(nm(s)),1])).concat([['Cheapest']]);
   return rpTbl(head, rows.slice(0,max).map(x=>{ const ci=x.lo==null?-1:x.idx.indexOf(x.lo); return [esc(x.g), x.cats].concat(x.idx.map((v,i)=> v==null? '' : `<span style="${x.lo!=null&&v===x.lo?'color:#1f6b45;font-weight:800':x.hi!=null&&v===x.hi?'color:#b42318;font-weight:800':''}">${v.toFixed(1)}</span> <span class="oth">(${x.n[i]})</span>`)).concat([ci<0?'':dot(ci)+esc(nm(B.S[ci]))]); })); }
 function bnHTML(B, anon, screen){
-  const nm=bnNm(B,anon), meta=DVA_BD.meta||{}, F=[BN.scope==='open'?'Pipeline':BN.scope==='shipped'?'Shipping & shipped':'All orders except cancelled', BN.w==='wavg'?'Qty-weighted FOB':'Median FOB', 'Min '+BN.min+' priced POs'];
+  const nm=bnNm(B,anon), meta=DVA_BD.meta||{}, F=[bdScopeTxt(BN.scope), BN.w==='wavg'?'Qty-weighted FOB':'Median FOB', 'Min '+BN.min+' priced POs'];
   const fv=fView(BN.f,{qty:PRC_QTY_LBL}); [['season','Season'],['brand','Brand'],['sub','Subclass'],['band','Price band'],['qty','Qty band']].forEach(([k,l])=>{ if(fv[k]) F.push(l+': '+fv[k]); });
   const card=(t,sub,c,b)=>`<div class="sc-card" style="--c:${c}"><h3><b>${t}</b><span>${sub||''}</span></h3><div class="b">${b}</div></div>`;
   const dot=i=>`<i style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${BN_COL[i%BN_COL.length]};margin-right:6px"></i>`;
@@ -6957,7 +7089,7 @@ function bnPpt(){ const B=BN.last; if(!B||!B.cats.length){ toast('Pick a supplie
     BN_DIMS.forEach(([dk,dl])=>{ const rows=B.dimOf(dk)||[]; if(!rows.length) return; const hd=[[dl]].concat(B.S.map(s=>[nm(s),1])).concat([['Cheapest']]); const w=Math.min(1.5,(12.3-3.0-2.2)/B.S.length);
       D.pages('Compare by '+dl.toLowerCase(),'Price index inside each '+dl.toLowerCase()+'   ·   100 = market median of the same categories   ·   (n) = priced POs',C.I,hd, rows.slice(0,36).map(x=>{ const ci=x.lo==null?-1:x.idx.indexOf(x.lo); return [x.g].concat(x.idx.map((v,i)=> v==null? ['',{}] : [v.toFixed(1)+' ('+x.n[i]+')',{color: x.lo!=null&&v===x.lo? C.G : x.hi!=null&&v===x.hi? C.R : '0F172A', bold: x.lo!=null&&(v===x.lo||v===x.hi)}])).concat([ci<0?'':nm(B.S[ci])]); }), [3.0].concat(B.S.map(()=>w)).concat([2.2]), 12, 0.38); });
     { const L=bnLadder(B); if(L&&L.rows.length){ const s=D.slide('Price ladder · '+BN.cat,'Market median '+scPrice(L.mk)+' ('+L.nPO.toLocaleString()+' POs, '+L.nSup+' suppliers)   ·   % = distance to the market median',C.T);
-        const hd=bnLadHead(B,L,nm).replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"');
+        const hd=bnLadHead(B,L,nm).replace(/<[^>]+>/g,'').replace(/&#39;/g,"'").replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"');
         s.addText(hd,{x:0.5,y:1.25,w:12.3,h:0.55,fontSize:13,color:'0F172A',fill:{color:'ECFDF3'},fontFace:C.F,margin:6});
         const it=L.rows.slice().reverse(), lab=x=>nm(x.s)+(x.on===0?'  (MAIN)':x.on>0&&!/^Competitor /.test(nm(x.s))?'  (COMPETITOR)':'')+'     '+scPrice(x.p)+'  ·  '+(x.gap>0?'+':'')+x.gap.toFixed(0)+'%  ·  '+x.n+' POs';
         s.addChart(p.ChartType.bar,[{name:'Cheaper than market',labels:it.map(lab),values:it.map(x=>x.gap<0?+x.gap.toFixed(1):0)},{name:'Dearer than market',labels:it.map(lab),values:it.map(x=>x.gap>=0?+x.gap.toFixed(1):0)}],
@@ -6988,7 +7120,7 @@ const totPct=(a,b)=> (a+b)? Math.round(a/(a+b)*100) : 0;
 const totMoney=v=> Math.abs(v)>=1e6? '$'+(v/1e6).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+'M' : '$'+Math.round(v).toLocaleString();
 const totQty=v=> Math.abs(v)>=1e6? (v/1e6).toFixed(2)+'M' : Math.round(v).toLocaleString();
 function totOther(scope, f){ if(!DVA_OTHER.length) return ''; f=f||{}; const g=new Map();
-  DVA_OTHER.forEach(r=>{ if(!(scope==='all'||r.sheet===scope)) return; if(!(fHas(f.buyer||[],r.buyer)&&fHas(f.brand||[],r.brand)&&fHas(f.season||[],r.season)&&fHas(f.dept||[],r.dept)&&fHas(f.sub||[],r.subclass))) return;
+  DVA_OTHER.forEach(r=>{ if(!rowScopeOK(scope,r)) return; if(!(fHas(f.buyer||[],r.buyer)&&fHas(f.brand||[],r.brand)&&fHas(f.season||[],r.season)&&fHas(f.dept||[],r.dept)&&fHas(f.sub||[],r.subclass))) return;
     const k='Direct suppliers matching no DLO or agent supplier'; const o=g.get(k)||{po:0,qty:0}; o.po++; o.qty+=Number(r.qty)||0; g.set(k,o); });
   return [...g.entries()].map(([k,o])=>k+' '+o.po.toLocaleString()+' POs ('+totQty(o.qty)+' pcs)').join(', '); }
 function totHTML(rows, scope, bd, f){ const T=totCalc(rows); if(!T.tot.po) return '';
@@ -7002,13 +7134,13 @@ function totHTML(rows, scope, bd, f){ const T=totCalc(rows); if(!T.tot.po) retur
   return side('DLO',bd?'DLO · DHAKA OFFICE':'DLO · MY ORDERS','#1f6b45')+side('Agent',bd?'AGENT / DIRECT · ALL OTHERS':'AGENT · SAME BUYERS','#d97706')+
     `<div class="tc" style="--k:#334155"><div class="th"><b>TOTAL</b><span>${T.tot.po.toLocaleString()} POs · ${totQty(T.tot.qty)} pcs${T.priced?' · '+totMoney(T.tot.val):''}</span></div>`+
     bar('POs',T.DLO.po,T.Agent.po)+bar('Qty',T.DLO.qty,T.Agent.qty)+(T.priced?bar('FOB value',T.DLO.val,T.Agent.val):'')+
-    (scope==='all'? `<div class="tb"><span>Open</span><span style="grid-column:2/4">${(T.open.d+T.open.a).toLocaleString()} POs: DLO ${T.open.d.toLocaleString()} · Agent ${T.open.a.toLocaleString()}</span></div><div class="tb"><span>Shipped</span><span style="grid-column:2/4">${(T.shipped.d+T.shipped.a).toLocaleString()} POs: DLO ${T.shipped.d.toLocaleString()} · Agent ${T.shipped.a.toLocaleString()}</span></div>` : '')+
+    (scope==='all'? `<div class="tb"><span>${bd?'Pipeline':'Open'}</span><span style="grid-column:2/4">${(T.open.d+T.open.a).toLocaleString()} POs: DLO ${T.open.d.toLocaleString()} · Agent ${T.open.a.toLocaleString()}</span></div><div class="tb"><span>${bd?'Shipping &amp; shipped':'Shipped'}</span><span style="grid-column:2/4">${(T.shipped.d+T.shipped.a).toLocaleString()} POs: DLO ${T.shipped.d.toLocaleString()} · Agent ${T.shipped.a.toLocaleString()}</span></div>` : '')+
     (notes.length?`<div class="tn">${notes.join(' ')}</div>`:'')+'</div>'; }
 /* the same numbers for PDF, PowerPoint and Excel */
 function totRows(rows){ const T=totCalc(rows), r2=n=>Math.round(n*100)/100;
   const one=(lab,x,o)=>({Side:lab, POs:x.po, 'Qty (pcs)':Math.round(x.qty), 'FOB value $':x.vq?Math.round(x.val):'', 'Avg FOB / pc $':x.vq?r2(x.val/x.vq):'', 'Share of POs %':o?totPct(x.po,o.po):100, 'Share of qty %':o?totPct(x.qty,o.qty):100, 'Share of value %':!T.priced?'':o?totPct(x.val,o.val):100});
   const out=[one('DLO (Dhaka Office)',T.DLO,T.Agent), one(DVA.bd||PRC.bd?'Agent / Direct (all others)':'Agent (same buyers)',T.Agent,T.DLO), one('Total',T.tot,null)];
-  if(T.tot.po){ [['open','Open orders'],['shipped','Shipped orders']].forEach(([k,l])=>{ const o=T[k]; if(!(o.d+o.a)) return; out.push({Side:l+' · DLO', POs:o.d, 'Share of POs %':totPct(o.d,o.a)}); out.push({Side:l+' · Agent', POs:o.a, 'Share of POs %':(o.d+o.a)?100-totPct(o.d,o.a):0}); }); }
+  if(T.tot.po){ (DVA.bd? [['open','Pipeline'],['shipped','Shipping & shipped']] : [['open','Open orders'],['shipped','Shipped orders']]).forEach(([k,l])=>{ const o=T[k]; if(!(o.d+o.a)) return; out.push({Side:l+' · DLO', POs:o.d, 'Share of POs %':totPct(o.d,o.a)}); out.push({Side:l+' · Agent', POs:o.a, 'Share of POs %':(o.d+o.a)?100-totPct(o.d,o.a):0}); }); }
   return {T, rows:out}; }
 function totPdf(rows, scope, bd, f){ const t=totHTML(rows,scope,bd,f); return t? `<div class="tot3" style="margin:0 0 12px">${t}</div>` : ''; }
 function totSlide(D, rows, scope, bd){ const T=totCalc(rows), C=D.C, p=D.p; if(!T.tot.po) return; const F=C.F||'Calibri';
@@ -7028,7 +7160,7 @@ function totSlide(D, rows, scope, bd){ const T=totCalc(rows), C=D.C, p=D.p; if(!
     if(f>0) s.addShape(p.ShapeType.rect,{x:bx,y:y+0.05,w:bw*f,h:0.24,fill:{color:'1F6B45'},line:{color:'1F6B45',width:0}}); if(f<1) s.addShape(p.ShapeType.rect,{x:bx+bw*f,y:y+0.05,w:bw*(1-f),h:0.24,fill:{color:'D97706'},line:{color:'D97706',width:0}});
     s.addText([{text:totPct(d,a)+'%',options:{color:'1F6B45',bold:true}},{text:' / ',options:{color:'64748B'}},{text:((d+a)?100-totPct(d,a):0)+'%',options:{color:'B45309',bold:true}}],{x:10.6,y,w:2.0,h:0.32,fontSize:13,align:'right',fontFace:F}); });
   let yy=y0+0.62+bars.length*0.42+0.05;
-  if(scope==='all'){ s.addText('Open: '+(T.open.d+T.open.a).toLocaleString()+' POs (DLO '+T.open.d.toLocaleString()+' · Agent '+T.open.a.toLocaleString()+')      Shipped: '+(T.shipped.d+T.shipped.a).toLocaleString()+' POs (DLO '+T.shipped.d.toLocaleString()+' · Agent '+T.shipped.a.toLocaleString()+')',{x:0.8,y:yy,w:11.8,h:0.32,fontSize:12,color:'334155',fontFace:F}); yy+=0.36; }
+  if(scope==='all'){ s.addText((bd?'Pipeline: ':'Open: ')+(T.open.d+T.open.a).toLocaleString()+' POs (DLO '+T.open.d.toLocaleString()+' · Agent '+T.open.a.toLocaleString()+')      '+(bd?'Shipping & shipped: ':'Shipped: ')+(T.shipped.d+T.shipped.a).toLocaleString()+' POs (DLO '+T.shipped.d.toLocaleString()+' · Agent '+T.shipped.a.toLocaleString()+')',{x:0.8,y:yy,w:11.8,h:0.32,fontSize:12,color:'334155',fontFace:F}); yy+=0.36; }
   if(notes.length) s.addText(notes.join('   '),{x:0.8,y:yy,w:11.8,h:0.3,fontSize:11,color:'64748B',fontFace:F}); }
 
 /* ===================================================================== AGENT SCORECARD and BUYER SCORECARD (BD Sourcing Review)
@@ -7036,8 +7168,7 @@ function totSlide(D, rows, scope, bd){ const T=totCalc(rows), C=D.C, p=D.p; if(!
    Prices: DD cost_price, USD; a category = brand + subclass + price band; a median needs at least ENT_MIN priced POs on a side. */
 const ENT_MIN=3;
 const ENT={agent:{key:'', scope:'all', f:{season:[]}, last:null, bound:false}, buyer:{key:'', scope:'all', f:{season:[]}, last:null, bound:false}};
-function entRows(S){ const openS=new Set(STATE.config.addStatuses.map(x=>x.toLowerCase()));
-  return (DVA_BD.rows||[]).filter(r=>{ const st=String(r.status||'').toLowerCase(); if(st==='cancelled') return false; if(!(S.scope==='all'||(openS.has(st)?'open':'shipped')===S.scope)) return false; return fHas(S.f.season,r.season); }); }
+function entRows(S){ return (DVA_BD.rows||[]).filter(r=> bdIn(S.scope,r) && fHas(S.f.season,r.season)); }
 const entStat=rs=>{ let po=0,q=0,v=0,pq=0; const p=[]; rs.forEach(r=>{ const x=Number(r.qty)||0, f=scFob(r); po++; q+=x; if(f){ v+=x*f; pq+=x; p.push(f); } }); return {po,qty:q,val:v,pq,avg:pq?v/pq:null,med:p.length>=ENT_MIN?prcMedian(p):null,np:p.length}; };
 const entGap=(a,b)=> (a!=null&&b!=null&&b)? (a-b)/b*100 : null;
 const entPct=(a,b)=> (a+b)? Math.round(a/(a+b)*100) : 0;
@@ -7071,8 +7202,8 @@ function agData(){ const S=ENT.agent, rows=entRows(S), key=sgNorm(S.key);
   const depts=[...entGroup(mine,r=>r.dept).entries()].map(([k,rs])=>Object.assign({k},entStat(rs))).sort((x,y)=>y.qty-x.qty);
   const dloC=entGroup(dlo,bnKey);
   const cats=[...entGroup(mine,bnKey).entries()].map(([k,rs])=>{ const a=entStat(rs), d=entStat(dloC.get(k)||[]); return {k, po:a.po, qty:a.qty, am:a.med, dm:d.med, dpo:d.po, gap:entGap(d.med,a.med)}; }).sort((x,y)=>y.po-x.po);
-  const dloFac=new Set(dlo.map(r=>sgNorm(r.factory||r.supplier)));
-  const facs=[...entGroup(mine,r=>r.factory||r.supplier).entries()].map(([k,rs])=>({k, po:rs.length, qty:entStat(rs).qty, dlo: dloFac.has(sgNorm(k)), dpo: dlo.filter(r=>sgNorm(r.factory||r.supplier)===sgNorm(k)).length})).sort((x,y)=>y.po-x.po);
+  const dloFac=new Set(dlo.map(r=>sgNorm(dvxFac(r))));
+  const facs=[...entGroup(mine,r=>dvxFac(r)).entries()].map(([k,rs])=>({k, po:rs.length, qty:entStat(rs).qty, dlo: dloFac.has(sgNorm(k)), dpo: dlo.filter(r=>sgNorm(dvxFac(r))===sgNorm(k)).length})).sort((x,y)=>y.po-x.po);
   const seasons=[...new Set(rows.map(r=>r.season).filter(Boolean))].sort((a,b)=>seasonKey(a)-seasonKey(b)).map(se=>{ const m=mine.filter(r=>r.season===se).length, ag=agents.filter(r=>r.season===se).length; return {label:se, a:m, d:0, share: ag? Math.round(m/ag*100) : 0}; }).filter(x=>x.a);
   const cheap=cats.filter(c=>c.gap!=null&&c.gap<=-3), dear=cats.filter(c=>c.gap!=null&&c.gap>=3), shared=facs.filter(f=>f.dlo);
   const find=[`<b>${esc(S.key)}</b> holds ${A.po.toLocaleString()} POs, ${Math.round(A.po/(allAg.po||1)*100)}% of all agent POs in this view (rank ${rk} of ${rank.length} agents).`,
@@ -7102,7 +7233,7 @@ function byData(){ const S=ENT.buyer, rows=entRows(S), key=sgNorm(S.key); const 
   return {kind:'buyer', name:S.key, D, A, O, agents, sups, cats, seasons, depts, find, rows:all}; }
 /* ---------- one HTML for screen and PDF ---------- */
 function entHTML(X, screen){ const S=ENT[X.kind], meta=DVA_BD.meta||{}, fv=fView(S.f);
-  const chips=[S.scope==='open'?'Pipeline':S.scope==='shipped'?'Shipping & shipped':'All orders except cancelled'].concat(fv.season?['Season: '+fv.season]:[]);
+  const chips=[bdScopeTxt(S.scope)].concat(fv.season?['Season: '+fv.season]:[]);
   const card=(t,sub,c,b)=>`<div class="sc-card" style="--c:${c}"><h3><b>${t}</b><span>${sub||''}</span></h3><div class="b">${b}</div></div>`;
   const pc=v=>v==null?'':`<span class="${v<=-3?'gch':v>=3?'gdr':''}">${(v>0?'+':'')+v.toFixed(1)}%</span>`;
   let h=`<div class="sc-ban"><div style="position:relative;z-index:1"><div class="k">${X.kind==='agent'?'Agent scorecard':'Buyer scorecard'} · BD sourcing review</div><h2>${esc(X.name)}</h2><div>${chips.map(x=>`<span class="sc-chip">${esc(x)}</span>`).join('')}</div></div><div class="m">Dhaka Liaison Office<br>Source: Main DD ${esc(meta.fileName||'')}<br>Report date ${fmtDate(todaySerial(),'dd-mmm-yy')}</div></div>`;
@@ -7129,13 +7260,13 @@ function entHTML(X, screen){ const S=ENT[X.kind], meta=DVA_BD.meta||{}, fv=fView
     h+=card('Categories: DLO against agents','brand + subclass + price band · gap = DLO median against agent median, negative = DLO cheaper · WIN BACK = DLO 3%+ cheaper but under half the POs',SCP.red,
       rpTbl([['Category'],['DLO POs',1],['Agent POs',1],['DLO share',1],['DLO median',1],['Agent median',1],['Gap',1],['Action']], X.cats.slice(0,screen?80:25).map(c=>[esc(c.k),c.dpo.toLocaleString(),c.apo.toLocaleString(),c.share+'%',c.dm!=null?scPrice(c.dm):'',c.am!=null?scPrice(c.am):'',pc(c.gap),tag(c.act)])));
   }
-  h+=`<div class="sc-note">Source: every non-cancelled row of the Main DD. DLO = agent Dhaka Office; Agent = every other agent and direct supplier. A direct-supplier PO goes to the side its supplier mostly works with, else it is left out; a Shanghai Office PO is DLO when its supplier works with Dhaka Office, else Agent. Prices in USD from cost_price; a median needs ${ENT_MIN}+ priced POs on a side. The same category is not the same garment: fabric, wash and trims differ.</div><div class="sc-foot"><span>${X.kind==='agent'?'Agent':'Buyer'} Scorecard · ${esc(X.name)}</span><span>Dhaka Liaison Office · ${fmtDate(todaySerial(),'dd-mmm-yy')}</span></div>`;
+  h+=`<div class="sc-note">Source: every non-cancelled row of the Main DD. DLO = agent Dhaka Office; Agent = every other agent and direct supplier. A direct-supplier or blank-agent PO goes to the side its supplier mostly works with (more DLO POs = DLO, else Agent/Direct); a Shanghai Office PO is DLO when its supplier works with Dhaka Office, else Agent. Prices in USD from cost_price; a median needs ${ENT_MIN}+ priced POs on a side. The same category is not the same garment: fabric, wash and trims differ.</div><div class="sc-foot"><span>${X.kind==='agent'?'Agent':'Buyer'} Scorecard · ${esc(X.name)}</span><span>Dhaka Liaison Office · ${fmtDate(todaySerial(),'dd-mmm-yy')}</span></div>`;
   return h; }
 function entRender(kind){ entBind(kind); const S=ENT[kind], P=kind==='agent'?'ag':'by', body=document.getElementById(P+'Body'), rows=DVA_BD.rows||[];
   document.querySelectorAll('#'+P+'Scope button').forEach(b=>b.classList.toggle('on',b.dataset.v===S.scope)); { const i=document.getElementById(P+'In'); if(document.activeElement!==i) i.value=S.key; }
   const meta=DVA_BD.meta||{}; document.getElementById(P+'Pills').innerHTML= rows.length? `<div class="pill">DD <b>${esc(meta.fileName||'')}</b> ${(meta.n||rows.length).toLocaleString()} rows</div>` : '<div class="pill">No full DD saved yet</div>';
   if(!rows.length){ body.innerHTML='<div class="notice info" style="margin-top:14px">No full DD saved yet. Import a Main DD first.</div>'; S.last=null; return; }
-  { const openS=new Set(STATE.config.addStatuses.map(x=>x.toLowerCase())); const rr=rows.filter(r=>{ const st=String(r.status||'').toLowerCase(); return st!=='cancelled' && (S.scope==='all'||(openS.has(st)?'open':'shipped')===S.scope); });
+  { const rr=rows.filter(r=>bdIn(S.scope,r));
     msStep(S.f, rr, r=>r.season, 'season', P+'Season', ()=>entRender(kind), {order:(a,b)=>seasonKey(a)-seasonKey(b)}); }
   if(!S.key){ body.innerHTML=`<div class="card" style="margin-top:14px"><div class="sc-empty">Type 2 or 3 words of ${kind==='agent'?'an agent':'a buyer'} name above and pick it.</div></div>`; S.last=null; return; }
   const X= kind==='agent'? agData() : byData(); S.last=X;
@@ -7147,8 +7278,8 @@ function entPdf(kind){ const X=ENT[kind].last; if(!X){ toast('Pick '+(kind==='ag
   window.__ENT__={doc}; const old=document.getElementById('scPrintFrame'); if(old) old.remove(); const fr=document.createElement('iframe'); fr.id='scPrintFrame'; fr.style.cssText='position:fixed;right:0;bottom:0;width:0;height:0;border:0;'; document.body.appendChild(fr);
   fr.onload=()=>{ setTimeout(()=>{ try{ fr.contentWindow.focus(); fr.contentWindow.print(); }catch(e){ toast('Could not open the print window: '+e.message); } },200); }; fr.srcdoc=doc; toast('In the print window choose "Save as PDF". File name: '+entBase(kind)+'.pdf'); }
 function entPpt(kind){ const X=ENT[kind].last; if(!X){ toast('Pick '+(kind==='agent'?'an agent':'a buyer')+' first.'); return; } if(!window.PptxGenJS){ toast('The PowerPoint library is missing from this page.'); return; }
-  const strip=h=>String(h).replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"');
-  const rT=rpTitle, rB=rpBase, rC=rpChips, rM=rpMeta; rpTitle=()=> kind==='agent'?'Agent Scorecard':'Buyer Scorecard'; rpBase=()=>entBase(kind); rpChips=()=>[X.name, ENT[kind].scope==='open'?'Pipeline':ENT[kind].scope==='shipped'?'Shipping & shipped':'All orders except cancelled']; rpMeta=()=>{ const m=DVA_BD.meta||{}; return {file:m.fileName||'', at:m.uploadedAt||''}; };
+  const strip=h=>String(h).replace(/<[^>]+>/g,'').replace(/&#39;/g,"'").replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"');
+  const rT=rpTitle, rB=rpBase, rC=rpChips, rM=rpMeta; rpTitle=()=> kind==='agent'?'Agent Scorecard':'Buyer Scorecard'; rpBase=()=>entBase(kind); rpChips=()=>[X.name, bdScopeTxt(ENT[kind].scope)]; rpMeta=()=>{ const m=DVA_BD.meta||{}; return {file:m.fileName||'', at:m.uploadedAt||''}; };
   try{ const cover= kind==='agent'? `${X.name}   ·   ${X.A.po.toLocaleString()} POs   ·   ${X.share}% of agent POs` : `${X.name}   ·   DLO ${entPct(X.D.po,X.A.po)}% of POs   ·   ${X.agents.length} agents`;
     const D=rpDeck('dva','BD sourcing review',cover), C=D.C, p=D.p;
     { const s=D.slide('At a glance'); if(kind==='agent'){ const A=X.A; D.kpis(s,[[A.po.toLocaleString(),'POs',C.A],[scQty(A.qty),'Quantity (pcs)',C.T],[A.pq?scMoney(A.val):'–','FOB value (USD)',C.I],[A.avg!=null?scPrice(A.avg):'–','Average FOB',C.SL],[X.share+'%','Share of agent POs',C.A],['#'+X.rank+' of '+X.nAg,'Rank among agents',C.R],[String(X.buyers.length),'Buyers',C.G],[String(X.facs.length),'Factories',C.T]]); }
@@ -7166,7 +7297,7 @@ function entPpt(kind){ const X=ENT[kind].last; if(!X){ toast('Pick '+(kind==='ag
     }
     D.save(); } finally { rpTitle=rT; rpBase=rB; rpChips=rC; rpMeta=rM; } }
 function entXls(kind){ const X=ENT[kind].last; if(!X){ toast('Pick '+(kind==='agent'?'an agent':'a buyer')+' first.'); return; } const wb=XLSX.utils.book_new(), r2=n=>n==null||!isFinite(n)?'':Math.round(n*100)/100;
-  const strip=h=>String(h).replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&#39;/g,"'");
+  const strip=h=>String(h).replace(/<[^>]+>/g,'').replace(/&#39;/g,"'").replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&#39;/g,"'");
   dvaSheet(wb,'Summary',[{Item:kind==='agent'?'Agent':'Buyer',Value:X.name},{Item:'Scope',Value:ENT[kind].scope},{Item:'DD file',Value:(DVA_BD.meta||{}).fileName||''}].concat(X.find.map((f,i)=>({Item:'Finding '+(i+1),Value:strip(f)}))),'334155',false);
   if(kind==='agent'){
     dvaSheet(wb,'Buyers',X.buyers.map(b=>({Buyer:b.k,'Agent POs':b.po,'Qty (pcs)':Math.round(b.qty),'DLO POs':b.dlo,'All agents POs':b.allAg,'Share of buyer DLO + agent POs %':b.share})),'D97706',false);
@@ -7185,6 +7316,504 @@ function entXls(kind){ const X=ENT[kind].last; if(!X){ toast('Pick '+(kind==='ag
 function renderAll(){ stallNote('renderAll after a change'); ppsRuleAll(); planFmtAll(); updateUndoBtns(); renderGrid(true); renderDashboard(); try{ const n=REVIEW_CHECKS.reduce((t,c)=>t+(c.level==='info'?0:c.run().length),0); document.getElementById('reviewDot').classList.toggle('show',n>0); }catch(e){} }
 setInterval(()=>{ if(stallWhat!=='idle' && !XL.editing && performance.now()-stallLast<400) stallWhat='idle'; },3000);
 
+/* ---- BD Sourcing Review: Cancelled Orders ----
+   Source: every row of the last Main DD (ddAllRows), cancelled rows included. Cancelled = DD status "cancelled".
+   Ordered = every PO in view, cancelled or not. Cancel % = cancelled / ordered (quantity unless the column says POs or value).
+   Channel by bdChan after bdNormalize, the same rule as the other pages. The DD has no cancel date and no cancel reason.
+   Re-ordered: the same style is still on a live (not cancelled) PO in the DD. Same supplier = probably re-issued or split. */
+const CX={chan:'all', f:{season:[],buyer:[],brand:[],dept:[]}, bigOff:true, big:100000, sort:'qty', last:null, bound:false, idx:null};
+const CX_MIN=10, CX_FOB_MAX=50;
+const cxFob=r=>{ const f=scFob(r); return f&&f<=CX_FOB_MAX? f : null; };
+const cxIsC=r=>String(r.status||'').toLowerCase()==='cancelled';
+function cxIndex(){ const src=DVA_BD.rows||[]; if(CX.idx&&CX.idx.src===src) return CX.idx; const ss=new Set(), st=new Set();
+  src.forEach(r=>{ if(cxIsC(r)) return; const y=sgNorm(r.style); if(!y) return; st.add(y); ss.add(y+'|'+sgNorm(r.supplier)); });
+  CX.idx={src,ss,st}; return CX.idx; }
+const cxRe=r=>{ const I=cxIndex(), y=sgNorm(r.style); if(!y) return 'none'; return I.ss.has(y+'|'+sgNorm(r.supplier))? 'same' : I.st.has(y)? 'other' : 'none'; };
+function cxStat(rs){ const o={po:0,qty:0,val:0,cpo:0,cqty:0,cval:0,same:0,other:0,none:0};
+  rs.forEach(r=>{ const q=Number(r.qty)||0, f=cxFob(r), v=f? q*f : 0; if(scFob(r)&&!f) o.bad=(o.bad||0)+1; o.po++; o.qty+=q; o.val+=v; if(cxIsC(r)){ o.cpo++; o.cqty+=q; o.cval+=v; o[cxRe(r)]+=q; } });
+  o.pq= o.qty? o.cqty/o.qty*100 : 0; o.pp= o.po? o.cpo/o.po*100 : 0; o.pv= o.val? o.cval/o.val*100 : 0; return o; }
+const cxP=v=> v==null? '' : (v>=10? Math.round(v) : v.toFixed(1))+'%';
+function cxGroups(rows, key, extra){ return [...entGroup(rows,key).entries()].map(([k,rs])=>Object.assign({k}, cxStat(rs), extra? extra(rs) : {})); }
+function cxSorted(L){ return CX.sort==='pct'? L.filter(x=>x.po>=CX_MIN).sort((a,b)=>b.pq-a.pq||b.cqty-a.cqty) : L.filter(x=>x.cpo).sort((a,b)=>b.cqty-a.cqty); }
+function cxBind(){ if(CX.bound) return; CX.bound=true;
+  document.getElementById('cxChan').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; CX.chan=b.dataset.v; cxRender(); });
+  document.getElementById('cxSort').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; CX.sort=b.dataset.v; cxRender(); });
+  document.getElementById('cxBigOff').addEventListener('change',e=>{ CX.bigOff=e.target.checked; cxRender(); });
+  document.getElementById('cxBig').addEventListener('change',e=>{ const v=Math.round(Number(e.target.value)); CX.big= v>=1000? v : 100000; e.target.value=CX.big; cxRender(); });
+  document.getElementById('cxReset').addEventListener('click',()=>{ CX.chan='all'; CX.f={season:[],buyer:[],brand:[],dept:[]}; CX.bigOff=true; CX.big=100000; CX.sort='qty'; document.getElementById('cxBigOff').checked=true; document.getElementById('cxBig').value=100000; cxRender(); });
+  document.getElementById('cxPdf').addEventListener('click',cxPdf); document.getElementById('cxPpt').addEventListener('click',cxPpt); document.getElementById('cxXls').addEventListener('click',cxXls); }
+function cxData(rows){
+  const all=rows, C=all.filter(cxIsC), T=cxStat(all), dloR=all.filter(r=>bdChan(r)==='DLO'), agR=all.filter(r=>bdChan(r)==='Agent'), D=cxStat(dloR), A=cxStat(agR);
+  const big=CX.bigOff? (DVA_BD.rows||[]).filter(r=>(Number(r.qty)||0)>=CX.big && cxIsC(r)) : [];
+  const top=r=>{ const m=new Map(); r.forEach(x=>{ const k=String(x.agent||'').trim(); if(k) m.set(k,(m.get(k)||0)+1); }); return [...m.entries()].sort((a,b)=>b[1]-a[1]).map(x=>x[0])[0]||''; };
+  const sups=cxGroups(all, r=>r.supplier, rs=>({chan: rs.some(r=>bdChan(r)==='DLO')&&rs.some(r=>bdChan(r)==='Agent')? 'Both' : bdChan(rs[0])==='DLO'? 'DLO':'Agent/Direct', agent: (()=>{ const d=rs.some(r=>bdChan(r)==='DLO'), a=rs.filter(r=>bdChan(r)==='Agent'); const t=a.length? (top(a)||'agent blank in DD') : ''; return d&&a.length? 'Dhaka Office + '+t : a.length? t : 'Dhaka Office'; })()}));
+  const agents=cxGroups(agR, r=>r.agent, rs=>({nsup:new Set(rs.map(r=>sgNorm(r.supplier))).size}));
+  const split=rs=>{ const d=cxStat(rs.filter(r=>bdChan(r)==='DLO')), a=cxStat(rs.filter(r=>bdChan(r)==='Agent')); return {dpq:d.qty?d.pq:null, apq:a.qty?a.pq:null, dcq:d.cqty, acq:a.cqty}; };
+  const brands=cxGroups(all, r=>r.brand, split), depts=cxGroups(all, r=>r.dept, split);
+  const buyers=cxGroups(all, r=>r.buyer, rs=>{ const d=cxStat(rs.filter(r=>bdChan(r)==='DLO')), a=cxStat(rs.filter(r=>bdChan(r)==='Agent')); return {dpq:d.qty?d.pq:null, apq:a.qty?a.pq:null}; });
+  const seasons=[...new Set(all.map(r=>r.season).filter(Boolean))].sort((a,b)=>seasonKey(a)-seasonKey(b)).map(se=>{ const rs=all.filter(r=>r.season===se), d=cxStat(rs.filter(r=>bdChan(r)==='DLO')), a=cxStat(rs.filter(r=>bdChan(r)==='Agent')), t=cxStat(rs); return {label:se, d:d.qty?d.pq:null, a:a.qty?a.pq:null, t}; });
+  const pos=C.slice().sort((a,b)=>(Number(b.qty)||0)-(Number(a.qty)||0)).slice(0,40);
+  const supC=sups.filter(x=>x.cpo).sort((a,b)=>b.cqty-a.cqty), agC=agents.filter(x=>x.cpo).sort((a,b)=>b.cqty-a.cqty), byC=buyers.filter(x=>x.cpo).sort((a,b)=>b.cqty-a.cqty);
+  const top5=supC.slice(0,5).reduce((t,x)=>t+x.cqty,0);
+  const find=[ `<b>${cxP(T.pq)} of the quantity ordered was cancelled</b>: ${scQty(T.cqty)} of ${scQty(T.qty)} pcs, ${T.cpo.toLocaleString()} of ${T.po.toLocaleString()} POs (${cxP(T.pp)}).`,
+    (D.qty&&A.qty)? `<b>DLO cancel rate ${cxP(D.pq)}</b> against <b>Agent/Direct ${cxP(A.pq)}</b> of quantity ordered. ${D.pq>A.pq? 'DLO loses more of its orders to cancellation.' : D.pq<A.pq? 'Agents and direct suppliers lose more of their orders to cancellation.' : ''}` : '',
+    T.cqty? `<b>${cxP(T.same/T.cqty*100)} of the cancelled quantity has the same style still on a live PO at the same supplier</b> (re-issued or split). ${cxP(T.other/T.cqty*100)} moved to another supplier. ${cxP(T.none/T.cqty*100)} was not re-ordered.` : '',
+    supC[0]? `Biggest cancelled supplier: <b>${esc(supC[0].k)}</b>, ${scQty(supC[0].cqty)} pcs (${cxP(supC[0].pq)} of its ordered quantity). The top 5 suppliers hold ${cxP(top5/(T.cqty||1)*100)} of all cancelled quantity.` : '',
+    (()=>{ const b=brands.filter(x=>x.cpo).sort((a,b)=>b.cqty-a.cqty), d=depts.filter(x=>x.po>=CX_MIN&&x.cpo).sort((a,b)=>b.pq-a.pq); return b[0]? `Brand with the most cancelled quantity: <b>${esc(b[0].k)}</b>, ${scQty(b[0].cqty)} pcs (${cxP(b[0].pq)} of its orders).`+(d[0]? ` Highest department cancel rate: <b>${esc(d[0].k)}</b>, ${cxP(d[0].pq)}.` : '') : ''; })(),
+    byC[0]? `Buyer with the most cancelled quantity: <b>${esc(byC[0].k)}</b>, ${scQty(byC[0].cqty)} pcs (${cxP(byC[0].pq)} of its orders).` : '',
+    T.bad? `${T.bad} PO${T.bad>1?'s have':' has'} a unit price above $${CX_FOB_MAX} in the DD, which looks like a typing error. ${T.bad>1?'They count':'It counts'} in POs and quantity but not in value.` : '',
+    big.length? `Left out: ${big.length.toLocaleString()} cancelled POs of ${CX.big.toLocaleString()} pcs or more, ${scQty(big.reduce((t,r)=>t+(Number(r.qty)||0),0))} pcs. Untick the box to include them.` : '' ].filter(Boolean);
+  return {T,D,A,sups,agents,buyers,brands,depts,seasons,pos,find,big, n:all.length}; }
+function cxSvgRate(items){ if(!items.length) return '<div class="sc-note">No data.</div>'; const W=1000, lw=110, RH=34, H=items.length*RH+8, mx=Math.max(1,...items.map(i=>Math.max(i.d||0,i.a||0))), bw=W-lw-90; let g='';
+  items.forEach((it,i)=>{ const y=i*RH+4; g+=scLab(lw-8, y+15, it.label, lw-10, 11.5, 'fill="#334155" font-weight="600"');
+    [[it.d,SCP.g,0],[it.a,SCP.amb,1]].forEach(([v,c,j])=>{ const yy=y+2+j*14; if(v==null){ g+=`<text x="${lw+4}" y="${yy+10}" font-size="9.5" fill="#94a3b8">no orders</text>`; return; } const w=Math.max(2,v/mx*bw);
+      g+=`<rect x="${lw}" y="${yy}" width="${w}" height="12" rx="3" fill="${c}"><title>${j?'Agent/Direct':'DLO'} ${cxP(v)}</title></rect><text x="${lw+w+6}" y="${yy+10}" font-size="10" font-weight="700" fill="#0f172a">${cxP(v)}</text>`; }); });
+  return `<svg viewBox="0 0 ${W} ${H}">${g}</svg><div class="sc-leg"><span><i style="background:${SCP.g}"></i>DLO cancel %</span><span><i style="background:${SCP.amb}"></i>Agent/Direct cancel %</span></div>`; }
+function cxHTML(X, screen){ const meta=DVA_BD.meta||{}, fv=fView(CX.f), T=X.T, D=X.D, A=X.A;
+  const chips=[CX.chan==='all'?'All channels':CX.chan==='DLO'?'Dhaka Office only':'Agent/Direct only'].concat(fv.season?['Season: '+fv.season]:[],fv.buyer?['Buyer: '+fv.buyer]:[],fv.brand?['Brand: '+fv.brand]:[], CX.bigOff?['POs under '+CX.big.toLocaleString()+' pcs']:['All PO sizes']);
+  const card=(t,sub,c,b)=>`<div class="sc-card" style="--c:${c}"><h3><b>${t}</b><span>${sub||''}</span></h3><div class="b">${b}</div></div>`;
+  const pc=(v,ref)=> v==null? '' : `<b style="color:${ref!=null&&v>ref*1.25?SCP.red:ref!=null&&v<ref*0.75?SCP.g:'#0f172a'}">${cxP(v)}</b>`;
+  const lim=screen?60:20, base=T.pq;
+  let h=`<div class="sc-ban"><div style="position:relative;z-index:1"><div class="k">Cancelled orders · BD sourcing review</div><h2>Cancelled Orders</h2><div>${chips.map(x=>`<span class="sc-chip">${esc(x)}</span>`).join('')}</div></div><div class="m">Dhaka Liaison Office<br>Source: Main DD ${esc(meta.fileName||'')}<br>Report date ${fmtDate(todaySerial(),'dd-mmm-yy')}</div></div>`;
+  const K=[[cxP(T.pq),'Cancel % of quantity',SCP.red],[scQty(T.cqty),'Cancelled qty (pcs)',SCP.red],[T.cpo.toLocaleString(),'Cancelled POs ('+cxP(T.pp)+')',SCP.amb],[T.cval?scMoney(T.cval):'–','Cancelled FOB value (USD)',SCP.ind],
+    [D.qty?cxP(D.pq):'–','DLO cancel %',SCP.g],[A.qty?cxP(A.pq):'–','Agent/Direct cancel %',SCP.amb],[T.cqty?cxP(T.same/T.cqty*100):'–','Re-ordered at same supplier',SCP.teal],[scQty(T.qty),'Ordered qty, cancelled included',SCP.sl]];
+  h+=`<div class="sc-kpis">${K.map(k=>`<div class="sc-k" style="--c:${k[2]}"><div class="v">${esc(String(k[0]))}</div><div class="l">${esc(k[1])}</div></div>`).join('')}</div>`;
+  h+=card('Key findings','from the rows in view',SCP.red,X.find.map(x=>`<div style="display:flex;gap:9px;padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:12.5px;line-height:1.45"><i style="flex:0 0 8px;height:8px;border-radius:50%;margin-top:6px;background:${SCP.red}"></i><span>${x}</span></div>`).join(''));
+  const row3=(lab,o)=>[lab,o.po.toLocaleString(),o.cpo.toLocaleString(),cxP(o.pp),scQty(o.qty),scQty(o.cqty),`<b>${cxP(o.pq)}</b>`,o.cval?scMoney(o.cval):'',o.cqty?cxP(o.same/o.cqty*100):'',o.cqty?cxP(o.none/o.cqty*100):''];
+  h+=card('Dhaka Office against Agent/Direct','ordered = all POs in view, cancelled included',SCP.ind, rpTbl([['Channel'],['POs ordered',1],['POs cancelled',1],['PO %',1],['Qty ordered',1],['Qty cancelled',1],['Qty %',1],['Value cancelled',1],['Re-ordered same supplier',1],['Not re-ordered',1]],
+    [row3('<b style="color:'+SCP.g+'">Dhaka Office (DLO)</b>',D), row3('<b style="color:'+SCP.amb+'">Agent/Direct</b>',A), row3('<b>Total</b>',T)]));
+  h+=card('Cancel % by season','cancelled quantity of quantity ordered, DLO against Agent/Direct',SCP.g, cxSvgRate(X.seasons));
+  const sh=CX.sort==='pct'? 'sorted by cancel %, 10+ POs ordered' : 'sorted by cancelled quantity';
+  const BR=X.brands.filter(x=>x.cpo).sort((a,b)=>b.cqty-a.cqty);
+  const grpT=(L,lab,n)=>rpTbl([[lab],['POs ordered',1],['POs cancelled',1],['Qty ordered',1],['Qty cancelled',1],['Cancel %',1],['DLO cancel %',1],['Agent/Direct cancel %',1],['Value cancelled',1]],
+    L.slice(0,n).map(x=>[esc(x.k),x.po.toLocaleString(),x.cpo.toLocaleString(),scQty(x.qty),scQty(x.cqty),pc(x.pq,base),cxP(x.dpq),cxP(x.apq),x.cval?scMoney(x.cval):'']));
+  h+=card('By brand',`cancel % per brand, DLO against Agent/Direct · ${BR.length} brands with cancellations`,SCP.amb, cxSvgRate(BR.map(x=>({label:x.k, d:x.dpq, a:x.apq})))+grpT(BR,'Brand',30));
+  h+=card('By department',`${sh} · red = 25%+ above the average cancel rate (${cxP(base)}), green = 25%+ below`,SCP.teal, grpT(cxSorted(X.depts),'Department',screen?50:20));
+  const S=cxSorted(X.sups);
+  h+=card('Suppliers',`${X.sups.filter(x=>x.cpo).length.toLocaleString()} suppliers with cancellations · ${sh} · red = 25%+ above the average cancel rate (${cxP(base)}), green = 25%+ below`,SCP.red,
+    rpTbl([['Supplier'],['Channel'],['Agent'],['POs ordered',1],['POs cancelled',1],['Qty ordered',1],['Qty cancelled',1],['Cancel %',1],['Value cancelled',1],['Re-ordered same supplier',1]],
+      S.slice(0,lim).map(x=>[esc(x.k),x.chan,esc(x.agent),x.po.toLocaleString(),x.cpo.toLocaleString(),scQty(x.qty),scQty(x.cqty),pc(x.pq,base),x.cval?scMoney(x.cval):'',x.cqty?cxP(x.same/x.cqty*100):''])));
+  const AG=cxSorted(X.agents);
+  h+=card('Agents and direct suppliers',`${X.agents.filter(x=>x.cpo).length} with cancellations · ${sh} · first row = Dhaka Office for comparison`,SCP.amb,
+    rpTbl([['Agent'],['Suppliers',1],['POs ordered',1],['POs cancelled',1],['Qty ordered',1],['Qty cancelled',1],['Cancel %',1],['Value cancelled',1],['Re-ordered same supplier',1]],
+      (D.po? [['<b style="color:'+SCP.g+'">Dhaka Office (DLO)</b>','',D.po.toLocaleString(),D.cpo.toLocaleString(),scQty(D.qty),scQty(D.cqty),pc(D.pq,base),D.cval?scMoney(D.cval):'',D.cqty?cxP(D.same/D.cqty*100):'']] : []).concat(
+      AG.slice(0,lim).map(x=>[esc(x.k),x.nsup.toLocaleString(),x.po.toLocaleString(),x.cpo.toLocaleString(),scQty(x.qty),scQty(x.cqty),pc(x.pq,base),x.cval?scMoney(x.cval):'',x.cqty?cxP(x.same/x.cqty*100):'']))));
+  const B=cxSorted(X.buyers);
+  h+=card('Buyers',`who cancels · ${sh}`,SCP.ind, rpTbl([['Buyer'],['POs ordered',1],['POs cancelled',1],['Qty ordered',1],['Qty cancelled',1],['Cancel %',1],['DLO cancel %',1],['Agent/Direct cancel %',1],['Value cancelled',1]],
+    B.slice(0,screen?40:15).map(x=>[esc(x.k),x.po.toLocaleString(),x.cpo.toLocaleString(),scQty(x.qty),scQty(x.cqty),pc(x.pq,base),cxP(x.dpq),cxP(x.apq),x.cval?scMoney(x.cval):''])));
+  const RL={same:'Same supplier',other:'Other supplier',none:'Not re-ordered'};
+  h+=card('Largest cancelled POs',`top ${Math.min(X.pos.length,screen?40:20)} by quantity · re-ordered = the same style is still on a live PO`,SCP.sl,
+    rpTbl([['PO#'],['Buyer'],['Supplier'],['Channel'],['Season'],['Qty (pcs)',1],['FOB value',1],['ETD'],['Re-ordered']],
+      X.pos.slice(0,screen?40:20).map(r=>{ const f=cxFob(r), q=Number(r.qty)||0, re=cxRe(r); return [esc(String(r.orderId)),esc(r.buyer||''),esc(r.supplier||''),bdChan(r)==='DLO'?'DLO':'Agent/Direct',esc(r.season||''),q.toLocaleString(),f?scMoney(q*f):'',(isoToSerial(String(r.etd||''))? fmtDate(isoToSerial(String(r.etd)),'dd-mmm-yy') : esc(String(r.etd||''))),`<span style="color:${re==='none'?SCP.red:re==='same'?SCP.g:SCP.amb};font-weight:700">${RL[re]}</span>`]; })));
+  h+=`<div class="sc-note">Source: every row of the Main DD, cancelled rows included. Cancelled = DD status "cancelled"; the DD gives the PO quantity at cancellation but no cancel date and no reason, so a cancellation cannot be put on the supplier, the agent or the buyer from this data alone. Season and ETD are the order's, not the cancel date. Re-ordered = the same style# is still on a PO that is not cancelled. Channel uses the same rule as the other pages: Dhaka Office, or a direct-supplier, blank-agent or Shanghai Office PO whose supplier mostly works with Dhaka Office. Values in USD from cost_price; a unit price above $${CX_FOB_MAX} is treated as a DD typing error and left out of value.</div><div class="sc-foot"><span>Cancelled Orders</span><span>Dhaka Liaison Office</span></div>`;
+  return h; }
+function cxRender(){ cxBind(); const body=document.getElementById('cxBody'), rows=DVA_BD.rows||[], meta=DVA_BD.meta||{};
+  document.querySelectorAll('#cxChan button').forEach(b=>b.classList.toggle('on',b.dataset.v===CX.chan)); document.querySelectorAll('#cxSort button').forEach(b=>b.classList.toggle('on',b.dataset.v===CX.sort));
+  document.getElementById('cxPills').innerHTML= rows.length? `<div class="pill">DD <b>${esc(meta.fileName||'')}</b> ${(meta.n||rows.length).toLocaleString()} rows</div>` : '<div class="pill">No full DD saved yet</div>';
+  if(!rows.length){ body.innerHTML='<div class="notice info" style="margin-top:14px">No full DD saved yet. Import a Main DD first.</div>'; CX.last=null; return; }
+  let rr=rows.filter(r=>{ const c=bdChan(r); if(c!=='DLO'&&c!=='Agent') return false; if(CX.chan!=='all'&&c!==CX.chan) return false; return !(CX.bigOff && (Number(r.qty)||0)>=CX.big); });
+  const ord=(a,b)=>seasonKey(a)-seasonKey(b);
+  rr=msStep(CX.f, rr, r=>r.season, 'season', 'cxSeason', cxRender, {order:ord});
+  rr=msStep(CX.f, rr, r=>r.buyer, 'buyer', 'cxBuyer', cxRender);
+  rr=msStep(CX.f, rr, r=>r.brand, 'brand', 'cxBrand', cxRender);
+  rr=msStep(CX.f, rr, r=>r.dept, 'dept', 'cxDept', cxRender);
+  msChips('cxChips', CX.f, [['season','Season'],['buyer','Buyer'],['brand','Brand'],['dept','Dept']], cxRender, 'cxReset');
+  if(!rr.length){ body.innerHTML='<div class="card" style="margin-top:14px"><div class="sc-empty">No orders in this view.</div></div>'; CX.last=null; return; }
+  const X=cxData(rr); CX.last=X; window.__CXS__=CX; body.innerHTML=`<div style="margin-top:14px" class="sc">${cxHTML(X,true)}</div>`; }
+const cxBase=()=>rpSafe('Cancelled Orders - '+(CX.chan==='all'?'All':CX.chan==='DLO'?'DLO':'Agent-Direct')+' - '+todayISO());
+function cxPdf(){ const X=CX.last; if(!X){ toast('No data to export.'); return; }
+  const doc=`<!doctype html><html><head><meta charset="utf-8"><title>${esc(cxBase())}</title><style>@page{size:A4 landscape;margin:8mm} html,body{margin:0;background:#fff} body{font-size:12px;-webkit-print-color-adjust:exact;print-color-adjust:exact} ${SC_CSS}</style></head><body><div class="sc">${cxHTML(X,false)}</div></body></html>`;
+  window.__CX__={doc}; const old=document.getElementById('scPrintFrame'); if(old) old.remove(); const fr=document.createElement('iframe'); fr.id='scPrintFrame'; fr.style.cssText='position:fixed;right:0;bottom:0;width:0;height:0;border:0;'; document.body.appendChild(fr);
+  fr.onload=()=>{ setTimeout(()=>{ try{ fr.contentWindow.focus(); fr.contentWindow.print(); }catch(e){ toast('Could not open the print window: '+e.message); } },200); }; fr.srcdoc=doc; toast('In the print window choose "Save as PDF". File name: '+cxBase()+'.pdf'); }
+
+function cxPpt(){ const X=CX.last; if(!X){ toast('No data to export.'); return; } if(!window.PptxGenJS){ toast('The PowerPoint library is missing from this page.'); return; }
+  const strip=h=>String(h).replace(/<[^>]+>/g,'').replace(/&#39;/g,"'").replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"');
+  const fv=fView(CX.f), chips=[CX.chan==='all'?'All channels':CX.chan==='DLO'?'Dhaka Office only':'Agent/Direct only'].concat(fv.season?['Season: '+fv.season]:[],fv.buyer?['Buyer: '+fv.buyer]:[],fv.brand?['Brand: '+fv.brand]:[], CX.bigOff?['POs under '+CX.big.toLocaleString()+' pcs']:['All PO sizes']);
+  const rT=rpTitle, rB=rpBase, rC=rpChips, rM=rpMeta; rpTitle=()=>'Cancelled Orders'; rpBase=cxBase; rpChips=()=>chips; rpMeta=()=>{ const m=DVA_BD.meta||{}; return {file:m.fileName||'', at:m.uploadedAt||''}; };
+  try{ const T=X.T, Dd=X.D, A=X.A; const D=rpDeck('dva','BD sourcing review',`Cancel ${cxP(T.pq)} of quantity`+(Dd.qty&&A.qty? `   ·   DLO ${cxP(Dd.pq)}   ·   Agent/Direct ${cxP(A.pq)}` : '')), C=D.C, p=D.p;
+    { const s=D.slide('At a glance'); D.kpis(s,[[cxP(T.pq),'Cancel % of quantity',C.R],[scQty(T.cqty),'Cancelled qty (pcs)',C.R],[T.cpo.toLocaleString(),'Cancelled POs',C.A],[T.cval?scMoney(T.cval):'–','Cancelled value (USD)',C.I],[Dd.qty?cxP(Dd.pq):'–','DLO cancel %',C.G],[A.qty?cxP(A.pq):'–','Agent/Direct cancel %',C.A],[T.cqty?cxP(T.same/T.cqty*100):'–','Re-ordered same supplier',C.T],[scQty(T.qty),'Ordered qty',C.SL]]);
+      s.addText(X.find.map(f=>({text:strip(f),options:{bullet:true,breakLine:true}})),{x:0.5,y:4.55,w:12.3,h:2.3,fontSize:12,color:'0F172A',fontFace:C.F,valign:'top',paraSpaceAfter:4}); }
+    const r3=(l,o)=>[l,o.po.toLocaleString(),o.cpo.toLocaleString(),cxP(o.pp),scQty(o.qty),scQty(o.cqty),[cxP(o.pq),{bold:true}],o.cval?scMoney(o.cval):'',o.cqty?cxP(o.same/o.cqty*100):''];
+    D.pages('Dhaka Office against Agent/Direct','Ordered = all POs in view, cancelled included',C.I,[['Channel'],['POs ordered',1],['POs cancelled',1],['PO %',1],['Qty ordered',1],['Qty cancelled',1],['Qty %',1],['Value cancelled',1],['Re-ordered same supplier',1]],(Dd.po&&A.po? [r3('Dhaka Office (DLO)',Dd),r3('Agent/Direct',A),r3('Total',T)] : [r3(Dd.po?'Dhaka Office (DLO)':'Agent/Direct',T)]),[2.6,1.2,1.3,0.9,1.3,1.4,0.9,1.4,1.3],12);
+    { const s=D.slide('Cancel % by season','Cancelled quantity of quantity ordered',C.G); const L=X.seasons.map(x=>x.label);
+      const ser=[{name:'DLO',labels:L,values:X.seasons.map(x=>x.d==null?0:Math.round(x.d*10)/10),c:C.G,on:!!Dd.po},{name:'Agent/Direct',labels:L,values:X.seasons.map(x=>x.a==null?0:Math.round(x.a*10)/10),c:C.A,on:!!A.po}].filter(x=>x.on);
+      s.addChart(p.ChartType.bar,ser.map(x=>({name:x.name,labels:x.labels,values:x.values})),{x:0.5,y:1.3,w:12.3,h:5.6,barDir:'col',barGrouping:'clustered',chartColors:ser.map(x=>x.c),showValue:true,dataLabelFontSize:10,dataLabelFormatCode:'0.0"%"',valAxisLabelFormatCode:'0"%"',valAxisLabelFontSize:9,catAxisLabelFontSize:11,valGridLine:{color:'E2E8F0',size:0.5},showLegend:true,legendPos:'b',legendFontSize:11}); }
+    const pcc=(v)=>[cxP(v),{bold:true,color: v>X.T.pq*1.25? C.R : v<X.T.pq*0.75? C.G : C.SL}];
+    const gh=[['Group'],['POs ordered',1],['POs cancelled',1],['Qty ordered',1],['Qty cancelled',1],['Cancel %',1],['DLO cancel %',1],['Agent/Direct cancel %',1],['Value cancelled',1]], gw=[2.9,1.0,1.1,1.3,1.3,1.0,1.1,1.3,1.3];
+    const gr=x=>[x.k,x.po.toLocaleString(),x.cpo.toLocaleString(),scQty(x.qty),scQty(x.cqty),pcc(x.pq),cxP(x.dpq),cxP(x.apq),x.cval?scMoney(x.cval):''];
+    { const BR=X.brands.filter(x=>x.cpo).sort((a,b)=>b.cqty-a.cqty); if(BR.length){ const s=D.slide('Cancel % by brand','Cancelled quantity of quantity ordered',C.A); const L=BR.slice(0,10).map(x=>x.k);
+      const ser=[{name:'DLO',values:BR.slice(0,10).map(x=>x.dpq==null?0:Math.round(x.dpq*10)/10),c:C.G,on:!!Dd.po},{name:'Agent/Direct',values:BR.slice(0,10).map(x=>x.apq==null?0:Math.round(x.apq*10)/10),c:C.A,on:!!A.po}].filter(x=>x.on);
+      s.addChart(p.ChartType.bar,ser.map(x=>({name:x.name,labels:L,values:x.values})),{x:0.5,y:1.3,w:12.3,h:5.6,barDir:'col',barGrouping:'clustered',chartColors:ser.map(x=>x.c),showValue:true,dataLabelFontSize:10,dataLabelFormatCode:'0.0"%"',valAxisLabelFormatCode:'0"%"',valAxisLabelFontSize:9,catAxisLabelFontSize:11,valGridLine:{color:'E2E8F0',size:0.5},showLegend:true,legendPos:'b',legendFontSize:11});
+      D.pages('Brands','Sorted by cancelled quantity',C.A,[['Brand']].concat(gh.slice(1)),BR.slice(0,24).map(gr),gw,12); } }
+    D.pages('Departments',CX.sort==='pct'?'Sorted by cancel %, 10+ POs ordered':'Sorted by cancelled quantity',C.T,[['Department']].concat(gh.slice(1)),cxSorted(X.depts).slice(0,36).map(gr),gw,12);
+    D.pages('Suppliers',CX.sort==='pct'?'Sorted by cancel %, 10+ POs ordered':'Sorted by cancelled quantity',C.R,[['Supplier'],['Channel'],['POs ordered',1],['POs cancelled',1],['Qty ordered',1],['Qty cancelled',1],['Cancel %',1],['Value cancelled',1],['Re-ordered same supplier',1]],
+      cxSorted(X.sups).slice(0,36).map(x=>[x.k,x.chan,x.po.toLocaleString(),x.cpo.toLocaleString(),scQty(x.qty),scQty(x.cqty),pcc(x.pq),x.cval?scMoney(x.cval):'',x.cqty?cxP(x.same/x.cqty*100):'']),[3.1,1.2,1.0,1.1,1.2,1.2,1.0,1.2,1.3],12);
+    D.pages('Agents and direct suppliers','First row = Dhaka Office for comparison',C.A,[['Agent'],['Suppliers',1],['POs ordered',1],['POs cancelled',1],['Qty ordered',1],['Qty cancelled',1],['Cancel %',1],['Value cancelled',1]],
+      [['Dhaka Office (DLO)','',Dd.po.toLocaleString(),Dd.cpo.toLocaleString(),scQty(Dd.qty),scQty(Dd.cqty),pcc(Dd.pq),Dd.cval?scMoney(Dd.cval):'']].concat(cxSorted(X.agents).slice(0,35).map(x=>[x.k,x.nsup.toLocaleString(),x.po.toLocaleString(),x.cpo.toLocaleString(),scQty(x.qty),scQty(x.cqty),pcc(x.pq),x.cval?scMoney(x.cval):''])),[3.7,1.0,1.2,1.3,1.3,1.3,1.0,1.5],12);
+    D.pages('Buyers','Who cancels',C.I,[['Buyer'],['POs ordered',1],['POs cancelled',1],['Qty ordered',1],['Qty cancelled',1],['Cancel %',1],['DLO cancel %',1],['Agent/Direct cancel %',1]],
+      cxSorted(X.buyers).slice(0,36).map(x=>[x.k,x.po.toLocaleString(),x.cpo.toLocaleString(),scQty(x.qty),scQty(x.cqty),pcc(x.pq),cxP(x.dpq),cxP(x.apq)]),[3.4,1.1,1.3,1.3,1.4,1.0,1.2,1.6],12);
+    const RL={same:'Same supplier',other:'Other supplier',none:'Not re-ordered'};
+    D.pages('Largest cancelled POs','Re-ordered = the same style is still on a live PO',C.SL,[['PO#'],['Buyer'],['Supplier'],['Channel'],['Season'],['Qty (pcs)',1],['FOB value',1],['Re-ordered']],
+      X.pos.slice(0,24).map(r=>{ const f=cxFob(r), q=Number(r.qty)||0, re=cxRe(r); return [String(r.orderId),r.buyer||'',r.supplier||'',bdChan(r)==='DLO'?'DLO':'Agent/Direct',r.season||'',q.toLocaleString(),f?scMoney(q*f):'',[RL[re],{bold:true,color:re==='none'?C.R:re==='same'?C.G:C.A}]]; }),[1.1,2.1,2.9,1.3,1.1,1.2,1.2,1.4],12);
+    D.save(); } finally { rpTitle=rT; rpBase=rB; rpChips=rC; rpMeta=rM; } }
+function cxXls(){ const X=CX.last; if(!X){ toast('No data to export.'); return; } const wb=XLSX.utils.book_new(), r1=n=>Math.round((n||0)*10)/10;
+  const strip=h=>String(h).replace(/<[^>]+>/g,'').replace(/&#39;/g,"'").replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&#39;/g,"'");
+  const row=(o)=>({'POs ordered':o.po,'POs cancelled':o.cpo,'PO cancel %':r1(o.pp),'Qty ordered':Math.round(o.qty),'Qty cancelled':Math.round(o.cqty),'Qty cancel %':r1(o.pq),'Value cancelled $':Math.round(o.cval),'Re-ordered same supplier %':o.cqty?r1(o.same/o.cqty*100):'','Not re-ordered %':o.cqty?r1(o.none/o.cqty*100):''});
+  dvaSheet(wb,'Summary',[{Item:'Channel',Value:CX.chan},{Item:'Large POs',Value:CX.bigOff?'Left out: '+CX.big+' pcs or more':'Included'},{Item:'DD file',Value:(DVA_BD.meta||{}).fileName||''}].concat(X.find.map((f,i)=>({Item:'Finding '+(i+1),Value:strip(f)}))),'334155',false);
+  dvaSheet(wb,'DLO vs Agent',[Object.assign({Channel:'Dhaka Office (DLO)'},row(X.D)),Object.assign({Channel:'Agent/Direct'},row(X.A)),Object.assign({Channel:'Total'},row(X.T))],'4338CA',false);
+  dvaSheet(wb,'Suppliers',X.sups.filter(x=>x.cpo).sort((a,b)=>b.cqty-a.cqty).map(x=>Object.assign({Supplier:x.k,Channel:x.chan,Agent:x.agent},row(x))),'B42318',false);
+  dvaSheet(wb,'Agents',X.agents.filter(x=>x.cpo).sort((a,b)=>b.cqty-a.cqty).map(x=>Object.assign({Agent:x.k,Suppliers:x.nsup},row(x))),'D97706',false);
+  const gx=L=>L.filter(x=>x.cpo).sort((a,b)=>b.cqty-a.cqty).map(x=>Object.assign({},row(x),{'DLO cancel %':x.dpq==null?'':r1(x.dpq),'Agent/Direct cancel %':x.apq==null?'':r1(x.apq),'DLO qty cancelled':Math.round(x.dcq||0),'Agent/Direct qty cancelled':Math.round(x.acq||0)}));
+  dvaSheet(wb,'Brands',gx(X.brands).map((o,i)=>Object.assign({Brand:X.brands.filter(x=>x.cpo).sort((a,b)=>b.cqty-a.cqty)[i].k},o)),'D97706',false);
+  dvaSheet(wb,'Departments',gx(X.depts).map((o,i)=>Object.assign({Department:X.depts.filter(x=>x.cpo).sort((a,b)=>b.cqty-a.cqty)[i].k},o)),'0E7490',false);
+  dvaSheet(wb,'Buyers',X.buyers.filter(x=>x.cpo).sort((a,b)=>b.cqty-a.cqty).map(x=>Object.assign({Buyer:x.k},row(x),{'DLO cancel %':x.dpq==null?'':r1(x.dpq),'Agent/Direct cancel %':x.apq==null?'':r1(x.apq)})),'4338CA',false);
+  dvaSheet(wb,'Seasons',X.seasons.map(x=>Object.assign({Season:x.label},row(x.t),{'DLO cancel %':x.d==null?'':r1(x.d),'Agent/Direct cancel %':x.a==null?'':r1(x.a)})),'1F6B45',false);
+  const RL={same:'Same supplier',other:'Other supplier',none:'Not re-ordered'};
+  dvaSheet(wb,'Largest cancelled POs',X.pos.map(r=>{ const f=cxFob(r), q=Number(r.qty)||0; return {'PO#':String(r.orderId),Buyer:r.buyer||'',Supplier:r.supplier||'',Agent:r.agent||'',Channel:bdChan(r)==='DLO'?'DLO':'Agent/Direct',Season:r.season||'',Style:r.style||'','Qty (pcs)':q,'FOB value $':f?Math.round(q*f):'','Re-ordered':RL[cxRe(r)]}; }),'334155',false);
+  xWrite(wb, cxBase()+'.xlsx'); toast('Excel saved: '+cxBase()+'.xlsx'); }
+
+/* ---- BD Sourcing Review: DLO Capacity and Agent Capacity (Kite) (Sohel, 8 Nov 2026) ----
+   Each tab analyses its own capacity file only (no Main DD). DLO file: sheet "Capacity"; agent file: sheet "Capacity Booking".
+   Per row: supplier or factory, merch or agent, product type, brand, monthly capacity, lines, then per month Offered (for the buyer),
+   Occupied and Free Space. Free space is recalculated as offered minus occupied, because the file writes "All booked" or n/a.
+   Utilisation = occupied / offered. Saved as config keys capDLOx and capAGx. */
+const CAP={dlo:null, ag:null, D:{w:3, f:{type:[],grp:[],brand:[]}, last:null, bound:false}, A:{w:3, f:{type:[],grp:[],brand:[]}, last:null, bound:false}, S:{w:3, last:null, bound:false}};
+const CAP_LO=60, CAP_HI=80;
+const CAP_GG=/\s*[-\u2013(]?\s*(\d+\s*gg|multi\s*gg)\s*\)?\s*$/i;
+const capPct=(a,b)=> b? Math.round(a/b*100)+'%' : '–';
+const capClean=v=>String(v==null?'':v).replace(/ /g,' ').replace(/\s+/g,' ').trim();
+const capN=v=>{ let x=String(v==null?'':v).replace(/ /g,' ').toLowerCase().trim(); x=x.replace(CAP_GG,''); x=x.replace(/\[[a-z]{2}\]/g,' ').replace(/[^a-z0-9&]+/g,' ');
+  x=x.replace(/\b(ltd|limited|pvt|private|co|company|the|bd|inds|industries|indus)\b/g,' '); return x.replace(/\s+/g,' ').trim(); };
+const capNum=v=>{ if(v==null||v==='') return null; if(typeof v==='number') return isFinite(v)? v : null; const t=String(v).replace(/[, ]/g,''); return /^-?\d+(\.\d+)?$/.test(t)? Number(t) : null; };
+const capBrand=v=>{ const t=capClean(v).toUpperCase().replace(/\s*\+\s*/g,'+'); return t||'(blank)'; };
+const capPT=v=>{ const t=capClean(v).toLowerCase(); return t? t.charAt(0).toUpperCase()+t.slice(1) : '(blank)'; };
+/* one supplier = one line: gauge lines (12gg, multi gg) and repeated names are added together (Sohel, 8 Nov 2026) */
+function capMerge(F){ if(!F) return F; if(F.merged&&F.raw) F=F.raw; const m=new Map(), nM=F.months.length, isD=/^capacity$/i.test(String(F.sheet||'').trim());
+  F.list.forEach(r0=>{ const r=r0; const k=capN(r.name)+'|'+capN(r.grp); const nm=String(r.name).replace(CAP_GG,'').trim();
+    if(!m.has(k)){ m.set(k,{name:nm, grp:r.grp, type:r.type, brand:r.brand, cap:r.cap, lines:r.lines, m:r.m.map(x=>x.slice()), rem:r.rem, n:1}); return; }
+    const o=m.get(k); o.n++; o.cap= (o.cap==null&&r.cap==null)? null : (o.cap||0)+(r.cap||0); o.lines= (o.lines==null&&r.lines==null)? null : (o.lines||0)+(r.lines||0);
+    if(o.type!==r.type) o.type=[...new Set((o.type+'/'+r.type).split('/'))].join('/'); if(o.brand!==r.brand) o.brand=[...new Set((o.brand+'/'+r.brand).split('/'))].join('/');
+    for(let i=0;i<nM;i++){ const a=o.m[i]||[null,null], b=r.m[i]||[null,null]; o.m[i]=[a[0]==null&&b[0]==null?null:(a[0]||0)+(b[0]||0), a[1]==null&&b[1]==null?null:(a[1]||0)+(b[1]||0)]; }
+    if(r.rem && r.rem!==o.rem) o.rem=[o.rem,r.rem].filter(Boolean).join(' | '); });
+  return Object.assign({}, F, {lines:F.list.length, list:[...m.values()], merged:true}); }
+async function capLoad(){ if(CAP.loaded) return; CAP.loaded=true; try{ const a=await idbGet('config','capDLOx'); CAP.dlo=capMerge(a&&a.value||null); const b=await idbGet('config','capAGx'); CAP.ag=capMerge(b&&b.value||null); }catch(e){} }
+const CAP_MN=['january','february','march','april','may','june','july','august','september','october','november','december'];
+/* month label to a number (year*12+month), or null; accepts November'26, Nov-26, November 2026, an Excel date */
+function capYM(l){ const t=String(l==null?'':l).trim().toLowerCase(); const m=t.match(/^([a-z]{3,9})\.?[\s'\-\/_]*'?(\d{2}|\d{4})$/); if(m){ const i=CAP_MN.findIndex(x=>x.startsWith(m[1].slice(0,3))); if(i>=0){ let y=+m[2]; if(y<100) y+=2000; return y*12+i; } }
+  const d=t.match(/^(\d{4})-(\d{1,2})(-\d{1,2})?/); if(d) return +d[1]*12+(+d[2]-1); return null; }
+function capLab(v){ if(typeof v==='number'&&v>20000&&v<80000&&window.XLSX&&XLSX.SSF){ const d=XLSX.SSF.parse_date_code(v); if(d) v=d.y*12+(d.m-1); else return String(v); } else { const k=capYM(v); if(k==null) return capClean(v).replace(/'(\d{4})$/,(m,y)=>"'"+y.slice(2)); v=k; }
+  const y=Math.floor(v/12), i=v%12; return CAP_MN[i].charAt(0).toUpperCase()+CAP_MN[i].slice(1)+"'"+String(y).slice(2); }
+/* the view starts at the current month: past months in an old file are skipped */
+function capCur(F){ if(!F) return F; const ym=F.months.map(capYM); if(ym.every(x=>x==null)) return Object.assign({},F,{skip:0}); const d=new Date(), now=d.getFullYear()*12+d.getMonth();
+  const i=ym.findIndex(x=>x!=null&&x>=now); if(i<0) return Object.assign({},F,{skip:0, stale:true}); if(i===0) return Object.assign({},F,{skip:0});
+  return Object.assign({},F,{skip:i, months:F.months.slice(i), list:F.list.map(r=>Object.assign({},r,{m:r.m.slice(i)}))}); }
+function capParse(kind, buf, name){ const want= kind==='dlo'? /^capacity$/i : /capacity\s*booking/i;
+  const names=XLSX.read(buf,{type:'array', bookSheets:true}).SheetNames, sn=names.find(n=>want.test(n.trim()));
+  if(!sn) throw new Error(`No sheet called "${kind==='dlo'?'Capacity':'Capacity Booking'}" in ${name}. Sheets found: ${names.join(', ')}`);
+  const rows=XLSX.utils.sheet_to_json(XLSX.read(buf,{type:'array', sheets:[sn]}).Sheets[sn],{header:1, blankrows:false, defval:null, raw:true});
+  let hr=-1; for(let i=0;i<Math.min(rows.length,15);i++){ const r=(rows[i]||[]).map(c=>capClean(c).toUpperCase()); if(r.includes(kind==='dlo'?'SUPPLIER':'FACTORY') && r.some(c=>/^OFFERED/.test(c))){ hr=i; break; } }
+  if(hr<0) throw new Error('Header row with '+(kind==='dlo'?'SUPPLIER':'FACTORY')+' and Offered not found on sheet '+sn+'.');
+  const H=(rows[hr]||[]).map(c=>capClean(c).toUpperCase()), M=rows[hr-1]||[], col=re=>H.findIndex(c=>re.test(c));
+  const iN= kind==='dlo'? col(/^SUPPLIER$/) : col(/^FACTORY$/), iG= kind==='dlo'? H.findIndex(c=>c==='MERCH') : col(/^AGENT$/), iT=col(/^PRODUCT TYPE$/), iB=col(/^BRAND$/), iC=col(/CAPACITY/), iL=col(/LINE/), iR=col(/^REMARK/);
+  const warn=[]; if(iG<0) warn.push('no '+(kind==='dlo'?'MERCH':'AGENT')+' column'); if(iT<0) warn.push('no Product type column'); if(iB<0) warn.push('no Brand column');
+  const offs=H.map((c,ix)=>/^OFFERED/.test(c)?ix:-1).filter(ix=>ix>=0), months=[];
+  offs.forEach((ix,j)=>{ const end= j+1<offs.length? offs[j+1] : H.length; let oc=-1; for(let k=ix+1;k<end;k++) if(/^OCCUPIED/.test(H[k])){ oc=k; break; }
+    const raw=M[ix]; const lab= raw==null||raw===''? 'Month '+(months.length+1) : capLab(raw); if(oc<0) warn.push('no Occupied column for '+lab); months.push({lab, off:ix, occ:oc}); });
+  const list=[]; rows.slice(hr+1).forEach(r=>{ const nm=capClean(r[iN]); if(!nm||/^(supplier|factory)$/i.test(nm)||/^(grand\s*|sub\s*)?total\b/i.test(nm)) return;
+    const m=months.map(mo=>{ const off=capNum(r[mo.off]), occ= mo.occ>=0? capNum(r[mo.occ]) : null; return [off, occ]; });
+    list.push({name:nm, grp: iG>=0? capClean(r[iG])||'(blank)' : '', type: iT>=0? capPT(r[iT]) : '(blank)', brand: iB>=0? capBrand(r[iB]) : '(blank)', cap: iC>=0? capNum(r[iC]) : null, lines: iL>=0? capNum(r[iL]) : null, m, rem: iR>=0? capClean(r[iR]) : ''}); });
+  if(!list.length) throw new Error('No supplier rows found under the header on sheet '+sn+'.');
+  return {file:name, sheet:sn, at:new Date().toISOString(), months:months.map(x=>x.lab), list, warn}; }
+function capBind(P){ const S=CAP[P]; if(S.bound) return; S.bound=true; const id='cap'+P;
+  /* either tab takes either file: the sheet decides which list it fills */
+  const status=(html,bad)=>{ const el=document.getElementById(id+'Info'); el.innerHTML=html; el.style.color= bad? 'var(--bad,#b42318)' : ''; };
+  const inp=document.getElementById(id+'File'), kind= P==='D'? 'dlo' : 'ag';
+  document.getElementById(id+'Pick').addEventListener('click',()=>inp.click());
+  inp.addEventListener('change',()=>{ const f=inp.files&&inp.files[0]; if(!f) return; const rd=new FileReader(); status('Reading <b>'+esc(f.name)+'</b> … this can take up to a minute for a large file.');
+    rd.onerror=()=>{ status('Could not open '+esc(f.name)+'. Close it in Excel and try again.',true); inp.value=''; };
+    rd.onload=async ev=>{ try{ const buf=new Uint8Array(ev.target.result); const names=XLSX.read(buf,{type:'array', bookSheets:true}).SheetNames;
+        const k2= names.some(n=>/capacity\s*booking/i.test(n.trim()))? 'ag' : names.some(n=>/^capacity$/i.test(n.trim()))? 'dlo' : kind;
+        const raw=capParse(k2, buf, f.name), X=capMerge(raw); CAP[k2]=X; await idbPut('config',{k:k2==='dlo'?'capDLOx':'capAGx', value:raw}).catch(()=>{});
+        if(k2!==kind){ status(esc(f.name)+' is the '+(k2==='dlo'?'DLO':'agent')+' capacity file. It is saved; open the '+(k2==='dlo'?'DLO Capacity':'Agent Capacity (Kite)')+' tab to see it. This tab needs the '+(kind==='dlo'?'DLO':'agent')+' file.',true); }
+        else { capRender(P); toast(`${new Set(X.list.map(r=>capN(r.name))).size} ${k2==='dlo'?'suppliers':'factories'} read from ${f.name}.`); } }
+      catch(e){ status('Could not read '+esc(f.name)+': '+esc(e.message),true); } inp.value=''; };
+    rd.readAsArrayBuffer(f); });
+  document.getElementById(id+'Reset').addEventListener('click',()=>{ S.f={type:[],grp:[],brand:[]}; capRender(P); });
+  document.getElementById(id+'Win').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; S.w=+b.dataset.v; capRender(P); });
+  document.getElementById(id+'Xls').addEventListener('click',()=>capXls(P)); document.getElementById(id+'Pdf').addEventListener('click',()=>capPdf(P)); document.getElementById(id+'Ppt').addEventListener('click',()=>capPpt(P)); }
+const capSum=(rs,nM)=>{ const m=[...Array(nM)].map(()=>({off:0,occ:0,free:0,over:0,n:0})); let cap=0, lines=0;
+  rs.forEach(r=>{ cap+=r.cap||0; lines+=r.lines||0; r.m.forEach(([o,c],i)=>{ const x=m[i]; if(o!=null){ x.off+=o; x.n++; } if(c!=null) x.occ+=c; const fr=(o||0)-(c||0); if(fr>0) x.free+=fr; else x.over-=fr; }); });
+  m.forEach(x=>x.u= x.off? x.occ/x.off*100 : null); return {cap, lines, m, n:new Set(rs.map(r=>capN(r.name))).size, rows:rs.length}; };
+const capU=u=> u==null? '' : Math.round(u)+'%';
+const capUc=u=> u==null? '#94a3b8' : u>100? SCP.red : u>=CAP_LO? SCP.g : SCP.amb;
+function capCell(o,c){ const u= o? (c||0)/o*100 : null; const t= o==null&&c? 'not booked' : u==null? '' : capU(u);
+  return `<span title="Offered ${o==null?'–':Math.round(o).toLocaleString()} · Occupied ${c==null?'–':Math.round(c).toLocaleString()} · Free ${o==null?'–':Math.round(o-(c||0)).toLocaleString()}" style="font-weight:700;color:${o==null&&c?SCP.red:capUc(u)}">${t}</span>`; }
+function capSvgMonths(labs, S){ const W=1000, pad=30, bw=(W-pad*2)/labs.length, max=Math.max(1,...S.m.map(x=>Math.max(x.off,x.occ))), w0=bw*0.34, LB=colLabels(S.m.flatMap(x=>[x.off,x.occ]), w0, 9), top=LB.top+14, H=260+top, base=H-34; let g='';
+  labs.forEach((lab,i)=>{ const x=pad+i*bw, o=S.m[i]; [[o.off,'#94b8a6',0,'Offered'],[o.occ,SCP.g,1,'Occupied']].forEach(([v,c,j,nm])=>{ const h=Math.max(v?2:0,v/max*(base-top)), xx=x+bw*0.14+j*w0;
+      g+=`<rect x="${xx}" y="${base-h}" width="${w0-2}" height="${h}" rx="3" fill="${c}"><title>${nm} ${Math.round(v).toLocaleString()}</title></rect>`+colText(xx+w0/2-1, base-h, v, 9, LB.rot, 'class="v"'); });
+    g+=`<text x="${x+bw/2}" y="${base+14}" text-anchor="middle" style="font-size:10.5px;font-weight:600;fill:#334155">${esc(lab)}</text><text x="${x+bw/2}" y="${base+28}" text-anchor="middle" style="font-size:10px;font-weight:700;fill:${capUc(o.u)}">${capU(o.u)}</text>`; });
+  return `<svg viewBox="0 0 ${W} ${H}" class="dva-svg"><line x1="${pad}" x2="${W-pad}" y1="${base}" y2="${base}" stroke="#cbd5e1"/>${g}</svg><div class="sc-leg"><span><i style="background:#94b8a6"></i>Offered for the buyer</span><span><i style="background:${SCP.g}"></i>Occupied</span><span>% under each month = occupied of offered</span></div>`; }
+function capData(P){ const F=capCur(CAP[P==='D'?'dlo':'ag']), S=CAP[P]; let rs=F.list;
+  rs=msStep(S.f, rs, r=>r.type, 'type', 'cap'+P+'Type', ()=>capRender(P));
+  rs=msStep(S.f, rs, r=>r.grp, 'grp', 'cap'+P+'Grp', ()=>capRender(P));
+  rs=msStep(S.f, rs, r=>r.brand, 'brand', 'cap'+P+'Brand', ()=>capRender(P));
+  msChips('cap'+P+'Chips', S.f, [['type','Product type'],['grp',P==='D'?'Merch':'Agent'],['brand','Brand']], ()=>capRender(P), 'cap'+P+'Reset');
+  const nM=F.months.length, T=capSum(rs,nM);
+  const grp=(fn)=>[...entGroup(rs,fn).entries()].map(([k,g])=>Object.assign({k},capSum(g,nM))).sort((a,b)=>b.cap-a.cap);
+  const over=[], free=[]; rs.forEach(r=>r.m.forEach(([o,c],i)=>{ if(o!=null&&c!=null&&c>o) over.push({r, i, o, c, x:c-o}); }));
+  const nb=rs.filter(r=>r.m.every(([o])=>o==null) && r.m.some(([,c])=>c));
+  const f3=rs.map(r=>({r, fr:r.m.slice(0,3).reduce((t,[o,c])=>t+Math.max(0,(o||0)-(c||0)),0), off:r.m.slice(0,3).reduce((t,[o])=>t+(o||0),0)})).filter(x=>x.fr>0).sort((a,b)=>b.fr-a.fr);
+  const R=Object.assign({F, rs, T, nM, types:grp(r=>r.type), grps:grp(r=>r.grp), brands:grp(r=>r.brand), over:over.sort((a,b)=>b.x-a.x), nb, f3}, capExec(rs, S.w||nM, nM)); R.find=capFind(P,R); return R; }
+
+/* ---- executive layer: one window (next 3 / 6 / all months), the target band (CAP_LO-CAP_HI) and four decision groups ---- */
+const capW=(r,w)=>{ let o=0,c=0,b=0; r.m.slice(0,w).forEach(([of,oc])=>{ o+=of||0; c+=oc||0; if(of==null&&oc) b+=oc; }); return {off:o, occ:c, nb:b, u: o? c/o*100 : null, free:Math.max(0,o-c), over:Math.max(0,c-o)}; };
+const capBand=u=> u==null? 'none' : u>100? 'over' : u>=CAP_LO? 'band' : 'under';
+const CAP_BC={over:SCP.red, band:SCP.g, under:SCP.amb, none:'#94a3b8'};
+const CAP_PAL=['#1f6b45','#0e7490','#4338ca','#d97706','#b42318','#7c3aed','#64748b'];
+function capExec(rs, w, nM){ w=Math.min(w||nM, nM); const per=new Map(); rs.forEach(r=>{ const k=capN(r.name); const x=capW(r,w); const o=per.get(k)||{name:r.name.replace(CAP_GG,''), grp:r.grp, type:r.type, brand:r.brand, off:0, occ:0, nb:0}; o.off+=x.off; o.occ+=x.occ; o.nb+=x.nb; per.set(k,o); });
+  const sup=[...per.values()].map(o=>Object.assign(o,{u:o.off?o.occ/o.off*100:null, free:Math.max(0,o.off-o.occ), over:Math.max(0,o.occ-o.off)}));
+  const W={off:0,occ:0}; sup.forEach(o=>{ W.off+=o.off; W.occ+=o.occ; }); W.u= W.off? W.occ/W.off*100 : null; W.free=Math.max(0,W.off-W.occ);
+  const offs=sup.filter(o=>o.off>0).map(o=>o.off).sort((a,b)=>a-b), med= offs.length? offs[Math.floor(offs.length/2)] : 0;
+  const quad=o=> !o.off? (o.occ? 'move' : null) : o.u>100? 'move' : o.u>=CAP_LO? 'protect' : o.off>=med? 'fill' : 'review';
+  sup.forEach(o=>o.q=quad(o));
+  const share=(key)=>{ const m=new Map(); rs.forEach(r=>{ const k=key(r); const x=capW(r,w); const o=m.get(k)||{k,off:0,occ:0}; o.off+=x.off; o.occ+=x.occ; m.set(k,o); }); return [...m.values()].map(o=>Object.assign(o,{u:o.off?o.occ/o.off*100:null, free:Math.max(0,o.off-o.occ)})).sort((a,b)=>b.off-a.off); };
+  return {w, med, sup, W, byType:share(r=>r.type), byGrp:share(r=>r.grp),
+    fill:sup.filter(o=>o.off&&o.u<CAP_LO).sort((a,b)=>b.free-a.free).slice(0,10), move:sup.filter(o=>o.q==='move').sort((a,b)=>(b.over+b.nb)-(a.over+a.nb)).slice(0,10), idle:sup.filter(o=>o.off>0&&!o.occ).sort((a,b)=>b.off-a.off),
+    under:sup.filter(o=>o.off&&o.u<30).length, q:{fill:sup.filter(o=>o.q==='fill'), protect:sup.filter(o=>o.q==='protect'), move:sup.filter(o=>o.q==='move'), review:sup.filter(o=>o.q==='review')}}; }
+/* ---- key findings for one capacity tab: facts from the file in the window, each with a decision to consider ---- */
+function capFind(P,X){ const W=X.W, w=X.w, labs=X.F.months, wl= w>=X.nM? 'all '+X.nM+' months' : 'next '+w+' months', nm= P==='D'? 'supplier' : 'factory', nms= P==='D'? 'suppliers' : 'factories', who= P==='D'? 'merch' : 'agent', out=[];
+  const add=(tag,t,d)=>out.push({tag,t,d}), names=(L,n)=>L.slice(0,n||3).map(o=>esc(o.name||o.k)).join(', '), pc=(a,b)=> b? Math.round(a/b*100) : 0;
+  if(W.u==null){ add('watch','No capacity is offered for the buyer in the '+wl+'.','Ask the '+who+'s to update the offered columns in the file.'); return out; }
+  const gap=Math.max(0,W.off*CAP_LO/100-W.occ);
+  if(W.u<CAP_LO) add('risk',`Booking is <b>${capU(W.u)}</b> against the ${CAP_LO}% target for the ${wl}. <b>${scQty(gap)} pcs</b> more orders are needed to reach ${CAP_LO}%.`,`Place new orders with the fill-first ${nms} below before the offer is lost to other buyers.`);
+  else if(W.u>CAP_HI) add('risk',`Booking is <b>${capU(W.u)}</b>, above the ${CAP_HI}% ceiling for the ${wl}. Only ${scQty(W.free)} pcs are free.`,`Ask the ${nms} for more capacity before taking new orders.`);
+  else add('good',`Booking is <b>${capU(W.u)}</b>, inside the ${CAP_LO}-${CAP_HI}% target for the ${wl}.`,`Hold the current loading. Watch the over-booked ${nms}.`);
+  const mm=[...Array(w)].map((_,i)=>{ let o=0,c=0; X.rs.forEach(r=>{ const [of,oc]=r.m[i]||[]; o+=of||0; c+=oc||0; }); return {l:labs[i], o, c, u:o?c/o*100:null, f:Math.max(0,o-c)}; }).filter(m=>m.o>0);
+  if(mm.length>1){ const lo=mm.reduce((a,b)=>(b.u??999)<(a.u??999)?b:a), mf=mm.reduce((a,b)=>b.f>a.f?b:a);
+    add(mm[mm.length-1].u<mm[0].u-15?'watch':'info',`Booking moves from <b>${capU(mm[0].u)}</b> in ${esc(mm[0].l)} to <b>${capU(mm[mm.length-1].u)}</b> in ${esc(mm[mm.length-1].l)}. The weakest month is ${esc(lo.l)} at ${capU(lo.u)}. ${esc(mf.l)} has the most free space: ${scQty(mf.f)} pcs.`,lo===mf? `Steer new orders to ${esc(mf.l)} delivery. It is the weakest month and has the most free space.` : `Steer new orders to ${esc(mf.l)} delivery. Confirm the ${esc(lo.l)} offer is still open.`); }
+  const live=X.sup.filter(o=>o.occ>0).sort((a,b)=>b.occ-a.occ), occT=live.reduce((t,o)=>t+o.occ,0), t5=live.slice(0,5), s5=pc(t5.reduce((t,o)=>t+o.occ,0),occT);
+  if(live.length>5) add(s5>=50?'risk':s5>=35?'watch':'info',`The top 5 ${nms} hold <b>${s5}%</b> of booked pcs: ${names(t5,5)}.`, s5>=35? `Keep a back-up ${nm} for each of these in the same product type.` : `Dependency is spread. No action needed.`);
+  if(X.fill.length){ const fr=X.fill.slice(0,5), sf=pc(fr.reduce((t,o)=>t+o.free,0),W.free);
+    add('good',`<b>${X.sup.filter(o=>o.off&&o.u<CAP_LO).length}</b> ${nms} are under ${CAP_LO}% used. The 5 with the most free space hold <b>${sf}%</b> of all free pcs: ${fr.map(o=>esc(o.name)+' '+scQty(o.free)).join(', ')}.`,`Give these ${nms} first call on new styles. Fill them before you onboard new ${nms}.`); }
+  const ovr=X.sup.filter(o=>o.q==='move'), ovP=ovr.reduce((t,o)=>t+o.over+o.nb,0);
+  if(ovr.length){ const top=ovr.slice().sort((a,b)=>(b.over+b.nb)-(a.over+a.nb))[0], alt=X.sup.filter(o=>o.type===top.type&&o.off&&o.u<CAP_LO&&o.free>0).sort((a,b)=>b.free-a.free).slice(0,2);
+    add('risk',`<b>${ovr.length}</b> ${nms} are booked over 100% or have orders with no offer: <b>${scQty(ovP)} pcs</b> above the offer. The biggest is ${esc(top.name)} (${esc(top.grp)}) at ${scQty(top.over+top.nb)} pcs.`,`Confirm ex-factory dates with these ${nms}. Split or move orders where the date is at risk${alt.length? '. Same product type with free space: '+alt.map(o=>esc(o.name)+' '+scQty(o.free)).join(', ') : ''}.`); }
+  if(X.idle.length){ const iP=X.idle.reduce((t,o)=>t+o.off,0);
+    add('watch',`<b>${X.idle.length}</b> ${nms} offer <b>${scQty(iP)} pcs</b> (${pc(iP,W.off)}% of the offer) but have no orders: ${names(X.idle,3)}${X.idle.length>3?' and others':''}.`,`Check with the ${who}s if these ${nms} fit current styles. Use them or remove the offer from the file.`); }
+  const ty=X.byType.filter(x=>x.off>=W.off*0.05&&x.u!=null).map(x=>Object.assign({},x,{k:String(x.k||'Not given').replace(/^./,c=>c.toUpperCase())}));
+  if(ty.length>1){ const s=ty.slice().sort((a,b)=>a.u-b.u), lo=s[0], hi=s[s.length-1];
+    if(hi.u-lo.u>=10) add(lo.u<50?'watch':'info',`By product type, ${esc(hi.k)} is the most booked at <b>${capU(hi.u)}</b>. ${esc(lo.k)} is the least booked at <b>${capU(lo.u)}</b> with ${scQty(lo.free)} pcs free.`,`Ask the buying teams for more ${esc(lo.k)} styles for the ${nms} with free space.`);
+    else add(lo.u<CAP_LO?'watch':'info',`All main product types sit between <b>${capU(lo.u)}</b> and <b>${capU(hi.u)}</b> booked. The gap is across the board, not in one product type.`, lo.u<CAP_LO? `Raise order intake for all product types, not only one. Largest free space: ${s.slice().sort((a,b)=>b.free-a.free).slice(0,2).map(x=>esc(x.k)+' '+scQty(x.free)).join(', ')}.` : 'No product type needs action.'); }
+  const gr=X.byGrp.filter(x=>x.off>0&&x.u!=null), gLo=gr.filter(x=>x.u<50).sort((a,b)=>b.free-a.free), gHi=gr.filter(x=>x.u>CAP_HI);
+  if(gLo.length||gHi.length) add(gHi.length?'risk':'watch',[gLo.length? `${gLo.length} of ${gr.length} ${who}s ${gLo.length>1?'are':'is'} under 50% used: ${gLo.slice(0,4).map(x=>esc(x.k)+' '+capU(x.u)).join(', ')}.` : '', gHi.length? `${gHi.length} of ${gr.length} ${who}s ${gHi.length>1?'are':'is'} above ${CAP_HI}%: ${gHi.slice(0,4).map(x=>esc(x.k)+' '+capU(x.u)).join(', ')}.` : ''].filter(Boolean).join(' '),
+    (P==='D'? `Review the order plan with each merch.` : `Review the booking with each agent.`)+(gHi.length? ` Shift new styles from the full ${who}s' ${nms} to free ones where product type matches.` : ` Ask these ${who}s for their order plan for the window.`));
+  const br=X.brands.map(b=>{ let o=0,c=0; X.rs.filter(r=>r.brand===b.k).forEach(r=>{ const x=capW(r,w); o+=x.off; c+=x.occ; }); return {k:b.k,o,c,u:o?c/o*100:null}; }).filter(b=>b.o>=W.off*0.02);
+  if(br.length>1) add('info','By brand: '+br.map(b=>`${esc(b.k||'Not given')} <b>${capU(b.u)}</b> booked of ${scQty(b.o)} pcs`).join(', ')+'.','Share this split with the brand buying teams in the next capacity call.');
+  const tr={risk:0,good:1,watch:2,info:3}; return out.map((f,i)=>Object.assign(f,{i})).sort((a,b)=>tr[a.tag]-tr[b.tag]||a.i-b.i).slice(0,5); }
+const CAP_FT={risk:['Risk','#b42318'], watch:['Watch','#d97706'], good:['Opportunity','#1f6b45'], info:['Note','#64748b']};
+const capTxt=s=>String(s).replace(/<[^>]+>/g,'').replace(/&#39;/g,"'").replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'");
+function capFindHTML(L){ return L.map(f=>{ const [t,c]=CAP_FT[f.tag]; return `<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f1f5f9;font-size:12.5px;line-height:1.45;break-inside:avoid"><span style="flex:0 0 84px;align-self:flex-start;text-align:center;font-size:10.5px;font-weight:800;letter-spacing:.03em;color:${c};background:${c}14;border:1px solid ${c}55;border-radius:999px;padding:2px 0">${t}</span><div>${f.t}</div></div>`; }).join(''); }
+const capTop6=L=>{ const t=L.filter(x=>x.off>0); if(t.length<=6) return t; const a=t.slice(0,5), r=t.slice(5); const o=r.reduce((s,x)=>s+x.off,0), c=r.reduce((s,x)=>s+x.occ,0); return a.concat([{k:'Others ('+r.length+')', off:o, occ:c, u:o?c/o*100:null}]); };
+function capDonut(items, center, sub){ const tot=items.reduce((t,x)=>t+x.v,0)||1, R0=74, R1=46, cx=90, cy=90; let a=-Math.PI/2, g='';
+  items.forEach((it,i)=>{ const f=it.v/tot; if(f<=0) return; const a2=a+f*Math.PI*2-(f>=0.999?0.0001:0), L=(a2-a)>Math.PI?1:0, p=(r,t)=>[cx+r*Math.cos(t),cy+r*Math.sin(t)], [x1,y1]=p(R0,a),[x2,y2]=p(R0,a2),[x3,y3]=p(R1,a2),[x4,y4]=p(R1,a);
+    g+=`<path d="M${x1} ${y1} A${R0} ${R0} 0 ${L} 1 ${x2} ${y2} L${x3} ${y3} A${R1} ${R1} 0 ${L} 0 ${x4} ${y4} Z" fill="${it.c||CAP_PAL[i%CAP_PAL.length]}" stroke="#fff" stroke-width="1.5"><title>${esc(it.label)} ${scQty(it.v)} (${Math.round(f*100)}%)</title></path>`; a=a2; });
+  const leg=items.map((it,i)=>`<div style="display:flex;gap:7px;align-items:center;font-size:11.5px;line-height:1.35;padding:2px 0"><i style="flex:0 0 10px;height:10px;border-radius:2px;background:${it.c||CAP_PAL[i%CAP_PAL.length]}"></i><span style="flex:1;min-width:0;overflow-wrap:anywhere">${esc(it.label)}</span><b style="white-space:nowrap">${Math.round(it.v/tot*100)}%</b></div>`).join('');
+  return `<div style="display:flex;gap:12px;align-items:center"><svg viewBox="0 0 180 180" style="width:150px;flex:0 0 150px">${g}<text x="90" y="88" text-anchor="middle" style="font-size:22px;font-weight:800;fill:#0f172a">${esc(center)}</text><text x="90" y="106" text-anchor="middle" style="font-size:10px;fill:#64748b">${esc(sub||'')}</text></svg><div style="flex:1;min-width:0">${leg}</div></div>`; }
+function capBarsU(items){ if(!items.length) return '<div class="sc-note">No data.</div>'; const W=1000, lw=210, RH=26, H=items.length*RH+34, mx=Math.max(120,...items.map(i=>Math.min(i.u||0,200))), bw=W-lw-70, X=v=>lw+Math.min(v,mx)/mx*bw; let g='';
+  g+=`<rect x="${X(CAP_LO)}" y="0" width="${X(CAP_HI)-X(CAP_LO)}" height="${H-22}" fill="#e8f3ec"/><line x1="${X(100)}" x2="${X(100)}" y1="0" y2="${H-22}" stroke="${SCP.red}" stroke-dasharray="3 3"/>`;
+  items.forEach((it,i)=>{ const y=i*RH+6, u=it.u||0, c=CAP_BC[capBand(it.u)]; g+=scLab(lw-8, y+9, it.label, lw-12, 11, 'fill="#334155"')+`<rect x="${lw}" y="${y}" width="${Math.max(2,X(u)-lw)}" height="15" rx="3" fill="${c}"><title>${esc(it.label)}: ${capU(it.u)} of ${scQty(it.off)} offered</title></rect><text x="${Math.min(X(u),W-60)+6}" y="${y+12}" style="font-size:10.5px;font-weight:700;fill:#0f172a">${capU(it.u)}</text>`; });
+  [0,CAP_LO,CAP_HI,100].forEach(v=>{ g+=`<text x="${X(v)}" y="${H-6}" text-anchor="middle" style="font-size:9.5px;fill:#64748b">${v}%</text>`; });
+  return `<svg viewBox="0 0 ${W} ${H}">${g}</svg><div class="sc-leg"><span><i style="background:#e8f3ec;border:1px solid #9cc9ae"></i>Target band ${CAP_LO}-${CAP_HI}%</span><span><i style="background:${SCP.amb}"></i>Under ${CAP_LO}%</span><span><i style="background:${SCP.g}"></i>In band or full</span><span><i style="background:${SCP.red}"></i>Over 100%</span></div>`; }
+function capQuad(X){ const W=1000, H=360, L=60, B=36, T=40, Rr=20, pts=X.sup.filter(o=>o.off>0), ymax=Math.max(1,...pts.map(o=>o.off)), xs=v=>L+Math.min(v,150)/150*(W-L-Rr), ys=v=>H-B-Math.sqrt(v/ymax)*(H-B-T); let g='';
+  const qc={fill:SCP.amb, review:'#94a3b8', protect:SCP.g, move:SCP.red};
+  g+=`<rect x="${xs(CAP_LO)}" y="${T}" width="${xs(100)-xs(CAP_LO)}" height="${H-B-T}" fill="#e8f3ec"/><rect x="${xs(100)}" y="${T}" width="${xs(150)-xs(100)}" height="${H-B-T}" fill="#fdecea"/>`;
+  g+=`<line x1="${L}" x2="${xs(CAP_LO)}" y1="${ys(X.med)}" y2="${ys(X.med)}" stroke="#94a3b8" stroke-dasharray="4 3"/>`;
+  pts.forEach(o=>{ g+=`<circle cx="${xs(o.u||0)}" cy="${ys(o.off)}" r="${4+Math.sqrt(o.off/ymax)*7}" fill="${qc[o.q]||'#94a3b8'}" fill-opacity=".72" stroke="#fff"><title>${esc(o.name)} · ${capU(o.u)} of ${scQty(o.off)} offered</title></circle>`; });
+  [0,CAP_LO,CAP_HI,100,150].forEach(v=>{ g+=`<text x="${xs(v)}" y="${H-B+16}" text-anchor="middle" style="font-size:10px;fill:#64748b">${v}%${v===150?'+':''}</text>`; });
+  g+=`<text x="${(L+W)/2}" y="${H-4}" text-anchor="middle" style="font-size:10.5px;fill:#334155;font-weight:600">Utilisation (occupied of offered) in the window</text><text transform="translate(14,${(H-B+T)/2}) rotate(-90)" text-anchor="middle" style="font-size:10.5px;fill:#334155;font-weight:600">Capacity offered</text>`;
+  const box=(x,y,lab,n,c,anchor)=>`<text x="${x}" y="${y}" text-anchor="${anchor||'start'}" style="font-size:12px;font-weight:800;fill:${c}">${lab} · ${n}</text>`;
+  g+=box(L+4,16,'FILL NOW (top left)',X.q.fill.length,SCP.amb)+box(L+4,32,'REVIEW (bottom left)',X.q.review.length,'#64748b')+box(xs(CAP_LO)+4,16,'PROTECT',X.q.protect.length,SCP.g)+box(W-Rr,16,'MOVE ORDERS OUT',X.q.move.length,SCP.red,'end');
+  return `<svg viewBox="0 0 ${W} ${H}">${g}</svg><div class="sc-note">Each dot is one ${'supplier'}; size = capacity offered. FILL NOW = big offer, under ${CAP_LO}% used. REVIEW = small offer, under ${CAP_LO}% used. PROTECT = ${CAP_LO}-100% used. MOVE ORDERS OUT = over 100%, or orders with no capacity offered.</div>`; }
+function capExecHTML(P,X){ const card=(t,sub,c,b)=>`<div class="sc-card" style="--c:${c}"><h3><b>${t}</b><span>${sub||''}</span></h3><div class="b">${b}</div></div>`;
+  const labs=X.F.months, wl= X.w>=X.nM? 'all '+X.nM+' months' : 'next '+X.w+' months ('+labs[0]+' to '+labs[X.w-1]+')', W=X.W, who= P==='D'? 'merch' : 'agent', unit= P==='D'? 'suppliers' : 'factories';
+  const head= W.u==null? 'No capacity offered in this window.' : `${P==='D'?'DLO':'Agent'} capacity is ${capU(W.u)} booked for the ${wl}: ${scQty(W.free)} pcs free of ${scQty(W.off)} offered.`;
+  let h=`<div class="sc-card" style="--c:${CAP_BC[capBand(W.u)]}"><h3><b>${esc(head)}</b><span>target band ${CAP_LO}-${CAP_HI}%</span></h3></div>`;
+  h+=`<div class="sc-kpis">${[[scQty(W.off),'Offered, '+wl,SCP.teal],[scQty(W.occ),'Occupied',SCP.g],[capU(W.u),'Utilisation',CAP_BC[capBand(W.u)]],[scQty(W.free),'Free pcs',SCP.teal],[String(X.q.move.length),'To move orders out (over 100%)',SCP.red],[String(X.q.fill.length),'Big offer under '+CAP_LO+'%: fill now',SCP.amb],[String(X.under),'Under 30% used',SCP.amb],[String(X.idle.length),'Offered but no orders',SCP.sl]].map(k=>`<div class="sc-k" style="--c:${k[2]}"><div class="v">${esc(k[0])}</div><div class="l">${esc(k[1])}</div></div>`).join('')}</div>`;
+  h+=card('Key findings','for strategic decisions · '+esc(wl)+' · from the file in view',SCP.g, capFindHTML(X.find||[]));
+  const T6=capTop6(X.byType), G6=capTop6(X.byGrp);
+  h+=`<div class="sc-grid3" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">`+card('Booked against free','offered capacity in the window',SCP.g, capDonut([{label:'Occupied',v:Math.min(W.occ,W.off),c:SCP.g},{label:'Free',v:W.free,c:'#b9d6c6'}], capU(W.u), 'booked'))+
+    card('Offered by product type','share of capacity offered',SCP.ind, capDonut(T6.map(x=>({label:x.k+' · '+capU(x.u)+' used',v:x.off})), String(X.byType.filter(x=>x.off>0).length), 'types'))+
+    card('Offered by '+who,'top 5 + others',SCP.amb, capDonut(G6.map(x=>({label:x.k+' · '+capU(x.u)+' used',v:x.off})), String(X.byGrp.filter(x=>x.off>0).length), who+'s'))+`</div>`;
+  h+=card('Utilisation by '+who,'occupied of offered in the window · sorted · band = target',SCP.amb, capBarsU(X.byGrp.filter(x=>x.off>0).slice().sort((a,b)=>(b.u||0)-(a.u||0)).map(x=>({label:x.k,u:x.u,off:x.off}))));
+  h+=card('Utilisation by product type','occupied of offered in the window',SCP.ind, capBarsU(X.byType.filter(x=>x.off>0).slice().sort((a,b)=>(b.u||0)-(a.u||0)).map(x=>({label:x.k,u:x.u,off:x.off}))));
+  const lst=(L,cols)=>L.length? rpTbl(cols.map(c=>c[0]), L.map(o=>cols.map(c=>c[1](o)))) : '<div class="sc-note">None.</div>';
+  const nmL= P==='D'? 'Supplier' : 'Factory';
+  h+=`<div class="sc-grid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">`+
+    card('Fill first','most free capacity, under '+CAP_LO+'% used · top 10',SCP.amb, lst(X.fill,[[[nmL],o=>esc(o.name)],[[P==='D'?'Merch':'Agent'],o=>esc(o.grp)],[['Free',1],o=>'<b>'+scQty(o.free)+'</b>'],[['Used',1],o=>capU(o.u)]]))+
+    card('Move orders out','over 100% booked, or orders with no offer · top 10',SCP.red, lst(X.move,[[[nmL],o=>esc(o.name)],[[P==='D'?'Merch':'Agent'],o=>esc(o.grp)],[['Over by',1],o=>'<b style="color:'+SCP.red+'">'+scQty(o.over+o.nb)+'</b>'],[['Used',1],o=>o.off?capU(o.u):'no offer']]))+`</div>`;
+  if(X.idle.length) h+=card('Offered but no orders in the window',X.idle.length+' '+unit,SCP.sl, lst(X.idle.slice(0,20),[[[nmL],o=>esc(o.name)],[[P==='D'?'Merch':'Agent'],o=>esc(o.grp)],[['Product type'],o=>esc(o.type)],[['Offered',1],o=>scQty(o.off)]]));
+  return h; }
+function capHTML(P,X,pdf){ const F=X.F, labs= pdf? F.months.map(l=>l.replace(/^(\w{3})\w*'/,"$1 '")) : F.months, T=X.T, m0=T.m[0]||{}, card=(t,sub,c,b)=>`<div class="sc-card" style="--c:${c}"><h3><b>${t}</b><span>${sub||''}</span></h3><div class="b">${b}</div></div>`;
+  const title= P==='D'? 'DLO Capacity' : 'Agent Capacity (Kite)', who= P==='D'? 'Merch' : 'Agent', unit= P==='D'? 'suppliers' : 'factories';
+  const fv=fView(CAP[P].f), chips=[].concat(fv.type?['Type: '+fv.type]:[], fv.grp?[who+': '+fv.grp]:[], fv.brand?['Brand: '+fv.brand]:[]);
+  let h=`<div class="sc-ban"><div style="position:relative;z-index:1"><div class="k">${title} · BD sourcing review</div><h2>${title}</h2><div>${(chips.length?chips:['All rows']).map(c=>`<span class="sc-chip">${esc(c)}</span>`).join('')}</div></div><div class="m">File: ${esc(F.file)}<br>Imported ${fmtDate(isoToSerial(F.at.slice(0,10)),'dd-mmm-yy')} · ${labs[0]||''} to ${labs[labs.length-1]||''}<br>Report date ${fmtDate(todaySerial(),'dd-mmm-yy')}</div></div>`;
+  const nU=new Set(X.rs.map(r=>capN(r.name))).size, n3=T.m.slice(0,3), off3=n3.reduce((t,x)=>t+x.off,0), occ3=n3.reduce((t,x)=>t+x.occ,0);
+  const K=[[String(nU),(P==='D'?'Suppliers':'Factories')+' ('+X.rs.length+' rows)',SCP.g],[scQty(T.cap),'Total monthly capacity (pcs)',SCP.sl],[scQty(m0.off||0),'Offered for the buyer, '+(labs[0]||''),SCP.teal],[scQty(m0.occ||0),'Occupied, '+(labs[0]||''),SCP.g],
+    [capU(m0.u),'Utilisation, '+(labs[0]||''),capUc(m0.u)],[scQty(Math.max(0,off3-occ3)),'Free space, next 3 months (pcs)',SCP.teal],[String(X.over.length),'Overbooked '+(P==='D'?'supplier':'factory')+'-months',SCP.red],[String(X.nb.length),P==='D'?'Rows with orders but no offer':'Factories with orders but no booking',SCP.amb]];
+  h+=capExecHTML(P,X)+`<div style="margin:18px 0 8px;font-weight:800;font-size:13px;color:#334155;letter-spacing:.04em">DETAIL · ${F.skip? 'ALL MONTHS FROM '+esc(F.months[0]||'').toUpperCase()+' ('+F.skip+' PAST MONTH'+(F.skip>1?'S':'')+' SKIPPED)' : 'ALL MONTHS IN THE FILE'}</div>`;
+  h+=card('Offered against occupied, month by month','all rows in view · pcs',SCP.g, capSvgMonths(labs,T));
+  const mHead=labs.map(l=>[esc(l),1]), sumRow=(k,S)=>[esc(k),S.n,scQty(S.cap)].concat(S.m.map(x=>`<span title="Offered ${Math.round(x.off).toLocaleString()} · Occupied ${Math.round(x.occ).toLocaleString()}" style="font-weight:700;color:${capUc(x.u)}">${capU(x.u)}</span>`));
+  h+=card('Utilisation by product type','occupied of offered per month · red over 100%, green '+CAP_LO+'-100%, amber under '+CAP_LO+'%',SCP.ind, rpTbl([['Product type'],[P==='D'?'Suppliers':'Factories',1],['Capacity',1]].concat(mHead), X.types.map(x=>sumRow(x.k,x))));
+  h+=card('Utilisation by '+who.toLowerCase(),'occupied of offered per month',SCP.amb, rpTbl([[who],[P==='D'?'Suppliers':'Factories',1],['Capacity',1]].concat(mHead), X.grps.map(x=>sumRow(x.k,x))));
+  h+=card('Utilisation by brand','brand groups as written in the capacity file',SCP.teal, rpTbl([['Brand'],[P==='D'?'Suppliers':'Factories',1],['Capacity',1]].concat(mHead), X.brands.map(x=>sumRow(x.k,x))));
+  h+=card('Free space, next 3 months',`${labs.slice(0,3).join(', ')} · offered minus occupied · top 30`,SCP.teal, X.f3.length? rpTbl([[P==='D'?'Supplier':'Factory'],[who],['Product type'],['Brand'],['Offered, 3 months',1],['Free, 3 months',1],['Free %',1]], X.f3.slice(0,30).map(x=>[esc(x.r.name),esc(x.r.grp),esc(x.r.type),esc(x.r.brand),scQty(x.off),'<b>'+scQty(x.fr)+'</b>',x.off?Math.round(x.fr/x.off*100)+'%':''])) : '<div class="sc-note">No free space in the next 3 months.</div>');
+  h+=card('Overbooked','occupied above the capacity offered to the buyer · top 30',SCP.red, X.over.length? rpTbl([[P==='D'?'Supplier':'Factory'],[who],['Product type'],['Month'],['Offered',1],['Occupied',1],['Over by',1],['Utilisation',1]], X.over.slice(0,30).map(o=>[esc(o.r.name),esc(o.r.grp),esc(o.r.type),esc(labs[o.i]),scQty(o.o),scQty(o.c),'<b style="color:'+SCP.red+'">'+scQty(o.x)+'</b>',capU(o.c/o.o*100)])) : '<div class="sc-note">No row is overbooked.</div>');
+  if(X.nb.length) h+=card(P==='D'?'Orders but no capacity offered':'Factories with orders but no capacity booked','occupied quantity with no offered capacity in the file',SCP.amb, rpTbl([[P==='D'?'Supplier':'Factory'],[who],['Occupied, all months',1],['Remarks']], X.nb.map(r=>[esc(r.name),esc(r.grp),scQty(r.m.reduce((t,[,c])=>t+(c||0),0)),esc(r.rem)])));
+  h+=card(P==='D'?'Suppliers, month by month':'Factories, month by month',`${X.T.n} ${P==='D'?'suppliers':'factories'}${X.rs.length>X.T.n?' ('+X.rs.length+' lines in the file)':''} · utilisation per month, hover a cell for offered, occupied and free`,SCP.sl,
+    rpTbl([[P==='D'?'Supplier':'Factory'],[who],['Type'],['Brand'],['Capacity',1],['Lines',1]].concat(mHead), X.rs.slice().sort((a,b)=>(b.cap||0)-(a.cap||0)).map(r=>[esc(r.name),esc(r.grp),esc(r.type),esc(r.brand),r.cap!=null?scQty(r.cap):'',r.lines!=null?r.lines:''].concat(r.m.map(([o,c])=>capCell(o,c))))));
+  h+=`<div class="sc-note">Source: ${esc(F.file)}, sheet ${esc(F.sheet)}. Free space = offered minus occupied (the file often writes "All booked"). Utilisation = occupied / offered. Gauge lines of one supplier (12gg, multi gg) are added together into one supplier. Capacity is the supplier's total monthly capacity, not only for the buyer.</div><div class="sc-foot"><span>${title}</span><span>Dhaka Liaison Office</span></div>`;
+  return h; }
+async function capRender(P){ capBind(P); await capLoad(); const S=CAP[P], id='cap'+P, body=document.getElementById(id+'Body'), F= P==='D'? CAP.dlo : CAP.ag;
+  const inf=document.getElementById(id+'Info'), V=capCur(F); if(F){ const wn=(F.warn||[]).length? `<br><b style="color:var(--bad,#b42318)">Check the file: ${esc(F.warn.join('; '))}.</b>` : '', st= V.stale? `<br><b style="color:var(--bad,#b42318)">All months in this file are past. Import the latest capacity file.</b>` : '';
+    inf.style.color=''; inf.innerHTML=`<b>${esc(F.file)}</b> · ${new Set(F.list.map(r=>capN(r.name))).size} ${P==='D'?'suppliers':'factories'}${F.lines&&F.lines>F.list.length?' ('+F.lines+' lines in the file)':''} · ${F.months.length} months${V.skip?' ('+V.skip+' past month'+(V.skip>1?'s':'')+' skipped)':''} · imported ${fmtDate(isoToSerial(F.at.slice(0,10)),'dd-mmm-yy')}${wn}${st}`; }
+  document.getElementById(id+'Pills').innerHTML= F? `<div class="pill">${esc(V.months[0]||'')} to ${esc(V.months[V.months.length-1]||'')}</div>` : '';
+  if(!F){ body.innerHTML=`<div class="card" style="margin-top:14px"><div class="sc-empty">Import the ${P==='D'?'DLO':'agent'} capacity file above to start.</div></div>`; S.last=null; return; }
+  document.querySelectorAll('#'+id+'Win button').forEach(b=>b.classList.toggle('on',+b.dataset.v===(S.w||0)));
+  const X=capData(P); S.last=X; window.__CAPS__=CAP; body.innerHTML=`<div style="margin-top:14px" class="sc">${capHTML(P,X)}</div>`; }
+
+const capBase=P=>rpSafe((P==='D'?'DLO Capacity - ':'Agent Capacity Kite - ')+todayISO());
+function capPdf(P){ const X=CAP[P].last; if(!X){ toast('Import the capacity file first.'); return; }
+  const doc=`<!doctype html><html><head><meta charset="utf-8"><title>${esc(capBase(P))}</title><style>@page{size:A4 landscape;margin:8mm} html,body{margin:0;background:#fff} body{font-size:12px;-webkit-print-color-adjust:exact;print-color-adjust:exact} ${SC_CSS} .sc table{font-size:8.5px} .sc td,.sc th{padding:3px 4px} .sc th{letter-spacing:0} .sc-grid3 .sc-card h3 span{display:none}</style></head><body><div class="sc">${capHTML(P,X,true)}</div></body></html>`;
+  window.__CAPX__={doc}; const old=document.getElementById('scPrintFrame'); if(old) old.remove(); const fr=document.createElement('iframe'); fr.id='scPrintFrame'; fr.style.cssText='position:fixed;right:0;bottom:0;width:0;height:0;border:0;'; document.body.appendChild(fr);
+  fr.onload=()=>{ setTimeout(()=>{ try{ fr.contentWindow.focus(); fr.contentWindow.print(); }catch(e){ toast('Could not open the print window: '+e.message); } },200); }; fr.srcdoc=doc; toast('In the print window choose "Save as PDF". File name: '+capBase(P)+'.pdf'); }
+/* PowerPoint tables that never run past the footer: rows are measured (long names wrap) and each slide is filled up to the space left */
+function capPages(D,title,sub,c,hdr,rows,colW,fs){ const cw=fs*0.0071, lh=fs/72*1.2, txt=x=>String(Array.isArray(x)?(x[0]==null?'':x[0]):(x==null?'':x));
+  const hgt=r=>Math.max(0.26, Math.max(...r.map((x,i)=>{ const w=Math.max(0.2,(colW[i]||1)-0.12), words=txt(x).split(/\s+/); let ln=1, cur=0; words.forEach(wd=>{ const l=(wd.length+1)*cw; if(cur+l>w&&cur>0){ ln++; cur=l; } else cur+=l; }); return ln; }))*lh+0.09);
+  const hH=hgt(hdr.map(h=>h[0])), RH=rows.map(r=>[r,hgt(r)]), split=MAX=>{ const pg=[]; let cur=[], h=hH; RH.forEach(x=>{ if(cur.length&&h+x[1]>MAX){ pg.push(cur); cur=[]; h=hH; } cur.push(x); h+=x[1]; }); pg.push(cur); return pg; };
+  let pages=split(5.8); if(pages.length>1){ const tot=RH.reduce((t,x)=>t+x[1],0), mx=Math.max(...RH.map(x=>x[1])), even=split(Math.min(5.8, hH+tot/pages.length+mx)); if(even.length===pages.length) pages=even; }
+  pages.forEach((pg,i)=>{ const s=D.slide(title+(pages.length>1?` (${i+1}/${pages.length})`:''),sub,c); s.addTable(D.T(hdr,pg.map(x=>x[0]),c),D.TO({x:0.5,y:1.35,w:12.3,colW,fontSize:fs,rowH:[hH].concat(pg.map(x=>x[1]))})); }); }
+function capPpt(P){ const X=CAP[P].last; if(!X){ toast('Import the capacity file first.'); return; } if(!window.PptxGenJS){ toast('The PowerPoint library is missing from this page.'); return; }
+  const F=X.F, labs=F.months, sl=labs.map(l=>l.replace(/^(\w{3})\w*'/,"$1 '")), T=X.T, m0=T.m[0]||{}, who= P==='D'? 'Merch' : 'Agent', nm= P==='D'? 'Supplier' : 'Factory', title= P==='D'? 'DLO Capacity' : 'Agent Capacity (Kite)';
+  const fv=fView(CAP[P].f), chips=[].concat(fv.type?['Type: '+fv.type]:[], fv.grp?[who+': '+fv.grp]:[], fv.brand?['Brand: '+fv.brand]:[]);
+  const rT=rpTitle, rB=rpBase, rC=rpChips, rM=rpMeta; rpTitle=()=>title; rpBase=()=>capBase(P); rpChips=()=>chips.length?chips:['All rows']; rpMeta=()=>({file:F.file, at:F.at, src:'Source: '+F.file});
+  try{ const n3=T.m.slice(0,3), free3=Math.max(0,n3.reduce((t,x)=>t+x.off,0)-n3.reduce((t,x)=>t+x.occ,0));
+    const D=rpDeck('dva','BD sourcing review',`${X.w>=X.nM?'All '+X.nM+' months':'Next '+X.w+' months'}: utilisation ${capU(X.W.u)}   ·   offered ${scQty(X.W.off)}   ·   occupied ${scQty(X.W.occ)}`), C=D.C, p=D.p; D.pages=(t,sub,c,hdr,rows,colW)=>capPages(D,t,sub,c,hdr,rows,colW,9.5);
+    const uc=u=> u==null? C.M : u>100? C.R : u>=CAP_LO? C.G : C.A;
+    { const W=X.W, wlg= X.w>=X.nM? 'all '+X.nM+' months' : 'next '+X.w+' months', bcg=u=> u==null? C.M : u>100? C.R : u>=CAP_LO? C.G : C.A; const s=D.slide('At a glance',wlg+' · target '+CAP_LO+'-'+CAP_HI+'%');
+      D.kpis(s,[[scQty(W.off),'Offered, '+wlg,C.T],[scQty(W.occ),'Occupied',C.G],[capU(W.u),'Utilisation',bcg(W.u)],[scQty(W.free),'Free pcs',C.T],[String(X.q.move.length),'To move orders out (over 100%)',C.R],[String(X.q.fill.length),'Big offer under '+CAP_LO+'%: fill now',C.A],[String(X.under),'Under 30% used',C.A],[String(X.idle.length),'Offered but no orders',C.SL]]); }
+    { const L=X.find||[], wl2= X.w>=X.nM? 'all '+X.nM+' months' : 'next '+X.w+' months'; for(let i=0;i<L.length;i+=5){ const s=D.slide('Key findings'+(L.length>5?` (${i/5+1}/${Math.ceil(L.length/5)})`:''),'for strategic decisions · '+wl2,C.G);
+      L.slice(i,i+5).forEach((f,j)=>{ const y=1.4+j*1.1, [t,c]=CAP_FT[f.tag]; s.addShape(p.ShapeType.roundRect,{x:0.5,y:y+0.05,w:1.25,h:0.32,fill:{color:c.slice(1)},line:{color:c.slice(1)},rectRadius:0.08}); s.addText(t,{x:0.5,y:y+0.05,w:1.25,h:0.32,fontSize:10,bold:true,color:'FFFFFF',align:'center',fontFace:C.F});
+        s.addText(capTxt(f.t),{x:1.95,y,w:10.9,h:0.95,fontSize:13.5,color:'0F172A',valign:'top',fontFace:C.F,margin:2}); }); } }
+    { const W=X.W, wl= X.w>=X.nM? 'all '+X.nM+' months' : 'next '+X.w+' months', bc=u=> u==null? C.M : u>100? C.R : u>=CAP_LO? C.G : C.A;
+      const s=D.slide((P==='D'?'DLO':'Agent')+' capacity is '+capU(W.u)+' booked, '+wl, scQty(W.free)+' pcs free of '+scQty(W.off)+' offered · target '+CAP_LO+'-'+CAP_HI+'%',bc(W.u));
+      const dn=(x,t,lab,vals,cols,pc)=>{ const tot=vals.reduce((a,b)=>a+b,0)||1; s.addText(t,{x,y:1.3,w:4,h:0.4,fontSize:13,bold:true,color:'0F172A',fontFace:C.F,align:'center'}); s.addChart(p.ChartType.doughnut,[{name:t,labels:pc? lab : lab.map((l,i)=>l+' '+Math.round(vals[i]/tot*100)+'%'),values:vals}],{x,y:1.7,w:4,h:5.1,holeSize:52,chartColors:cols,showPercent:!!pc,showLegend:true,legendPos:'b',legendFontSize:10,dataLabelColor:'0F172A',dataLabelFontSize:11}); };
+      const T6=capTop6(X.byType), G6=capTop6(X.byGrp), pal=['1F6B45','0E7490','4338CA','D97706','B42318','7C3AED'];
+      dn(0.4,'Booked against free',['Occupied','Free'],[Math.round(Math.min(W.occ,W.off)),Math.round(W.free)],[C.G,'B9D6C6'],1);
+      dn(4.65,'Offered by product type',T6.map(x=>x.k),T6.map(x=>Math.round(x.off)),pal); dn(8.9,'Offered by '+who.toLowerCase(),G6.map(x=>x.k),G6.map(x=>Math.round(x.off)),pal); }
+    { const L=X.byGrp.filter(x=>x.off>0).slice().sort((a,b)=>(b.u||0)-(a.u||0)); const s=D.slide('Utilisation by '+who.toLowerCase(),'occupied of offered, '+(X.w>=X.nM?'all months':'next '+X.w+' months')+' · target '+CAP_LO+'-'+CAP_HI+'%',C.A);
+      s.addChart(p.ChartType.bar,[{name:'Utilisation',labels:L.map(x=>x.k),values:L.map(x=>Math.round(x.u||0))}],{x:0.5,y:1.3,w:12.3,h:5.6,barDir:'bar',chartColors:L.map(x=>{ const u=x.u; return u>100? 'B42318' : u>=CAP_LO? '1F6B45' : 'D97706'; }),showValue:true,dataLabelFontSize:9,dataLabelFormatCode:'0"%"',valAxisLabelFormatCode:'0"%"',valAxisLabelFontSize:9,catAxisLabelFontSize:9,catAxisOrientation:'maxMin',valGridLine:{color:'E2E8F0',size:0.5}}); }
+    D.pages('Fill first and move orders out','top 10 each in the window',C.A,[['Group'],[nm],[who],['Free / over',1],['Used',1]],
+      X.fill.map(o=>['Fill first',o.name,o.grp,scQty(o.free),capU(o.u)]).concat(X.move.map(o=>[['Move out',{bold:true,color:C.R}],o.name,o.grp,[scQty(o.over+o.nb),{bold:true,color:C.R}],o.off?capU(o.u):'no offer'])),[1.6,4.6,2.4,1.9,1.8],20);
+    { const s=D.slide('Offered against occupied, month by month','pcs · all rows in view',C.G);
+      s.addChart(p.ChartType.bar,[{name:'Offered for the buyer',labels:sl,values:T.m.map(x=>Math.round(x.off))},{name:'Occupied',labels:sl,values:T.m.map(x=>Math.round(x.occ))}],{x:0.5,y:1.3,w:12.3,h:5.0,barDir:'col',barGrouping:'clustered',chartColors:['94B8A6',C.G],showValue:false,valAxisLabelFormatCode:'[>=1000000]0.0,,"M";[>=1000]0,"K";0',valAxisLabelFontSize:9,catAxisLabelFontSize:10,valGridLine:{color:'E2E8F0',size:0.5},showLegend:true,legendPos:'b',legendFontSize:11});
+      s.addText('Utilisation:  '+sl.map((l,i)=>l+' '+capU(T.m[i].u)).join('   '),{x:0.5,y:6.45,w:12.3,h:0.4,fontSize:10,color:'0F172A',fontFace:C.F}); }
+    const wide=(t,sub,c,hdr,rows,colW)=>capPages(D,t,sub,c,hdr,rows,colW,8.5);
+    const mW=7.2/labs.length, uCell=x=>[capU(x.u),{bold:true,color:uc(x.u)}];
+    const sumT=(t,L,c)=>wide('Utilisation by '+t,'occupied of offered per month · red over 100%, green '+CAP_LO+'-100%, amber under '+CAP_LO+'%',c,[[t.charAt(0).toUpperCase()+t.slice(1)],[P==='D'?'Suppliers':'Factories',1],['Capacity',1]].concat(sl.map(l=>[l,1])),L.map(x=>[x.k,String(x.n),scQty(x.cap)].concat(x.m.map(uCell))),[3.3,0.8,1.0].concat(labs.map(()=>mW)),16);
+    sumT('product type',X.types,C.I); sumT(who.toLowerCase(),X.grps,C.A); sumT('brand',X.brands,C.T);
+    if(X.f3.length) D.pages('Free space, next 3 months',labs.slice(0,3).join(', ')+' · offered minus occupied',C.T,[[nm],[who],['Product type'],['Brand'],['Offered, 3 months',1],['Free, 3 months',1],['Free %',1]],X.f3.slice(0,30).map(x=>[x.r.name,x.r.grp,x.r.type,x.r.brand,scQty(x.off),[scQty(x.fr),{bold:true}],x.off?Math.round(x.fr/x.off*100)+'%':'']),[3.6,1.4,1.4,1.2,1.6,1.6,1.5],15);
+    if(X.over.length) D.pages('Overbooked','occupied above the capacity offered to the buyer',C.R,[[nm],[who],['Product type'],['Month'],['Offered',1],['Occupied',1],['Over by',1],['Utilisation',1]],X.over.slice(0,30).map(o=>[o.r.name,o.r.grp,o.r.type,labs[o.i],scQty(o.o),scQty(o.c),[scQty(o.x),{bold:true,color:C.R}],capU(o.c/o.o*100)]),[3.4,1.2,1.2,1.4,1.2,1.3,1.3,1.3],15);
+    if(X.nb.length) D.pages(P==='D'?'Orders but no capacity offered':'Factories with orders but no booking','occupied quantity with no offered capacity in the file',C.A,[[nm],[who],['Occupied, all months',1],['Remarks']],X.nb.map(r=>[r.name,r.grp,scQty(r.m.reduce((t,[,c])=>t+(c||0),0)),r.rem]),[4.2,2.6,1.8,3.7],15);
+    wide(P==='D'?'Suppliers, month by month':'Factories, month by month','utilisation per month · "not booked" = orders with no offered capacity',C.SL,[[nm],[who],['Type'],['Capacity',1]].concat(sl.map(l=>[l,1])),
+      X.rs.slice().sort((a,b)=>(b.cap||0)-(a.cap||0)).map(r=>[r.name,r.grp,r.type,r.cap!=null?scQty(r.cap):''].concat(r.m.map(([o,c])=>{ const u=o?(c||0)/o*100:null; return o==null&&c? ['not booked',{bold:true,color:C.R}] : [capU(u),{bold:true,color:uc(u)}]; }))),[2.2,P==='A'?1.6:1.0,0.8,0.8].concat(labs.map(()=>(12.3-(P==='A'?5.4:4.8))/labs.length)),16);
+    D.save(); } finally { rpTitle=rT; rpBase=rB; rpChips=rC; rpMeta=rM; } }
+
+/* ---- Capacity Summary: DLO and agent capacity analysis on the two capacity files ---- */
+const capPG=t=>{ t=String(t||'').toLowerCase(); return /sweater/.test(t)? 'Sweater' : /knit|jersey/.test(t)? 'Knit' : /denim/.test(t)? 'Denim' : /woven/.test(t)? 'Woven' : /blank/.test(t)||!t? 'Not given' : 'Other'; };
+function capSData(){ const S=CAP.S, D0=capCur(CAP.dlo), A0=capCur(CAP.ag), com=D0.months.filter(l=>A0.months.includes(l));
+  const al=F=>Object.assign({},F,{months:com, list:F.list.map(r=>Object.assign({},r,{m:com.map(l=>r.m[F.months.indexOf(l)]||[null,null])}))}), D=al(D0), A=al(A0);
+  const nM=com.length, w= Math.min(S.w||nM, nM);
+  const agg=(F,key)=>{ const m=new Map(); F.list.forEach(r=>{ const k=key(r), x=capW(r,w); const o=m.get(k)||{k,off:0,occ:0}; o.off+=x.off; o.occ+=x.occ; m.set(k,o); }); return m; };
+  const tot=F=>{ let o=0,c=0; F.list.forEach(r=>{ const x=capW(r,w); o+=x.off; c+=x.occ; }); return {off:o, occ:c, u:o?c/o*100:null, free:Math.max(0,o-c)}; };
+  const TD=tot(D), TA=tot(A), gD=agg(D,r=>capPG(r.type)), gA=agg(A,r=>capPG(r.type));
+  const groups=[...new Set([...gD.keys(),...gA.keys()])].map(k=>{ const d=gD.get(k)||{off:0,occ:0}, a=gA.get(k)||{off:0,occ:0}; const dFree=Math.max(0,d.off-d.occ);
+    return {k, dOff:d.off, dOcc:d.occ, dU:d.off?d.occ/d.off*100:null, dFree, aOff:a.off, aOcc:a.occ, aU:a.off?a.occ/a.off*100:null, aFree:Math.max(0,a.off-a.occ), tOff:d.off+a.off, tOcc:d.occ+a.occ, tU:(d.off+a.off)?(d.occ+a.occ)/(d.off+a.off)*100:null}; }).filter(g=>g.dOff||g.aOff||g.aOcc).sort((a,b)=>(b.dOff+b.aOff)-(a.dOff+a.aOff));
+  const months=[...Array(nM)].map((_,i)=>{ const f=F=>{ let o=0,c=0; F.list.forEach(r=>{ const [of,oc]=r.m[i]||[]; o+=of||0; c+=oc||0; }); return {off:o,occ:c,u:o?c/o*100:null}; }; return {label:D.months[i], d:f(D), a:f(A)}; });
+  const TT={off:TD.off+TA.off, occ:TD.occ+TA.occ}; TT.u= TT.off? TT.occ/TT.off*100 : null; TT.free=TD.free+TA.free;
+  const wl= w>=nM? 'all '+nM+' months' : 'next '+w+' months', fuller=groups.filter(g=>g.dOff&&g.aOff&&g.aU!=null&&g.dU!=null&&g.aU>g.dU).sort((a,b)=>(b.aU-b.dU)-(a.aU-a.dU));
+  const wk=k=>{ const L=months.slice(0,w).filter(m=>m[k].off>0); return L.length? L.reduce((a,b)=>b[k].u<a[k].u?b:a) : null; }, wD=wk('d'), wA=wk('a');
+  const find=[ `DLO is <b>${capU(TD.u)}</b> booked and agents are <b>${capU(TA.u)}</b> booked for the ${wl}, against the ${CAP_LO}-${CAP_HI}% target.`,
+    `DLO holds <b>${capPct(TD.off,TD.off+TA.off)}</b> of the capacity offered. DLO has <b>${scQty(TD.free)} pcs</b> free and agents have ${scQty(TA.free)} pcs free.`,
+    `In total, DLO and agents offer <b>${scQty(TT.off)} pcs</b> and are <b>${capU(TT.u)}</b> booked, with ${scQty(TT.free)} pcs free.`,
+    (()=>{ const G=groups.filter(g=>g.dOff||g.aOff).slice(0,4); return G.length? `Booked by product type: ${G.map(g=>esc(g.k)+' DLO '+(g.dOff?capU(g.dU):'no offer')+', agents '+(g.aOff?capU(g.aU):'no offer')).join('; ')}.` : ''; })(),
+    wD&&wA&&wD.label===wA.label? `${esc(wD.label)} is the weakest month for both: DLO <b>${capU(wD.d.u)}</b> and agents <b>${capU(wA.a.u)}</b>.` : wD&&wA? `The weakest month is ${esc(wD.label)} for DLO at <b>${capU(wD.d.u)}</b>, and ${esc(wA.label)} for agents at <b>${capU(wA.a.u)}</b>.` : '' ].filter(Boolean).slice(0,5);
+  return {w, nM, TD, TA, TT, groups, months, find, D, A}; }
+function capSPair(items){ if(!items.length) return '<div class="sc-note">No data.</div>'; const W=1000, lw=130, RH=36, H=items.length*RH+30, mx=Math.max(110,...items.flatMap(i=>[i.d||0,i.a||0]).map(v=>Math.min(v,200))), bw=W-lw-70, X=v=>lw+Math.min(v,mx)/mx*bw; let g='';
+  g+=`<rect x="${X(CAP_LO)}" y="0" width="${X(CAP_HI)-X(CAP_LO)}" height="${H-24}" fill="#e8f3ec"/><line x1="${X(100)}" x2="${X(100)}" y1="0" y2="${H-24}" stroke="${SCP.red}" stroke-dasharray="3 3"/>`;
+  items.forEach((it,i)=>{ const y=i*RH+5; g+=scLab(lw-8, y+13, it.label, lw-12, 11.5, 'fill="#334155" font-weight="600"');
+    [[it.d,SCP.g,0,'DLO'],[it.a,SCP.amb,1,'Agents']].forEach(([v,c,j,nm])=>{ const yy=y+j*14; if(v==null){ g+=`<text x="${lw+4}" y="${yy+10}" style="font-size:9.5px;fill:#94a3b8">no capacity</text>`; return; } g+=`<rect x="${lw}" y="${yy}" width="${Math.max(2,X(v)-lw)}" height="12" rx="3" fill="${c}"><title>${nm} ${capU(v)}</title></rect><text x="${Math.min(X(v),W-60)+6}" y="${yy+10}" style="font-size:10px;font-weight:700;fill:#0f172a">${capU(v)}</text>`; }); });
+  [0,CAP_LO,CAP_HI,100].forEach(v=>{ g+=`<text x="${X(v)}" y="${H-8}" text-anchor="middle" style="font-size:9.5px;fill:#64748b">${v}%</text>`; });
+  return `<svg viewBox="0 0 ${W} ${H}">${g}</svg><div class="sc-leg"><span><i style="background:${SCP.g}"></i>DLO utilisation</span><span><i style="background:${SCP.amb}"></i>Agent utilisation</span><span><i style="background:#e8f3ec;border:1px solid #9cc9ae"></i>Target ${CAP_LO}-${CAP_HI}%</span></div>`; }
+function capSHTML(X, pdf){ const card=(t,sub,c,b)=>`<div class="sc-card" style="--c:${c}"><h3><b>${t}</b><span>${sub||''}</span></h3><div class="b">${b}</div></div>`, TD=X.TD, TA=X.TA;
+  const wl= X.w>=X.nM? 'All '+X.nM+' months' : 'Next '+X.w+' months';
+  let h=`<div class="sc-ban"><div style="position:relative;z-index:1"><div class="k">Capacity summary · BD sourcing review</div><h2>DLO and agents: capacity analysis</h2><div><span class="sc-chip">${esc(wl)}</span><span class="sc-chip">Target ${CAP_LO}-${CAP_HI}%</span></div></div><div class="m">DLO file: ${esc(X.D.file)}<br>Agent file: ${esc(X.A.file)}<br>Report date ${fmtDate(todaySerial(),'dd-mmm-yy')}</div></div>`;
+  h+=`<div class="sc-kpis">${[[capU(TD.u),'DLO utilisation',CAP_BC[capBand(TD.u)]],[scQty(TD.off),'DLO offered',SCP.g],[scQty(TD.free),'DLO free pcs',SCP.teal],[capU(X.TT.u),'Total utilisation (DLO + agents)',CAP_BC[capBand(X.TT.u)]],
+    [capU(TA.u),'Agent utilisation',CAP_BC[capBand(TA.u)]],[scQty(TA.off),'Agent offered',SCP.amb],[scQty(TA.free),'Agent free pcs',SCP.teal],[capPct(TD.off,TD.off+TA.off),'DLO share of offered capacity',SCP.sl]].map(k=>`<div class="sc-k" style="--c:${k[2]}"><div class="v">${esc(k[0])}</div><div class="l">${esc(k[1])}</div></div>`).join('')}</div>`;
+  h+=card('Key findings','for management',SCP.g, X.find.map(x=>`<div style="display:flex;gap:9px;padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:12.5px;line-height:1.45"><i style="flex:0 0 8px;height:8px;border-radius:50%;margin-top:6px;background:${SCP.g}"></i><span>${x}</span></div>`).join(''));
+  h+=`<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">`+card('DLO booked','offered capacity',SCP.g, capDonut([{label:'Occupied',v:Math.min(TD.occ,TD.off),c:SCP.g},{label:'Free',v:TD.free,c:'#b9d6c6'}],capU(TD.u),'booked'))+
+    card('Agents booked','offered capacity',SCP.amb, capDonut([{label:'Occupied',v:Math.min(TA.occ,TA.off),c:SCP.amb},{label:'Free',v:TA.free,c:'#f5d9a8'}],capU(TA.u),'booked'))+
+    card('Offered capacity','DLO and agents',SCP.sl, capDonut([{label:'DLO',v:TD.off,c:SCP.g},{label:'Agents',v:TA.off,c:SCP.amb}],capPct(TD.off,TD.off+TA.off),'DLO'))+`</div>`;
+  h+=card('Utilisation by product type','DLO and agents in the window · knit includes light knit, woven includes light woven',SCP.ind, capSPair(X.groups.map(g=>({label:g.k,d:g.dU,a:g.aU}))));
+  h+=card('DLO and agents by product type','offered, occupied and free in the window · DLO, agents and total',SCP.ind, rpTbl([['Product type'],['DLO offered',1],['DLO occupied',1],['DLO used',1],['DLO free',1],['Agent offered',1],['Agent occupied',1],['Agent used',1],['Agent free',1],['Total offered',1],['Total used',1]],
+    X.groups.map(g=>[esc(g.k),scQty(g.dOff),scQty(g.dOcc),capU(g.dU),scQty(g.dFree),scQty(g.aOff),scQty(g.aOcc),capU(g.aU),scQty(g.aFree),scQty(g.tOff),'<b>'+capU(g.tU)+'</b>']).concat([['<b>Total</b>','<b>'+scQty(X.TD.off)+'</b>','<b>'+scQty(X.TD.occ)+'</b>','<b>'+capU(X.TD.u)+'</b>','<b>'+scQty(X.TD.free)+'</b>','<b>'+scQty(X.TA.off)+'</b>','<b>'+scQty(X.TA.occ)+'</b>','<b>'+capU(X.TA.u)+'</b>','<b>'+scQty(X.TA.free)+'</b>','<b>'+scQty(X.TT.off)+'</b>','<b>'+capU(X.TT.u)+'</b>']])));
+  h+=card('Month by month','utilisation per month, DLO and agents',SCP.teal, capSPair(X.months.map(m=>({label:pdf? m.label.replace(/^(\w{3})\w*'/,"$1 '") : m.label, d:m.d.u, a:m.a.u}))));
+  h+=`<div class="sc-note">Source: the DLO capacity file (sheet Capacity) and the agent capacity file (sheet Capacity Booking). Utilisation = occupied / offered for the buyer. Free = offered minus occupied. The agent file covers the agents and factories in its booking list only.</div><div class="sc-foot"><span>Capacity Summary</span><span>Dhaka Liaison Office</span></div>`;
+  return h; }
+let CAPS_BOUND=false;
+async function capRenderS(){ await capLoad(); const S=CAP.S, body=document.getElementById('capSBody');
+  if(!CAPS_BOUND){ CAPS_BOUND=true; document.getElementById('capSWin').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; S.w=+b.dataset.v; capRenderS(); });
+    document.getElementById('capSPdf').addEventListener('click',capSPdf); document.getElementById('capSPpt').addEventListener('click',capSPpt); document.getElementById('capSXls').addEventListener('click',capSXls); }
+  document.querySelectorAll('#capSWin button').forEach(b=>b.classList.toggle('on',+b.dataset.v===(S.w||0)));
+  document.getElementById('capSPills').innerHTML=[CAP.dlo?'DLO file <b>'+esc(CAP.dlo.file)+'</b>':'No DLO file', CAP.ag?'Agent file <b>'+esc(CAP.ag.file)+'</b>':'No agent file'].map(t=>`<div class="pill">${t}</div>`).join('');
+  if(!CAP.dlo||!CAP.ag){ body.innerHTML=`<div class="card" style="margin-top:14px"><div class="sc-empty">Import ${!CAP.dlo&&!CAP.ag?'both capacity files':!CAP.dlo?'the DLO capacity file (DLO Capacity tab)':'the agent capacity file (Agent Capacity tab)'} first.</div></div>`; S.last=null; return; }
+  const X=capSData(); S.last=X; window.__CAPS__=CAP; body.innerHTML=`<div style="margin-top:14px" class="sc">${capSHTML(X)}</div>`; }
+const capSBase=()=>rpSafe('Capacity Summary - '+todayISO());
+function capSPdf(){ const X=CAP.S.last; if(!X){ toast('Import both capacity files first.'); return; }
+  const doc=`<!doctype html><html><head><meta charset="utf-8"><title>${esc(capSBase())}</title><style>@page{size:A4 landscape;margin:8mm} html,body{margin:0;background:#fff} body{font-size:12px;-webkit-print-color-adjust:exact;print-color-adjust:exact} ${SC_CSS} .sc table{font-size:10px}</style></head><body><div class="sc">${capSHTML(X,true)}</div></body></html>`;
+  window.__CAPX__={doc}; const old=document.getElementById('scPrintFrame'); if(old) old.remove(); const fr=document.createElement('iframe'); fr.id='scPrintFrame'; fr.style.cssText='position:fixed;right:0;bottom:0;width:0;height:0;border:0;'; document.body.appendChild(fr);
+  fr.onload=()=>{ setTimeout(()=>{ try{ fr.contentWindow.focus(); fr.contentWindow.print(); }catch(e){ toast('Could not open the print window: '+e.message); } },200); }; fr.srcdoc=doc; toast('In the print window choose "Save as PDF". File name: '+capSBase()+'.pdf'); }
+function capSPpt(){ const X=CAP.S.last; if(!X){ toast('Import both capacity files first.'); return; } if(!window.PptxGenJS){ toast('The PowerPoint library is missing from this page.'); return; }
+  const strip=h=>String(h).replace(/<[^>]+>/g,'').replace(/&#39;/g,"'").replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'), TD=X.TD, TA=X.TA, wl= X.w>=X.nM? 'All '+X.nM+' months' : 'Next '+X.w+' months';
+  const rT=rpTitle, rB=rpBase, rC=rpChips, rM=rpMeta; rpTitle=()=>'Capacity Summary'; rpBase=capSBase; rpChips=()=>[wl,'Target '+CAP_LO+'-'+CAP_HI+'%']; rpMeta=()=>({file:'', at:'', src:'Source: '+X.D.file+' and '+X.A.file});
+  try{ const D=rpDeck('dva','BD sourcing review',`DLO ${capU(TD.u)} booked   ·   agents ${capU(TA.u)} booked   ·   DLO free ${scQty(TD.free)} pcs`), C=D.C, p=D.p; D.pages=(t,sub,c,hdr,rows,colW)=>capPages(D,t,sub,c,hdr,rows,colW,10);
+    const bc=u=> u==null? C.M : u>100? C.R : u>=CAP_LO? C.G : C.A;
+    { const s=D.slide('At a glance'); D.kpis(s,[[capU(TD.u),'DLO utilisation',bc(TD.u)],[scQty(TD.off),'DLO offered',C.G],[scQty(TD.free),'DLO free pcs',C.T],[capU(X.TT.u),'Total utilisation (DLO + agents)',bc(X.TT.u)],[capU(TA.u),'Agent utilisation',bc(TA.u)],[scQty(TA.off),'Agent offered',C.A],[scQty(TA.free),'Agent free pcs',C.T],[capPct(TD.off,TD.off+TA.off),'DLO share of offered',C.SL]]);
+      s.addText('Key findings',{x:0.5,y:4.95,w:6,h:0.3,fontSize:12,bold:true,color:'0F172A',fontFace:C.F}); s.addText(X.find.map(f=>({text:strip(f),options:{bullet:true,breakLine:true}})),{x:0.5,y:5.3,w:12.3,h:1.8,fontSize:11.5,color:'0F172A',fontFace:C.F,valign:'top',paraSpaceAfter:3}); }
+    { const s=D.slide('Booked and free','offered capacity, '+wl,C.G); const dn=(x,t,vals,cols,lab)=>{ s.addText(t,{x,y:1.3,w:4,h:0.4,fontSize:14,bold:true,color:'0F172A',fontFace:C.F,align:'center'}); s.addChart(p.ChartType.doughnut,[{name:t,labels:lab,values:vals}],{x,y:1.75,w:4,h:4.6,holeSize:55,chartColors:cols,showPercent:true,showLegend:true,legendPos:'b',legendFontSize:11,dataLabelColor:'0F172A',dataLabelFontSize:11}); };
+      dn(0.4,'DLO',[Math.round(Math.min(TD.occ,TD.off)),Math.round(TD.free)],[C.G,'B9D6C6'],['Occupied','Free']); dn(4.65,'Agents',[Math.round(Math.min(TA.occ,TA.off)),Math.round(TA.free)],[C.A,'F5D9A8'],['Occupied','Free']); dn(8.9,'Offered capacity: DLO and agents',[Math.round(TD.off),Math.round(TA.off)],[C.G,C.A],['DLO','Agents']); }
+    { const s=D.slide('Utilisation by product type','DLO and agents, '+wl+' · target '+CAP_LO+'-'+CAP_HI+'% · types with capacity offered',C.I); const G=X.groups.filter(g=>g.dOff||g.aOff), L=G.map(g=>g.k);
+      s.addChart(p.ChartType.bar,[{name:'DLO',labels:L,values:G.map(g=>g.dU==null?0:Math.round(g.dU))},{name:'Agents',labels:L,values:G.map(g=>g.aU==null?0:Math.round(g.aU))}],{x:0.5,y:1.3,w:12.3,h:5.6,barDir:'col',barGrouping:'clustered',chartColors:[C.G,C.A],showValue:true,dataLabelFontSize:10,dataLabelFormatCode:'0"%"',valAxisLabelFormatCode:'0"%"',valAxisLabelFontSize:9,catAxisLabelFontSize:11,valGridLine:{color:'E2E8F0',size:0.5},showLegend:true,legendPos:'b',legendFontSize:11}); }
+    { const B=v=>[v,{bold:true}]; D.pages('DLO and agents by product type','offered, occupied and free, '+wl+' · DLO, agents and total',C.I,[['Product type'],['DLO offered',1],['DLO occupied',1],['DLO used',1],['DLO free',1],['Agent offered',1],['Agent occupied',1],['Agent used',1],['Agent free',1],['Total offered',1],['Total used',1]],
+      X.groups.map(g=>[g.k,scQty(g.dOff),scQty(g.dOcc),capU(g.dU),scQty(g.dFree),scQty(g.aOff),scQty(g.aOcc),capU(g.aU),scQty(g.aFree),scQty(g.tOff),B(capU(g.tU))]).concat([[B('Total'),B(scQty(TD.off)),B(scQty(TD.occ)),B(capU(TD.u)),B(scQty(TD.free)),B(scQty(TA.off)),B(scQty(TA.occ)),B(capU(TA.u)),B(scQty(TA.free)),B(scQty(X.TT.off)),B(capU(X.TT.u))]]),[1.6,1.15,1.15,0.9,1.15,1.15,1.15,0.9,1.15,1.15,0.85]); }
+    { const s=D.slide('Month by month','utilisation per month, DLO and agents',C.T); const L=X.months.map(m=>m.label.replace(/^(\w{3})\w*'/,"$1 '"));
+      s.addChart(p.ChartType.bar,[{name:'DLO',labels:L,values:X.months.map(m=>m.d.u==null?0:Math.round(m.d.u))},{name:'Agents',labels:L,values:X.months.map(m=>m.a.u==null?0:Math.round(m.a.u))}],{x:0.5,y:1.3,w:12.3,h:5.6,barDir:'col',barGrouping:'clustered',chartColors:[C.G,C.A],showValue:true,dataLabelFontSize:9,dataLabelFormatCode:'0"%"',valAxisLabelFormatCode:'0"%"',valAxisLabelFontSize:9,catAxisLabelFontSize:10,valGridLine:{color:'E2E8F0',size:0.5},showLegend:true,legendPos:'b',legendFontSize:11}); }
+    D.save(); } finally { rpTitle=rT; rpBase=rB; rpChips=rC; rpMeta=rM; } }
+function capSXls(){ const X=CAP.S.last; if(!X){ toast('Import both capacity files first.'); return; } const wb=XLSX.utils.book_new(), r1=v=>v==null?'':Math.round(v*10)/10, strip=h=>String(h).replace(/<[^>]+>/g,'').replace(/&#39;/g,"'").replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
+  dvaSheet(wb,'Summary',[{Item:'Window',Value:X.w>=X.nM?'All months':'Next '+X.w+' months'},{Item:'DLO offered',Value:Math.round(X.TD.off)},{Item:'DLO occupied',Value:Math.round(X.TD.occ)},{Item:'DLO utilisation %',Value:r1(X.TD.u)},{Item:'Agent offered',Value:Math.round(X.TA.off)},{Item:'Agent occupied',Value:Math.round(X.TA.occ)},{Item:'Agent utilisation %',Value:r1(X.TA.u)},{Item:'Total offered (DLO + agents)',Value:Math.round(X.TT.off)},{Item:'Total occupied (DLO + agents)',Value:Math.round(X.TT.occ)},{Item:'Total utilisation %',Value:r1(X.TT.u)}].concat(X.find.map((f,i)=>({Item:'Finding '+(i+1),Value:strip(f)}))),'334155',false);
+  dvaSheet(wb,'By product type',X.groups.map(g=>({'Product type':g.k,'DLO offered':Math.round(g.dOff),'DLO occupied':Math.round(g.dOcc),'DLO used %':r1(g.dU),'DLO free':Math.round(g.dFree),'Agent offered':Math.round(g.aOff),'Agent occupied':Math.round(g.aOcc),'Agent used %':r1(g.aU),'Agent free':Math.round(g.aFree),'Total offered':Math.round(g.tOff),'Total occupied':Math.round(g.tOcc),'Total used %':r1(g.tU)})),'4338CA',false);
+  dvaSheet(wb,'By month',X.months.map(m=>({Month:m.label,'DLO offered':Math.round(m.d.off),'DLO occupied':Math.round(m.d.occ),'DLO used %':r1(m.d.u),'Agent offered':Math.round(m.a.off),'Agent occupied':Math.round(m.a.occ),'Agent used %':r1(m.a.u)})),'0E7490',false);
+  xWrite(wb, capSBase()+'.xlsx'); toast('Excel saved: '+capSBase()+'.xlsx'); }
+function capXls(P){ const X=CAP[P].last; if(!X){ toast('Nothing to export yet.'); return; } const wb=XLSX.utils.book_new(), labs=X.F.months, who= P==='D'? 'Merch' : 'Agent', base=rpSafe((P==='D'?'DLO Capacity - ':'Agent Capacity Kite - ')+todayISO()), r1=v=>v==null?'':Math.round(v*10)/10;
+  const sumRows=L=>L.map(x=>{ const o={Group:x.k, [P==='D'?'Suppliers':'Factories']:x.n, Capacity:Math.round(x.cap)}; labs.forEach((l,i)=>{ o[l+' offered']=Math.round(x.m[i].off); o[l+' occupied']=Math.round(x.m[i].occ); o[l+' util %']=r1(x.m[i].u); }); return o; });
+  dvaSheet(wb,'Key findings',(X.find||[]).map((f,i)=>({'#':i+1, Type:CAP_FT[f.tag][0], Finding:capTxt(f.t)})),'1F6B45',false);
+  dvaSheet(wb,'Decision groups',X.sup.filter(o=>o.off||o.occ).map(o=>({[P==='D'?'Supplier':'Factory']:o.name,[who]:o.grp,'Product type':o.type,Group:{fill:'Fill now',protect:'Protect',move:'Move orders out',review:'Review'}[o.q]||'',Window:X.w>=X.nM?'All months':'Next '+X.w+' months',Offered:Math.round(o.off),Occupied:Math.round(o.occ),'Used %':r1(o.u),Free:Math.round(o.free),'Over':Math.round(o.over+o.nb)})),'334155',false);
+  dvaSheet(wb,'Total',sumRows([Object.assign({k:'All rows in view'},X.T)]),'1F6B45',false);
+  dvaSheet(wb,'By product type',sumRows(X.types),'4338CA',false); dvaSheet(wb,'By '+who.toLowerCase(),sumRows(X.grps),'D97706',false); dvaSheet(wb,'By brand',sumRows(X.brands),'0E7490',false);
+  dvaSheet(wb,P==='D'?'Supplier list':'Factory list',X.rs.map(r=>{ const o={[P==='D'?'Supplier':'Factory']:r.name,[who]:r.grp,'Product type':r.type,Brand:r.brand,Capacity:r.cap==null?'':r.cap,Lines:r.lines==null?'':r.lines}; labs.forEach((l,i)=>{ const [of,oc]=r.m[i]; o[l+' offered']=of==null?'':of; o[l+' occupied']=oc==null?'':oc; o[l+' free']=of==null?'':of-(oc||0); }); o.Remarks=r.rem; return o; }),'334155',false);
+  dvaSheet(wb,'Overbooked',X.over.map(o=>({[P==='D'?'Supplier':'Factory']:o.r.name,[who]:o.r.grp,'Product type':o.r.type,Month:labs[o.i],Offered:o.o,Occupied:o.c,'Over by':o.x})),'B42318',false);
+  dvaSheet(wb,'Free next 3 months',X.f3.map(x=>({[P==='D'?'Supplier':'Factory']:x.r.name,[who]:x.r.grp,'Product type':x.r.type,Brand:x.r.brand,'Offered 3 months':x.off,'Free 3 months':x.fr})),'0E7490',false);
+  xWrite(wb, base+'.xlsx'); toast('Excel saved: '+base+'.xlsx'); }
+
 /* ---- BD Sourcing Review: the same page with only the DD pages ---- */
 function srcSetup(){
   document.title='BD Sourcing Review';
@@ -7194,16 +7823,16 @@ function srcSetup(){
     const d=P.querySelector('details'); if(d) d.innerHTML='<summary class="small" style="cursor:pointer;font-weight:700">What the import does</summary><div class="notice info" style="margin-top:8px;">Reads every row of the DD export, finds the columns by header name, and saves them on this computer. <b>DLO</b> = rows whose agent is Dhaka Office; every other agent and direct supplier counts as <b>Agent/Direct</b>. A PO under 0_Direct Supplier or Shanghai Office counts as DLO when its supplier is a Dhaka Office supplier. Cancelled rows are left out of the review pages. Prices are the DD cost_price column; a DD without that column still gives POs and quantity. Nothing is uploaded.</div>';
     const v=document.getElementById('btnDDView'); if(v) v.style.display='none'; }
   const sb=document.querySelector('.sidebar');
-  const keep=new Set(['import','bdva','bprice','bscore','bbench','bagent','bbuyer']);
+  const keep=new Set(['import','bdva','bprice','bscore','bbench','bagent','bbuyer','bcxl','bcaps','bcap','bcapa']);
   sb.querySelectorAll('.navbtn').forEach(b=>{ if(!keep.has(b.dataset.tab)) b.remove(); });
-  sb.querySelectorAll('.navlabel').forEach(l=>{ if(l.textContent.trim()!=='BD Sourcing Review') l.remove(); });
+  sb.querySelectorAll('.navlabel').forEach(l=>{ const t=l.textContent.trim(); if(t!=='BD Sourcing Review'&&t!=='Capacity Analysis') l.remove(); });
   const imp=sb.querySelector('.navbtn[data-tab="import"]'), lab=sb.querySelector('.navlabel'), brand=sb.querySelector('.brand');
   const l0=document.createElement('div'); l0.className='navlabel'; l0.style.paddingTop='4px'; l0.textContent='Main DD';
   brand.after(l0); l0.after(imp); lab.textContent='Sourcing Review';
-  const SR_LOGO='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="30" height="30" aria-hidden="true"><rect width="100" height="100" rx="20" fill="#12305a"/><text x="50" y="58" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="38" fill="#fff">SR</text><rect x="18" y="68" width="38" height="12" rx="4" fill="#34d399"/><rect x="58" y="68" width="24" height="12" rx="4" fill="#fbbf24"/></svg>';
+  const SR_LOGO='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="30" height="30" aria-hidden="true"><rect width="100" height="100" rx="20" fill="#12305a"/><text x="50" y="49" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="34" fill="#fff">SR</text><rect x="20" y="71" width="13" height="12" rx="3" fill="#34d399"/><rect x="37" y="64" width="13" height="19" rx="3" fill="#34d399"/><rect x="54" y="57" width="13" height="26" rx="3" fill="#34d399"/><rect x="71.5" y="58.5" width="9" height="23" rx="3" fill="none" stroke="#fbbf24" stroke-width="3" stroke-dasharray="4 3"/><rect x="18" y="86" width="64" height="2.5" rx="1.2" fill="#fff" opacity=".5"/></svg>';
   const mk=brand.querySelector('.mark'); mk.innerHTML=SR_LOGO; mk.style.background='transparent'; mk.style.boxShadow='0 0 0 1px rgba(255,255,255,.25)'; mk.style.overflow='hidden'; mk.title='BD Sourcing Review';
   const fav=document.createElement('link'); fav.rel='icon'; fav.type='image/svg+xml'; fav.href='data:image/svg+xml,'+encodeURIComponent(SR_LOGO.replace(' width="30" height="30"','')); document.head.querySelectorAll('link[rel~="icon"]').forEach(l=>l.remove()); document.head.appendChild(fav);
-  brand.querySelector('.name').textContent='Sourcing Review'; brand.querySelector('.sub').textContent='BD · DLO vs agents';
+  brand.querySelector('.name').textContent='Sourcing Review'; brand.querySelector('.sub').textContent='Orders · Capacity';
   sb.querySelectorAll('.navbtn').forEach(b=>b.classList.remove('active'));
   imp.childNodes.forEach(n=>{ if(n.nodeType===3&&/Import Main DD/.test(n.textContent)) n.textContent='Import DD'; });
   document.querySelectorAll('.sitefoot').forEach(f=>f.remove());
@@ -7211,8 +7840,13 @@ function srcSetup(){
 async function srcStart(){ let has=false; try{ const m=await idbGet('config','ddAllMeta'); has=!!(m&&m.value); }catch(e){}
   const b=document.querySelector('.navbtn[data-tab="'+(has?'bdva':'import')+'"]'); if(b) b.click(); }
 if(SRC_MODE) srcSetup();
+/* Follow-Up Master (Sohel, 8 Nov 2026): the BD Sourcing Review pages live only in the BD Sourcing Review app.
+   They are taken out of this app's sidebar, and the full-DD copy they need is no longer saved here. */
+function fumSetup(){ ['bdva','bprice','bscore','bbench','bagent','bbuyer','bcxl','bcaps','bcap','bcapa'].forEach(t=>{ const b=document.querySelector('.navbtn[data-tab="'+t+'"]'); if(b) b.remove(); });
+  document.querySelectorAll('.navlabel').forEach(l=>{ if(/BD Sourcing Review|^Capacity( Analysis)?$/i.test(l.textContent.trim())) l.remove(); }); }
+if(!SRC_MODE) fumSetup();
 window.__FUM__ = {DDX, STATE, XL, displayOf, cellValue, rawCell, toInternal, toExcel, COLUMNS, LETTER_TO_IDX, BLANK, isErr, serialToISO, invalidate, cfStyle};
-loadAll().then(()=>{ if(SRC_MODE) srcStart(); else focusGrid(); });
+loadAll().then(()=>{ if(SRC_MODE) srcStart(); else { focusGrid(); idbDel('config','ddAllRows').catch(()=>{}); idbDel('config','ddAllMeta').catch(()=>{}); } });
 })();
 </script>
 <!-- ===================== SITE FOOTER (cloned into every page on load) ===================== -->
