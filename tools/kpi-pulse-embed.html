@@ -3455,15 +3455,17 @@ function nfmt(v, f){
   if(!f) return String(v);
   var sign = '', n = v;
   if(f.charAt(0) === '+'){ if(v > 0) sign = '+'; f = f.slice(1) }
+  /* 1,000,000 and above show as 1.78M (quantity, volume, FOB value). Excel exports keep full numbers. */
+  var M = Math.abs(n) >= 1e6 ? (Math.abs(n) / 1e6).toFixed(2) + 'M' : null;
   switch(f){
-    case '#,##0':      return sign + NF0.format(Math.round(n));
+    case '#,##0':      if(M) return (n < 0 ? '-' : sign) + M; return sign + NF0.format(Math.round(n));
     case '#,##0.00':   return sign + n.toLocaleString('en-US',{minimumFractionDigits:2, maximumFractionDigits:2});
-    case '$#,##0':     return (n < 0 ? '-' : sign) + '$' + NF0.format(Math.abs(Math.round(n)));
+    case '$#,##0':     if(M) return (n < 0 ? '-' : sign) + '$' + M; return (n < 0 ? '-' : sign) + '$' + NF0.format(Math.abs(Math.round(n)));
     case '$#,##0.00':  return (n < 0 ? '-' : sign) + '$' + Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2, maximumFractionDigits:2});
     case '0.0%':       return sign + (n * 100).toFixed(1) + '%';
     case '0%':         return sign + Math.round(n * 100) + '%';
     case '0':          return sign + String(Math.round(n));
-    default:           return sign + NF0.format(n);
+    default:           if(M) return (n < 0 ? '-' : sign) + M; return sign + NF0.format(n);
   }
 }
 

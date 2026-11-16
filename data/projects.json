@@ -69,7 +69,7 @@
       "Dashboard with live figures from the same formulas: order status, ETD due in 7 and 30 days, overdue milestones in red and amber, orders by buyer and supplier. My Orders vs Agent Volume and Price compare the liaison office's own orders with agent orders from the same export.",
       "KPI Pulse loads beside the chart and is fed both sheets, so the ten KPI sheets rebuild from the live data. Exports the chart to Excel with colours, formats and formulas kept. Auto backup saves every change to a folder the user picks, the latest file plus one file per day, 30 days kept, so the data survives an uninstall."
     ],
-    "footnote": "Packaged as a Windows installer (v1.2.36, 15 Nov 2026). Runs offline, needs no admin rights and uploads no data. In daily use on a real order book of 381 running and 3,079 shipped orders. Every change is tested in the browser with the real data before it is built into the installer. The demo runs an earlier build, without the Weekly DLO Shipment Status page and the newer import and backup features.",
+    "footnote": "Packaged as a Windows installer (v1.2.36, 15 Nov 2026). Runs offline, needs no admin rights and uploads no data. In daily use on a real order book of 381 running and 3,079 shipped orders. Every change is tested in the browser with the real data before it is built into the installer. The demo uses made-up buyers, factories, POs and figures, with a sample DD export to try the import.",
     "link_label": "Try the demo",
     "link_url": "tools/production-follow-up-master.html"
   },
