@@ -195,6 +195,63 @@
       consoles.forEach(function (el) { cxIo.observe(el); });
     }
 
+    /* ---------- 8. AI Learning page: hero typing and neural net ----------
+       Only runs on body.ai-page. The canvas pauses when off screen or when
+       the tab is hidden, and is skipped entirely for reduced motion. */
+    if (document.body.classList.contains("ai-page")) {
+      var ht = document.querySelector(".ai-type");
+      if (ht) {
+        var full8 = ht.getAttribute("data-text") || ht.textContent, k8 = 0;
+        ht.textContent = "";
+        setTimeout(function tick8() {
+          k8 += 1; ht.textContent = full8.slice(0, k8);
+          if (k8 < full8.length) setTimeout(tick8, 24);
+        }, 700);
+      }
+      var cv = document.querySelector(".ai-net");
+      if (cv && cv.getContext) {
+        var ctx = cv.getContext("2d"), dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var W = 0, H = 0, pts = [], running = false, visible = true, raf = 0;
+        var size = function () {
+          var r = cv.getBoundingClientRect(); W = r.width; H = r.height;
+          cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          var n = Math.max(18, Math.min(60, Math.round(W * H / 16000)));
+          pts = [];
+          for (var q = 0; q < n; q++) pts.push({ x: Math.random() * W, y: Math.random() * H,
+            vx: (Math.random() - .5) * .28, vy: (Math.random() - .5) * .28 });
+        };
+        var frame = function () {
+          ctx.clearRect(0, 0, W, H);
+          for (var a = 0; a < pts.length; a++) {
+            var p = pts[a]; p.x += p.vx; p.y += p.vy;
+            if (p.x < 0 || p.x > W) p.vx *= -1;
+            if (p.y < 0 || p.y > H) p.vy *= -1;
+            for (var b = a + 1; b < pts.length; b++) {
+              var o = pts[b], dx = p.x - o.x, dy = p.y - o.y, d2 = dx * dx + dy * dy;
+              if (d2 < 15000) {
+                ctx.strokeStyle = "rgba(63,208,164," + (0.22 * (1 - d2 / 15000)).toFixed(3) + ")";
+                ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(o.x, o.y); ctx.stroke();
+              }
+            }
+            ctx.fillStyle = "rgba(150,235,205,.75)";
+            ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, 6.283); ctx.fill();
+          }
+          if (running) raf = requestAnimationFrame(frame);
+        };
+        var setRun = function () {
+          var want = visible && !document.hidden;
+          if (want && !running) { running = true; raf = requestAnimationFrame(frame); }
+          else if (!want && running) { running = false; cancelAnimationFrame(raf); }
+        };
+        size(); setRun();
+        new IntersectionObserver(function (es) { visible = es[0].isIntersecting; setRun(); }).observe(cv);
+        document.addEventListener("visibilitychange", setRun);
+        var rt = 0;
+        window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(size, 200); }, { passive: true });
+      }
+    }
+
     /* ---------- 5 and 6. Scroll-linked effects ---------- */
     var bar = document.querySelector(".scroll-progress");
     var timeline = document.querySelector(".timeline");
