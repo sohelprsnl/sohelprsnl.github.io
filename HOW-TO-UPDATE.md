@@ -17,10 +17,13 @@ The site is plain HTML on GitHub Pages. Nothing to pay for, nothing to log in to
 | Home page achievements | The "Latest achievements" list |
 | Projects | Every project card, in three sections |
 | AI learning journal | The dated log on AI Learning |
-| AI coursework | The Coursework list on AI Learning |
+| AI coursework | The Coursework list on AI Learning. Fill "Console card" to show a course as the dark animated card (counters, path, tags, tiles, rule line). The Details text moves into its drop-down. |
 | Certifications and training | The list on Resources |
 
-Counts such as "All 32 issues" and "Nine projects" update by themselves.
+Counts such as "All 36 issues", "Twelve projects" and the newsletter issue count on the Projects page update by themselves.
+
+Two parts of AI Learning have no form and need a hand edit under "Pages (raw HTML)" when a project is added:
+the "Projects shipped with AI" list and the "How I already use AI" module cards.
 
 ## Everything else: Pages (raw HTML)
 
