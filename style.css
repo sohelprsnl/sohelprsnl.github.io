@@ -947,3 +947,8 @@ h4.rsub {
   .mini-list a::after { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .mini-list a { transition: none; } }
+/* ---------- Google Scholar badge (Publications hero, beside ORCID) ---------- */
+.scholar-badge { margin-left: 12px; border-color: rgba(66,133,244,.45); border-left-color: #4285F4; }
+.scholar-badge:hover { background: rgba(66,133,244,.14); border-color: #4285F4; }
+.scholar-badge .orcid-label { color: #8AB4F8; }
+@media (max-width: 640px) { .scholar-badge { margin-left: 0; } }
