@@ -291,6 +291,52 @@ content:
         options:
           format: html
         description: Paragraphs as <p>...</p>. Copy an existing entry to keep the same look.
+      - name: console
+        label: Console card (optional)
+        type: object
+        description: When this has path points, the course shows as the dark animated console card. The Details above move into its "Full syllabus" drop-down.
+        fields:
+          - { name: code, label: Top label, type: string, description: "Short code line, for example MYAI · AIAP 1.0 · AGENT PROGRAMME" }
+          - { name: dates, label: Dates line, type: string }
+          - name: stats
+            label: Numbers
+            type: object
+            list: true
+            description: Two or three counters, for example 6 / Live sessions. Whole numbers only.
+            fields:
+              - { name: n, label: Number, type: string }
+              - { name: l, label: Label, type: string }
+          - { name: path_label, label: Path heading, type: string, default: Mission path }
+          - name: nodes
+            label: Path points
+            type: object
+            list: true
+            description: Sessions first, then workshops. Workshops show in gold at the end of the line.
+            fields:
+              - { name: code, label: Code, type: string, description: "S1, S2 ... or W1, W2" }
+              - { name: date, label: Date, type: string, description: "Optional, for example 02 Oct" }
+              - { name: label, label: Topic, type: string }
+              - name: kind
+                label: Type
+                type: select
+                default: session
+                options:
+                  values: [session, workshop]
+          - { name: chips_label, label: Tags heading, type: string }
+          - { name: chips, label: Tags, type: string, list: true }
+          - { name: chip_alert, label: Highlighted tag, type: string, description: "Must match one tag exactly. Shown in gold." }
+          - { name: tiles_label, label: Tiles heading, type: string }
+          - name: tiles
+            label: Tiles
+            type: object
+            list: true
+            fields:
+              - { name: title, label: Title, type: string }
+              - { name: text, label: Line, type: string }
+              - { name: tabs, label: File tabs, type: string, list: true }
+              - { name: link, label: Link (optional), type: string }
+          - { name: rule, label: Closing rule line, type: string, description: Typed out on screen when the card appears. }
+          - { name: more_label, label: Drop-down label, type: string, default: Full syllabus and notes }
 
   - name: certifications
     label: Certifications and training
