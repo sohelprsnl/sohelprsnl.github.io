@@ -137,37 +137,31 @@
       "nodes": [
         {
           "code": "S1",
-          "date": "19 May",
           "label": "Prompt engineering",
           "kind": "session"
         },
         {
           "code": "S2",
-          "date": "09 Jun",
           "label": "Productivity",
           "kind": "session"
         },
         {
           "code": "S3",
-          "date": "16 Jun",
           "label": "Career acceleration",
           "kind": "session"
         },
         {
           "code": "S4",
-          "date": "23 Jun",
           "label": "AI 101",
           "kind": "session"
         },
         {
           "code": "S5",
-          "date": "02 Jul",
           "label": "Wealth creation",
           "kind": "session"
         },
         {
           "code": "S6",
-          "date": "14 Jul",
           "label": "Sales and business",
           "kind": "session"
         },
