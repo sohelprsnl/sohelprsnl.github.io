@@ -231,6 +231,13 @@ def build_journal(pages):
 
 # ---------- projects ----------
 
+def newsletter_count():
+    try:
+        return len(json.loads((DATA / "newsletter.json").read_text(encoding="utf-8")))
+    except Exception:
+        return None
+
+
 def project_card(pr):
     cover = str(pr.get("cover") or "").strip()
     cls = f'card {pr["accent"]} has-cover reveal' if cover else f'card {pr["accent"]} reveal'
@@ -264,6 +271,15 @@ def project_card(pr):
 def build_projects(pages):
     projects = load("projects.json", ("section", "title", "meta", "intro", "accent"),
                     {"section": set(PROJECT_SECTIONS), "accent": ACCENTS})
+    issues = newsletter_count()
+    if issues:
+        for pr in projects:
+            for key in ("points", "intro", "footnote"):
+                val = pr.get(key)
+                if isinstance(val, list):
+                    pr[key] = [re.sub(r"(RMG Xpress Insights by Sohel, with )\d+( issues)", rf"\g<1>{issues}\2", str(x)) for x in val]
+                elif isinstance(val, str):
+                    pr[key] = re.sub(r"(RMG Xpress Insights by Sohel, with )\d+( issues)", rf"\g<1>{issues}\2", val)
     p = "projects.html"
     for section, marker in PROJECT_SECTIONS.items():
         cards = [project_card(pr) for pr in projects if pr["section"] == section]
