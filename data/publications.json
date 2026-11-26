@@ -46,5 +46,13 @@
     "month": "2026-11",
     "summary": "A classroom redesign of the magic pond puzzle for Classes 4 to 8, in two levels: doubling ponds worked backwards, then ponds that multiply by 10 and by 7, where some patterns hold and one breaks. Developed from my Zenodo preprint, Flowers at the Magic Pond.",
     "meta": "At Right Angles 26 · Azim Premji University · ISSN 2582-1873"
+  },
+  {
+    "title": "Denim Washing: A Buyer's Introduction",
+    "url": "https://doi.org/10.5281/zenodo.22930682",
+    "tag": "Training deck · Zenodo",
+    "month": "2026-09",
+    "summary": "An 86-slide open training deck for buyers, merchandisers and product developers: denim basics, wet and dry processes, laser and ozone, building and approving a wash, quality risk, cost, lead time and compliance.",
+    "meta": "Zenodo · DOI: 10.5281/zenodo.22930682 · CC BY-NC 4.0"
   }
 ]
