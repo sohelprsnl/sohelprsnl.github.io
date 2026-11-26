@@ -155,6 +155,46 @@
       });
     }
 
+    /* ---------- 7. AI course console cards ----------
+       Count the stats up and type the closing rule line once the card
+       enters the screen. The text is already in the HTML, so without JS
+       or with reduced motion nothing is lost. */
+    var consoles = document.querySelectorAll(".cx");
+    if (consoles.length) {
+      var cxIo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          cxIo.unobserve(e.target);
+          var card = e.target;
+          card.querySelectorAll(".cx-n").forEach(function (el) {
+            var target = parseInt(el.getAttribute("data-n"), 10);
+            if (isNaN(target)) return;
+            var start = null, dur = 900;
+            el.textContent = "0";
+            function step(ts) {
+              if (start === null) start = ts;
+              var p = Math.min((ts - start) / dur, 1);
+              el.textContent = String(Math.round(target * (1 - Math.pow(1 - p, 3))));
+              if (p < 1) requestAnimationFrame(step); else el.textContent = String(target);
+            }
+            setTimeout(function () { requestAnimationFrame(step); }, 300);
+            setTimeout(function () { el.textContent = String(target); }, 300 + dur + 400);
+          });
+          var t = card.querySelector(".cx-type");
+          if (t) {
+            var full = t.getAttribute("data-text") || t.textContent, k = 0;
+            t.textContent = "";
+            setTimeout(function tick() {
+              k += 1;
+              t.textContent = full.slice(0, k);
+              if (k < full.length) setTimeout(tick, 28);
+            }, 1500);
+          }
+        });
+      }, { threshold: 0.3 });
+      consoles.forEach(function (el) { cxIo.observe(el); });
+    }
+
     /* ---------- 5 and 6. Scroll-linked effects ---------- */
     var bar = document.querySelector(".scroll-progress");
     var timeline = document.querySelector(".timeline");

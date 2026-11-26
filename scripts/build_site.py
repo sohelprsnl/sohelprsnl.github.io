@@ -292,9 +292,82 @@ def build_projects(pages):
 
 # ---------- coursework and certifications ----------
 
-def res_blocks(items):
+def console_block(c):
+    """Futuristic 'mission console' card for a course that has a console section."""
+    k = c["console"]
+    where = c.get("_where", c["title"])
+    nodes = k.get("nodes") or []
+    if not nodes:
+        raise DataError(f"{where}: the console needs at least one path node")
+    out = [f'      <article class="cx reveal" aria-label="{attr(c["title"])}">',
+           '        <div class="cx-scan" aria-hidden="true"></div>',
+           '        <header class="cx-head">',
+           f'          <span class="cx-code">{esc(k.get("code", ""))}</span>',
+           f'          <span class="cx-badge"><span class="cx-pulse" aria-hidden="true"></span>{esc(c["status"])}</span>',
+           '        </header>',
+           f'        <h3 class="cx-title">{esc(c["title"])}</h3>',
+           f'        <p class="cx-dates">{esc(k.get("dates", ""))}</p>']
+    stats = k.get("stats") or []
+    if stats:
+        out.append('        <div class="cx-stats">')
+        for st in stats:
+            out.append(f'          <div class="cx-stat"><span class="cx-n" data-n="{attr(st["n"])}">{esc(st["n"])}</span><span class="cx-l">{esc(st["l"])}</span></div>')
+        out.append('        </div>')
+    out.append(f'        <p class="cx-label">{esc(k.get("path_label") or "Mission path")}</p>')
+    n_s = sum(1 for n in nodes if (n.get("kind") or "session") == "session")
+    split = round(((n_s / len(nodes)) * 100 - 3) / 94 * 100, 1) if n_s < len(nodes) else 100
+    out.append(f'        <ol class="cx-path" style="--split:{split}%">')
+    i = 0
+    for kind in ("session", "workshop"):
+        for nd in [n for n in nodes if (n.get("kind") or "session") == kind]:
+            label = esc(nd.get("label") or "")
+            date = esc(nd.get("date") or "")
+            out.append(f'          <li class="cx-node{" w" if kind == "workshop" else ""}" style="--i:{i}"><span class="cx-dot" aria-hidden="true"></span>'
+                       f'<span class="cx-nc">{esc(nd["code"])}</span>'
+                       + (f'<span class="cx-nd">{date}</span>' if date else "")
+                       + (f'<span class="cx-nl">{label}</span>' if label else "") + '</li>')
+            i += 1
+    out.append('        </ol>')
+    chips = k.get("chips") or []
+    if chips:
+        out.append(f'        <p class="cx-label">{esc(k.get("chips_label") or "")}</p>')
+        out.append('        <ul class="cx-chips">')
+        alert = str(k.get("chip_alert") or "").strip()
+        for j, ch in enumerate(chips):
+            cls = "cx-chip alert" if alert and str(ch).strip() == alert else "cx-chip"
+            out.append(f'          <li class="{cls}" style="--i:{j}">{esc(ch)}</li>')
+        out.append('        </ul>')
+    tiles = k.get("tiles") or []
+    if tiles:
+        out.append(f'        <p class="cx-label">{esc(k.get("tiles_label") or "")}</p>')
+        out.append('        <div class="cx-tiles">')
+        for j, t in enumerate(tiles):
+            url = str(t.get("link") or "").strip()
+            tag = "a" if url else "div"
+            href = f' href="{attr(url)}"{link_target(url)}' if url else ""
+            tabs = "".join(f'<span class="cx-tab">{esc(x)}</span>' for x in (t.get("tabs") or []))
+            out.append(f'          <{tag} class="cx-tile" style="--i:{j}"{href}><span class="cx-tt">{esc(t["title"])}</span>'
+                       f'<span class="cx-td">{esc(t.get("text") or "")}</span>'
+                       + (f'<span class="cx-tabs">{tabs}</span>' if tabs else "") + f'</{tag}>')
+        out.append('        </div>')
+    if k.get("rule"):
+        out.append(f'        <p class="cx-rule"><span class="cx-prompt" aria-hidden="true">&gt;</span> <span class="cx-type" data-text="{attr(k["rule"])}">{esc(k["rule"])}</span><span class="cx-caret" aria-hidden="true"></span></p>')
+    out.append('        <details class="cx-more">')
+    out.append(f'          <summary>{esc(k.get("more_label") or "Full syllabus and notes")}</summary>')
+    out.append('          <div class="cx-more-body">')
+    out.append(indent_block(c["details"], 12))
+    out.append('          </div>')
+    out.append('        </details>')
+    out.append('      </article>')
+    return "\n".join(out)
+
+
+def res_blocks(items, console=False):
     blocks = []
     for c in items:
+        if console and isinstance(c.get("console"), dict) and c["console"].get("nodes"):
+            blocks.append(console_block(c))
+            continue
         blocks.append("\n".join([
             f'      <div class="res {c["accent"]} reveal">',
             f'        <h3>{esc(c["title"])} <span class="status {c["status_style"]}">{esc(c["status"])}</span></h3>',
@@ -309,7 +382,7 @@ def build_courses(pages):
              {"accent": ACCENTS, "status_style": STATUS_STYLES})
     course = load("coursework.json", *rules)
     certs = load("certifications.json", *rules)
-    pages["ai-learning.html"] = fill(pages["ai-learning.html"], "COURSEWORK", res_blocks(course), 6, "ai-learning.html")
+    pages["ai-learning.html"] = fill(pages["ai-learning.html"], "COURSEWORK", res_blocks(course, console=True), 6, "ai-learning.html")
     pages["resources.html"] = fill(pages["resources.html"], "CERTIFICATIONS", res_blocks(certs), 6, "resources.html")
     return f"{len(course)} courses, {len(certs)} certifications"
 
